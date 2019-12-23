@@ -8,21 +8,13 @@ use yii\db\ActiveRecord;
 
 class Location extends ActiveRecord
 {
-    private $id;
-    private $city;
-    private $latitude;
-    private $longitude;
+    public $id;
+    public $city;
+    public $latitude;
+    public $longitude;
 
-    public function getCityName($id) {
-
+    public static function tableName()
+    {
+        return 'locations';
     }
-
-    public function getLatitude($id) {
-
-    }
-
-    public function getLongitude($id) {
-
-    }
-
 }
