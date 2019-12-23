@@ -10,7 +10,7 @@ use yii\base\Controller;
 class LocationController extends Controller
 {
    public function actionShow() {
-       $locations = Location::find()->all();
+       $locations = Location::find()->asArray()->all();
        return $this->render('show', compact('locations'));
    }
 
