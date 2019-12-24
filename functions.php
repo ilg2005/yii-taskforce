@@ -20,10 +20,11 @@ function getArrayFromCSV($filename)
 $locations = [];
 foreach($arrayFromCSV as $key => $values) {
     foreach ($values as $k => $v) {
-        $locations[$k] = $v;
+        $location[$k] = $v;
     }
-    $locations['id'] = $key++;
-}*/
-echo '';
+    $location['id'] = ++$key;
+    $locations[] = $location;
+}
+echo '';*/
 
 
