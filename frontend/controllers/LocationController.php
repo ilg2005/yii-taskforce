@@ -15,7 +15,7 @@ class LocationController extends Controller
         $cities = getArrayFromCSV('../../data/cities.csv');
         foreach ($cities as $key => $values) {
             $location = new Location();
-            $location->id = ++$key;
+            /*$location->id = ++$key;*/
             $location->city = 'Moscow';
 
             /*foreach ($values as $k => $v) {
