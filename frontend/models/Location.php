@@ -8,10 +8,10 @@ use yii\db\ActiveRecord;
 
 class Location extends ActiveRecord
 {
-    public $id;
+/*    public $id;
     public $city;
     public $latitude;
-    public $longitude;
+    public $longitude;*/
 
     public static function tableName()
     {

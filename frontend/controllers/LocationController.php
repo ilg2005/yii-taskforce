@@ -15,14 +15,18 @@ class LocationController extends Controller
         $cities = getArrayFromCSV('../../data/cities.csv');
         foreach ($cities as $key => $values) {
             $location = new Location();
-            /*$location->id = ++$key;*/
-            $location->city = 'Moscow';
 
-            /*foreach ($values as $k => $v) {
+            foreach ($values as $k => $v) {
                 $location->$k = $v;
-            }*/
+            }
             $location->save();
         }
+
+        /*for ($i = 0; $i <= 100; ++$i) {
+            $location = new Location();
+            $location->city = $i;
+            $location->save();
+        }*/
 
         $locations = Location::find()->asArray()->all();
         return $this->render('import', compact('locations'));
