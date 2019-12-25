@@ -2,15 +2,15 @@
 
 namespace console\controllers;
 
+use console\models\Import;
 use frontend\models\Location;
 use yii\console\Controller;
 
 class LocationController extends Controller
 {
-    public function actionImport()
+    public function actionImport($filename)
     {
-        $lines = file('D:\OSPanel\domains\yii-taskforce\data\cities.csv');
-        array_shift($lines);
+        $lines = Import::readCSV($filename);
         foreach ($lines as $line) {
             $location = new Location();
             $data = str_getcsv($line);
