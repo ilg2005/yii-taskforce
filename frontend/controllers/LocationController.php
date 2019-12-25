@@ -12,22 +12,16 @@ class LocationController extends Controller
 {
     public function actionImport()
     {
-        $cities = getArrayFromCSV('../../data/cities.csv');
-        foreach ($cities as $key => $values) {
+        $lines = file('../../data/cities.csv');
+        array_shift($lines);
+        foreach ($lines as $line) {
             $location = new Location();
-
-            foreach ($values as $k => $v) {
-                $location->$k = $v;
-            }
+            $data = str_getcsv($line);
+            $location->city = $data[0];
+            $location->latitude = $data[1];
+            $location->longitude = $data[2];
             $location->save();
         }
-
-        /*for ($i = 0; $i <= 100; ++$i) {
-            $location = new Location();
-            $location->city = $i;
-            $location->save();
-        }*/
-
         $locations = Location::find()->asArray()->all();
         return $this->render('import', compact('locations'));
     }
