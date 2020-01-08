@@ -10,7 +10,6 @@ use yii\db\ActiveRecord;
 class Profile extends ActiveRecord
 {
 
-
     public function rules()
     {
         return [
@@ -26,7 +25,9 @@ class Profile extends ActiveRecord
                 'attributeTypes' => [
                     'phone' => AttributeTypecastBehavior::TYPE_STRING,
                     'skype' => AttributeTypecastBehavior::TYPE_STRING,
-                    'birthday' => strtotime($this->birthday),
+                    'birthday' => static function ($value) {
+                        return ($value instanceof \DateTime) ? $value->getTimestamp(): (int)$value;
+                    },
                 ],
                 'typecastAfterValidate' => true,
                 'typecastBeforeSave' => true,
