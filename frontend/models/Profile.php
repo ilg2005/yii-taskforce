@@ -4,6 +4,7 @@
 namespace frontend\models;
 
 
+use DateTime;
 use yii\behaviors\AttributeTypecastBehavior;
 use yii\db\ActiveRecord;
 
@@ -23,11 +24,11 @@ class Profile extends ActiveRecord
             'typecast' => [
                 'class' => AttributeTypecastBehavior::className(),
                 'attributeTypes' => [
+                    'birthday' => static function ($value) {
+                        return ($value instanceof DateTime) ? $value->getTimestamp() : (int)$value;
+                    },
                     'phone' => AttributeTypecastBehavior::TYPE_STRING,
                     'skype' => AttributeTypecastBehavior::TYPE_STRING,
-                    'birthday' => static function ($value) {
-                        return ($value instanceof \DateTime) ? $value->getTimestamp(): (int)$value;
-                    },
                 ],
                 'typecastAfterValidate' => true,
                 'typecastBeforeSave' => true,
