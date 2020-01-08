@@ -15,8 +15,8 @@ CREATE TABLE locations
 CREATE TABLE categories
 (
     id            int AUTO_INCREMENT PRIMARY KEY,
-    category_name VARCHAR(64),
-    category_icon VARCHAR(64)
+    name VARCHAR(64),
+    icon VARCHAR(64)
 );
 
 CREATE TABLE users_profile
