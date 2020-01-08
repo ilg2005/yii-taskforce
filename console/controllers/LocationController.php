@@ -16,12 +16,12 @@ class LocationController extends Controller
 
 
         foreach ($arrayFromCSV as $line) {
+            $location = new Location();
+            $data = str_getcsv($line);
             foreach ($titles as $key => $title) {
-                $location = new Location();
-                $data = str_getcsv($line);
                 $location->$title = $data[$key];
-                $location->save();
             }
+            $location->save();
         }
     }
 }
