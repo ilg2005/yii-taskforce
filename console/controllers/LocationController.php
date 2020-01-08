@@ -10,14 +10,18 @@ class LocationController extends Controller
 {
     public function actionImport($filename)
     {
-        $lines = Import::readCSV($filename);
-        foreach ($lines as $line) {
-            $location = new Location();
-            $data = str_getcsv($line);
-            $location->city = $data[0];
-            $location->latitude = $data[1];
-            $location->longitude = $data[2];
-            $location->save();
+        $arrayFromCSV = Import::readCSV($filename);
+        $titleLine = array_shift($arrayFromCSV);
+        $titles = str_getcsv($titleLine);
+
+
+        foreach ($arrayFromCSV as $line) {
+            foreach ($titles as $key => $title) {
+                $location = new Location();
+                $data = str_getcsv($line);
+                $location->$title = $data[$key];
+                $location->save();
+            }
         }
     }
 }
