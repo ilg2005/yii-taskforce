@@ -3,23 +3,21 @@
 namespace console\controllers;
 
 use console\models\Import;
-
-use frontend\models\Location;
 use yii\console\Controller;
 
 class ImportController extends Controller
 {
 
-    public function actionIndex($filename)
+    public function actionIndex($filename, $modelName)
     {
         $arrayFromCSV = Import::readCSV($filename);
         $titleLine = array_shift($arrayFromCSV);
         $titles = str_getcsv($titleLine);
 
-        //$className = $currentModel;
+        $modelClass = 'frontend\models\\' . $modelName;
         $values = [];
         foreach ($arrayFromCSV as $line) {
-            $instance = new Location();
+            $instance = new $modelClass();
             $data = str_getcsv($line);
 
             foreach ($titles as $key => $title) {
