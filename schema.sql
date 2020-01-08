@@ -14,7 +14,7 @@ CREATE TABLE locations
 
 CREATE TABLE categories
 (
-    id            int AUTO_INCREMENT PRIMARY KEY,
+    id   int AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(64),
     icon VARCHAR(64)
 );
@@ -59,12 +59,12 @@ CREATE TABLE users_statistics
 
 CREATE TABLE users_settings
 (
-    user_id            int,
-    new_message        TINYINT DEFAULT 1,
-    actions_on_task    TINYINT DEFAULT 0,
-    new_review         TINYINT DEFAULT 0,
-    show_to_customer   TINYINT DEFAULT 1,
-    hide_user_profile  TINYINT DEFAULT 0,
+    user_id           int,
+    new_message       TINYINT DEFAULT 1,
+    actions_on_task   TINYINT DEFAULT 0,
+    new_review        TINYINT DEFAULT 0,
+    show_to_customer  TINYINT DEFAULT 1,
+    hide_user_profile TINYINT DEFAULT 0,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
 
@@ -97,6 +97,8 @@ CREATE TABLE tasks
     deadline      TIMESTAMP,
     customer_id   int          NOT NULL,
     worker_id     int,
+    latitude      FLOAT,
+    longitude     FLOAT,
     FOREIGN KEY (category) REFERENCES categories (id) ON DELETE CASCADE,
     FOREIGN KEY (location_id) REFERENCES locations (id) ON DELETE CASCADE,
     FOREIGN KEY (customer_id) REFERENCES users (id) ON DELETE CASCADE,
