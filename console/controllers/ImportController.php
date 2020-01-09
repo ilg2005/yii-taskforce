@@ -7,21 +7,18 @@ use yii\console\Controller;
 
 class ImportController extends Controller
 {
-
     public function actionIndex($filename, $modelName)
     {
         $arrayFromCSV = Import::readCSV($filename);
-        $titleLine = array_shift($arrayFromCSV);
-        $titles = str_getcsv($titleLine);
+        print_r($arrayFromCSV);
 
         $modelClass = 'frontend\models\\' . $modelName;
-        $values = [];
-        foreach ($arrayFromCSV as $line) {
-            $instance = new $modelClass();
-            $data = str_getcsv($line);
 
-            foreach ($titles as $key => $title) {
-                $values[$title] = $data[$key];
+        foreach ($arrayFromCSV as $data) {
+            $values = [];
+            $instance = new $modelClass();
+            foreach ($data as $key => $value) {
+                $values[$key] = $value;
             }
             $instance->attributes = $values;
             $instance->save();
