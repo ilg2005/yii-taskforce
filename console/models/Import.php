@@ -22,6 +22,7 @@ class Import extends Model
             }
             $resultArray[] = $newData;
         }
+        print_r($resultArray);
         return $resultArray;
     }
 }

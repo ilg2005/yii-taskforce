@@ -10,7 +10,6 @@ class ImportController extends Controller
     public function actionIndex($filename, $modelName)
     {
         $arrayFromCSV = Import::readCSV($filename);
-        print_r($arrayFromCSV);
 
         $modelClass = 'frontend\models\\' . $modelName;
 
