@@ -14,23 +14,23 @@ class Profile extends ActiveRecord
     public function rules()
     {
         return [
-            /*[['address', 'birthday', 'about', 'phone', 'skype'], 'safe'],*/
-            ['birthday', 'filter', 'filter' => static function ($value) {
+            [['address', 'birthday', 'about', 'phone', 'skype'], 'safe'],
+            /*['birthday', 'filter', 'filter' => static function ($value) {
                 var_dump($value);
                 return ($value instanceof DateTime) ? $value->getTimestamp() : DateTime::createFromFormat('Y-m-d', $value)->getTimestamp();
-            }],
+            }],*/
 
         ];
     }
 
-    /*public function behaviors()
+    public function behaviors()
     {
         return [
             'typecast' => [
-                'class' => AttributeTypecastBehavior::className(),
+                'class' => AttributeTypecastBehavior::class,
                 'attributeTypes' => [
                     'birthday' => static function ($value) {
-                        return ($value instanceof DateTime) ? $value->getTimestamp() : (int)$value;
+                        return ($value instanceof DateTime) ? $value->format('Y-m-d') : DateTime::createFromFormat('Y-m-d', $value);
                     },
                     'phone' => AttributeTypecastBehavior::TYPE_STRING,
                     'skype' => AttributeTypecastBehavior::TYPE_STRING,
@@ -40,7 +40,7 @@ class Profile extends ActiveRecord
                 'typecastAfterFind' => false,
             ],
         ];
-    }*/
+    }
 
     public static function tableName()
     {

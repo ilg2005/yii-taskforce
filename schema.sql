@@ -25,7 +25,7 @@ CREATE TABLE users_profile
     avatar_file VARCHAR(128),
     address     VARCHAR(1000),
     location_id int,
-    birthday    int,
+    birthday    date,
     about       TEXT,
     phone       VARCHAR(20),
     skype       VARCHAR(128),
