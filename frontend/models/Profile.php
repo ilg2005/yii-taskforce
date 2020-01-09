@@ -14,11 +14,16 @@ class Profile extends ActiveRecord
     public function rules()
     {
         return [
-            [['address', 'birthday', 'about', 'phone', 'skype'], 'safe'],
+            /*[['address', 'birthday', 'about', 'phone', 'skype'], 'safe'],*/
+            ['birthday', 'filter', 'filter' => static function ($value) {
+                var_dump($value);
+                return ($value instanceof DateTime) ? $value->getTimestamp() : DateTime::createFromFormat('Y-m-d', $value)->getTimestamp();
+            }],
+
         ];
     }
 
-    public function behaviors()
+    /*public function behaviors()
     {
         return [
             'typecast' => [
@@ -35,7 +40,7 @@ class Profile extends ActiveRecord
                 'typecastAfterFind' => false,
             ],
         ];
-    }
+    }*/
 
     public static function tableName()
     {
