@@ -15,6 +15,11 @@ class Task extends ActiveRecord
         ];
     }
 
+    public function getCustomer()
+    {
+        return $this->hasOne(User::class, ['id' => 'customer_id']);
+    }
+
     public static function tableName()
     {
         return 'tasks';

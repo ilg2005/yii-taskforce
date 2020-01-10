@@ -11,8 +11,8 @@ class ImportController extends Controller
         'categories' => 'Category',
         'cities' => 'Location',
         'profiles' => 'Profile',
+        'users' => 'User',
         'tasks' => 'Task',
-        'users' => 'User'
     ];
 
     public function importData($filename, $modelName)

@@ -16,6 +16,11 @@ class User extends ActiveRecord
         ];
     }
 
+    public function getTasks()
+    {
+        return $this->hasMany(Task::class, ['customer_id' => 'id']);
+    }
+
     public static function tableName()
     {
         return 'users';
