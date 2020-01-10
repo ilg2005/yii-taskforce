@@ -7,7 +7,15 @@ use yii\console\Controller;
 
 class ImportController extends Controller
 {
-    public function actionIndex($filename, $modelName)
+    const DATA_MODEL_MAP = [
+        'categories' => 'Category',
+        'cities' => 'Location',
+        'profiles' => 'Profile',
+        'tasks' => 'Task',
+        'users' => 'User'
+    ];
+
+    public function importData($filename, $modelName)
     {
         $arrayFromCSV = Import::readCSV($filename);
 
@@ -21,6 +29,16 @@ class ImportController extends Controller
             }
             $instance->attributes = $values;
             $instance->save();
+        }
+    }
+
+    public function actionIndex($file = '', $model = '') {
+        if ($file && $model) {
+            $this->importData($file, $model);
+        } else {
+            foreach (self::DATA_MODEL_MAP as $filename => $modelName) {
+                $this->importData($filename, $modelName);
+            }
         }
     }
 }
