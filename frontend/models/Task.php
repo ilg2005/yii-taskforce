@@ -15,6 +15,11 @@ class Task extends ActiveRecord
         ];
     }
 
+    public function getCategory()
+    {
+        return $this->hasOne(Category::class, ['id' => 'category']);
+    }
+
     public function getCustomer()
     {
         return $this->hasOne(User::class, ['id' => 'customer_id']);

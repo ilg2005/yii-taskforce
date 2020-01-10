@@ -89,7 +89,7 @@ CREATE TABLE tasks
     creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     title         VARCHAR(256) NOT NULL,
     description   TEXT         NOT NULL,
-    category      int,
+    category      int          NOT NULL,
     status        int       DEFAULT 0,
     address       VARCHAR(256),
     location_id   int,

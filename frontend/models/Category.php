@@ -15,6 +15,11 @@ class Category extends ActiveRecord
         ];
     }
 
+    public function getTasks()
+    {
+        return $this->hasMany(Task::class, ['category' => 'id']);
+    }
+
     public static function tableName()
     {
         return 'categories';
