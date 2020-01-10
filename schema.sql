@@ -112,12 +112,13 @@ CREATE TABLE tasks_files
     FOREIGN KEY (task_id) REFERENCES tasks (id) ON DELETE CASCADE
 );
 
-CREATE TABLE reviews
+CREATE TABLE grades
 (
     user_id         int,
     task_id         int,
     grade           TINYINT UNSIGNED,
     grading_comment TEXT,
+    grading_date    date,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
     FOREIGN KEY (task_id) REFERENCES tasks (id) ON DELETE CASCADE
 );

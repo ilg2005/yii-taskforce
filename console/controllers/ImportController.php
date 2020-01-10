@@ -13,6 +13,7 @@ class ImportController extends Controller
         'profiles' => 'Profile',
         'users' => 'User',
         'tasks' => 'Task',
+        'opinions' => 'Grade',
     ];
 
     public function importData($filename, $modelName)
