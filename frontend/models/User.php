@@ -12,6 +12,7 @@ class User extends ActiveRecord
     {
         return [
             [['name', 'email', 'password', 'registration_date'], 'safe'],
+            ['email', 'email'],
         ];
     }
 
