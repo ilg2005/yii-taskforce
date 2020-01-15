@@ -9,6 +9,7 @@ use yii\base\Controller;
 
 class UserController extends Controller
 {
+    public $layout = 'basic';
     public function actionShow()
     {
         $users = User::find()->asArray()->all();

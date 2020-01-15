@@ -9,6 +9,7 @@ use yii\base\Controller;
 
 class TaskController extends Controller
 {
+    public $layout = 'basic';
     public function actionShow()
     {
         $tasks = Task::find()->asArray()->all();

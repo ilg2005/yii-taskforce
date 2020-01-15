@@ -8,6 +8,7 @@ use yii\base\Controller;
 
 class LocationController extends Controller
 {
+    public $layout = 'basic';
     public function actionShow()
     {
         $locations = Location::find()->asArray()->all();
