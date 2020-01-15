@@ -2,6 +2,7 @@
 
 namespace console\models;
 
+use SplFileObject;
 use yii\base\Model;
 
 class Import extends Model
@@ -10,7 +11,18 @@ class Import extends Model
 
     public static function readCSV($filename)
     {
-        $arrayFromCSV = file(self::FILE_PATH . $filename . '.csv');
+        $file = new SplFileObject(self::FILE_PATH . $filename . '.csv');
+        $file->setFlags(SplFileObject::READ_CSV | SplFileObject::SKIP_EMPTY);
+        $titles = $file->current();
+        $resultArray = [];
+        foreach ($file as $row) {
+            if ($row && $file->key()) {
+                $resultArray[] = array_combine($titles, $row);
+            }
+        }
+        print_r($resultArray);
+        return $resultArray;
+        /*$arrayFromCSV = file(self::FILE_PATH . $filename . '.csv');
         $titleLine = array_shift($arrayFromCSV);
         $titles = str_getcsv($titleLine);
         $newData = [];
@@ -23,6 +35,6 @@ class Import extends Model
             $resultArray[] = $newData;
         }
         print_r($resultArray);
-        return $resultArray;
+        return $resultArray;*/
     }
 }
