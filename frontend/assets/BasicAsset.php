@@ -5,6 +5,7 @@ namespace frontend\assets;
 
 
 use yii\web\AssetBundle;
+use yii\web\YiiAsset;
 
 class BasicAsset extends AssetBundle
 
@@ -18,7 +19,6 @@ class BasicAsset extends AssetBundle
     public $js = [
     ];
     public $depends = [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
+        YiiAsset::class,
     ];
 }

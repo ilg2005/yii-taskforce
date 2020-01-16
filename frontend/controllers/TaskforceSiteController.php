@@ -48,4 +48,64 @@ class TaskforceSiteController extends Controller
     {
         return $this->render('account');
     }
+
+    /**
+     * Displays new tasks page.
+     *
+     * @return mixed
+     */
+    public function actionBrowse()
+    {
+        return $this->render('browse');
+    }
+
+    /**
+     * Displays new task publication page.
+     *
+     * @return mixed
+     */
+    public function actionCreate()
+    {
+        return $this->render('create');
+    }
+
+    /**
+     * Displays user' tasks list page.
+     *
+     * @return mixed
+     */
+    public function actionMylist()
+    {
+        return $this->render('mylist');
+    }
+
+    /**
+     * Displays user' profile page.
+     *
+     * @return mixed
+     */
+    public function actionProfile()
+    {
+        return $this->render('profile');
+    }
+
+    /**
+     * Displays users' list page.
+     *
+     * @return mixed
+     */
+    public function actionUsers()
+    {
+        return $this->render('users');
+    }
+
+    /**
+     * Displays task view page.
+     *
+     * @return mixed
+     */
+    public function actionView()
+    {
+        return $this->render('view');
+    }
 }
