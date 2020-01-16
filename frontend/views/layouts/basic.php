@@ -14,10 +14,10 @@ BasicAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body>
+<body <?= ($this->title !== 'TaskForce-Index') ?: 'class="landing"'?>>
 <?php $this->beginBody() ?>
 <div class="table-layout">
-    <?php if($this->title !== 'landing') : ?>
+    <?php if($this->title !== 'TaskForce-Index') : ?>
     <header class="page-header">
         <div class="main-container page-header__container">
             <div class="page-header__logo">
