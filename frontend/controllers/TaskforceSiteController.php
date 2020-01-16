@@ -39,4 +39,13 @@ class TaskforceSiteController extends Controller
         return $this->render('signup');
     }
 
+    /**
+     * Displays account settings.
+     *
+     * @return mixed
+     */
+    public function actionAccount()
+    {
+        return $this->render('account');
+    }
 }
