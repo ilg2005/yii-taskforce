@@ -158,7 +158,7 @@ BasicAsset::register($this);
                          alt="Логотип HTML Academy">
                 </a>
             </div>
-            <?php echo \Yii::$app->view->renderFile('@app/views/taskforce-site/clipart.php'); ?>
+            <?= ($this->title !== 'TaskForce-Signup') ?: \Yii::$app->view->renderFile('@app/views/taskforce-site/clipart.php') ?>
         </div>
     </footer>
 </div>
