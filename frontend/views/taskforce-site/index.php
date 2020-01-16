@@ -40,7 +40,7 @@ $this->title = 'TaskForce-Index';
             <a href="#" class="header__account-enter">
                 <span>Вход</span></a>
             или
-            <a href="signup.html" class="header__account-registration">
+            <a href="/index.php?r=taskforce-site%2Fsignup" class="header__account-registration">
                 Регистрация
             </a>
         </div>
