@@ -37,10 +37,10 @@ $this->title = 'TaskForce-Index';
             <p>Работа там, где ты!</p>
         </div>
         <div class="header__account--index">
-            <a href="/index.php?r=taskforce-site%2Faccount" class="header__account-enter">
+            <a href="/account" class="header__account-enter">
                 <span>Вход</span></a>
             или
-            <a href="/index.php?r=taskforce-site%2Fsignup" class="header__account-registration">
+            <a href="/signup" class="header__account-registration">
                 Регистрация
             </a>
         </div>

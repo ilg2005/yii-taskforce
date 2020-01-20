@@ -21,7 +21,7 @@ BasicAsset::register($this);
     <header class="page-header">
         <div class="main-container page-header__container">
             <div class="page-header__logo">
-                <a href="/index.php?r=taskforce-site%2Findex">
+                <a href="/index">
                     <svg class="page-header__logo-image" id="Layer_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1634 646.35">
                         <title>taskforce_logo2-01</title>
                         <g>
@@ -51,16 +51,16 @@ BasicAsset::register($this);
             <div class="header__nav">
                 <ul class="header-nav__list site-list">
                     <li class="site-list__item">
-                        <a href="/index.php?r=taskforce-site%2Fbrowse">Задания</a>
+                        <a href="/browse">Задания</a>
                     </li>
                     <li class="site-list__item">
-                        <a href="/index.php?r=taskforce-site%2Fusers">Исполнители</a>
+                        <a href="/users">Исполнители</a>
                     </li>
                     <li class="site-list__item">
-                        <a href="/index.php?r=taskforce-site%2Fcreate">Создать задание</a>
+                        <a href="/create">Создать задание</a>
                     </li>
                     <li class="site-list__item">
-                        <a href="/index.php?r=taskforce-site%2Faccount">Мой профиль</a>
+                        <a href="/account">Мой профиль</a>
                     </li>
                 </ul>
             </div>
@@ -102,13 +102,13 @@ BasicAsset::register($this);
             <div class="account__pop-up">
                 <ul class="account__pop-up-list">
                     <li>
-                        <a href="/index.php?r=taskforce-site%2Fview">Мои задания</a>
+                        <a href="/view">Мои задания</a>
                     </li>
                     <li>
-                        <a href="/index.php?r=taskforce-site%2Faccount">Настройки</a>
+                        <a href="/account">Настройки</a>
                     </li>
                     <li>
-                        <a href="/index.php?r=taskforce-site%2Findex">Выход</a>
+                        <a href="/index">Выход</a>
                     </li>
                 </ul>
             </div>
@@ -134,19 +134,19 @@ BasicAsset::register($this);
                         <a href="">Задания</a>
                     </li>
                     <li class="links__item">
-                        <a href="/index.php?r=taskforce-site%2Fprofile">Мой профиль</a>
+                        <a href="/profile">Мой профиль</a>
                     </li>
                     <li class="links__item">
-                        <a href="/index.php?r=taskforce-site%2Fusers">Исполнители</a>
+                        <a href="/users">Исполнители</a>
                     </li>
                     <li class="links__item">
-                        <a href="/index.php?r=taskforce-site%2Fsignup">Регистрация</a>
+                        <a href="/signup">Регистрация</a>
                     </li>
                     <li class="links__item">
-                        <a href="/index.php?r=taskforce-site%2Fcreate">Создать задание</a>
+                        <a href="/create">Создать задание</a>
                     </li>
                     <li class="links__item">
-                        <a href="">Справка</a>
+                        <a href="#">Справка</a>
                     </li>
                 </ul>
             </div>

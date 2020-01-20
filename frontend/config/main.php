@@ -36,14 +36,30 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
+
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'enableStrictParsing' => true,
             'rules' => [
+                '/' => 'site/index',
+                'about' => 'site/about',
+                'contact' => 'site/contact',
+                'login' => 'site/login',
+                'defaultRoute' => 'site/index',
+
+                'index' => 'taskforce-site/index',
+                'account' => 'taskforce-site/account',
+                'browse' => 'taskforce-site/browse',
+                'create' => 'taskforce-site/create',
+                'mylist' => 'taskforce-site/mylist',
+                'profile' => 'taskforce-site/profile',
+                'signup' => 'taskforce-site/signup',
+                'users' => 'taskforce-site/users',
+                'view' => 'taskforce-site/view',
             ],
         ],
-        */
+
     ],
     'params' => $params,
 ];
