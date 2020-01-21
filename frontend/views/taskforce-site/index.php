@@ -54,7 +54,7 @@ $this->title = 'TaskForce-Index';
             <p>Сломался кран на кухне? Надо отправить документы? Нет времени самому гулять с собакой?
                 У нас вы быстро найдёте исполнителя для любой жизненной ситуации?<br>
                 Быстро, безопасно и с гарантией. Просто, как раз, два, три. </p>
-            <button class="button">Создать аккаунт</button>
+            <a href="/signup" class="button">Создать аккаунт</a>
         </div>
         <div class="landing-center">
             <div class="landing-instruction">
@@ -202,7 +202,7 @@ $this->title = 'TaskForce-Index';
                 </div>
             </div>
             <div class="landing-bottom-container">
-                <button type="button" class="button red-button">смотреть все задания</button>
+                <a href="/browse" type="button" class="button red-button">смотреть все задания</a>
             </div>
         </div>
     </div>

@@ -131,7 +131,7 @@ BasicAsset::register($this);
             <div class="page-footer__links">
                 <ul class="links__list">
                     <li class="links__item">
-                        <a href="">Задания</a>
+                        <a href="/browse">Задания</a>
                     </li>
                     <li class="links__item">
                         <a href="/profile">Мой профиль</a>
