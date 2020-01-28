@@ -19,10 +19,10 @@ class TaskController extends Controller
 
     public static function getLatestTasks($numberToGet = '')
     {
-        $tasks = Task::find()->with('category')->orderBy(['creation_date' => SORT_DESC]);
+       $tasks = Task::find()->orderBy(['creation_date' => SORT_DESC]);
         if ($numberToGet) {
             $tasks = $tasks->limit($numberToGet);
         }
-        return $tasks->all();
+        return $tasks->with('category')->asArray()->all();
     }
 }
