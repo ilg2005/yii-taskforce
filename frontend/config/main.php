@@ -1,4 +1,7 @@
 <?php
+
+use yii\i18n\PhpMessageSource;
+
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
     require __DIR__ . '/../../common/config/params-local.php',
@@ -9,9 +12,22 @@ $params = array_merge(
 return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
+    'language' => 'ru-RU',
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
+        /*'i18n' => [
+            'translations' => [
+                'app*' => [
+                    'class' => PhpMessageSource::class,
+                    'basePath' => '@app/messages',
+                    'sourceLanguage' => 'en-US',
+                    'fileMap' => [
+                        'app'       => 'app.php',
+                    ],
+                ],
+            ],
+        ],*/
         'request' => [
             'csrfParam' => '_csrf-frontend',
         ],

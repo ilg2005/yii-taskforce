@@ -4,7 +4,14 @@
 
 $this->title = 'TaskForce-Index';
 
+use frontend\controllers\TaskController;
+
+const LATEST_TASKS_NUMBER = 4;
+const TRIM_WIDTH = 70;
+
+$tasks = TaskController::getLatestTasks(LATEST_TASKS_NUMBER);
 ?>
+
 <header class=" page-header--index">
     <div class="main-container page-header__container page-header__container--index">
         <div class="page-header__logo--index">
@@ -139,6 +146,22 @@ $this->title = 'TaskForce-Index';
         <div class="landing-bottom">
             <div class="landing-bottom-container">
                 <h2>Последние задания на сайте</h2>
+                <?php foreach ($tasks as $task): ?>
+                    <div class="landing-task">
+                        <div class="landing-task-top task-courier"></div>
+                        <div class="landing-task-description">
+                            <h3><a href="#" class="link-regular"><?= $task->title ?></a></h3>
+                            <p><?= mb_strimwidth($task->description, 0, TRIM_WIDTH, '...') ?></p>
+                        </div>
+                        <div class="landing-task-info">
+                            <div class="task-info-left">
+                                <p><a href="#" class="link-regular"><?= $task->category->name ?></a></p>
+                                <p><?= Yii::$app->formatter->asRelativeTime($task->creation_date) ?></p>
+                            </div>
+                            <span><?= $task->budget ?> <b>₽</b></span>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
                 <div class="landing-task">
                     <div class="landing-task-top task-courier"></div>
                     <div class="landing-task-description">
