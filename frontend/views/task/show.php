@@ -1,10 +1,6 @@
 <h1>Show Tasks</h1>
 <?php use yii\widgets\LinkPager;
 
-foreach ($tasks as $task) {
-    var_dump($task);
-}
-
 // display pagination
 echo LinkPager::widget([
     'pagination' => $pages,
@@ -17,6 +13,11 @@ echo LinkPager::widget([
     'prevPageCssClass' => 'pagination__item new-task__pagination-list',
     'options' => ['class' => 'new-task__pagination-list'],
 ]);
+
+foreach ($tasks as $task) {
+    var_dump($task);
+}
+
 ?>
 <p></p>
 
