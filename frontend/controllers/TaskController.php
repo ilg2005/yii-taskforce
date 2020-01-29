@@ -4,8 +4,10 @@
 namespace frontend\controllers;
 
 
+use frontend\constants\TaskStatuses;
 use frontend\models\Task;
 use yii\base\Controller;
+use yii\data\Pagination;
 
 class TaskController extends Controller
 {
@@ -13,8 +15,13 @@ class TaskController extends Controller
 
     public function actionShow()
     {
-       $tasks = Task::find()->with('category')->asArray()->all();
-       return $this->render('show', compact('tasks'));
+       $tasks = Task::find()->with(['category']);
+       $pages = new Pagination(['totalCount' => $tasks->count(), 'pageSize' => 1]);
+       $tasks = $tasks->offset($pages->offset)
+           ->limit($pages->limit)
+           ->all();
+
+       return $this->render('show', compact('tasks', 'pages'));
     }
 
     public static function getLatestTasks($numberToGet = '')
@@ -24,5 +31,15 @@ class TaskController extends Controller
             $tasks = $tasks->limit($numberToGet);
         }
         return $tasks->with('category')->asArray()->all();
+    }
+
+    public static function getNewTasks()
+    {
+        return Task::find()
+            ->where(['status' => TaskStatuses::NEW])
+            ->orderBy(['creation_date' => SORT_DESC])
+            ->with(['category'])
+            ->asArray()
+            ->all();
     }
 }

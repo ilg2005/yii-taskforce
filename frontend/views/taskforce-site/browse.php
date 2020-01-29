@@ -2,30 +2,34 @@
 
 /* @var $this yii\web\View */
 
+use frontend\controllers\TaskController;
+
 $this->title = 'TaskForce-Browse';
 
+const TRIM_WIDTH = 70;
+$tasks = TaskController::getNewTasks();
 ?>
 <main class="page-main">
     <div class="main-container page-container">
         <section class="new-task">
             <div class="new-task__wrapper">
                 <h1>Новые задания</h1>
+                <?php foreach ($tasks as $task): ?>
                 <div class="new-task__card">
                     <div class="new-task__title">
-                        <a href="#" class="link-regular"><h2>Перевести войну и мир на клингонский</h2></a>
-                        <a  class="new-task__type link-regular" href="#"><p>Переводы</p></a>
+                        <a href="#" class="link-regular"><h2><?= $task['title'] ?></h2></a>
+                        <a  class="new-task__type link-regular" href="#"><p><?= $task['category']['name'] ?></p></a>
                     </div>
-                    <div class="new-task__icon new-task__icon--translation"></div>
+                    <div class="new-task__icon new-task__icon--<?= $task['category']['icon'] ?>"></div>
                     <p class="new-task_description">
-                        Значимость этих проблем настолько очевидна, что начало
-                        повседневной работы по формированию позиции
-                        требуют определения и уточнения позиций…
+                        <?= mb_strimwidth($task['description'], 0, TRIM_WIDTH, '...') ?>
                     </p>
-                    <b class="new-task__price new-task__price--translation">3400<b> ₽</b></b>
+                    <b class="new-task__price new-task__price--<?= $task['category']['name'] ?>"><?= $task['budget'] ?><b> ₽</b></b>
                     <p class="new-task__place">Санкт-Петербург, Центральный район</p>
-                    <span class="new-task__time">4 часа назад</span>
+                    <span class="new-task__time"><?= Yii::$app->formatter->asRelativeTime($task['creation_date']) ?></span>
                 </div>
-                <div class="new-task__card">
+                <?php endforeach; ?>
+<!--                <div class="new-task__card">
                     <div class="new-task__title">
                         <a href="#" class="link-regular"><h2>Убраться в квартире после вписки</h2></a>
                         <a class="new-task__type link-regular" href="#"><p>Уборка</p></a>
@@ -54,7 +58,7 @@ $this->title = 'TaskForce-Browse';
                     <b class="new-task__price new-task__price--cargo">3000<b> ₽</b></b>
                     <p class="new-task__place">Москва, Центральный район</p>
                     <span class="new-task__time">10 часов назад</span>
-                </div>
+                </div>-->
             </div>
             <div class="new-task__pagination">
                 <ul class="new-task__pagination-list">
