@@ -15,18 +15,18 @@ class TaskController extends Controller
 
     public function actionShow()
     {
-       $tasks = Task::find()->with(['category']);
-       $pages = new Pagination(['totalCount' => $tasks->count(), 'pageSize' => 1]);
-       $tasks = $tasks->offset($pages->offset)
-           ->limit($pages->limit)
-           ->all();
+        $tasks = Task::find()->with(['category']);
+        $pages = new Pagination(['totalCount' => $tasks->count(), 'pageSize' => 1]);
+        $tasks = $tasks->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
 
-       return $this->render('show', compact('tasks', 'pages'));
+        return $this->render('show', compact('tasks', 'pages'));
     }
 
     public static function getLatestTasks($numberToGet = '')
     {
-       $tasks = Task::find()->orderBy(['creation_date' => SORT_DESC]);
+        $tasks = Task::find()->orderBy(['creation_date' => SORT_DESC]);
         if ($numberToGet) {
             $tasks = $tasks->limit($numberToGet);
         }
@@ -35,11 +35,16 @@ class TaskController extends Controller
 
     public static function getNewTasks()
     {
-        return Task::find()
+        $tasksCountPerPage = 5;
+        $tasks = Task::find()
             ->where(['status' => TaskStatuses::NEW])
             ->orderBy(['creation_date' => SORT_DESC])
             ->with(['category'])
-            ->asArray()
+            ->asArray();
+        $pages = new Pagination(['totalCount' => $tasks->count(), 'pageSize' => $tasksCountPerPage]);
+        $tasks = $tasks->offset($pages->offset)
+            ->limit($pages->limit)
             ->all();
+        return array($tasks, $pages);
     }
 }

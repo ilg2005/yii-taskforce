@@ -2,12 +2,14 @@
 
 /* @var $this yii\web\View */
 
+use frontend\components\Pager;
 use frontend\controllers\TaskController;
 
 $this->title = 'TaskForce-Browse';
 
+[$tasks, $pages] = TaskController::getNewTasks();
 const TRIM_WIDTH = 70;
-$tasks = TaskController::getNewTasks();
+
 ?>
 <main class="page-main">
     <div class="main-container page-container">
@@ -61,14 +63,17 @@ $tasks = TaskController::getNewTasks();
                 </div>-->
             </div>
             <div class="new-task__pagination">
-                <ul class="new-task__pagination-list">
-                    <li class="pagination__item"><a href="#"></a></li>
-                    <li class="pagination__item pagination__item--current">
-                        <a>1</a></li>
-                    <li class="pagination__item"><a href="#">2</a></li>
-                    <li class="pagination__item"><a href="#">3</a></li>
-                    <li class="pagination__item"><a href="#"></a></li>
-                </ul>
+                <?= Pager::widget([
+                    'pagination' => $pages,
+                ]) ?>
+<!--                <ul class="new-task__pagination-list">-->
+<!--                    <li class="pagination__item"><a href="#"></a></li>-->
+<!--                    <li class="pagination__item pagination__item--current">-->
+<!--                        <a>1</a></li>-->
+<!--                    <li class="pagination__item"><a href="#">2</a></li>-->
+<!--                    <li class="pagination__item"><a href="#">3</a></li>-->
+<!--                    <li class="pagination__item"><a href="#"></a></li>-->
+<!--                </ul>-->
             </div>
         </section>
         <section  class="search-task">

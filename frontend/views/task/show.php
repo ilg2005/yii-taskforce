@@ -1,17 +1,8 @@
 <h1>Show Tasks</h1>
-<?php use yii\widgets\LinkPager;
+<?php use frontend\components\Pager;
 
-// display pagination
-echo LinkPager::widget([
+echo Pager::widget([
     'pagination' => $pages,
-    'hideOnSinglePage' => true,
-    'pageCssClass' => 'pagination__item',
-    'activePageCssClass' => 'pagination__item--current',
-    'nextPageLabel' => '',
-    'nextPageCssClass' => 'pagination__item new-task__pagination-list',
-    'prevPageLabel' => '',
-    'prevPageCssClass' => 'pagination__item new-task__pagination-list',
-    'options' => ['class' => 'new-task__pagination-list'],
 ]);
 
 foreach ($tasks as $task) {
