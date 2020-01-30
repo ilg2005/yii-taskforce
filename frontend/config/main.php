@@ -66,7 +66,7 @@ return [
 
                 'index' => 'taskforce-site/index',
                 'account' => 'taskforce-site/account',
-                'browse/<per-page:\d+>/<page:\d+>' => 'taskforce-site/browse',
+                'browse/<page:\d+>/page' => 'taskforce-site/browse',
                 'browse' => 'taskforce-site/browse',
                 'create' => 'taskforce-site/create',
                 'mylist' => 'taskforce-site/mylist',
