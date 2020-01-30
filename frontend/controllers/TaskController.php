@@ -41,7 +41,7 @@ class TaskController extends Controller
             ->orderBy(['creation_date' => SORT_DESC])
             ->with(['category'])
             ->asArray();
-        $pages = new Pagination(['totalCount' => $tasks->count(), 'pageSize' => $tasksCountPerPage]);
+        $pages = new Pagination(['totalCount' => $tasks->count(), 'pageSize' => $tasksCountPerPage, 'forcePageParam' => false, 'pageSizeParam' => false]);
         $tasks = $tasks->offset($pages->offset)
             ->limit($pages->limit)
             ->all();

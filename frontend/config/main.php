@@ -56,7 +56,7 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            /*'enableStrictParsing' => true,*/
+           // 'enableStrictParsing' => true,
             'rules' => [
                 '/' => 'site/index',
                 'about' => 'site/about',
@@ -66,6 +66,7 @@ return [
 
                 'index' => 'taskforce-site/index',
                 'account' => 'taskforce-site/account',
+                'browse/<per-page:\d+>/<page:\d+>' => 'taskforce-site/browse',
                 'browse' => 'taskforce-site/browse',
                 'create' => 'taskforce-site/create',
                 'mylist' => 'taskforce-site/mylist',
