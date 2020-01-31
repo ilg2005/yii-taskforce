@@ -64,16 +64,8 @@ return [
                 'login' => 'site/login',
                 'defaultRoute' => 'site/index',
 
-                'index' => 'taskforce-site/index',
-                'account' => 'taskforce-site/account',
                 'browse/<page:\d+>' => 'taskforce-site/browse',
-                'browse' => 'taskforce-site/browse',
-                'create' => 'taskforce-site/create',
-                'mylist' => 'taskforce-site/mylist',
-                'profile' => 'taskforce-site/profile',
-                'signup' => 'taskforce-site/signup',
-                'users' => 'taskforce-site/users',
-                'view' => 'taskforce-site/view',
+                '<action:(index|account|browse|create|mylist|profile|signup|users|view)>' => 'taskforce-site/<action>',
             ],
         ],
 
