@@ -27,7 +27,6 @@ class TaskforceSiteController extends Controller
             ->orderBy(['creation_date' => SORT_DESC])
             ->limit($tasksNumberToShow)
             ->with('category')
-            ->asArray()
             ->all();
         return $this->render('index', compact('tasks'));
     }
@@ -68,8 +67,7 @@ class TaskforceSiteController extends Controller
         $tasks = Task::find()
             ->where(['status' => TaskStatuses::NEW])
             ->orderBy(['creation_date' => SORT_DESC])
-            ->with(['category'])
-            ->asArray();
+            ->with(['category']);
         $pages = new Pagination(['totalCount' => $tasks->count(), 'pageSize' => $tasksCountPerPage, 'forcePageParam' => false, 'pageSizeParam' => false]);
         $tasks = $tasks->offset($pages->offset)
             ->limit($pages->limit)

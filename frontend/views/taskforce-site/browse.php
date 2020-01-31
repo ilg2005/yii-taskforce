@@ -17,16 +17,16 @@ const TRIM_WIDTH = 70;
                 <?php foreach ($tasks as $task): ?>
                 <div class="new-task__card">
                     <div class="new-task__title">
-                        <a href="#" class="link-regular"><h2><?= $task['title'] ?></h2></a>
-                        <a  class="new-task__type link-regular" href="#"><p><?= $task['category']['name'] ?></p></a>
+                        <a href="#" class="link-regular"><h2><?= $task->title ?></h2></a>
+                        <a  class="new-task__type link-regular" href="#"><p><?= $task->category->name ?></p></a>
                     </div>
-                    <div class="new-task__icon new-task__icon--<?= $task['category']['icon'] ?>"></div>
+                    <div class="new-task__icon new-task__icon--<?= $task->category->icon ?>"></div>
                     <p class="new-task_description">
-                        <?= mb_strimwidth($task['description'], 0, TRIM_WIDTH, '...') ?>
+                        <?= mb_strimwidth($task->description, 0, TRIM_WIDTH, '...') ?>
                     </p>
-                    <b class="new-task__price new-task__price--<?= $task['category']['name'] ?>"><?= $task['budget'] ?><b> ₽</b></b>
+                    <b class="new-task__price new-task__price--<?= $task->category->name ?>"><?= $task->budget ?><b> ₽</b></b>
                     <p class="new-task__place">Санкт-Петербург, Центральный район</p>
-                    <span class="new-task__time"><?= Yii::$app->formatter->asRelativeTime($task['creation_date']) ?></span>
+                    <span class="new-task__time"><?= Yii::$app->formatter->asRelativeTime($task->creation_date) ?></span>
                 </div>
                 <?php endforeach; ?>
 <!--                <div class="new-task__card">
