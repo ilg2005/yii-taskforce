@@ -3,6 +3,9 @@
 
 namespace frontend\controllers;
 
+use frontend\constants\TaskStatuses;
+use frontend\models\Task;
+use yii\data\Pagination;
 use yii\web\Controller;
 
 class TaskforceSiteController extends Controller
@@ -19,7 +22,14 @@ class TaskforceSiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $tasksNumberToShow = 4;
+        $tasks = Task::find()
+            ->orderBy(['creation_date' => SORT_DESC])
+            ->limit($tasksNumberToShow)
+            ->with('category')
+            ->asArray()
+            ->all();
+        return $this->render('index', compact('tasks'));
     }
 
     public function actionSignup()
@@ -54,7 +64,17 @@ class TaskforceSiteController extends Controller
      */
     public function actionBrowse()
     {
-        return $this->render('browse');
+        $tasksCountPerPage = 5;
+        $tasks = Task::find()
+            ->where(['status' => TaskStatuses::NEW])
+            ->orderBy(['creation_date' => SORT_DESC])
+            ->with(['category'])
+            ->asArray();
+        $pages = new Pagination(['totalCount' => $tasks->count(), 'pageSize' => $tasksCountPerPage, 'forcePageParam' => false, 'pageSizeParam' => false]);
+        $tasks = $tasks->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+        return $this->render('browse', compact('tasks', 'pages'));
     }
 
     /**

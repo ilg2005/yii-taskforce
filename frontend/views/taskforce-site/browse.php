@@ -3,11 +3,9 @@
 /* @var $this yii\web\View */
 
 use frontend\components\Pager;
-use frontend\controllers\TaskController;
 
 $this->title = 'TaskForce-Browse';
 
-[$tasks, $pages] = TaskController::getNewTasks();
 const TRIM_WIDTH = 70;
 
 ?>

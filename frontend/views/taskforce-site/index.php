@@ -4,12 +4,7 @@
 
 $this->title = 'TaskForce-Index';
 
-use frontend\controllers\TaskController;
-
-const LATEST_TASKS_NUMBER = 4;
 const TRIM_WIDTH = 70;
-
-$tasks = TaskController::getLatestTasks(LATEST_TASKS_NUMBER);
 ?>
 
 <header class=" page-header--index">
