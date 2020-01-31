@@ -17,7 +17,7 @@ class Task extends ActiveRecord
 
     public function getCategory()
     {
-        return $this->hasOne(Category::class, ['id' => 'category']);
+        return $this->hasOne(Category::class, ['id' => 'category_id']);
     }
 
     public function getCustomer()
