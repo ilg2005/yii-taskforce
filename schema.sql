@@ -89,7 +89,7 @@ CREATE TABLE tasks
     creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     title         VARCHAR(256) NOT NULL,
     description   TEXT         NOT NULL,
-    category      int          NOT NULL,
+    category_id   int          NOT NULL,
     status        int       DEFAULT 0,
     address       VARCHAR(256),
     location_id   int,
@@ -99,7 +99,7 @@ CREATE TABLE tasks
     worker_id     int,
     latitude      FLOAT,
     longitude     FLOAT,
-    FOREIGN KEY (category) REFERENCES categories (id) ON DELETE CASCADE,
+    FOREIGN KEY (category_id) REFERENCES categories (id) ON DELETE CASCADE,
     FOREIGN KEY (location_id) REFERENCES locations (id) ON DELETE CASCADE,
     FOREIGN KEY (customer_id) REFERENCES users (id) ON DELETE CASCADE,
     FOREIGN KEY (worker_id) REFERENCES users (id) ON UPDATE CASCADE
