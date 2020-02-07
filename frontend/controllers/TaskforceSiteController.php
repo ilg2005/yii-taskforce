@@ -5,6 +5,8 @@ namespace frontend\controllers;
 
 use frontend\constants\TaskStatuses;
 use frontend\models\Task;
+
+use Yii;
 use yii\data\Pagination;
 use yii\web\Controller;
 
@@ -67,12 +69,15 @@ class TaskforceSiteController extends Controller
         $tasks = Task::find()
             ->where(['status' => TaskStatuses::NEW])
             ->orderBy(['creation_date' => SORT_DESC])
-            ->with(['category']);
+            ->with(['category'])
+            ->where(['category_id' => Yii::$app->request->get('category')]);
         $pages = new Pagination(['totalCount' => $tasks->count(), 'pageSize' => $tasksCountPerPage, 'forcePageParam' => false, 'pageSizeParam' => false]);
         $tasks = $tasks->offset($pages->offset)
             ->limit($pages->limit)
             ->all();
-        return $this->render('browse', compact('tasks', 'pages'));
+
+        $categories = CategoryController::getCategories();
+        return $this->render('browse', compact('tasks', 'pages', 'categories'));
     }
 
     /**

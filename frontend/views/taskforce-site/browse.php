@@ -3,7 +3,6 @@
 /* @var $this yii\web\View */
 
 use frontend\components\Pager;
-use frontend\controllers\CategoryController;
 
 $this->title = 'TaskForce-Browse';
 
@@ -43,8 +42,8 @@ const TRIM_WIDTH = 70;
                 <form class="search-task__form" name="test" method="get" action="/browse">
                     <fieldset class="search-task__categories">
                         <legend>Категории</legend>
-                        <?php foreach (CategoryController::getCategories() as $category): ?>
-                        <input class="visually-hidden checkbox__input" id="<?= $category['id'] ?>" type="checkbox" name="<?= $category['icon'] ?>" value="<?= $category['id'] ?>" <?= Yii::$app->request->get($category['icon']) ? 'checked' : '' ?>>
+                        <?php foreach ($categories as $category): ?>
+                        <input class="visually-hidden checkbox__input" id="<?= $category['id'] ?>" type="checkbox" name="category[<?= $category['icon'] ?>]" value="<?= $category['id'] ?>" <?= Yii::$app->request->get('category')[$category['icon']] ? 'checked' : '' ?>>
                         <label for="<?= $category['id'] ?>"><?= $category['name'] ?></label>
                         <?php endforeach; ?>
                     </fieldset>
