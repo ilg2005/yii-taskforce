@@ -18,7 +18,7 @@ const TRIM_WIDTH = 70;
                 <div class="new-task__card">
                     <div class="new-task__title">
                         <a href="#" class="link-regular"><h2><?= $task->title ?></h2></a>
-                        <a  class="new-task__type link-regular" href="#"><p><?= $task->category->name ?></p></a>
+                        <a  class="new-task__type link-regular" href="/browse?category[]=<?= $task->category_id ?>"><p><?= $task->category->name ?></p></a>
                     </div>
                     <div class="new-task__icon new-task__icon--<?= $task->category->icon ?>"></div>
                     <p class="new-task_description">
@@ -43,7 +43,7 @@ const TRIM_WIDTH = 70;
                     <fieldset class="search-task__categories">
                         <legend>Категории</legend>
                         <?php foreach ($categories as $category): ?>
-                        <input class="visually-hidden checkbox__input" id="<?= $category['id'] ?>" type="checkbox" name="category[<?= $category['icon'] ?>]" value="<?= $category['id'] ?>" <?= Yii::$app->request->get('category')[$category['icon']] ? 'checked' : '' ?>>
+                        <input class="visually-hidden checkbox__input" id="<?= $category['id'] ?>" type="checkbox" name="category[]" value="<?= $category['id'] ?>" <?= (Yii::$app->request->get('category') && in_array($category['id'], Yii::$app->request->get('category'))) ? 'checked' : '' ?>>
                         <label for="<?= $category['id'] ?>"><?= $category['name'] ?></label>
                         <?php endforeach; ?>
                     </fieldset>
