@@ -69,8 +69,10 @@ class TaskforceSiteController extends Controller
         $tasks = Task::find()
             ->where(['status' => TaskStatuses::NEW])
             ->orderBy(['creation_date' => SORT_DESC])
-            ->with(['category'])
-            ->where(['category_id' => Yii::$app->request->get('category')]);
+            ->with(['category']);
+        if(Yii::$app->request->get('category')) {
+            $tasks->where(['category_id' => Yii::$app->request->get('category')]);
+        }
         $pages = new Pagination(['totalCount' => $tasks->count(), 'pageSize' => $tasksCountPerPage, 'forcePageParam' => false, 'pageSizeParam' => false]);
         $tasks = $tasks->offset($pages->offset)
             ->limit($pages->limit)
