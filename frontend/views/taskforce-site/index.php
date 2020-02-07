@@ -150,7 +150,7 @@ const TRIM_WIDTH = 70;
                         </div>
                         <div class="landing-task-info">
                             <div class="task-info-left">
-                                <p><a href="#" class="link-regular"><?= $task->category->name ?></a></p>
+                                <p><a href="/browse?category[]=<?= $task->category_id ?>" class="link-regular"><?= $task->category->name ?></a></p>
                                 <p><?= Yii::$app->formatter->asRelativeTime($task->creation_date) ?></p>
                             </div>
                             <span><?= $task->budget ?> <b>₽</b></span>
