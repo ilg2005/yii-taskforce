@@ -40,11 +40,11 @@ const TRIM_WIDTH = 70;
         </section>
         <section  class="search-task">
             <div class="search-task__wrapper">
-                <form class="search-task__form" name="test" method="post" action="#">
+                <form class="search-task__form" name="test" method="get" action="/browse">
                     <fieldset class="search-task__categories">
                         <legend>Категории</legend>
                         <?php foreach (CategoryController::getCategories() as $category): ?>
-                        <input class="visually-hidden checkbox__input" id="<?= $category['id'] ?>" type="checkbox" name="<?= $category['icon'] ?>" value="">
+                        <input class="visually-hidden checkbox__input" id="<?= $category['id'] ?>" type="checkbox" name="<?= $category['icon'] ?>" value="<?= $category['id'] ?>" <?= Yii::$app->request->get($category['icon']) ? 'checked' : '' ?>>
                         <label for="<?= $category['id'] ?>"><?= $category['name'] ?></label>
                         <?php endforeach; ?>
                     </fieldset>
@@ -52,7 +52,7 @@ const TRIM_WIDTH = 70;
                         <legend>Дополнительно</legend>
                         <input class="visually-hidden checkbox__input" id="6" type="checkbox" name="" value="">
                         <label for="6">Без исполнителя </label>
-                        <input class="visually-hidden checkbox__input" id="7" type="checkbox" name="" value="" checked>
+                        <input class="visually-hidden checkbox__input" id="7" type="checkbox" name="" value="">
                         <label for="7">Удаленная работа </label>
                     </fieldset>
                     <label class="search-task__name" for="8">Период</label>

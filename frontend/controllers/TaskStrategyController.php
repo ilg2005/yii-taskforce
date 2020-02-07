@@ -44,7 +44,7 @@ class TaskStrategyController
 
     public function getWorkerCategories() {
         return [
-            WorkerCategories::TRANSLATION => 'Перевод текстов',
+            WorkerCategories::TRANSLATION => 'Перевод',
             WorkerCategories::CLEAN => 'Уборка',
             WorkerCategories::CARGO => 'Грузоперевозки',
             WorkerCategories::NEO => 'Компьютерная помощь',
@@ -52,7 +52,7 @@ class TaskStrategyController
             WorkerCategories::BEAUTY => 'Красота',
             WorkerCategories::REPAIR => 'Ремонт техники',
             WorkerCategories::PHOTO => 'Фото',
-            WorkerCategories::COURIER => 'Курьерские услуги'
+            WorkerCategories::DELIVERY => 'Курьерские услуги'
         ];
     }
 
