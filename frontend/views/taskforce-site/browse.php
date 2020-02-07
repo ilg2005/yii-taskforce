@@ -3,6 +3,7 @@
 /* @var $this yii\web\View */
 
 use frontend\components\Pager;
+use frontend\controllers\CategoryController;
 
 $this->title = 'TaskForce-Browse';
 
@@ -42,16 +43,10 @@ const TRIM_WIDTH = 70;
                 <form class="search-task__form" name="test" method="post" action="#">
                     <fieldset class="search-task__categories">
                         <legend>Категории</legend>
-                        <input class="visually-hidden checkbox__input" id="1" type="checkbox" name="" value="" checked>
-                        <label for="1">Курьерские услуги </label>
-                        <input class="visually-hidden checkbox__input" id="2" type="checkbox" name="" value="" checked>
-                        <label  for="2">Грузоперевозки </label>
-                        <input class="visually-hidden checkbox__input" id="3" type="checkbox" name="" value="">
-                        <label  for="3">Переводы </label>
-                        <input class="visually-hidden checkbox__input" id="4" type="checkbox" name="" value="">
-                        <label  for="4">Строительство и ремонт </label>
-                        <input class="visually-hidden checkbox__input" id="5" type="checkbox" name="" value="">
-                        <label  for="5">Выгул животных </label>
+                        <?php foreach (CategoryController::getCategories() as $category): ?>
+                        <input class="visually-hidden checkbox__input" id="<?= $category['id'] ?>" type="checkbox" name="<?= $category['icon'] ?>" value="">
+                        <label for="<?= $category['id'] ?>"><?= $category['name'] ?></label>
+                        <?php endforeach; ?>
                     </fieldset>
                     <fieldset class="search-task__categories">
                         <legend>Дополнительно</legend>
