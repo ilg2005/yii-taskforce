@@ -47,19 +47,22 @@ const TRIM_WIDTH = 70;
                         <label for="<?= $category['id'] ?>"><?= $category['name'] ?></label>
                         <?php endforeach; ?>
                     </fieldset>
+                    <br>
                     <fieldset class="search-task__categories">
                         <legend>Дополнительно</legend>
                         <input class="visually-hidden checkbox__input" id="6" type="checkbox" name="" value="">
-                        <label for="6">Без исполнителя </label>
+                        <label for="6">Без откликов </label>
                         <input class="visually-hidden checkbox__input" id="7" type="checkbox" name="" value="">
                         <label for="7">Удаленная работа </label>
                     </fieldset>
+                    <br>
                     <label class="search-task__name" for="8">Период</label>
                     <select class="multiple-select input" id="8"size="1" name="time[]">
                         <option value="day">За день</option>
                         <option selected value="week">За неделю</option>
                         <option value="month">За месяц</option>
                     </select>
+                    <br>
                     <label class="search-task__name" for="9">Поиск по названию</label>
                     <input class="input-middle input" id="9" type="search" name="q" placeholder="">
                     <button class="button" type="submit">Искать</button>
