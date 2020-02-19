@@ -75,7 +75,6 @@ class TaskforceSiteController extends Controller
             $tasks->where(['category_id' => Yii::$app->request->get('category')]);
         }
         if(Yii::$app->request->get('no-responses')) {
-          //  echo(var_dump(Response::getTaskIDs()));
             $tasks->where(['not in', 'id', Response::getTaskIDs()]);
         }
         $pages = new Pagination(['totalCount' => $tasks->count(), 'pageSize' => $tasksCountPerPage, 'forcePageParam' => false, 'pageSizeParam' => false]);

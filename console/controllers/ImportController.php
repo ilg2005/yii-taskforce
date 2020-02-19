@@ -14,6 +14,7 @@ class ImportController extends Controller
         'users' => 'User',
         'tasks' => 'Task',
         'replies' => 'Grade',
+        'responses' => 'Response',
     ];
 
     public function importData($filename, $modelName)
