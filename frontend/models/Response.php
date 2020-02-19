@@ -13,7 +13,7 @@ class Response extends ActiveRecord
         $arrayFromDB = array_values(self::find()->select('task_id')->asArray()->all());
         $res = [];
         foreach ($arrayFromDB as $value) {
-            $res[] = $value['task_id'];
+            $res[] = (int)$value['task_id'];
         }
         return $res;
     }
