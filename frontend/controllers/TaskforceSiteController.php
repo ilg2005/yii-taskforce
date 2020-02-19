@@ -4,6 +4,7 @@
 namespace frontend\controllers;
 
 use frontend\constants\TaskStatuses;
+use frontend\models\Response;
 use frontend\models\Task;
 
 use Yii;
@@ -72,6 +73,9 @@ class TaskforceSiteController extends Controller
             ->with(['category']);
         if(Yii::$app->request->get('category')) {
             $tasks->where(['category_id' => Yii::$app->request->get('category')]);
+        }
+        if(Yii::$app->request->get('no-responses')) {
+            $tasks->where(['not in', 'id', Response::getTaskIDs()]);
         }
         $pages = new Pagination(['totalCount' => $tasks->count(), 'pageSize' => $tasksCountPerPage, 'forcePageParam' => false, 'pageSizeParam' => false]);
         $tasks = $tasks->offset($pages->offset)

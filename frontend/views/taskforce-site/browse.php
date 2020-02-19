@@ -50,8 +50,8 @@ const TRIM_WIDTH = 70;
                     <br>
                     <fieldset class="search-task__categories">
                         <legend>Дополнительно</legend>
-                        <input class="visually-hidden checkbox__input" id="6" type="checkbox" name="" value="">
-                        <label for="6">Без откликов </label>
+                        <input class="visually-hidden checkbox__input" id="no-responses" type="checkbox" name="no-responses" value="<?= (Yii::$app->request->get('no-responses', 1)) ?>" <?= (Yii::$app->request->get('no-responses')) ? 'checked' : '' ?>>
+                        <label for="no-responses">Без откликов </label>
                         <input class="visually-hidden checkbox__input" id="7" type="checkbox" name="" value="">
                         <label for="7">Удаленная работа </label>
                     </fieldset>
