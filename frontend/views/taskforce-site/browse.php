@@ -56,11 +56,12 @@ const TRIM_WIDTH = 70;
                         <label for="no-location">Удаленная работа </label>
                     </fieldset>
                     <br>
-                    <label class="search-task__name" for="8">Период</label>
-                    <select class="multiple-select input" id="8"size="1" name="time[]">
+                    <label class="search-task__name" for="time">Период</label>
+                    <select class="multiple-select input" id="time"size="1" name="time[]">
                         <option value="day">За день</option>
-                        <option selected value="week">За неделю</option>
+                        <option value="week">За неделю</option>
                         <option value="month">За месяц</option>
+                        <option selected value="all">За все время</option>
                     </select>
                     <br>
                     <label class="search-task__name" for="9">Поиск по названию</label>
