@@ -90,9 +90,9 @@ class TaskforceSiteController extends Controller
         }
 
         $timePeriod = Yii::$app->request->get('time');
-        $query = date('Y-m-d H:i:s', strtotime("-1 {$timePeriod}"));
-        if ($timePeriod !== 'all') {
-            $tasks->andWhere(['>=', 'creation_date', $query]);
+        $subquery = date('Y-m-d H:i:s', strtotime("-1 $timePeriod"));
+        if ($timePeriod && $timePeriod !== 'all') {
+            $tasks->andWhere(['>=', 'creation_date', $subquery]);
         }
 
         $pages = new Pagination(['totalCount' => $tasks->count(), 'pageSize' => $tasksCountPerPage, 'forcePageParam' => false, 'pageSizeParam' => false]);
