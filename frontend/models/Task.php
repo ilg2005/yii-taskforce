@@ -12,6 +12,9 @@ class Task extends ActiveRecord
     {
         return [
             [['creation_date', 'title', 'description', 'category_id', 'address', 'budget', 'deadline', 'latitude', 'longitude', 'customer_id', 'location_id'], 'safe'],
+            /*['creation_date', 'filter', 'filter' => function ($value) {
+                return strtotime($value);
+            }],*/
         ];
     }
 

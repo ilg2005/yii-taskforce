@@ -57,11 +57,11 @@ const TRIM_WIDTH = 70;
                     </fieldset>
                     <br>
                     <label class="search-task__name" for="time">Период</label>
-                    <select class="multiple-select input" id="time"size="1" name="time[]">
-                        <option value="day">За день</option>
-                        <option value="week">За неделю</option>
-                        <option value="month">За месяц</option>
-                        <option selected value="all">За все время</option>
+                    <select class="multiple-select input" id="time" name="time">
+                        <option <?= (Yii::$app->request->get('time') === 'all') ? 'selected' : '' ?> value="all">За все время</option>
+                        <option <?= (Yii::$app->request->get('time') === 'day') ? 'selected' : '' ?> value="day">За день</option>
+                        <option <?= (Yii::$app->request->get('time') === 'week') ? 'selected' : '' ?> value="week">За неделю</option>
+                        <option <?= (Yii::$app->request->get('time') === 'month') ? 'selected' : '' ?> value="month">За месяц</option>
                     </select>
                     <br>
                     <label class="search-task__name" for="9">Поиск по названию</label>
