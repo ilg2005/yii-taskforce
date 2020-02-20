@@ -92,18 +92,18 @@ class TaskforceSiteController extends Controller
         $timePeriod = Yii::$app->request->get('time')[0];
         switch ($timePeriod) {
             case 'day':
-                $tasks->andWhere(['<=','time', DATE_SUB(CURRENT_DATE, INTERVAL 1 DAY)]);
+                $tasks->andWhere(['<=', 'creation_date', 'DATE_SUB(NOW(), INTERVAL 1 DAY)']);
                 break;
             case 'week':
-                $tasks->andWhere(['time' <= DATE_SUB(CURRENT_DATE, INTERVAL 1 WEEK)]);
+                $tasks->andWhere(['<=', 'creation_date', 'DATE_SUB(CURRENT_DATE, INTERVAL 1 WEEK)']);
                 break;
             case 'month':
-                $tasks->andWhere(['time' <= DATE_SUB(CURRENT_DATE, INTERVAL 1 MONTH)]);
+                $tasks->andWhere(['<=', 'creation_date', 'DATE_SUB(CURRENT_DATE, INTERVAL 1 MONTH)']);
                 break;
             default:
                 break;
         }
-       echo(var_dump($timePeriod));
+       //echo(var_dump($timePeriod));
 
         $pages = new Pagination(['totalCount' => $tasks->count(), 'pageSize' => $tasksCountPerPage, 'forcePageParam' => false, 'pageSizeParam' => false]);
         $tasks = $tasks->offset($pages->offset)
