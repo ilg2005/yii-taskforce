@@ -82,11 +82,11 @@ class TaskforceSiteController extends Controller
             foreach ($arrayFromDB as $value) {
                 $res[] = (int)$value['task_id'];
             }
-            $tasks->where(['not in', 'id', $res]);
+            $tasks->andWhere(['not in', 'id', $res]);
         }
 
         if(Yii::$app->request->get('no-location')) {
-            $tasks->where(['location_id' => null]);
+            $tasks->andWhere(['location_id' => null]);
         }
 
         $pages = new Pagination(['totalCount' => $tasks->count(), 'pageSize' => $tasksCountPerPage, 'forcePageParam' => false, 'pageSizeParam' => false]);
