@@ -58,10 +58,15 @@ const TRIM_WIDTH = 70;
                     <br>
                     <label class="search-task__name" for="time">Период</label>
                     <select class="multiple-select input" id="time" name="time">
-                        <option <?= (Yii::$app->request->get('time') === 'all') ? 'selected' : '' ?> value="all">За все время</option>
-                        <option <?= (Yii::$app->request->get('time') === 'day') ? 'selected' : '' ?> value="day">За день</option>
-                        <option <?= (Yii::$app->request->get('time') === 'week') ? 'selected' : '' ?> value="week">За неделю</option>
-                        <option <?= (Yii::$app->request->get('time') === 'month') ? 'selected' : '' ?> value="month">За месяц</option>
+                        <?php $periods = [
+                            'all' => 'За все время',
+                            'month' => 'За месяц',
+                            'week' => 'За неделю',
+                            'day' => 'За день',
+                        ];
+                        foreach ($periods as $period => $description): ?>
+                        <option <?= (Yii::$app->request->get('time') === $period) ? 'selected' : '' ?> value=<?= $period ?>><?= $description ?></option>;
+                        <?php endforeach; ?>
                     </select>
                     <br>
                     <label class="search-task__name" for="9">Поиск по названию</label>
