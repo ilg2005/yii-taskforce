@@ -25,7 +25,7 @@ const TRIM_WIDTH = 70;
                         <?= mb_strimwidth($task->description, 0, TRIM_WIDTH, '...') ?>
                     </p>
                     <b class="new-task__price new-task__price--<?= $task->category->name ?>"><?= $task->budget ?><b> ₽</b></b>
-                    <p class="new-task__place">Санкт-Петербург, Центральный район</p>
+                        <p class="new-task__place"><?= $task->location_id ? 'Санкт-Петербург, Центральный район' : 'Удаленная работа' ?></p>
                     <span class="new-task__time"><?= Yii::$app->formatter->asRelativeTime($task->creation_date) ?></span>
                 </div>
                 <?php endforeach; ?>
@@ -52,8 +52,8 @@ const TRIM_WIDTH = 70;
                         <legend>Дополнительно</legend>
                         <input class="visually-hidden checkbox__input" id="no-responses" type="checkbox" name="no-responses" value="<?= (Yii::$app->request->get('no-responses', 1)) ?>" <?= (Yii::$app->request->get('no-responses')) ? 'checked' : '' ?>>
                         <label for="no-responses">Без откликов </label>
-                        <input class="visually-hidden checkbox__input" id="7" type="checkbox" name="" value="">
-                        <label for="7">Удаленная работа </label>
+                        <input class="visually-hidden checkbox__input" id="no-location" type="checkbox" name="no-location" value="<?= (Yii::$app->request->get('no-location', 1)) ?>" <?= (Yii::$app->request->get('no-location')) ? 'checked' : '' ?>>
+                        <label for="no-location">Удаленная работа </label>
                     </fieldset>
                     <br>
                     <label class="search-task__name" for="8">Период</label>

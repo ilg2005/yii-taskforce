@@ -71,9 +71,11 @@ class TaskforceSiteController extends Controller
             ->where(['status' => TaskStatuses::NEW])
             ->orderBy(['creation_date' => SORT_DESC])
             ->with(['category']);
+
         if(Yii::$app->request->get('category')) {
             $tasks->where(['category_id' => Yii::$app->request->get('category')]);
         }
+
         if(Yii::$app->request->get('no-responses')) {
             $arrayFromDB = array_values(Response::find()->select('task_id')->asArray()->all());
             $res = [];
@@ -82,6 +84,11 @@ class TaskforceSiteController extends Controller
             }
             $tasks->where(['not in', 'id', $res]);
         }
+
+        if(Yii::$app->request->get('no-location')) {
+            $tasks->where(['location_id' => null]);
+        }
+
         $pages = new Pagination(['totalCount' => $tasks->count(), 'pageSize' => $tasksCountPerPage, 'forcePageParam' => false, 'pageSizeParam' => false]);
         $tasks = $tasks->offset($pages->offset)
             ->limit($pages->limit)
