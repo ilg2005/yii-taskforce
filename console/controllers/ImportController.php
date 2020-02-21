@@ -3,7 +3,9 @@
 namespace console\controllers;
 
 use console\models\Import;
+use Yii;
 use yii\console\Controller;
+use yii\db\Exception;
 
 class ImportController extends Controller
 {
@@ -16,6 +18,24 @@ class ImportController extends Controller
         'replies' => 'Grade',
         'responses' => 'Response',
     ];
+
+    const DATA_TABLE_MAP = [
+        'users-categories' => 'users_categories',
+    ];
+
+    public function directImport2Table($filename, $tableName)
+    {
+        $values = [];
+        foreach (Import::readCSV($filename) as $array) {
+            $values[] = array_values($array);
+        }
+        $columnNames = Import::$titles;
+        try {
+            Yii::$app->db->createCommand()->batchInsert($tableName, $columnNames, $values)->execute();
+        } catch (Exception $e) {
+            die("Error: $e");
+        }
+    }
 
     public function importData($filename, $modelName)
     {
@@ -32,6 +52,7 @@ class ImportController extends Controller
             $instance->attributes = $values;
             $instance->save();
         }
+
     }
 
     public function actionIndex($file = '', $model = '') {
@@ -40,6 +61,9 @@ class ImportController extends Controller
         } else {
             foreach (self::DATA_MODEL_MAP as $filename => $modelName) {
                 $this->importData($filename, $modelName);
+            }
+            foreach (self::DATA_TABLE_MAP as $filename => $tableName) {
+                $this->directImport2Table($filename, $tableName);
             }
         }
     }

@@ -9,15 +9,17 @@ class Import extends Model
 {
     const FILE_PATH = 'D:\OSPanel\domains\yii-taskforce\data\\';
 
+    public static $titles;
+
     public static function readCSV($filename)
     {
         $file = new SplFileObject(self::FILE_PATH . $filename . '.csv');
         $file->setFlags(SplFileObject::READ_CSV | SplFileObject::SKIP_EMPTY);
-        $titles = $file->current();
+        self::$titles = $file->current();
         $resultArray = [];
         foreach ($file as $row) {
             if ($row && $file->key()) {
-                $resultArray[] = array_combine($titles, $row);
+                $resultArray[] = array_combine(self::$titles, $row);
             }
         }
         print_r($resultArray);
