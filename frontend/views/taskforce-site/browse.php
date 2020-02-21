@@ -69,8 +69,8 @@ const TRIM_WIDTH = 70;
                         <?php endforeach; ?>
                     </select>
                     <br>
-                    <label class="search-task__name" for="9">Поиск по названию</label>
-                    <input class="input-middle input" id="9" type="search" name="q" placeholder="">
+                    <label class="search-task__name" for="q">Поиск по названию</label>
+                    <input class="input-middle input" id="q" type="search" name="q" placeholder="" value="<?= Yii::$app->request->get('q') ?>">
                     <button class="button" type="submit">Искать</button>
                 </form>
             </div>

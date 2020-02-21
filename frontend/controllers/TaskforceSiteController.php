@@ -95,6 +95,11 @@ class TaskforceSiteController extends Controller
             $tasks->andWhere(['>=', 'creation_date', $subquery]);
         }
 
+        $search = Yii::$app->request->get('q');
+        if (!empty($search)) {
+            $tasks->andWhere(['like', 'title', $search]);
+        }
+
         $pages = new Pagination(['totalCount' => $tasks->count(), 'pageSize' => $tasksCountPerPage, 'forcePageParam' => false, 'pageSizeParam' => false]);
         $tasks = $tasks->offset($pages->offset)
             ->limit($pages->limit)
