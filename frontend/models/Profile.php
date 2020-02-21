@@ -44,6 +44,6 @@ class Profile extends ActiveRecord
 
     public static function tableName()
     {
-        return 'user_profiles';
+        return 'users_profiles';
     }
 }

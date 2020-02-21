@@ -19,7 +19,7 @@ CREATE TABLE categories
     icon VARCHAR(64)
 );
 
-CREATE TABLE user_profiles
+CREATE TABLE users_profiles
 (
     id          int AUTO_INCREMENT PRIMARY KEY,
     avatar_file VARCHAR(128),
@@ -43,7 +43,7 @@ CREATE TABLE users
     email             VARCHAR(128) NOT NULL,
     password          VARCHAR(128) NOT NULL,
     profile_id        int,
-    FOREIGN KEY (profile_id) REFERENCES user_profiles (id) ON DELETE CASCADE
+    FOREIGN KEY (profile_id) REFERENCES users_profiles (id) ON DELETE CASCADE
 );
 
 CREATE TABLE users_statistics
