@@ -14,8 +14,13 @@ class Profile extends ActiveRecord
     public function rules()
     {
         return [
-            [['address', 'birthday', 'about', 'phone', 'skype'], 'safe'],
+            [['address', 'birthday', 'about', 'phone', 'skype', 'category_id'], 'safe'],
         ];
+    }
+
+    public function getUsers()
+    {
+        return $this->hasMany(USER::class, ['profile_id' => 'id']);
     }
 
     public function behaviors()
@@ -39,6 +44,6 @@ class Profile extends ActiveRecord
 
     public static function tableName()
     {
-        return 'users_profile';
+        return 'user_profiles';
     }
 }

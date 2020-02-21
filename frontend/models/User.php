@@ -11,7 +11,7 @@ class User extends ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'email', 'password', 'registration_date'], 'safe'],
+            [['name', 'email', 'password', 'registration_date', 'profile_id'], 'safe'],
             ['email', 'email'],
         ];
     }
@@ -19,6 +19,11 @@ class User extends ActiveRecord
     public function getTasks()
     {
         return $this->hasMany(Task::class, ['customer_id' => 'id']);
+    }
+
+    public function getProfile()
+    {
+        return $this->hasOne(Profile::class, ['id' => 'profile_id']);
     }
 
     public static function tableName()
