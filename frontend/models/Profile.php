@@ -14,7 +14,7 @@ class Profile extends ActiveRecord
     public function rules()
     {
         return [
-            [['address', 'birthday', 'about', 'phone', 'skype', 'category_id'], 'safe'],
+            [['address', 'birthday', 'about', 'phone', 'skype'], 'safe'],
         ];
     }
 

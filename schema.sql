@@ -30,9 +30,7 @@ CREATE TABLE users_profiles
     phone       VARCHAR(20),
     skype       VARCHAR(128),
     messenger   VARCHAR(128),
-    category_id int,
-    FOREIGN KEY (location_id) REFERENCES locations (id) ON DELETE CASCADE,
-    FOREIGN KEY (category_id) REFERENCES categories (id) ON DELETE CASCADE
+    FOREIGN KEY (location_id) REFERENCES locations (id) ON DELETE CASCADE
 );
 
 CREATE TABLE users
@@ -68,6 +66,14 @@ CREATE TABLE users_settings
     show_to_customer  TINYINT DEFAULT 1,
     hide_user_profile TINYINT DEFAULT 0,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+);
+
+CREATE TABLE users_categories
+(
+    user_id     int,
+    category_id int,
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
+    FOREIGN KEY (category_id) REFERENCES categories (id) ON DELETE CASCADE
 );
 
 CREATE TABLE users_portfolio
@@ -159,6 +165,10 @@ create index user_views_count_index
     on users_statistics (views_count);
 create index reviews_count_index
     on users_statistics (reviews_count);
+create index user_id_index
+    on users_categories (user_id);
+create index category_id_index
+    on users_categories (category_id);
 create index task_creation_date_index
     on tasks (creation_date);
 create index task_title_index

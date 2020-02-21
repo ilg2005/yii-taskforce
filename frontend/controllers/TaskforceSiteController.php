@@ -7,6 +7,7 @@ use frontend\constants\TaskStatuses;
 use frontend\models\Response;
 use frontend\models\Task;
 
+use frontend\models\User;
 use Yii;
 use yii\data\Pagination;
 use yii\web\Controller;
@@ -146,7 +147,16 @@ class TaskforceSiteController extends Controller
      */
     public function actionUsers()
     {
-        return $this->render('users');
+        $usersCountPerPage = 5;
+        $users = User::find()
+            ->with(['profile']);
+
+        $pages = new Pagination(['totalCount' => $users->count(), 'pageSize' => $usersCountPerPage, 'forcePageParam' => false, 'pageSizeParam' => false]);
+        $users = $users->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+
+        return $this->render('users', compact('users', 'pages'));
     }
 
     /**
