@@ -114,6 +114,7 @@ $this->title = 'TaskForce-Users';
                         <input class="visually-hidden checkbox__input" id="105" type="checkbox" name="" value="">
                         <label  for="105">Выгул животных </label>
                     </fieldset>
+                    <br>
                     <fieldset class="search-task__categories">
                         <legend>Дополнительно</legend>
                         <input class="visually-hidden checkbox__input" id="106" type="checkbox" name="" value="" disabled>
@@ -122,9 +123,12 @@ $this->title = 'TaskForce-Users';
                         <label for="107">Сейчас онлайн</label>
                         <input class="visually-hidden checkbox__input" id="108" type="checkbox" name="" value="" checked>
                         <label for="108">Есть отзывы</label>
+                        <input class="visually-hidden checkbox__input" id="109" type="checkbox" name="" value="" checked>
+                        <label for="109">В избранном</label>
                     </fieldset>
-                    <label class="search-task__name" for="109">Поиск по названию</label>
-                    <input class="input-middle input" id="109" type="search" name="q" placeholder="">
+                    <br>
+                    <label class="search-task__name" for="110">Поиск по имени</label>
+                    <input class="input-middle input" id="110" type="search" name="q" placeholder="">
                     <button class="button" type="submit">Искать</button>
                 </form>
             </div>
