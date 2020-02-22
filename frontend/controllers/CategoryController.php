@@ -12,7 +12,7 @@ class CategoryController extends Controller
     public $layout = 'basic';
     public static function getCategories()
     {
-        return Category::find()->asArray()->all();
+        return Category::find()->asArray()->with('users')->all();
     }
 
     public function actionShow()

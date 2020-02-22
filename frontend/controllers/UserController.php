@@ -12,7 +12,7 @@ class UserController extends Controller
     public $layout = 'basic';
     public function actionShow()
     {
-        $users = User::find()->asArray()->all();
+        $users = User::find()->asArray()->with('categories')->all();
         return $this->render('show', compact('users'));
     }
 }
