@@ -27,8 +27,8 @@ use frontend\components\Pager; ?>
                 <div class="feedback-card__top">
                     <div class="user__search-icon">
                         <a href="#"><img src="../img/man-glasses.jpg" width="65" height="65"></a>
-                        <span>17 заданий</span>
-                        <span>6 отзывов</span>
+                        <span><?= $user->statistics->tasks_count ?> заданий</span>
+                        <span><?= $user->statistics->reviews_count ?> отзывов</span>
                     </div>
                     <div class="feedback-card__top--name user__search-card">
                         <p class="link-name"><a href="#" class="link-regular"><?= $user->name ?></a></p>

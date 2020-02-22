@@ -35,7 +35,7 @@ class User extends ActiveRecord
 
     public function getStatistics()
     {
-        return $this->hasMany(Statistics::class, ['user_id' => 'id']);
+        return $this->hasOne(Statistics::class, ['user_id' => 'id']);
     }
 
     public static function tableName()

@@ -153,7 +153,8 @@ class TaskforceSiteController extends Controller
         $users = User::find()
             ->orderBy(['registration_date' => SORT_DESC])
             ->with(['profile'])
-            ->with(['categories']);
+            ->with(['categories'])
+            ->with(['statistics']);
 
         if(Yii::$app->request->get('category')) {
           $subqueryArray = (new Query())
@@ -180,7 +181,8 @@ class TaskforceSiteController extends Controller
 
         $categories = CategoryController::getCategories();
 
-        return $this->render('users', compact('users', 'pages', 'categories'));
+
+        return $this->render('users', compact('users', 'pages', 'categories', 'statistics'));
     }
 
     /**
