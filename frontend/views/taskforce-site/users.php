@@ -55,19 +55,13 @@ use frontend\components\Pager; ?>
         </section>
         <section  class="search-task">
             <div class="search-task__wrapper">
-                <form class="search-task__form" name="users" method="post" action="#">
+                <form class="search-task__form" name="users" method="get" action="/users">
                     <fieldset class="search-task__categories">
                         <legend>Категории</legend>
-                        <input class="visually-hidden checkbox__input" id="101" type="checkbox" name="" value="" checked disabled>
-                        <label for="101">Курьерские услуги </label>
-                        <input class="visually-hidden checkbox__input" id="102" type="checkbox" name="" value="" checked>
-                        <label  for="102">Грузоперевозки </label>
-                        <input class="visually-hidden checkbox__input" id="103" type="checkbox" name="" value="">
-                        <label  for="103">Переводы </label>
-                        <input class="visually-hidden checkbox__input" id="104" type="checkbox" name="" value="">
-                        <label  for="104">Строительство и ремонт </label>
-                        <input class="visually-hidden checkbox__input" id="105" type="checkbox" name="" value="">
-                        <label  for="105">Выгул животных </label>
+                        <?php foreach ($categories as $category): ?>
+                            <input class="visually-hidden checkbox__input" id="<?= $category['id'] ?>" type="checkbox" name="category[]" value="<?= $category['id'] ?>" <?= (Yii::$app->request->get('category') && in_array($category['id'], Yii::$app->request->get('category'))) ? 'checked' : '' ?>>
+                            <label for="<?= $category['id'] ?>"><?= $category['name'] ?></label>
+                        <?php endforeach; ?>
                     </fieldset>
                     <br>
                     <fieldset class="search-task__categories">

@@ -10,6 +10,7 @@ use frontend\models\Task;
 use frontend\models\User;
 use Yii;
 use yii\data\Pagination;
+use yii\db\Query;
 use yii\web\Controller;
 
 class TaskforceSiteController extends Controller
@@ -107,6 +108,7 @@ class TaskforceSiteController extends Controller
             ->all();
 
         $categories = CategoryController::getCategories();
+
         return $this->render('browse', compact('tasks', 'pages', 'categories'));
     }
 
@@ -152,12 +154,27 @@ class TaskforceSiteController extends Controller
             ->with(['profile'])
             ->with(['categories']);
 
+        if(Yii::$app->request->get('category')) {
+          $subqueryArray = (new Query())
+              ->select(['user_id'])
+              ->from('users_categories')
+              ->where(['category_id' => Yii::$app->request->get('category')])
+              ->all();
+          $userIDs = [];
+          foreach ($subqueryArray as $array) {
+              $userIDs[] = $array['user_id'];
+          }
+          $users->where(['in', 'id', $userIDs]);
+        }
+
         $pages = new Pagination(['totalCount' => $users->count(), 'pageSize' => $usersCountPerPage, 'forcePageParam' => false, 'pageSizeParam' => false]);
         $users = $users->offset($pages->offset)
             ->limit($pages->limit)
             ->all();
 
-        return $this->render('users', compact('users', 'pages'));
+        $categories = CategoryController::getCategories();
+
+        return $this->render('users', compact('users', 'pages', 'categories'));
     }
 
     /**

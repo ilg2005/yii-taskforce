@@ -39,7 +39,7 @@ const TRIM_WIDTH = 70;
         </section>
         <section  class="search-task">
             <div class="search-task__wrapper">
-                <form class="search-task__form" name="test" method="get" action="/browse">
+                <form class="search-task__form" name="tasks" method="get" action="/browse">
                     <fieldset class="search-task__categories">
                         <legend>Категории</legend>
                         <?php foreach ($categories as $category): ?>
