@@ -4,6 +4,7 @@
 namespace frontend\controllers;
 
 use frontend\constants\TaskStatuses;
+use frontend\constants\UserRoles;
 use frontend\models\Reaction;
 use frontend\models\Task;
 
@@ -151,10 +152,11 @@ class TaskforceSiteController extends Controller
     {
         $usersCountPerPage = 5;
         $users = User::find()
+            ->joinWith('statistics')
+            ->where(['users_statistics.role' => UserRoles::WORKER])
             ->orderBy(['registration_date' => SORT_DESC])
             ->with(['profile'])
-            ->with(['categories'])
-            ->with(['statistics']);
+            ->with(['categories']);
 
         if(Yii::$app->request->get('category')) {
           $subqueryArray = (new Query())
