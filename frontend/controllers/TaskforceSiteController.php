@@ -151,6 +151,7 @@ class TaskforceSiteController extends Controller
     {
         $usersCountPerPage = 5;
         $users = User::find()
+            ->orderBy(['registration_date' => SORT_DESC])
             ->with(['profile'])
             ->with(['categories']);
 
