@@ -33,7 +33,7 @@ use frontend\components\Pager; ?>
                     <div class="feedback-card__top--name user__search-card">
                         <p class="link-name"><a href="#" class="link-regular"><?= $user->name ?></a></p>
                         <span></span><span></span><span></span><span></span><span class="star-disabled"></span>
-                        <b>4.25</b>
+                        <b><?= $user->statistics->rating ?></b>
                         <p class="user__search-content">
                             <?= $user->profile->about ?>
                         </p>
