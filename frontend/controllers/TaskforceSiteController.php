@@ -167,6 +167,11 @@ class TaskforceSiteController extends Controller
           $users->where(['in', 'id', $userIDs]);
         }
 
+        $searchByName = Yii::$app->request->get('name');
+        if (!empty($searchByName)) {
+            $users->where(['like', 'name', $searchByName]);
+        }
+
         $pages = new Pagination(['totalCount' => $users->count(), 'pageSize' => $usersCountPerPage, 'forcePageParam' => false, 'pageSizeParam' => false]);
         $users = $users->offset($pages->offset)
             ->limit($pages->limit)

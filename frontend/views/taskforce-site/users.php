@@ -59,7 +59,7 @@ use frontend\components\Pager; ?>
                     <fieldset class="search-task__categories">
                         <legend>Категории</legend>
                         <?php foreach ($categories as $category): ?>
-                            <input class="visually-hidden checkbox__input" id="<?= $category['id'] ?>" type="checkbox" name="category[]" value="<?= $category['id'] ?>" <?= (Yii::$app->request->get('category') && in_array($category['id'], Yii::$app->request->get('category'))) ? 'checked' : '' ?>>
+                            <input class="visually-hidden checkbox__input" id="<?= $category['id'] ?>" type="checkbox" name="category[]" value="<?= $category['id'] ?>" <?= (Yii::$app->request->get('category') && !(Yii::$app->request->get('name')) && in_array($category['id'], Yii::$app->request->get('category'))) ? 'checked' : '' ?>>
                             <label for="<?= $category['id'] ?>"><?= $category['name'] ?></label>
                         <?php endforeach; ?>
                     </fieldset>
@@ -76,8 +76,8 @@ use frontend\components\Pager; ?>
                         <label for="109">В избранном</label>
                     </fieldset>
                     <br>
-                    <label class="search-task__name" for="110">Поиск по имени</label>
-                    <input class="input-middle input" id="110" type="search" name="q" placeholder="">
+                    <label class="search-task__name" for="name">Поиск по имени</label>
+                    <input class="input-middle input" id="name" type="search" name="name" placeholder="" value="<?= Yii::$app->request->get('name') ?>">
                     <button class="button" type="submit">Искать</button>
                 </form>
             </div>
