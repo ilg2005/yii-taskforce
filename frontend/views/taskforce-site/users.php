@@ -41,9 +41,9 @@ use frontend\components\Pager; ?>
                     <span class="new-task__time">Был на сайте 25 минут назад</span>
                 </div>
                 <div class="link-specialization user__search-link--bottom">
-                    <a href="#" class="link-regular">Ремонт</a>
-                    <a href="#" class="link-regular">Курьер</a>
-                    <a href="#" class="link-regular">Оператор ПК</a>
+                    <?php foreach ($user->categories as $category): ?>
+                    <a href="#" class="link-regular"><?= $category ?></a>
+                   <?php endforeach; ?>
                 </div>
             </div>
             <?php endforeach; ?>

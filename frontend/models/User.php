@@ -21,6 +21,12 @@ class User extends ActiveRecord
         return $this->hasMany(Task::class, ['customer_id' => 'id']);
     }
 
+    public function getCategories()
+    {
+        return $this->hasMany(Category::class, ['id' => 'id'])            ->viaTable('users_categories', ['user_id' => 'id']);
+    }
+
+
     public function getProfile()
     {
         return $this->hasOne(Profile::class, ['id' => 'profile_id']);
