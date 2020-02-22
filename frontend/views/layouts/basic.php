@@ -60,7 +60,7 @@ BasicAsset::register($this);
                         <a href="/create">Создать задание</a>
                     </li>
                     <li class="site-list__item">
-                        <a href="/account">Мой профиль</a>
+                        <a href="/profile">Мой профиль</a>
                     </li>
                 </ul>
             </div>
