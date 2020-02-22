@@ -16,7 +16,7 @@ class ImportController extends Controller
         'users' => 'User',
         'tasks' => 'Task',
         'replies' => 'Grade',
-        'responses' => 'Response',
+        'reactions' => 'Reaction',
     ];
 
     const DATA_TABLE_MAP = [

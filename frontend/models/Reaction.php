@@ -6,7 +6,7 @@ namespace frontend\models;
 
 use yii\db\ActiveRecord;
 
-class Response extends ActiveRecord
+class Reaction extends ActiveRecord
 {
     public function rules()
     {
@@ -17,6 +17,6 @@ class Response extends ActiveRecord
 
     public static function tableName()
     {
-        return 'tasks_responses';
+        return 'tasks_reactions';
     }
 }

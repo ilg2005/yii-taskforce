@@ -4,7 +4,7 @@
 namespace frontend\controllers;
 
 use frontend\constants\TaskStatuses;
-use frontend\models\Response;
+use frontend\models\Reaction;
 use frontend\models\Task;
 
 use frontend\models\User;
@@ -78,7 +78,7 @@ class TaskforceSiteController extends Controller
         }
 
         if(Yii::$app->request->get('no-responses')) {
-            $arrayFromDB = array_values(Response::find()->select('task_id')->asArray()->all());
+            $arrayFromDB = array_values(Reaction::find()->select('task_id')->asArray()->all());
             $res = [];
             foreach ($arrayFromDB as $value) {
                 $res[] = (int)$value['task_id'];

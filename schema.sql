@@ -123,7 +123,7 @@ CREATE TABLE grades
     FOREIGN KEY (task_id) REFERENCES tasks (id) ON DELETE CASCADE
 );
 
-CREATE TABLE tasks_responses
+CREATE TABLE tasks_reactions
 (
     task_id        int,
     worker_id      int,
