@@ -32,7 +32,9 @@ use frontend\components\Pager; ?>
                     </div>
                     <div class="feedback-card__top--name user__search-card">
                         <p class="link-name"><a href="#" class="link-regular"><?= $user->name ?></a></p>
-                        <span></span><span></span><span></span><span></span><span class="star-disabled"></span>
+                        <?php for ($i = 1; $i <= 5; $i++) : ?>
+                        <span <?= ($i > floor($user->statistics->rating)) ? 'class="star-disabled"' : '' ?>></span>
+                        <?php endfor; ?>
                         <b><?= $user->statistics->rating ?></b>
                         <p class="user__search-content">
                             <?= $user->profile->about ?>
