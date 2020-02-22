@@ -149,7 +149,8 @@ class TaskforceSiteController extends Controller
     {
         $usersCountPerPage = 5;
         $users = User::find()
-            ->with(['profile']);
+            ->with(['profile'])
+            ->with(['categories']);
 
         $pages = new Pagination(['totalCount' => $users->count(), 'pageSize' => $usersCountPerPage, 'forcePageParam' => false, 'pageSizeParam' => false]);
         $users = $users->offset($pages->offset)
