@@ -38,7 +38,7 @@ use frontend\components\Pager; ?>
                             <?= $user->profile->about ?>
                         </p>
                     </div>
-                    <span class="new-task__time">Был на сайте 25 минут назад</span>
+                    <span class="new-task__time">Был на сайте <?= Yii::$app->formatter->asRelativeTime($user->statistics->latest_activity_time) ?></span>
                 </div>
                 <div class="link-specialization user__search-link--bottom">
                     <?php foreach ($user->categories as $category): ?>
