@@ -23,7 +23,8 @@ class User extends ActiveRecord
 
     public function getCategories()
     {
-        return $this->hasMany(Category::class, ['id' => 'id'])->viaTable('users_categories', ['user_id' => 'id']);
+        return $this->hasMany(Category::class, ['id' => 'category_id'])
+            ->viaTable('users_categories', ['user_id' => 'id']);
     }
 
 

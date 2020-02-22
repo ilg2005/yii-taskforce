@@ -17,7 +17,8 @@ class Category extends ActiveRecord
 
     public function getUsers()
     {
-        return $this->hasMany(User::class, ['id' => 'id'])->viaTable('users_categories', ['category_id' => 'id']);
+        return $this->hasMany(User::class, ['id' => 'user_id'])
+            ->viaTable('users_categories', ['category_id' => 'id']);
     }
 
     public function getTasks()
