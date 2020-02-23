@@ -14,11 +14,11 @@ use frontend\components\Pager; ?>
                     <li class="user__search-item <?= (Yii::$app->request->get('rating') && !(Yii::$app->request->get('name'))) ? 'user__search-item--current' : '' ?>">
                         <a href="/users?rating=1" class="link-regular">Рейтингу</a>
                     </li>
-                    <li class="user__search-item">
-                        <a href="#" class="link-regular">Числу заказов</a>
+                    <li class="user__search-item <?= (Yii::$app->request->get('tasks') && !(Yii::$app->request->get('name'))) ? 'user__search-item--current' : '' ?>">
+                        <a href="/users?tasks=1" class="link-regular">Числу заказов</a>
                     </li>
-                    <li class="user__search-item">
-                        <a href="#" class="link-regular">Популярности</a>
+                    <li class="user__search-item <?= (Yii::$app->request->get('views') && !(Yii::$app->request->get('name'))) ? 'user__search-item--current' : '' ?>">
+                        <a href="/users?views=1" class="link-regular">Популярности</a>
                     </li>
                 </ul>
             </div>
