@@ -26,7 +26,7 @@ use frontend\components\Pager; ?>
             <div class="content-view__feedback-card user__search-wrapper">
                 <div class="feedback-card__top">
                     <div class="user__search-icon">
-                        <a href="#"><img src="../img/man-glasses.jpg" width="65" height="65"></a>
+                        <a href="#"><img src="../img/<?= $user->profile->avatar_file ?>" width="65" height="65"></a>
                         <span><?= $user->statistics->tasks_count ?> заданий</span>
                         <span><?= $user->statistics->testimonials_count ?> отзывов</span>
                     </div>
