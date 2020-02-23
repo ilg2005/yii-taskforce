@@ -171,6 +171,19 @@ class TaskforceSiteController extends Controller
           $users->where(['in', 'id', $userIDs]);
         }
 
+        if(Yii::$app->request->get('free')) {
+          $subqueryArray = (new Query())
+              ->select(['worker_id'])
+              ->from('tasks')
+              ->where(['not in','status', TaskStatuses::ACTIVE])
+              ->all();
+          $workerIDs = [];
+          foreach ($subqueryArray as $array) {
+              $workerIDs[] = $array['worker_id'];
+          }
+          $users->andWhere(['in', 'id', $workerIDs]);
+        }
+
         if (Yii::$app->request->get('online')) {
             $users->andWhere(['>=', 'users_statistics.latest_activity_time', date('Y-m-d H:i:s', strtotime('-30 minutes'))]);
         }

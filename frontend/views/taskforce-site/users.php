@@ -68,8 +68,8 @@ use frontend\components\Pager; ?>
                     <br>
                     <fieldset class="search-task__categories">
                         <legend>Дополнительно</legend>
-                        <input class="visually-hidden checkbox__input" id="106" type="checkbox" name="" value="" disabled>
-                        <label for="106">Сейчас свободен</label>
+                        <input class="visually-hidden checkbox__input" id="free" type="checkbox" name="free" value="<?= (Yii::$app->request->get('free', 1)) ?>" <?= (Yii::$app->request->get('free') && !(Yii::$app->request->get('name'))) ? 'checked' : '' ?>>
+                        <label for="free">Сейчас свободен</label>
                         <input class="visually-hidden checkbox__input" id="online" type="checkbox" name="online" value="<?= (Yii::$app->request->get('online', 1)) ?>" <?= (Yii::$app->request->get('online') && !(Yii::$app->request->get('name'))) ? 'checked' : '' ?>>
                         <label for="online">Сейчас онлайн</label>
                         <input class="visually-hidden checkbox__input" id="testimonials" type="checkbox" name="testimonials" value="<?= (Yii::$app->request->get('testimonials', 1)) ?>" <?= (Yii::$app->request->get('testimonials') && !(Yii::$app->request->get('name'))) ? 'checked' : '' ?>>
