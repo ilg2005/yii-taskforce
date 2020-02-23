@@ -74,8 +74,8 @@ use frontend\components\Pager; ?>
                         <label for="107">Сейчас онлайн</label>
                         <input class="visually-hidden checkbox__input" id="108" type="checkbox" name="" value="" checked>
                         <label for="108">Есть отзывы</label>
-                        <input class="visually-hidden checkbox__input" id="109" type="checkbox" name="" value="" checked>
-                        <label for="109">В избранном</label>
+                        <input class="visually-hidden checkbox__input" id="favorite" type="checkbox" name="favorite" value="<?= (Yii::$app->request->get('favorite', 1)) ?>" <?= (Yii::$app->request->get('favorite') && !(Yii::$app->request->get('name'))) ? 'checked' : '' ?>>
+                        <label for="favorite">В избранном</label>
                     </fieldset>
                     <br>
                     <label class="search-task__name" for="name">Поиск по имени</label>

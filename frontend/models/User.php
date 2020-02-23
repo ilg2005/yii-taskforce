@@ -16,9 +16,14 @@ class User extends ActiveRecord
         ];
     }
 
-    public function getTasks()
+    public function getCustomerTasks()
     {
         return $this->hasMany(Task::class, ['customer_id' => 'id']);
+    }
+
+    public function getWorkerTasks()
+    {
+        return $this->hasMany(Task::class, ['worker_id' => 'id']);
     }
 
     public function getCategories()

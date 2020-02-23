@@ -11,7 +11,7 @@ class Task extends ActiveRecord
     public function rules()
     {
         return [
-            [['creation_date', 'title', 'description', 'category_id', 'address', 'budget', 'deadline', 'latitude', 'longitude', 'customer_id', 'location_id'], 'safe'],
+            [['creation_date', 'title', 'description', 'category_id', 'address', 'budget', 'deadline', 'latitude', 'longitude', 'customer_id', 'worker_id', 'location_id', 'status'], 'safe'],
         ];
     }
 
@@ -23,6 +23,11 @@ class Task extends ActiveRecord
     public function getCustomer()
     {
         return $this->hasOne(User::class, ['id' => 'customer_id']);
+    }
+
+    public function getWorker()
+    {
+        return $this->hasOne(User::class, ['id' => 'worker_id']);
     }
 
     public static function tableName()

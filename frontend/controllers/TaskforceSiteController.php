@@ -171,6 +171,10 @@ class TaskforceSiteController extends Controller
           $users->where(['in', 'id', $userIDs]);
         }
 
+        if(Yii::$app->request->get('favorite')) {
+            $users->andWhere(['users_statistics.is_favorite' => 1]);
+        }
+
         $searchByName = Yii::$app->request->get('name');
         if (!empty($searchByName)) {
             $users->where(['like', 'name', $searchByName]);
