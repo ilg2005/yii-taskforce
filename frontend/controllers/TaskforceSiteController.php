@@ -158,6 +158,10 @@ class TaskforceSiteController extends Controller
             ->with(['profile'])
             ->with(['categories']);
 
+        if(Yii::$app->request->get('rating')) {
+            $users->orderBy(['users_statistics.rating' => SORT_DESC]);
+        }
+
         if(Yii::$app->request->get('category')) {
           $subqueryArray = (new Query())
               ->select(['user_id'])
