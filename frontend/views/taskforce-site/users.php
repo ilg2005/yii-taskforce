@@ -70,8 +70,8 @@ use frontend\components\Pager; ?>
                         <legend>Дополнительно</legend>
                         <input class="visually-hidden checkbox__input" id="106" type="checkbox" name="" value="" disabled>
                         <label for="106">Сейчас свободен</label>
-                        <input class="visually-hidden checkbox__input" id="107" type="checkbox" name="" value="" checked>
-                        <label for="107">Сейчас онлайн</label>
+                        <input class="visually-hidden checkbox__input" id="online" type="checkbox" name="online" value="<?= (Yii::$app->request->get('online', 1)) ?>" <?= (Yii::$app->request->get('online') && !(Yii::$app->request->get('name'))) ? 'checked' : '' ?>>
+                        <label for="online">Сейчас онлайн</label>
                         <input class="visually-hidden checkbox__input" id="testimonials" type="checkbox" name="testimonials" value="<?= (Yii::$app->request->get('testimonials', 1)) ?>" <?= (Yii::$app->request->get('testimonials') && !(Yii::$app->request->get('name'))) ? 'checked' : '' ?>>
                         <label for="testimonials">Есть отзывы</label>
                         <input class="visually-hidden checkbox__input" id="favorite" type="checkbox" name="favorite" value="<?= (Yii::$app->request->get('favorite', 1)) ?>" <?= (Yii::$app->request->get('favorite') && !(Yii::$app->request->get('name'))) ? 'checked' : '' ?>>
