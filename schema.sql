@@ -51,7 +51,7 @@ CREATE TABLE users_statistics
     latest_activity_time TIMESTAMP,
     is_favorite          boolean    DEFAULT false,
     rating               FLOAT      DEFAULT 0,
-    reviews_count        INT        DEFAULT 0,
+    testimonials_count        INT        DEFAULT 0,
     tasks_count          INT        DEFAULT 0,
     views_count          INT        DEFAULT 0,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
@@ -62,7 +62,7 @@ CREATE TABLE users_settings
     user_id           int,
     new_message       TINYINT DEFAULT 1,
     actions_on_task   TINYINT DEFAULT 0,
-    new_review        TINYINT DEFAULT 0,
+    new_testimonial   TINYINT DEFAULT 0,
     show_to_customer  TINYINT DEFAULT 1,
     hide_user_profile TINYINT DEFAULT 0,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
@@ -163,8 +163,8 @@ create index user_tasks_count_index
     on users_statistics (tasks_count);
 create index user_views_count_index
     on users_statistics (views_count);
-create index reviews_count_index
-    on users_statistics (reviews_count);
+create index testimonials_count_index
+    on users_statistics (testimonials_count);
 create index user_id_index
     on users_categories (user_id);
 create index category_id_index
