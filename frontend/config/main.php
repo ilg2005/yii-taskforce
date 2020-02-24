@@ -16,6 +16,9 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
+        'formatter' => [
+            'defaultTimeZone' => 'Europe/Moscow',
+            ],
         'i18n' => [
             'translations' => [
                 'app*' => [
