@@ -7,7 +7,7 @@ use yii\base\Model;
 
 class Import extends Model
 {
-    const FILE_PATH = 'D:\OSPanel\domains\yii-taskforce\data\\';
+    const FILE_PATH = __DIR__ . '/../../../yii-taskforce/data/';
 
     public static $titles;
 
