@@ -16,18 +16,18 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
-        /*'i18n' => [
+        'i18n' => [
             'translations' => [
                 'app*' => [
                     'class' => PhpMessageSource::class,
                     'basePath' => '@app/messages',
-                    'sourceLanguage' => 'en-US',
+                    'sourceLanguage' => 'ru-RU',
                     'fileMap' => [
                         'app'       => 'app.php',
                     ],
                 ],
             ],
-        ],*/
+        ],
         'request' => [
             'csrfParam' => '_csrf-frontend',
         ],

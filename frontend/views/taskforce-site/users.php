@@ -27,8 +27,8 @@ use frontend\components\Pager; ?>
                 <div class="feedback-card__top">
                     <div class="user__search-icon">
                         <a href="#"><img src="../img/<?= $user->profile->avatar_file ?>" width="65" height="65"></a>
-                        <span><?= Yii::t('app', '{n, plural, one{# задание} =2{# задания} =3{# задания} =4{# задания} other{# заданий}}', array('n' => $user->statistics->tasks_count,)) ?></span>
-                        <span><?= Yii::t('app', '{n, plural, one{# отзыв} =2{# отзыва} =3{# отзыва} =4{# отзыва} other{# отзывов}}', array('n' => $user->statistics->testimonials_count,)) ?></span>
+                        <span><?= Yii::t('app', '{n, plural, one{# задание} few{# задания} other{# заданий}}', array('n' => $user->statistics->tasks_count,)) ?></span>
+                        <span><?= Yii::t('app', '{n, plural, one{# отзыв} few{# отзыва} other{# отзывов}}', array('n' => $user->statistics->testimonials_count,)) ?></span>
                     </div>
                     <div class="feedback-card__top--name user__search-card">
                         <p class="link-name"><a href="#" class="link-regular"><?= $user->name ?></a></p>
