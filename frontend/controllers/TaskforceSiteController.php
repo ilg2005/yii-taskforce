@@ -5,6 +5,7 @@ namespace frontend\controllers;
 
 use frontend\constants\TaskStatuses;
 use frontend\constants\UserRoles;
+use frontend\models\Category;
 use frontend\models\Reaction;
 use frontend\models\Task;
 
@@ -108,7 +109,7 @@ class TaskforceSiteController extends Controller
             ->limit($pages->limit)
             ->all();
 
-        $categories = CategoryController::getCategories();
+        $categories = Category::find()->with('users')->all();
 
         return $this->render('browse', compact('tasks', 'pages', 'categories'));
     }
@@ -218,7 +219,7 @@ class TaskforceSiteController extends Controller
             ->limit($pages->limit)
             ->all();
 
-        $categories = CategoryController::getCategories();
+        $categories = Category::find()->with('users')->all();
 
 
         return $this->render('users', compact('users', 'pages', 'categories'));
