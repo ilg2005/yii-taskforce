@@ -221,7 +221,6 @@ class TaskforceSiteController extends Controller
 
         $categories = Category::find()->with('users')->all();
 
-
         return $this->render('users', compact('users', 'pages', 'categories'));
     }
 
