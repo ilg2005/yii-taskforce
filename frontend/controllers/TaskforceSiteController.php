@@ -73,7 +73,7 @@ class TaskforceSiteController extends Controller
         $tasks = Task::find()
             ->where(['status' => TaskStatuses::NEW])
             ->orderBy(['creation_date' => SORT_DESC])
-            ->with(['category']);
+            ->with('category');
 
         if(Yii::$app->request->get('category')) {
             $tasks->where(['category_id' => Yii::$app->request->get('category')]);
@@ -155,8 +155,8 @@ class TaskforceSiteController extends Controller
             ->joinWith('statistics')
             ->where(['users_statistics.role' => UserRoles::WORKER])
             ->orderBy(['registration_date' => SORT_DESC])
-            ->with(['profile'])
-            ->with(['categories']);
+            ->with('profile')
+            ->with('categories');
 
         if(Yii::$app->request->get('rating')) {
             $users->orderBy(['users_statistics.rating' => SORT_DESC]);
@@ -172,7 +172,7 @@ class TaskforceSiteController extends Controller
 
         if(Yii::$app->request->get('category')) {
           $subqueryArray = (new Query())
-              ->select(['user_id'])
+              ->select('user_id')
               ->from('users_categories')
               ->where(['category_id' => Yii::$app->request->get('category')])
               ->all();
@@ -185,7 +185,7 @@ class TaskforceSiteController extends Controller
 
         if(Yii::$app->request->get('free')) {
           $subqueryArray = (new Query())
-              ->select(['worker_id'])
+              ->select('worker_id')
               ->from('tasks')
               ->where(['not in','status', TaskStatuses::ACTIVE])
               ->all();
@@ -221,7 +221,7 @@ class TaskforceSiteController extends Controller
         $categories = CategoryController::getCategories();
 
 
-        return $this->render('users', compact('users', 'pages', 'categories', 'statistics'));
+        return $this->render('users', compact('users', 'pages', 'categories'));
     }
 
     /**
