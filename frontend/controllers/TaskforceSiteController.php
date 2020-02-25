@@ -151,7 +151,7 @@ class TaskforceSiteController extends Controller
             ->joinWith('statistics')
             ->where(['users_statistics.role' => UserRoles::WORKER])
             ->orderBy(['registration_date' => SORT_DESC])
-            ->with('profile', 'categories');
+            ->with('profile');
 
         if(Yii::$app->request->get('rating')) {
             $users->orderBy(['users_statistics.rating' => SORT_DESC]);
