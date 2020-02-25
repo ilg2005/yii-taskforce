@@ -44,7 +44,7 @@ use frontend\components\Pager; ?>
                 </div>
                 <div class="link-specialization user__search-link--bottom">
                     <?php foreach ($user->categories as $category): ?>
-                    <a href="/browse?category[]=<?= $category->id ?>" class="link-regular"><?= $category->name ?></a>
+                    <a href="/users?category[]=<?= $category->id ?>" class="link-regular"><?= $category->name ?></a>
                    <?php endforeach; ?>
                 </div>
             </div>

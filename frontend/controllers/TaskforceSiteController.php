@@ -149,13 +149,13 @@ class TaskforceSiteController extends Controller
     {
         $usersCountPerPage = 5;
         $users = User::find()
-            ->joinWith('statistics')
-            ->where(['users_statistics.role' => UserRoles::WORKER])
+          //  ->joinWith('statistics')
+          //  ->where(['users_statistics.role' => UserRoles::WORKER])
             ->orderBy(['registration_date' => SORT_DESC])
             ->with('profile')
             ->with('categories');
 
-        if(Yii::$app->request->get('rating')) {
+        /*if(Yii::$app->request->get('rating')) {
             $users->orderBy(['users_statistics.rating' => SORT_DESC]);
         }
 
@@ -165,19 +165,11 @@ class TaskforceSiteController extends Controller
 
         if(Yii::$app->request->get('views')) {
             $users->orderBy(['users_statistics.views_count' => SORT_DESC]);
-        }
+        }*/
 
         if(Yii::$app->request->get('category')) {
-          $subqueryArray = (new Query())
-              ->select('user_id')
-              ->from('users_categories')
-              ->where(['category_id' => Yii::$app->request->get('category')])
-              ->all();
-          $userIDs = [];
-          foreach ($subqueryArray as $array) {
-              $userIDs[] = $array['user_id'];
-          }
-          $users->where(['in', 'id', $userIDs]);
+            $users->joinWith('categories')
+                ->andWhere(['users_categories.category_id' => Yii::$app->request->get('category')]);
         }
 
         if(Yii::$app->request->get('free')) {
