@@ -15,6 +15,10 @@ class Reaction extends ActiveRecord
         ];
     }
 
+    public function getTasks() {
+        return $this->hasMany(Task::class, ['id' => 'task_id']);
+    }
+
     public static function tableName()
     {
         return 'tasks_reactions';

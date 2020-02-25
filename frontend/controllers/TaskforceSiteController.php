@@ -81,12 +81,8 @@ class TaskforceSiteController extends Controller
         }
 
         if(Yii::$app->request->get('no-responses')) {
-            $arrayFromDB = array_values(Reaction::find()->select('task_id')->asArray()->all());
-            $res = [];
-            foreach ($arrayFromDB as $value) {
-                $res[] = (int)$value['task_id'];
-            }
-            $tasks->andWhere(['not in', 'id', $res]);
+            $tasks->joinWith('reactions');
+            $tasks->andWhere('tasks_reactions.id IS NULL');
         }
 
         if(Yii::$app->request->get('no-location')) {
