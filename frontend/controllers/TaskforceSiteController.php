@@ -149,13 +149,13 @@ class TaskforceSiteController extends Controller
     {
         $usersCountPerPage = 5;
         $users = User::find()
-          //  ->joinWith('statistics')
-          //  ->where(['users_statistics.role' => UserRoles::WORKER])
+            ->joinWith('statistics')
+            ->where(['users_statistics.role' => UserRoles::WORKER])
             ->orderBy(['registration_date' => SORT_DESC])
             ->with('profile')
             ->with('categories');
 
-        /*if(Yii::$app->request->get('rating')) {
+        if(Yii::$app->request->get('rating')) {
             $users->orderBy(['users_statistics.rating' => SORT_DESC]);
         }
 
@@ -165,7 +165,7 @@ class TaskforceSiteController extends Controller
 
         if(Yii::$app->request->get('views')) {
             $users->orderBy(['users_statistics.views_count' => SORT_DESC]);
-        }*/
+        }
 
         if(Yii::$app->request->get('category')) {
             $users->joinWith('categories')
@@ -173,16 +173,8 @@ class TaskforceSiteController extends Controller
         }
 
         if(Yii::$app->request->get('free')) {
-          $subqueryArray = (new Query())
-              ->select('worker_id')
-              ->from('tasks')
-              ->where(['not in','status', TaskStatuses::ACTIVE])
-              ->all();
-          $workerIDs = [];
-          foreach ($subqueryArray as $array) {
-              $workerIDs[] = $array['worker_id'];
-          }
-          $users->andWhere(['in', 'id', $workerIDs]);
+            $users->joinWith('tasks')
+                ->where(['not in','status', TaskStatuses::ACTIVE]);
         }
 
         if (Yii::$app->request->get('online')) {
