@@ -147,7 +147,6 @@ class TaskforceSiteController extends Controller
      */
     public function actionUsers()
     {
-        $usersCountPerPage = 5;
         $users = User::find()
             ->joinWith('statistics')
             ->where(['users_statistics.role' => UserRoles::WORKER])
@@ -193,6 +192,7 @@ class TaskforceSiteController extends Controller
             $users->where(['like', 'name', $searchByName]);
         }
 
+        $usersCountPerPage = 5;
         $pages = new Pagination(['totalCount' => $users->count(), 'pageSize' => $usersCountPerPage, 'forcePageParam' => false, 'pageSizeParam' => false]);
         $users = $users->offset($pages->offset)
             ->limit($pages->limit)
