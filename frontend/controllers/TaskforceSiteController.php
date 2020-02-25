@@ -172,7 +172,7 @@ class TaskforceSiteController extends Controller
 
         if(Yii::$app->request->get('free')) {
             $users->joinWith('tasks')
-                ->where(['not in','status', TaskStatuses::ACTIVE]);
+                ->andWhere(['not in','status', TaskStatuses::ACTIVE]);
         }
 
         if (Yii::$app->request->get('online')) {
