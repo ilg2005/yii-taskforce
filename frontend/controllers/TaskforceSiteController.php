@@ -105,7 +105,7 @@ class TaskforceSiteController extends Controller
             ->limit($pages->limit)
             ->all();
 
-        $categories = Category::find()->with('users')->all();
+        $categories = Category::find()->all();
 
         return $this->render('browse', compact('tasks', 'pages', 'categories'));
     }
@@ -198,7 +198,7 @@ class TaskforceSiteController extends Controller
             ->limit($pages->limit)
             ->all();
 
-        $categories = Category::find()->with('users')->all();
+        $categories = Category::find()->all();
 
         return $this->render('users', compact('users', 'pages', 'categories'));
     }
