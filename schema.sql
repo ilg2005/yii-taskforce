@@ -46,12 +46,13 @@ CREATE TABLE users
 
 CREATE TABLE users_statistics
 (
+    id                   int AUTO_INCREMENT PRIMARY KEY,
     user_id              int,
     role                 TINYINT(1) DEFAULT 0,
     latest_activity_time TIMESTAMP,
     is_favorite          boolean    DEFAULT false,
     rating               FLOAT      DEFAULT 0,
-    testimonials_count        INT        DEFAULT 0,
+    testimonials_count   INT        DEFAULT 0,
     tasks_count          INT        DEFAULT 0,
     views_count          INT        DEFAULT 0,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
@@ -59,6 +60,7 @@ CREATE TABLE users_statistics
 
 CREATE TABLE users_settings
 (
+    id                int AUTO_INCREMENT PRIMARY KEY,
     user_id           int,
     new_message       TINYINT DEFAULT 1,
     actions_on_task   TINYINT DEFAULT 0,
@@ -70,6 +72,7 @@ CREATE TABLE users_settings
 
 CREATE TABLE users_categories
 (
+    id          int AUTO_INCREMENT PRIMARY KEY,
     user_id     int,
     category_id int,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
@@ -78,6 +81,7 @@ CREATE TABLE users_categories
 
 CREATE TABLE users_portfolio
 (
+    id       int AUTO_INCREMENT PRIMARY KEY,
     user_id  int,
     filename VARCHAR(128),
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
@@ -107,6 +111,7 @@ CREATE TABLE tasks
 
 CREATE TABLE tasks_files
 (
+    id       int AUTO_INCREMENT PRIMARY KEY,
     task_id  int,
     filename VARCHAR(128),
     FOREIGN KEY (task_id) REFERENCES tasks (id) ON DELETE CASCADE
@@ -114,6 +119,7 @@ CREATE TABLE tasks_files
 
 CREATE TABLE grades
 (
+    id              int AUTO_INCREMENT PRIMARY KEY,
     user_id         int,
     task_id         int,
     grade           TINYINT UNSIGNED,
@@ -125,6 +131,7 @@ CREATE TABLE grades
 
 CREATE TABLE tasks_reactions
 (
+    id             int AUTO_INCREMENT PRIMARY KEY,
     task_id        int,
     worker_id      int,
     worker_price   int UNSIGNED,
@@ -135,6 +142,7 @@ CREATE TABLE tasks_reactions
 
 CREATE TABLE correspondence
 (
+    id           int AUTO_INCREMENT PRIMARY KEY,
     task_id      int,
     sender_id    int,
     recipient_id int,

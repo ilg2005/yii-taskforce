@@ -77,7 +77,7 @@ class TaskforceSiteController extends Controller
             ->with('category');
 
         if(Yii::$app->request->get('category')) {
-            $tasks->where(['category_id' => Yii::$app->request->get('category')]);
+            $tasks->andWhere(['category_id' => Yii::$app->request->get('category')]);
         }
 
         if(Yii::$app->request->get('no-responses')) {
