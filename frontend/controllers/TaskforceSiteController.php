@@ -140,9 +140,8 @@ class TaskforceSiteController extends Controller
         $user = User::find()
             ->where(['id' => Yii::$app->request->get('user_id')])
             ->with('profile')
-            ->joinWith('statistics')
+            ->joinWith(['statistics', 'categories', 'portfolio'])
             ->where(['users_statistics.user_id' => Yii::$app->request->get('user_id')])
-            ->joinWith('categories')
             ->one();
         return $this->render('profile', compact('user'));
     }

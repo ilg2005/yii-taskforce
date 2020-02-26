@@ -39,6 +39,11 @@ class User extends ActiveRecord
         return $this->hasOne(Statistics::class, ['user_id' => 'id']);
     }
 
+    public function getPortfolio()
+    {
+        return $this->hasMany(Portfolio::class, ['user_id' => 'id']);
+    }
+
     public static function tableName()
     {
         return 'users';
