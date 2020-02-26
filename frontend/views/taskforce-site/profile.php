@@ -53,7 +53,7 @@ $this->title = 'TaskForce-Profile';
                 </div>
             </div>
             <div class="content-view__feedback">
-                <h2>Отзывы<span>(2)</span></h2>
+                <h2>Отзывы<span> (<?= $user->statistics->testimonials_count ?>)</span></h2>
                 <div class="content-view__feedback-wrapper reviews-wrapper">
                     <div class="feedback-card__reviews">
                         <p class="link-task link">Задание <a href="#" class="link-regular">«Выгулять моего боевого петуха»</a></p>
