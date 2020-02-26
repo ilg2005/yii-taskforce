@@ -31,7 +31,7 @@ use frontend\components\Pager; ?>
                         <span><?= Yii::t('app', '{n, plural, one{# отзыв} few{# отзыва} other{# отзывов}}', ['n' => $user->statistics->testimonials_count]) ?></span>
                     </div>
                     <div class="feedback-card__top--name user__search-card">
-                        <p class="link-name"><a href="#" class="link-regular"><?= $user->name ?></a></p>
+                        <p class="link-name"><a href="/profile?user_id=<?= $user->id ?>" class="link-regular"><?= $user->name ?></a></p>
                         <?php for ($i = 1; $i <= 5; $i++) : ?>
                         <span <?= ($i > floor($user->statistics->rating)) ? 'class="star-disabled"' : '' ?>></span>
                         <?php endfor; ?>

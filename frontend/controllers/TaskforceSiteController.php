@@ -137,7 +137,8 @@ class TaskforceSiteController extends Controller
      */
     public function actionProfile()
     {
-        return $this->render('profile');
+        $user = User::findOne(Yii::$app->request->get('user_id'));
+        return $this->render('profile', compact('user'));
     }
 
     /**

@@ -12,7 +12,7 @@ $this->title = 'TaskForce-Profile';
                 <div class="user__card">
                     <img src="../img/man-hat.png" width="120" height="120" alt="Аватар пользователя">
                     <div class="content-view__headline">
-                        <h1>Мамедов Кумар</h1>
+                        <h1><?= $user->name ?></h1>
                         <p>Россия, Санкт-Петербург, 30 лет</p>
                         <div class="profile-mini__name five-stars__rate">
                             <span></span><span></span><span></span><span></span><span class="star-disabled"></span>
