@@ -219,4 +219,15 @@ class TaskforceSiteController extends Controller
     {
         return $this->render('view');
     }
+
+    /**
+     * Displays image file view page.
+     *
+     * @return mixed
+     */
+    public function actionImage()
+    {
+        $filename = Yii::$app->request->get('filename');
+        return $this->render('image', compact('filename'));
+    }
 }

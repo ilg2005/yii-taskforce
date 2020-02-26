@@ -2563,4 +2563,12 @@ footer {
 .dz-error-mark {
   display: none !important;
 }
+
+IMG.displayed {
+  display: block;
+  margin-left: auto;
+  margin-right: auto
+}
+
 /*# sourceMappingURL=style.css.map */
+

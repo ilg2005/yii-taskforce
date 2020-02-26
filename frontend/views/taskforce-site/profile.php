@@ -47,7 +47,7 @@ $this->title = 'TaskForce-Profile';
                     <div class="user__card-photo">
                         <h3 class="content-view__h3">Фото работ</h3>
                         <?php foreach ($user->portfolio as $array): ?>
-                        <a href="#" target="_blank"><img src="../img/<?= $array->filename ?>" width="85" height="86" alt="Фото работы"></a>
+                        <a href="/image?filename=<?= $array->filename ?>"><img src="../img/<?= $array->filename ?>" width="85" height="86" alt="Фото работы"></a>
                         <?php endforeach; ?>
                     </div>
                 </div>
