@@ -10,41 +10,38 @@ $this->title = 'TaskForce-Profile';
         <section class="content-view">
             <div class="user__card-wrapper">
                 <div class="user__card">
-                    <img src="../img/man-hat.png" width="120" height="120" alt="Аватар пользователя">
+                    <img src="../img/<?= $user->profile->avatar_file ?>" width="120" height="120" alt="Аватар пользователя">
                     <div class="content-view__headline">
                         <h1><?= $user->name ?></h1>
                         <p>Россия, Санкт-Петербург, 30 лет</p>
-                        <div class="profile-mini__name five-stars__rate">
-                            <span></span><span></span><span></span><span></span><span class="star-disabled"></span>
-                            <b>4.25</b>
+                        <div class="profile-mini__name five-stars__rate"><?php for ($i = 1; $i <= 5; $i++) : ?>
+                                <span <?= ($i > floor($user->statistics->rating)) ? 'class="star-disabled"' : '' ?>></span>
+                            <?php endfor; ?>
+                            <b><?= $user->statistics->rating ?></b>
                         </div>
-                        <b class="done-task">Выполнил 5 заказов</b><b class="done-review">Получил 6 отзывов</b>
+                        <b class="done-task"><?= Yii::t('app', 'Выполнил {n, plural, one{# заказ} few{# заказа} other{# заказов}}', ['n' => $user->statistics->tasks_count]) ?></b><b class="done-review"><?= Yii::t('app', 'Получил {n, plural, one{# отзыв} few{# отзыва} other{# отзывов}}', ['n' => $user->statistics->testimonials_count]) ?></b>
                     </div>
                     <div class="content-view__headline user__card-bookmark user__card-bookmark--current">
-                        <span>Был на сайте 25 минут назад</span>
+                        <span>Был на сайте <?= Yii::$app->formatter->asRelativeTime($user->statistics->latest_activity_time) ?></span>
                         <a href="#"><b></b></a>
                     </div>
                 </div>
                 <div class="content-view__description">
-                    <p>Внезапно, ключевые особенности структуры проекта неоднозначны и будут подвергнуты целой серии
-                        независимых исследований. Следует отметить, что высококачественный прототип будущего проекта, в
-                        своём классическом представлении, допускает внедрение своевременного выполнения сверхзадачи.
-                        Кстати, некоторые особенности внутренней политики будут функционально разнесены на
-                        независимые элементы.</p>
+                    <p><?= $user->profile->about ?></p>
                 </div>
                 <div class="user__card-general-information">
                     <div class="user__card-info">
                         <h3 class="content-view__h3">Специализации</h3>
                         <div class="link-specialization">
-                            <a href="#" class="link-regular">Ремонт</a>
-                            <a href="#" class="link-regular">Курьер</a>
-                            <a href="#" class="link-regular">Оператор ПК</a>
+                            <?php foreach ($user->categories as $category): ?>
+                                <a href="/browse?category[]=<?= $category->id ?>" class="link-regular"><?= $category->name ?></a>
+                            <?php endforeach; ?>
                         </div>
                         <h3 class="content-view__h3">Контакты</h3>
                         <div class="user__card-link">
-                            <a class="user__card-link--tel link-regular" href="#">8 (555) 172 83 69</a>
-                            <a class="user__card-link--email link-regular" href="#">Kumarm@mail.ru</a>
-                            <a class="user__card-link--skype link-regular" href="#">Kumarm</a>
+                            <a class="user__card-link--tel link-regular" href="tel:<?= $user->profile->phone ?>">+<?= $user->profile->phone ?></a>
+                            <a class="user__card-link--email link-regular" href="mailto: <?= $user->email ?>"><?= $user->email ?></a>
+                            <a class="user__card-link--skype link-regular" href="skype: <?= $user->profile->skype ?>?call"><?= $user->profile->skype ?></a>
                         </div>
                     </div>
                     <div class="user__card-photo">
