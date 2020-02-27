@@ -29,7 +29,7 @@ use frontend\components\Rating; ?>
                     <div class="user__search-icon">
                         <a href="#"><img src="../img/<?= $user->profile->avatar_file ?>" width="65" height="65"></a>
                         <span><?= Yii::t('app', '{n, plural, one{# задание} few{# задания} other{# заданий}}', ['n' => $user->statistics->tasks_count]) ?></span>
-                        <span><?= Yii::t('app', '{n, plural, one{# отзыв} few{# отзыва} other{# отзывов}}', ['n' => $user->statistics->testimonials_count]) ?></span>
+                        <span><?= Yii::t('app', '{n, plural, one{# отзыв} few{# отзыва} other{# отзывов}}', ['n' => $user->statistics->feedbacks_count]) ?></span>
                     </div>
                     <div class="feedback-card__top--name user__search-card">
                         <p class="link-name"><a href="/profile?user_id=<?= $user->id ?>" class="link-regular"><?= $user->name ?></a></p>
@@ -68,8 +68,8 @@ use frontend\components\Rating; ?>
                         <label for="free">Сейчас свободен</label>
                         <input class="visually-hidden checkbox__input" id="online" type="checkbox" name="online" value="<?= (Yii::$app->request->get('online', 1)) ?>" <?= (Yii::$app->request->get('online') && !(Yii::$app->request->get('name'))) ? 'checked' : '' ?>>
                         <label for="online">Сейчас онлайн</label>
-                        <input class="visually-hidden checkbox__input" id="testimonials" type="checkbox" name="testimonials" value="<?= (Yii::$app->request->get('testimonials', 1)) ?>" <?= (Yii::$app->request->get('testimonials') && !(Yii::$app->request->get('name'))) ? 'checked' : '' ?>>
-                        <label for="testimonials">Есть отзывы</label>
+                        <input class="visually-hidden checkbox__input" id="feedbacks" type="checkbox" name="feedbacks" value="<?= (Yii::$app->request->get('feedbacks', 1)) ?>" <?= (Yii::$app->request->get('feedbacks') && !(Yii::$app->request->get('name'))) ? 'checked' : '' ?>>
+                        <label for="feedbacks">Есть отзывы</label>
                         <input class="visually-hidden checkbox__input" id="favorite" type="checkbox" name="favorite" value="<?= (Yii::$app->request->get('favorite', 1)) ?>" <?= (Yii::$app->request->get('favorite') && !(Yii::$app->request->get('name'))) ? 'checked' : '' ?>>
                         <label for="favorite">В избранном</label>
                     </fieldset>

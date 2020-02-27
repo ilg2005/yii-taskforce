@@ -11,7 +11,7 @@ class Statistics extends ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'role', 'latest_activity_time', 'is_favorite', 'rating', 'testimonials_count', 'tasks_count', 'views_count'], 'safe'],
+            [['user_id', 'role', 'latest_activity_time', 'is_favorite', 'rating', 'feedbacks_count', 'tasks_count', 'views_count'], 'safe'],
         ];
     }
 

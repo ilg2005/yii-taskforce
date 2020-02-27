@@ -15,7 +15,7 @@ class ImportController extends Controller
         'profiles' => 'Profile',
         'users' => 'User',
         'tasks' => 'Task',
-        'replies' => 'Grade',
+        'feedbacks' => 'Feedback',
         'reactions' => 'Reaction',
         'users-statistics' => 'Statistics',
         'users-portfolio' => 'Portfolio',

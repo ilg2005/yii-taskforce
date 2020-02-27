@@ -19,7 +19,7 @@ use frontend\components\Rating;
                         <div class="profile-mini__name five-stars__rate">
                             <?= Rating::widget(['rating' => $user->statistics->rating]) ?>
                         </div>
-                        <b class="done-task"><?= Yii::t('app', 'Выполнил {n, plural, one{# заказ} few{# заказа} other{# заказов}}', ['n' => $user->statistics->tasks_count]) ?></b><b class="done-review"><?= Yii::t('app', 'Получил {n, plural, one{# отзыв} few{# отзыва} other{# отзывов}}', ['n' => $user->statistics->testimonials_count]) ?></b>
+                        <b class="done-task"><?= Yii::t('app', 'Выполнил {n, plural, one{# заказ} few{# заказа} other{# заказов}}', ['n' => $user->statistics->tasks_count]) ?></b><b class="done-review"><?= Yii::t('app', 'Получил {n, plural, one{# отзыв} few{# отзыва} other{# отзывов}}', ['n' => $user->statistics->feedbacks_count]) ?></b>
                     </div>
                     <div class="content-view__headline user__card-bookmark user__card-bookmark--current">
                         <span>Был на сайте <?= Yii::$app->formatter->asRelativeTime($user->statistics->latest_activity_time) ?></span>
@@ -53,7 +53,7 @@ use frontend\components\Rating;
                 </div>
             </div>
             <div class="content-view__feedback">
-                <h2>Отзывы<span> (<?= $user->statistics->testimonials_count ?>)</span></h2>
+                <h2>Отзывы<span> (<?= $user->statistics->feedbacks_count ?>)</span></h2>
                 <div class="content-view__feedback-wrapper reviews-wrapper">
                     <div class="feedback-card__reviews">
                         <p class="link-task link">Задание <a href="#" class="link-regular">«Выгулять моего боевого петуха»</a></p>

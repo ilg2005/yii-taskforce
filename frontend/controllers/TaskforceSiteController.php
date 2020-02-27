@@ -186,8 +186,8 @@ class TaskforceSiteController extends Controller
             $users->andWhere(['>=', 'users_statistics.latest_activity_time', date('Y-m-d H:i:s', strtotime('-30 minutes'))]);
         }
 
-        if(Yii::$app->request->get('testimonials')) {
-            $users->andWhere(['>', 'users_statistics.testimonials_count', 0 ]);
+        if(Yii::$app->request->get('feedbacks')) {
+            $users->andWhere(['>', 'users_statistics.feedbacks_count', 0 ]);
         }
 
         if(Yii::$app->request->get('favorite')) {

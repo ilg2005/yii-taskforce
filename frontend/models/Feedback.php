@@ -8,12 +8,12 @@ use DateTime;
 use yii\behaviors\AttributeTypecastBehavior;
 use yii\db\ActiveRecord;
 
-class Grade extends ActiveRecord
+class Feedback extends ActiveRecord
 {
     public function rules()
     {
         return [
-            [['grade', 'grading_comment', 'grading_date'], 'safe'],
+            [['task_id', 'grade', 'comment', 'feedback_date'], 'safe'],
         ];
     }
 
@@ -23,11 +23,11 @@ class Grade extends ActiveRecord
             'typecast' => [
                 'class' => AttributeTypecastBehavior::class,
                 'attributeTypes' => [
-                    'grading_date' => static function ($value) {
+                    'feedback_date' => static function ($value) {
                         return ($value instanceof DateTime) ? $value->format('Y-m-d') : DateTime::createFromFormat('Y-m-d', $value);
                     },
                     'grade' => AttributeTypecastBehavior::TYPE_INTEGER,
-                    'grading_comment' => AttributeTypecastBehavior::TYPE_STRING,
+                    'comment' => AttributeTypecastBehavior::TYPE_STRING,
                 ],
                 'typecastAfterValidate' => true,
                 'typecastBeforeSave' => true,
@@ -38,6 +38,6 @@ class Grade extends ActiveRecord
 
     public static function tableName()
     {
-        return 'grades';
+        return 'feedbacks';
     }
 }

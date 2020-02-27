@@ -4,15 +4,15 @@
 namespace frontend\controllers;
 
 
-use frontend\models\Grade;
+use frontend\models\Feedback;
 use yii\base\Controller;
 
-class GradeController extends Controller
+class FeedbackController extends Controller
 {
     public $layout = 'basic';
     public function actionShow()
     {
-        $grades = Grade::find()->asArray()->all();
-        return $this->render('show', compact('grades'));
+        $feedbacks = Feedback::find()->asArray()->all();
+        return $this->render('show', compact('feedbacks'));
     }
 }
