@@ -4,7 +4,7 @@
 
 $this->title = 'TaskForce-Profile';
 
-?>
+use frontend\components\Rating; ?>
 <main class="page-main">
     <div class="main-container page-container">
         <section class="content-view">
@@ -14,10 +14,8 @@ $this->title = 'TaskForce-Profile';
                     <div class="content-view__headline">
                         <h1><?= $user->name ?></h1>
                         <p>Россия, Санкт-Петербург, 30 лет</p>
-                        <div class="profile-mini__name five-stars__rate"><?php for ($i = 1; $i <= 5; $i++) : ?>
-                                <span <?= ($i > floor($user->statistics->rating)) ? 'class="star-disabled"' : '' ?>></span>
-                            <?php endfor; ?>
-                            <b><?= $user->statistics->rating ?></b>
+                        <div class="profile-mini__name five-stars__rate">
+                            <?= Rating::widget(['rating' => $user->statistics->rating]) ?>
                         </div>
                         <b class="done-task"><?= Yii::t('app', 'Выполнил {n, plural, one{# заказ} few{# заказа} other{# заказов}}', ['n' => $user->statistics->tasks_count]) ?></b><b class="done-review"><?= Yii::t('app', 'Получил {n, plural, one{# отзыв} few{# отзыва} other{# отзывов}}', ['n' => $user->statistics->testimonials_count]) ?></b>
                     </div>

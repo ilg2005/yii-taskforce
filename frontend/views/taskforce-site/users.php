@@ -4,7 +4,8 @@
 
 $this->title = 'TaskForce-Users';
 
-use frontend\components\Pager; ?>
+use frontend\components\Pager;
+use frontend\components\Rating; ?>
 <main class="page-main">
     <div class="main-container page-container">
         <section class="user__search">
@@ -32,10 +33,7 @@ use frontend\components\Pager; ?>
                     </div>
                     <div class="feedback-card__top--name user__search-card">
                         <p class="link-name"><a href="/profile?user_id=<?= $user->id ?>" class="link-regular"><?= $user->name ?></a></p>
-                        <?php for ($i = 1; $i <= 5; $i++) : ?>
-                        <span <?= ($i > floor($user->statistics->rating)) ? 'class="star-disabled"' : '' ?>></span>
-                        <?php endfor; ?>
-                        <b><?= $user->statistics->rating ?></b>
+                        <?= Rating::widget(['rating' => $user->statistics->rating]) ?>
                         <p class="user__search-content">
                             <?= $user->profile->about ?>
                         </p>
@@ -50,9 +48,7 @@ use frontend\components\Pager; ?>
             </div>
             <?php endforeach; ?>
             <div class="new-task__pagination">
-                <?= Pager::widget([
-                    'pagination' => $pages,
-                ]) ?>
+                <?= Pager::widget(['pagination' => $pages]) ?>
             </div>
         </section>
         <section  class="search-task">
