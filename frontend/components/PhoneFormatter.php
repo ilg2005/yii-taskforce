@@ -6,7 +6,7 @@ namespace frontend\components;
 
 use yii\i18n\Formatter;
 
-class phoneFormatter extends Formatter
+class PhoneFormatter extends Formatter
 {
 
     public function asPhone($number)
