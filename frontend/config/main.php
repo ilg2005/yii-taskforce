@@ -18,6 +18,7 @@ return [
     'components' => [
         'formatter' => [
             'defaultTimeZone' => 'Europe/Moscow',
+            'class' => 'app\frontend\components\phoneFormatter',
             ],
         'i18n' => [
             'translations' => [
