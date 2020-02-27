@@ -1,5 +1,6 @@
 <?php
 
+use frontend\components\phoneFormatter;
 use yii\i18n\PhpMessageSource;
 
 $params = array_merge(
@@ -18,7 +19,7 @@ return [
     'components' => [
         'formatter' => [
             'defaultTimeZone' => 'Europe/Moscow',
-            'class' => 'app\frontend\components\phoneFormatter',
+            'class' => phoneFormatter::class,
             ],
         'i18n' => [
             'translations' => [

@@ -39,7 +39,7 @@ use frontend\components\Rating;
                         </div>
                         <h3 class="content-view__h3">Контакты</h3>
                         <div class="user__card-link">
-                            <a class="user__card-link--tel link-regular" href="tel:<?= $user->profile->phone ?>"><?= Yii::$app->phoneFormatter->asPhone($user->profile->phone) ?></a>
+                            <a class="user__card-link--tel link-regular" href="tel:<?= $user->profile->phone ?>"><?= Yii::$app->formatter->asPhone($user->profile->phone) ?></a>
                             <a class="user__card-link--email link-regular" href="mailto: <?= $user->email ?>"><?= $user->email ?></a>
                             <a class="user__card-link--skype link-regular" href="skype: <?= $user->profile->skype ?>?call"><?= $user->profile->skype ?></a>
                         </div>
