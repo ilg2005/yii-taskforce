@@ -121,10 +121,14 @@ CREATE TABLE feedbacks
 (
     id            int AUTO_INCREMENT PRIMARY KEY,
     task_id       int NOT NULL,
-    grade         TINYINT UNSIGNED,
+    worker_id     int NOT NULL,
+    customer_id   int NOT NULL,
+    rate         TINYINT UNSIGNED,
     comment       TEXT,
     feedback_date date,
-    FOREIGN KEY (task_id) REFERENCES tasks (id) ON DELETE CASCADE
+    FOREIGN KEY (task_id) REFERENCES tasks (id) ON DELETE CASCADE,
+    FOREIGN KEY (worker_id) REFERENCES tasks (worker_id) ON DELETE CASCADE,
+    FOREIGN KEY (customer_id) REFERENCES tasks (customer_id) ON DELETE CASCADE
 );
 
 CREATE TABLE tasks_reactions

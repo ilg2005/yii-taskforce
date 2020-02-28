@@ -44,6 +44,12 @@ class User extends ActiveRecord
         return $this->hasMany(Portfolio::class, ['user_id' => 'id']);
     }
 
+    public function getFeedbacks()
+    {
+        return $this->hasMany(Feedback::class, ['worker_id' => 'id']);
+    }
+
+
     public static function tableName()
     {
         return 'users';
