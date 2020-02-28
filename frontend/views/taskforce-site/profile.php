@@ -53,6 +53,7 @@ use frontend\components\Rating;
                     </div>
                 </div>
             </div>
+            <?php if ($user->statistics->feedbacks_count): ?>
             <div class="content-view__feedback">
                 <h2>Отзывы<span> (<?= $user->statistics->feedbacks_count ?>)</span></h2>
                 <div class="content-view__feedback-wrapper reviews-wrapper">
@@ -73,6 +74,7 @@ use frontend\components\Rating;
                     <?php endforeach; ?>
                 </div>
             </div>
+            <?php endif; ?>
         </section>
     </div>
 </main>
