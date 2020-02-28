@@ -145,11 +145,9 @@ class TaskforceSiteController extends Controller
             ->where(['users_statistics.user_id' => Yii::$app->request->get('user_id')])
             ->one();
 
-        if (isset($_GET['is_favorite'])) {
             $model = Statistics::find()->where(['user_id' => Yii::$app->request->get('user_id')])->one();
             $model->is_favorite = Yii::$app->request->get('is_favorite');
             $model->save();
-        }
 
         return $this->render('profile', compact('user'));
     }

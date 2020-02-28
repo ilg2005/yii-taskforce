@@ -32,7 +32,7 @@ use frontend\components\Rating; ?>
                         <span><?= Yii::t('app', '{n, plural, one{# отзыв} few{# отзыва} other{# отзывов}}', ['n' => $user->statistics->feedbacks_count]) ?></span>
                     </div>
                     <div class="feedback-card__top--name user__search-card">
-                        <p class="link-name"><a href="/profile?user_id=<?= $user->id ?>" class="link-regular"><?= $user->name ?></a></p>
+                        <p class="link-name"><a href="/profile?user_id=<?= $user->id ?>&is_favorite=<?= $user->statistics->is_favorite ?>" class="link-regular"><?= $user->name ?></a></p>
                         <?= Rating::widget(['rating' => $user->statistics->rating]) ?>
                         <p class="user__search-content">
                             <?= $user->profile->about ?>
