@@ -16,7 +16,7 @@ use frontend\components\Rating;
                     <img src="../img/<?= $user->profile->avatar_file ?>" width="120" height="120" alt="Аватар пользователя">
                     <div class="content-view__headline">
                         <h1><?= $user->name ?></h1>
-                        <p>Россия, Санкт-Петербург, 30 лет</p>
+                        <p>Россия, Санкт-Петербург, <?= Yii::t('app', '{n, plural, one{# год} few{# года} other{# лет}}', ['n' => Yii::$app->formatter->calculateAge($user->profile->birthday)]) ?></p>
                         <div class="profile-mini__name five-stars__rate">
                             <?= Rating::widget(['rating' => $user->statistics->rating]) ?>
                         </div>
@@ -40,7 +40,7 @@ use frontend\components\Rating;
                         </div>
                         <h3 class="content-view__h3">Контакты</h3>
                         <div class="user__card-link">
-                            <a class="user__card-link--tel link-regular" href="tel:<?= $user->profile->phone ?>"><?= Yii::$app->formatter->asPhone($user->profile->phone) ?></a>
+                            <a class="user__card-link--tel link-regular" href="tel:<?= $user->profile->phone ?>"><?= Yii::$app->formatter->formatAsPhone($user->profile->phone) ?></a>
                             <a class="user__card-link--email link-regular" href="mailto: <?= $user->email ?>"><?= $user->email ?></a>
                             <a class="user__card-link--skype link-regular" href="skype: <?= $user->profile->skype ?>?call"><?= $user->profile->skype ?></a>
                         </div>
