@@ -27,7 +27,7 @@ use frontend\components\Rating; ?>
             <div class="content-view__feedback-card user__search-wrapper">
                 <div class="feedback-card__top">
                     <div class="user__search-icon">
-                        <a href="/profile?user_id=<?= $user->id ?>"><img src="../img/<?= $user->profile->avatar_file ?>" width="65" height="65"></a>
+                        <a href="/profile?user_id=<?= $user->id ?>&is_favorite=<?= $user->statistics->is_favorite ?>"><img src="../img/<?= $user->profile->avatar_file ?>" width="65" height="65"></a>
                         <span><?= Yii::t('app', '{n, plural, one{# задание} few{# задания} other{# заданий}}', ['n' => $user->statistics->tasks_count]) ?></span>
                         <span><?= Yii::t('app', '{n, plural, one{# отзыв} few{# отзыва} other{# отзывов}}', ['n' => $user->statistics->feedbacks_count]) ?></span>
                     </div>
