@@ -7,6 +7,7 @@ use frontend\constants\TaskStatuses;
 use frontend\constants\UserRoles;
 use frontend\models\Category;
 use frontend\models\Reaction;
+use frontend\models\Statistics;
 use frontend\models\Task;
 
 use frontend\models\User;
@@ -143,6 +144,13 @@ class TaskforceSiteController extends Controller
             ->joinWith(['statistics', 'categories', 'portfolio', 'feedbacks'])
             ->where(['users_statistics.user_id' => Yii::$app->request->get('user_id')])
             ->one();
+
+        if (isset($_GET['is_favorite'])) {
+            $model = Statistics::find()->where(['user_id' => Yii::$app->request->get('user_id')])->one();
+            $model->is_favorite = Yii::$app->request->get('is_favorite');
+            $model->save();
+        }
+
         return $this->render('profile', compact('user'));
     }
 
