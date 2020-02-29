@@ -7,7 +7,7 @@ USE taskforce;
 CREATE TABLE locations
 (
     id        int AUTO_INCREMENT PRIMARY KEY,
-    city      VARCHAR(64),
+    town      VARCHAR(64),
     latitude  FLOAT,
     longitude FLOAT
 );
@@ -38,6 +38,7 @@ CREATE TABLE users
     id                int AUTO_INCREMENT PRIMARY KEY,
     registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     name              VARCHAR(64)  NOT NULL,
+    town              VARCHAR(128) NOT NULL,
     email             VARCHAR(128) NOT NULL,
     password          VARCHAR(128) NOT NULL,
     profile_id        int,
@@ -123,7 +124,7 @@ CREATE TABLE feedbacks
     task_id       int NOT NULL,
     worker_id     int NOT NULL,
     customer_id   int NOT NULL,
-    rate         TINYINT UNSIGNED,
+    rate          TINYINT UNSIGNED,
     comment       TEXT,
     feedback_date date,
     FOREIGN KEY (task_id) REFERENCES tasks (id) ON DELETE CASCADE,
@@ -157,6 +158,8 @@ CREATE TABLE correspondence
 
 create index users_name_index
     on users (name);
+create index users_town_index
+    on users (town);
 create unique index users_email_index
     on users (email);
 create index users_registration_date_index

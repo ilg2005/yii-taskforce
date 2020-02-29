@@ -7,6 +7,7 @@ use frontend\constants\TaskStatuses;
 use frontend\constants\UserRoles;
 use frontend\models\Category;
 use frontend\models\Reaction;
+use frontend\models\SignupForm;
 use frontend\models\Statistics;
 use frontend\models\Task;
 
@@ -41,17 +42,14 @@ class TaskforceSiteController extends Controller
 
     public function actionSignup()
     {
-        /*$model = new SignupForm();
+        $model = new SignupForm();
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
             Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
             return $this->goHome();
         }
 
-        return $this->render('signup', [
-            'model' => $model,
-        ]);*/
+        return $this->render('signup', ['model' => $model,]);
 
-        return $this->render('signup');
     }
 
     /**

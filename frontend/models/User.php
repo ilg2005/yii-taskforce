@@ -11,7 +11,7 @@ class User extends ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'email', 'password', 'registration_date', 'profile_id'], 'safe'],
+            [['name', 'town', 'email', 'password', 'registration_date', 'profile_id'], 'safe'],
             ['email', 'email'],
         ];
     }

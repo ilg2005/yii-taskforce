@@ -10,7 +10,7 @@ class Location extends ActiveRecord
     public function rules()
     {
         return [
-            [['city', 'latitude', 'longitude'], 'safe'],
+            [['town', 'latitude', 'longitude'], 'safe'],
         ];
     }
 
