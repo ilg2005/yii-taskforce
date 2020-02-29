@@ -26,6 +26,8 @@ class SignupForm extends Model
             ['name', 'required'],
             ['name', 'string', 'min' => 2, 'max' => 255],
 
+            ['town', 'required'],
+
             ['password', 'required'],
             ['password', 'string', 'min' => 8],
         ];
