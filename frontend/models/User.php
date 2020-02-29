@@ -4,6 +4,7 @@
 namespace frontend\models;
 
 
+use Yii;
 use yii\db\ActiveRecord;
 
 class User extends ActiveRecord
@@ -47,6 +48,16 @@ class User extends ActiveRecord
     public function getFeedbacks()
     {
         return $this->hasMany(Feedback::class, ['worker_id' => 'id']);
+    }
+
+    /**
+     * Generates password hash from password and sets it to the model
+     *
+     * @param string $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = Yii::$app->security->generatePasswordHash($password);
     }
 
 

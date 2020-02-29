@@ -49,7 +49,7 @@ use yii\widgets\ActiveForm;
 
                 <?= $form->field($model, 'town[]')
                     ->label('Город проживания', ['for' => 'town'])
-                    ->dropDownList(Location::find()->select('town')->indexBy('id')->column(), [
+                    ->dropDownList(Location::find()->select('town')->indexBy('town')->column(), [
                         'prompt' => 'Выберите город...',
                         'class' => 'multiple-select input town-select registration-town',
                         'style' => ['width' => '360px'],
