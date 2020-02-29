@@ -24,7 +24,7 @@ class SignupForm extends Model
             ['name', 'trim'],
             ['name', 'string', 'min' => 2, 'max' => 255],
 
-            ['password', 'string', 'min' => 8],
+            ['password', 'string', 'min' => 8, 'tooShort' => 'Пароль должен быть не менее 8 символов'],
 
 
             [['email', 'name', 'town','password'], 'required', 'message' => 'Это поле должно быть заполнено!'],
