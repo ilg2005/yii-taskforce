@@ -17,19 +17,17 @@ class SignupForm extends Model
         return [
 
             ['email', 'trim'],
-            ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => User::class, 'message' => 'This email address has already been taken.'],
+            ['email', 'unique', 'targetClass' => User::class, 'message' => 'Этот электронный адрес уже используется'],
 
             ['name', 'trim'],
-            ['name', 'required'],
             ['name', 'string', 'min' => 2, 'max' => 255],
 
-            ['town', 'required'],
+            ['password', 'string', 'min' => 8, 'message' => 'Длина пароля должна быть более 8 символов!'],
 
-            ['password', 'required'],
-            ['password', 'string', 'min' => 8],
+
+            [['email', 'name', 'town','password'], 'required', 'message' => 'Это поле должно быть заполнено!'],
         ];
     }
 
