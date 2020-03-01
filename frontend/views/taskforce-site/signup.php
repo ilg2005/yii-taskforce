@@ -22,7 +22,11 @@ use yii\widgets\ActiveForm;
                         'class' => 'registration__user-form form-create'
                     ],
                     'fieldConfig' => [
-                        'template' => '<p>{label}</p><div>{input}</div><span>{hint}</span><span>{error}</spanclass>',
+                        'template' => '<p>{label}</p><div>{input}</div><span>{hint}</span><span>{error}</span><br>',
+                        'inputOptions' => [
+                            'class' => 'input textarea',
+                            'style' => ['width' => '330px'],
+                        ],
                         'errorOptions' => [
                             'class' => 'text-danger'
                         ],
@@ -30,41 +34,34 @@ use yii\widgets\ActiveForm;
                 ]); ?>
 
                 <?= $form->field($model, 'email')
-                    ->label('Электронная почта', ['class' => 'form-create', 'for' => 'email'])
+                    ->label('Электронная почта')
                     ->input('email', [
-                        'class' => 'input textarea',
-                        'style' => ['width' => '330px'],
                         'placeholder' => 'example@gmail.com',
-                        'id' => 'email'
                     ])
                     ->hint('Введите валидный адрес электронной почты')
                 ?>
 
                 <?= $form->field($model, 'name')
-                    ->label('Ваше имя', ['for' => 'name'])
+                    ->label('Ваше имя')
                     ->textInput([
-                        'class' => 'input textarea',
-                        'style' => ['width' => '330px'],
                         'placeholder' => 'Иванов Иван',
-                        'id' => 'name'
                     ])
                     ->hint('Введите ваше имя и фамилию')
                 ?>
 
                 <?= $form->field($model, 'town[]')
-                    ->label('Город проживания', ['for' => 'town'])
+                    ->label('Город проживания')
                     ->dropDownList(Location::find()->select('town')->indexBy('town')->column(), [
                         'prompt' => 'Выберите город...',
                         'class' => 'multiple-select input town-select registration-town',
                         'style' => ['width' => '360px'],
-                        'id' => 'town'
                     ])
                     ->hint('Укажите город, чтобы находить подходящие задачи')
                 ?>
 
                 <?= $form->field($model, 'password')
-                    ->label('Пароль', ['for' => 'password'])
-                    ->passwordInput(['class' => 'input textarea', 'style' => ['width' => '330px'], 'id' => 'password'])
+                    ->label('Пароль')
+                    ->passwordInput()
                     ->hint('Длина пароля от 8 символов')
                 ?>
 
