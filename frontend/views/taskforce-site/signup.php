@@ -17,11 +17,15 @@ use yii\widgets\ActiveForm;
             <div class="registration-wrapper">
 
                 <?php $form = ActiveForm::begin([
+                    'id' => 'signup',
                     'options' => [
                         'class' => 'registration__user-form form-create'
                     ],
                     'fieldConfig' => [
-                        'template' => '<p>{label}</p><div>{input}</div><span>{hint}</span><span>{error}</span>',
+                        'template' => '<p>{label}</p><div>{input}</div><span>{hint}</span><span>{error}</spanclass>',
+                        'errorOptions' => [
+                            'class' => 'text-danger'
+                        ],
                     ],
                 ]); ?>
 
@@ -30,7 +34,7 @@ use yii\widgets\ActiveForm;
                     ->input('email', [
                         'class' => 'input textarea',
                         'style' => ['width' => '330px'],
-                        'placeholder' => 'kumarm@mail.ru',
+                        'placeholder' => 'example@gmail.com',
                         'id' => 'email'
                     ])
                     ->hint('Введите валидный адрес электронной почты')
@@ -41,7 +45,7 @@ use yii\widgets\ActiveForm;
                     ->textInput([
                         'class' => 'input textarea',
                         'style' => ['width' => '330px'],
-                        'placeholder' => 'Мамедов Кумар',
+                        'placeholder' => 'Иванов Иван',
                         'id' => 'name'
                     ])
                     ->hint('Введите ваше имя и фамилию')
