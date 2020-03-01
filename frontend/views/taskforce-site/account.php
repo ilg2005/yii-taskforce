@@ -3,8 +3,8 @@
 /* @var $this yii\web\View */
 
 $this->title = 'TaskForce-Account';
-
 ?>
+
 <main class="page-main">
     <div class="main-container page-container">
         <section class="account__redaction-wrapper">

@@ -6,7 +6,6 @@ $this->title = 'TaskForce-Index';
 
 const TRIM_WIDTH = 70;
 ?>
-
 <header class=" page-header--index">
     <div class="main-container page-header__container page-header__container--index">
         <div class="page-header__logo--index">
@@ -56,7 +55,12 @@ const TRIM_WIDTH = 70;
             <p>Сломался кран на кухне? Надо отправить документы? Нет времени самому гулять с собакой?
                 У нас вы быстро найдёте исполнителя для любой жизненной ситуации?<br>
                 Быстро, безопасно и с гарантией. Просто, как раз, два, три. </p>
+            <?php if( Yii::$app->session->hasFlash('success') ): ?>
+                <a href="/index" class="button" style="background-color: #3d9109"><?= Yii::$app->session->getFlash('success') ?></a>
+            <?php else: ?>
             <a href="/signup" class="button">Создать аккаунт</a>
+            <?php endif; ?>
+
         </div>
         <div class="landing-center">
             <div class="landing-instruction">

@@ -31,19 +31,4 @@ class SignupForm extends Model
         ];
     }
 
-    public function signup()
-    {
-        if (!$this->validate()) {
-            return null;
-        }
-
-        $user = new User();
-        $user->email = $this->email;
-        $user->name = $this->name;
-        $user->town = $this->town[0];
-        $user->setPassword($this->password);
-        return $user->save();
-
-    }
-
 }

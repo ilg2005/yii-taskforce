@@ -63,11 +63,11 @@ return [
             'showScriptName' => false,
             //'enableStrictParsing' => true,
             'rules' => [
-                '/' => 'site/index',
+                '/' => 'taskforce-site/index',
                 'about' => 'site/about',
                 'contact' => 'site/contact',
                 'login' => 'site/login',
-                'defaultRoute' => 'site/index',
+                'defaultRoute' => 'taskforce-site/index',
 
                 'browse/<page:\d+>' => 'taskforce-site/browse',
                 '<action:(index|account|browse|create|mylist|profile|signup|users|view|image)>' => 'taskforce-site/<action>',

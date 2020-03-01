@@ -6,7 +6,6 @@ namespace frontend\controllers;
 use frontend\constants\TaskStatuses;
 use frontend\constants\UserRoles;
 use frontend\models\Category;
-use frontend\models\Reaction;
 use frontend\models\SignupForm;
 use frontend\models\Statistics;
 use frontend\models\Task;
@@ -14,7 +13,6 @@ use frontend\models\Task;
 use frontend\models\User;
 use Yii;
 use yii\data\Pagination;
-use yii\db\Query;
 use yii\web\Controller;
 
 class TaskforceSiteController extends Controller
@@ -43,8 +41,16 @@ class TaskforceSiteController extends Controller
     public function actionSignup()
     {
         $model = new SignupForm();
-        if ($model->load(Yii::$app->request->post()) && $model->signup()) {
-            Yii::$app->session->setFlash('success', 'Вы успешно зарегистрировались!');
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+
+            $user = new User();
+            $user->email = $model->email;
+            $user->name = $model->name;
+            $user->town = $model->town[0];
+            $user->setPassword($model->password);
+            $user->save();
+
+            Yii::$app->session->setFlash('success', 'Регистрация успешна!');
             return $this->goHome();
         }
 
