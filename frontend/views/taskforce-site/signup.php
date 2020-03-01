@@ -33,7 +33,7 @@ use yii\widgets\ActiveForm;
                     ],
                 ]); ?>
 
-                <?= $form->field($model, 'email')
+                <?= $form->field($model, 'email', ['enableAjaxValidation' => 'true'])
                     ->label('Электронная почта')
                     ->input('email', [
                         'placeholder' => 'example@gmail.com',

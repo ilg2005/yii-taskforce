@@ -12,8 +12,10 @@ use frontend\models\Task;
 
 use frontend\models\User;
 use Yii;
+use yii\web\Response;
 use yii\data\Pagination;
 use yii\web\Controller;
+use yii\widgets\ActiveForm;
 
 class TaskforceSiteController extends Controller
 {
@@ -41,6 +43,12 @@ class TaskforceSiteController extends Controller
     public function actionSignup()
     {
         $model = new SignupForm();
+
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
+
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
 
             $user = new User();
