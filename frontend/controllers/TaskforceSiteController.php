@@ -6,6 +6,7 @@ namespace frontend\controllers;
 use frontend\constants\TaskStatuses;
 use frontend\constants\UserRoles;
 use frontend\models\Category;
+use frontend\models\Feedback;
 use frontend\models\SignupForm;
 use frontend\models\Task;
 
@@ -151,14 +152,17 @@ class TaskforceSiteController extends Controller
     {
         $user = User::find()
             ->where(['users.id' => Yii::$app->request->get('user_id')])
-            ->with('profile')
-            ->joinWith(['categories', 'portfolio', 'feedbacks'])
             ->one();
+
+        $feedbacks = Feedback::find()
+            ->where(['worker_id' => Yii::$app->request->get('user_id')])
+            ->with(['customer', 'avatar', 'task'])
+            ->all();
 
             $user->is_favorite = Yii::$app->request->get('is_favorite');
             $user->save();
 
-        return $this->render('profile', compact('user'));
+        return $this->render('profile', compact('user', 'feedbacks'));
     }
 
     /**

@@ -57,7 +57,7 @@ use frontend\components\Rating;
             <div class="content-view__feedback">
                 <h2>Отзывы<span> (<?= $user->feedbacks_count ?>)</span></h2>
                 <div class="content-view__feedback-wrapper reviews-wrapper">
-                    <?php foreach ($user->feedbacks as $feedback): ?>
+                    <?php foreach ($feedbacks as $feedback): ?>
                     <div class="feedback-card__reviews">
                         <p class="link-task link">Задание <a href="#" class="link-regular">«<?= $feedback->task->title ?>»</a></p>
                         <div class="card__review">
