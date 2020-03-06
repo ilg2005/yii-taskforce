@@ -159,8 +159,10 @@ class TaskforceSiteController extends Controller
             ->with(['customer', 'avatar', 'task'])
             ->all();
 
+        if (Yii::$app->request->get('is_favorite') !== null) {
             $user->is_favorite = Yii::$app->request->get('is_favorite');
             $user->save();
+        }
 
         return $this->render('profile', compact('user', 'feedbacks'));
     }

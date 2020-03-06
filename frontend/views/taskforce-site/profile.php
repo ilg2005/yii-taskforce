@@ -22,7 +22,7 @@ use frontend\components\Rating;
                         </div>
                         <b class="done-task"><?= Yii::t('app', 'Выполнил {n, plural, one{# заказ} few{# заказа} other{# заказов}}', ['n' => $user->tasks_count]) ?></b><b class="done-review"><?= Yii::t('app', 'Получил {n, plural, one{# отзыв} few{# отзыва} other{# отзывов}}', ['n' => $user->feedbacks_count]) ?></b>
                     </div>
-                    <div class="content-view__headline user__card-bookmark <?= Yii::$app->request->get('is_favorite') ? 'user__card-bookmark--current' : '' ?>">
+                    <div class="content-view__headline user__card-bookmark <?= (Yii::$app->request->get('is_favorite') || $user->is_favorite) ? 'user__card-bookmark--current' : '' ?>">
                         <span>Был на сайте <?= Yii::$app->formatter->asRelativeTime($user->latest_activity_time) ?></span>
                         <a href="/profile?user_id=<?= $user->id ?>&is_favorite=<?= Yii::$app->request->get('is_favorite') ? '0' : '1' ?>"><b></b></a>
                     </div>
