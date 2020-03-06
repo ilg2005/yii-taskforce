@@ -12,7 +12,7 @@ class User extends ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'town', 'email', 'password', 'registration_date', 'profile_id'], 'safe'],
+            [['name', 'town', 'email', 'password', 'registration_date', 'profile_id', 'role', 'latest_activity_time', 'is_favorite', 'rating', 'feedbacks_count', 'tasks_count', 'views_count'], 'safe'],
             ['email', 'email'],
         ];
     }
@@ -35,10 +35,6 @@ class User extends ActiveRecord
         return $this->hasOne(Profile::class, ['id' => 'profile_id']);
     }
 
-    public function getStatistics()
-    {
-        return $this->hasOne(Statistics::class, ['user_id' => 'id']);
-    }
 
     public function getPortfolio()
     {

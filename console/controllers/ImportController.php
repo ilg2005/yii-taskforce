@@ -13,11 +13,10 @@ class ImportController extends Controller
         'categories' => 'Category',
         'towns' => 'Location',
         'profiles' => 'Profile',
-        'users' => 'User',
+        'users-combined' => 'User',
         'tasks' => 'Task',
         'feedbacks' => 'Feedback',
         'reactions' => 'Reaction',
-        'users-statistics' => 'Statistics',
         'users-portfolio' => 'Portfolio',
     ];
 

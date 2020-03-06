@@ -18,12 +18,12 @@ use frontend\components\Rating;
                         <h1><?= $user->name ?></h1>
                         <p>Россия, Санкт-Петербург, <?= Yii::t('app', '{n, plural, one{# год} few{# года} other{# лет}}', ['n' => Yii::$app->formatter->asAge($user->profile->birthday)]) ?></p>
                         <div class="profile-mini__name five-stars__rate">
-                            <?= Rating::widget(['rating' => $user->statistics->rating]) ?>
+                            <?= Rating::widget(['rating' => $user->rating]) ?>
                         </div>
-                        <b class="done-task"><?= Yii::t('app', 'Выполнил {n, plural, one{# заказ} few{# заказа} other{# заказов}}', ['n' => $user->statistics->tasks_count]) ?></b><b class="done-review"><?= Yii::t('app', 'Получил {n, plural, one{# отзыв} few{# отзыва} other{# отзывов}}', ['n' => $user->statistics->feedbacks_count]) ?></b>
+                        <b class="done-task"><?= Yii::t('app', 'Выполнил {n, plural, one{# заказ} few{# заказа} other{# заказов}}', ['n' => $user->tasks_count]) ?></b><b class="done-review"><?= Yii::t('app', 'Получил {n, plural, one{# отзыв} few{# отзыва} other{# отзывов}}', ['n' => $user->feedbacks_count]) ?></b>
                     </div>
                     <div class="content-view__headline user__card-bookmark <?= Yii::$app->request->get('is_favorite') ? 'user__card-bookmark--current' : '' ?>">
-                        <span>Был на сайте <?= Yii::$app->formatter->asRelativeTime($user->statistics->latest_activity_time) ?></span>
+                        <span>Был на сайте <?= Yii::$app->formatter->asRelativeTime($user->latest_activity_time) ?></span>
                         <a href="/profile?user_id=<?= $user->id ?>&is_favorite=<?= Yii::$app->request->get('is_favorite') ? '0' : '1' ?>"><b></b></a>
                     </div>
                 </div>
@@ -53,9 +53,9 @@ use frontend\components\Rating;
                     </div>
                 </div>
             </div>
-            <?php if ($user->statistics->feedbacks_count): ?>
+            <?php if ($user->feedbacks_count): ?>
             <div class="content-view__feedback">
-                <h2>Отзывы<span> (<?= $user->statistics->feedbacks_count ?>)</span></h2>
+                <h2>Отзывы<span> (<?= $user->feedbacks_count ?>)</span></h2>
                 <div class="content-view__feedback-wrapper reviews-wrapper">
                     <?php foreach ($user->feedbacks as $feedback): ?>
                     <div class="feedback-card__reviews">
