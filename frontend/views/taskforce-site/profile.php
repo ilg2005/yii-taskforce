@@ -53,9 +53,9 @@ use frontend\components\Rating;
                     </div>
                 </div>
             </div>
-            <?php if ($user->feedbacks_count): ?>
+            <?php if (count($feedbacks)): ?>
             <div class="content-view__feedback">
-                <h2>Отзывы<span> (<?= $user->feedbacks_count ?>)</span></h2>
+                <h2>Отзывы<span> (<?= count($feedbacks) ?>)</span></h2>
                 <div class="content-view__feedback-wrapper reviews-wrapper">
                     <?php foreach ($feedbacks as $feedback): ?>
                     <div class="feedback-card__reviews">

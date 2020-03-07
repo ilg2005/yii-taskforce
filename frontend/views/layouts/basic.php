@@ -48,6 +48,8 @@ BasicAsset::register($this);
                     </svg>
                 </a>
             </div>
+
+            <?php if($this->title !== 'TaskForce-Signup') : ?>
             <div class="header__nav">
                 <ul class="header-nav__list site-list">
                     <li class="site-list__item">
@@ -112,6 +114,8 @@ BasicAsset::register($this);
                     </li>
                 </ul>
             </div>
+            <?php endif; ?>
+
         </div>
     </header>
     <?php endif;?>
