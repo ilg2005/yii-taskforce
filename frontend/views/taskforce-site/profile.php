@@ -6,6 +6,7 @@ const RATE_THRESHOLD = 3;
 
 $this->title = 'TaskForce-Profile';
 
+use frontend\components\Pager;
 use frontend\components\Rating;
 ?>
 <main class="page-main">
@@ -20,7 +21,7 @@ use frontend\components\Rating;
                         <div class="profile-mini__name five-stars__rate">
                             <?= Rating::widget(['rating' => $user->rating]) ?>
                         </div>
-                        <b class="done-task"><?= Yii::t('app', 'Выполнил {n, plural, one{# заказ} few{# заказа} other{# заказов}}', ['n' => $user->tasks_count]) ?></b><b class="done-review"><?= Yii::t('app', 'Получил {n, plural, one{# отзыв} few{# отзыва} other{# отзывов}}', ['n' => $user->feedbacks_count]) ?></b>
+                        <b class="done-task"><?= Yii::t('app', 'Выполнил {n, plural, one{# заказ} few{# заказа} other{# заказов}}', ['n' => count($user->tasks)]) ?></b><b class="done-review"><?= Yii::t('app', 'Получил {n, plural, one{# отзыв} few{# отзыва} other{# отзывов}}', ['n' => count($user->feedbacks)]) ?></b>
                     </div>
                     <div class="content-view__headline user__card-bookmark <?= (Yii::$app->request->get('is_favorite') || $user->is_favorite) ? 'user__card-bookmark--current' : '' ?>">
                         <span>Был на сайте <?= Yii::$app->formatter->asRelativeTime($user->latest_activity_time) ?></span>
@@ -53,9 +54,9 @@ use frontend\components\Rating;
                     </div>
                 </div>
             </div>
-            <?php if (count($feedbacks)): ?>
+            <?php if (count($user->feedbacks)): ?>
             <div class="content-view__feedback">
-                <h2>Отзывы<span> (<?= count($feedbacks) ?>)</span></h2>
+                <h2>Отзывы<span> (<?= count($user->feedbacks) ?>)</span></h2>
                 <div class="content-view__feedback-wrapper reviews-wrapper">
                     <?php foreach ($feedbacks as $feedback): ?>
                     <div class="feedback-card__reviews">
@@ -72,6 +73,11 @@ use frontend\components\Rating;
                         </div>
                     </div>
                     <?php endforeach; ?>
+                    <div class="feedbacks__pagination">
+                        <?= Pager::widget(['pagination' => $pages]) ?>
+                    </div>
+
+
                 </div>
             </div>
             <?php endif; ?>

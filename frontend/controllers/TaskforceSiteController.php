@@ -156,7 +156,12 @@ class TaskforceSiteController extends Controller
 
         $feedbacks = Feedback::find()
             ->where(['worker_id' => Yii::$app->request->get('user_id')])
-            ->with(['customer', 'avatar', 'task'])
+            ->with(['customer', 'avatar', 'task']);
+
+        $feedbacksCountPerPage = 3;
+        $pages = new Pagination(['totalCount' => count($user->feedbacks), 'pageSize' => $feedbacksCountPerPage, 'forcePageParam' => false, 'pageSizeParam' => false]);
+        $feedbacks = $feedbacks->offset($pages->offset)
+            ->limit($pages->limit)
             ->all();
 
         if (Yii::$app->request->get('is_favorite') !== null) {
@@ -164,7 +169,7 @@ class TaskforceSiteController extends Controller
             $user->save();
         }
 
-        return $this->render('profile', compact('user', 'feedbacks'));
+        return $this->render('profile', compact('user', 'feedbacks', 'pages'));
     }
 
     /**

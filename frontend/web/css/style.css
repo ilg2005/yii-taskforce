@@ -2571,5 +2571,12 @@ IMG.displayed {
   margin-right: auto
 }
 
+.feedbacks__pagination {
+  padding-left: 20px;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  background-color: #ffffff;
+  border-top: 1px solid #c8c5c5; }
+
 /*# sourceMappingURL=style.css.map */
 
