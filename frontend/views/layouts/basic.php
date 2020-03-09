@@ -49,7 +49,6 @@ BasicAsset::register($this);
                 </a>
             </div>
 
-            <?php if($this->title !== 'TaskForce-Signup') : ?>
             <div class="header__nav">
                 <ul class="header-nav__list site-list">
                     <li class="site-list__item">
@@ -66,6 +65,9 @@ BasicAsset::register($this);
                     </li>
                 </ul>
             </div>
+
+            <?php if($this->title !== 'TaskForce-Signup') : ?>
+
             <div class="header__town">
                 <select class="multiple-select input town-select" size="1" name="town[]">
                     <option value="Moscow">Москва</option>
