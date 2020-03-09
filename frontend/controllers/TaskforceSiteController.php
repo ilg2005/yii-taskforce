@@ -6,8 +6,8 @@ namespace frontend\controllers;
 use frontend\constants\TaskStatuses;
 use frontend\constants\UserRoles;
 use frontend\models\Category;
+use frontend\models\Feedback;
 use frontend\models\SignupForm;
-use frontend\models\Statistics;
 use frontend\models\Task;
 
 use frontend\models\User;
@@ -151,17 +151,25 @@ class TaskforceSiteController extends Controller
     public function actionProfile()
     {
         $user = User::find()
-            ->where(['id' => Yii::$app->request->get('user_id')])
-            ->with('profile')
-            ->joinWith(['statistics', 'categories', 'portfolio', 'feedbacks'])
-            ->where(['users_statistics.user_id' => Yii::$app->request->get('user_id')])
+            ->where(['users.id' => Yii::$app->request->get('user_id')])
             ->one();
 
-            $model = Statistics::find()->where(['user_id' => Yii::$app->request->get('user_id')])->one();
-            $model->is_favorite = Yii::$app->request->get('is_favorite');
-            $model->save();
+        $feedbacks = Feedback::find()
+            ->where(['worker_id' => Yii::$app->request->get('user_id')])
+            ->with(['customer', 'avatar', 'task']);
 
-        return $this->render('profile', compact('user'));
+        $feedbacksCountPerPage = 3;
+        $pages = new Pagination(['totalCount' => $user->feedbacks_count, 'pageSize' => $feedbacksCountPerPage, 'forcePageParam' => false, 'pageSizeParam' => false]);
+        $feedbacks = $feedbacks->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+
+        if (Yii::$app->request->get('is_favorite') !== null) {
+            $user->is_favorite = Yii::$app->request->get('is_favorite');
+            $user->save();
+        }
+
+        return $this->render('profile', compact('user', 'feedbacks', 'pages'));
     }
 
     /**
@@ -172,22 +180,21 @@ class TaskforceSiteController extends Controller
     public function actionUsers()
     {
         $users = User::find()
-            ->joinWith('statistics')
-            ->where(['users_statistics.role' => UserRoles::WORKER])
+            ->where(['role' => UserRoles::WORKER])
             ->orderBy(['registration_date' => SORT_DESC])
             ->with(['profile', 'categories'])
-            ->groupBy(['users.id', 'users_statistics.rating', 'users_statistics.tasks_count', 'users_statistics.views_count']);
+            ->groupBy(['id', 'rating', 'tasks_count', 'views_count']);
 
         if(Yii::$app->request->get('rating')) {
-            $users->orderBy(['users_statistics.rating' => SORT_DESC]);
+            $users->orderBy(['rating' => SORT_DESC]);
         }
 
         if(Yii::$app->request->get('tasks')) {
-            $users->orderBy(['users_statistics.tasks_count' => SORT_DESC]);
+            $users->orderBy(['tasks_count' => SORT_DESC]);
         }
 
         if(Yii::$app->request->get('views')) {
-            $users->orderBy(['users_statistics.views_count' => SORT_DESC]);
+            $users->orderBy(['views_count' => SORT_DESC]);
         }
 
         if(Yii::$app->request->get('category')) {
@@ -201,15 +208,15 @@ class TaskforceSiteController extends Controller
         }
 
         if (Yii::$app->request->get('online')) {
-            $users->andWhere(['>=', 'users_statistics.latest_activity_time', date('Y-m-d H:i:s', strtotime('-30 minutes'))]);
+            $users->andWhere(['>=', 'latest_activity_time', date('Y-m-d H:i:s', strtotime('-30 minutes'))]);
         }
 
         if(Yii::$app->request->get('feedbacks')) {
-            $users->andWhere(['>', 'users_statistics.feedbacks_count', 0 ]);
+            $users->andWhere(['>', 'feedbacks_count', 0 ]);
         }
 
         if(Yii::$app->request->get('favorite')) {
-            $users->andWhere(['users_statistics.is_favorite' => 1]);
+            $users->andWhere(['is_favorite' => 1]);
         }
 
         $searchByName = Yii::$app->request->get('name');
