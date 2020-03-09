@@ -159,7 +159,7 @@ class TaskforceSiteController extends Controller
             ->with(['customer', 'avatar', 'task']);
 
         $feedbacksCountPerPage = 3;
-        $pages = new Pagination(['totalCount' => count($user->feedbacks), 'pageSize' => $feedbacksCountPerPage, 'forcePageParam' => false, 'pageSizeParam' => false]);
+        $pages = new Pagination(['totalCount' => $user->feedbacks_count, 'pageSize' => $feedbacksCountPerPage, 'forcePageParam' => false, 'pageSizeParam' => false]);
         $feedbacks = $feedbacks->offset($pages->offset)
             ->limit($pages->limit)
             ->all();

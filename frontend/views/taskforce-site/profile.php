@@ -21,7 +21,7 @@ use frontend\components\Rating;
                         <div class="profile-mini__name five-stars__rate">
                             <?= Rating::widget(['rating' => $user->rating]) ?>
                         </div>
-                        <b class="done-task"><?= Yii::t('app', 'Выполнил {n, plural, one{# заказ} few{# заказа} other{# заказов}}', ['n' => count($user->tasks)]) ?></b><b class="done-review"><?= Yii::t('app', 'Получил {n, plural, one{# отзыв} few{# отзыва} other{# отзывов}}', ['n' => count($user->feedbacks)]) ?></b>
+                        <b class="done-task"><?= Yii::t('app', 'Выполнил {n, plural, one{# заказ} few{# заказа} other{# заказов}}', ['n' => $user->tasks_count]) ?></b><b class="done-review"><?= Yii::t('app', 'Получил {n, plural, one{# отзыв} few{# отзыва} other{# отзывов}}', ['n' => $user->feedbacks_count]) ?></b>
                     </div>
                     <div class="content-view__headline user__card-bookmark <?= (Yii::$app->request->get('is_favorite') || $user->is_favorite) ? 'user__card-bookmark--current' : '' ?>">
                         <span>Был на сайте <?= Yii::$app->formatter->asRelativeTime($user->latest_activity_time) ?></span>
@@ -54,9 +54,9 @@ use frontend\components\Rating;
                     </div>
                 </div>
             </div>
-            <?php if (count($user->feedbacks)): ?>
+            <?php if ($user->feedbacks_count): ?>
             <div class="content-view__feedback">
-                <h2>Отзывы<span> (<?= count($user->feedbacks) ?>)</span></h2>
+                <h2>Отзывы<span> (<?= $user->feedbacks_count ?>)</span></h2>
                 <div class="content-view__feedback-wrapper reviews-wrapper">
                     <?php foreach ($feedbacks as $feedback): ?>
                     <div class="feedback-card__reviews">
