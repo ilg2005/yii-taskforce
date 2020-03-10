@@ -157,11 +157,6 @@ class TaskforceSiteController extends Controller
     {
         $user = User::find()
             ->where(['users.id' => Yii::$app->request->get('user_id')])
-            ->with([
-                'tasks' => function ($query) {
-                    $query->andWhere(['status' => TaskStatuses::COMPLETED]);
-                }
-            ])
             ->one();
 
         $tasksCount = count($user->tasks);
@@ -170,7 +165,7 @@ class TaskforceSiteController extends Controller
             ->where(['worker_id' => Yii::$app->request->get('user_id')])
             ->with(['customer', 'avatar', 'task']);
 
-        $feedbacksCount = count($feedbacks);
+        $feedbacksCount = count($user->feedbacks);
         $feedbacksCountPerPage = 3;
         $pages = new Pagination([
             'totalCount' => $feedbacksCount,
