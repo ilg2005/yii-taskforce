@@ -170,7 +170,7 @@ class TaskforceSiteController extends Controller
             ->where(['worker_id' => Yii::$app->request->get('user_id')])
             ->with(['customer', 'avatar', 'task']);
 
-        $feedbacksCount = count($user->feedbacks);
+        $feedbacksCount = count($feedbacks);
         $feedbacksCountPerPage = 3;
         $pages = new Pagination([
             'totalCount' => $feedbacksCount,
