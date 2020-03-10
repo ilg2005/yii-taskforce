@@ -89,16 +89,16 @@ class TaskforceSiteController extends Controller
             ->orderBy(['creation_date' => SORT_DESC])
             ->with('category');
 
-        if(Yii::$app->request->get('category')) {
+        if (Yii::$app->request->get('category')) {
             $tasks->andWhere(['category_id' => Yii::$app->request->get('category')]);
         }
 
-        if(Yii::$app->request->get('no-responses')) {
+        if (Yii::$app->request->get('no-responses')) {
             $tasks->joinWith('reactions');
             $tasks->andWhere('tasks_reactions.id IS NULL');
         }
 
-        if(Yii::$app->request->get('no-location')) {
+        if (Yii::$app->request->get('no-location')) {
             $tasks->andWhere(['location_id' => null]);
         }
 
@@ -113,7 +113,12 @@ class TaskforceSiteController extends Controller
             $tasks->andWhere(['like', 'title', $search]);
         }
 
-        $pages = new Pagination(['totalCount' => $tasks->count(), 'pageSize' => $tasksCountPerPage, 'forcePageParam' => false, 'pageSizeParam' => false]);
+        $pages = new Pagination([
+            'totalCount' => $tasks->count(),
+            'pageSize' => $tasksCountPerPage,
+            'forcePageParam' => false,
+            'pageSizeParam' => false
+        ]);
         $tasks = $tasks->offset($pages->offset)
             ->limit($pages->limit)
             ->all();
@@ -152,14 +157,27 @@ class TaskforceSiteController extends Controller
     {
         $user = User::find()
             ->where(['users.id' => Yii::$app->request->get('user_id')])
+            ->with([
+                'tasks' => function ($query) {
+                    $query->andWhere(['status' => TaskStatuses::COMPLETED]);
+                }
+            ])
             ->one();
+
+        $tasksCount = count($user->tasks);
 
         $feedbacks = Feedback::find()
             ->where(['worker_id' => Yii::$app->request->get('user_id')])
             ->with(['customer', 'avatar', 'task']);
 
+        $feedbacksCount = count($user->feedbacks);
         $feedbacksCountPerPage = 3;
-        $pages = new Pagination(['totalCount' => $user->feedbacks_count, 'pageSize' => $feedbacksCountPerPage, 'forcePageParam' => false, 'pageSizeParam' => false]);
+        $pages = new Pagination([
+            'totalCount' => $feedbacksCount,
+            'pageSize' => $feedbacksCountPerPage,
+            'forcePageParam' => false,
+            'pageSizeParam' => false
+        ]);
         $feedbacks = $feedbacks->offset($pages->offset)
             ->limit($pages->limit)
             ->all();
@@ -169,7 +187,7 @@ class TaskforceSiteController extends Controller
             $user->save();
         }
 
-        return $this->render('profile', compact('user', 'feedbacks', 'pages'));
+        return $this->render('profile', compact('user', 'feedbacks', 'pages', 'feedbacksCount', 'tasksCount'));
     }
 
     /**
@@ -185,37 +203,37 @@ class TaskforceSiteController extends Controller
             ->with(['profile', 'categories'])
             ->groupBy(['id', 'rating', 'tasks_count', 'views_count']);
 
-        if(Yii::$app->request->get('rating')) {
+        if (Yii::$app->request->get('rating')) {
             $users->orderBy(['rating' => SORT_DESC]);
         }
 
-        if(Yii::$app->request->get('tasks')) {
+        if (Yii::$app->request->get('tasks')) {
             $users->orderBy(['tasks_count' => SORT_DESC]);
         }
 
-        if(Yii::$app->request->get('views')) {
+        if (Yii::$app->request->get('views')) {
             $users->orderBy(['views_count' => SORT_DESC]);
         }
 
-        if(Yii::$app->request->get('category')) {
+        if (Yii::$app->request->get('category')) {
             $users->joinWith('categories')
                 ->andWhere(['users_categories.category_id' => Yii::$app->request->get('category')]);
         }
 
-        if(Yii::$app->request->get('free')) {
+        if (Yii::$app->request->get('free')) {
             $users->joinWith('tasks')
-                ->andWhere(['not in','status', TaskStatuses::ACTIVE]);
+                ->andWhere(['not in', 'status', TaskStatuses::ACTIVE]);
         }
 
         if (Yii::$app->request->get('online')) {
             $users->andWhere(['>=', 'latest_activity_time', date('Y-m-d H:i:s', strtotime('-30 minutes'))]);
         }
 
-        if(Yii::$app->request->get('feedbacks')) {
-            $users->andWhere(['>', 'feedbacks_count', 0 ]);
+        if (Yii::$app->request->get('feedbacks')) {
+            $users->andWhere(['>', 'feedbacks_count', 0]);
         }
 
-        if(Yii::$app->request->get('favorite')) {
+        if (Yii::$app->request->get('favorite')) {
             $users->andWhere(['is_favorite' => 1]);
         }
 
@@ -225,7 +243,12 @@ class TaskforceSiteController extends Controller
         }
 
         $usersCountPerPage = 5;
-        $pages = new Pagination(['totalCount' => $users->count(), 'pageSize' => $usersCountPerPage, 'forcePageParam' => false, 'pageSizeParam' => false]);
+        $pages = new Pagination([
+            'totalCount' => $users->count(),
+            'pageSize' => $usersCountPerPage,
+            'forcePageParam' => false,
+            'pageSizeParam' => false
+        ]);
         $users = $users->offset($pages->offset)
             ->limit($pages->limit)
             ->all();
