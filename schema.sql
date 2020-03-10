@@ -150,6 +150,16 @@ CREATE TABLE correspondence
     FOREIGN KEY (recipient_id) REFERENCES users (id) ON DELETE CASCADE
 );
 
+CREATE TABLE profile_views
+(
+    id              int AUTO_INCREMENT PRIMARY KEY,
+    current_user_id int,
+    viewed_user_id  int,
+    viewing_time    TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    FOREIGN KEY (current_user_id) REFERENCES users (id) ON DELETE CASCADE,
+    FOREIGN KEY (viewed_user_id) REFERENCES users (id) ON DELETE CASCADE
+);
+
 create index users_name_index
     on users (name);
 create index users_town_index
@@ -166,12 +176,6 @@ create index users_is_favorite_index
     on users (is_favorite);
 create index user_rating_index
     on users (rating);
-create index user_tasks_count_index
-    on users (tasks_count);
-create index user_views_count_index
-    on users (views_count);
-create index feedbacks_count_index
-    on users (feedbacks_count);
 create index user_id_index
     on users_categories (user_id);
 create index category_id_index

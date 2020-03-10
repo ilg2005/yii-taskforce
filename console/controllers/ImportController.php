@@ -18,6 +18,7 @@ class ImportController extends Controller
         'feedbacks' => 'Feedback',
         'reactions' => 'Reaction',
         'users-portfolio' => 'Portfolio',
+        'profile-views' => 'ProfileView'
     ];
 
     const DATA_TABLE_MAP = [
