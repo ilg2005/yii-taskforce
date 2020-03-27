@@ -30,6 +30,7 @@ use frontend\components\Rating; ?>
                         <a href="/profile?user_id=<?= $user->id ?>&is_favorite=<?= $user->is_favorite ?>"><img src="../img/<?= $user->profile->avatar_file ?>" width="65" height="65"></a>
                         <span><?= Yii::t('app', '{n, plural, one{# задание} few{# задания} other{# заданий}}', ['n' => count($user->tasks)]) ?></span>
                         <span><?= Yii::t('app', '{n, plural, one{# отзыв} few{# отзыва} other{# отзывов}}', ['n' => count($user->feedbacks)]) ?></span>
+                        <span><?= Yii::t('app', '{n, plural, one{# просмотр} few{# просмотра} other{# просмотров}}', ['n' => count($user->views)]) ?></span>
                     </div>
                     <div class="feedback-card__top--name user__search-card">
                         <p class="link-name"><a href="/profile?user_id=<?= $user->id ?>&is_favorite=<?= $user->is_favorite ?>" class="link-regular"><?= $user->name ?></a></p>

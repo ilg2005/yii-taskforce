@@ -46,7 +46,6 @@ CREATE TABLE users
     latest_activity_time TIMESTAMP,
     is_favorite          boolean    DEFAULT false,
     rating               FLOAT      DEFAULT 0,
-    views_count          INT        DEFAULT 0,
 
     FOREIGN KEY (profile_id) REFERENCES users_profiles (id) ON DELETE CASCADE
 );
