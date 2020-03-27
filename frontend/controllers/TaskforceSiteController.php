@@ -7,6 +7,7 @@ use frontend\constants\TaskStatuses;
 use frontend\constants\UserRoles;
 use frontend\models\Category;
 use frontend\models\Feedback;
+use frontend\models\ProfileView;
 use frontend\models\SignupForm;
 use frontend\models\Task;
 
@@ -158,6 +159,14 @@ class TaskforceSiteController extends Controller
         $user = User::find()
             ->where(['users.id' => Yii::$app->request->get('user_id')])
             ->one();
+
+        if (Yii::$app->user->id !== $user->id) {
+            $view = new ProfileView();
+            $view->current_user_id = Yii::$app->user->id;
+            $view->viewed_user_id = $user->id;
+
+            $view->save();
+        }
 
         $tasksCount = count($user->tasks);
 
