@@ -161,11 +161,18 @@ class TaskforceSiteController extends Controller
             ->one();
 
         if (Yii::$app->user->id !== $user->id) {
-            $view = new ProfileView();
-            $view->current_user_id = Yii::$app->user->id;
-            $view->viewed_user_id = $user->id;
+            $recentViews = ProfileView::find()
+                ->where(['current_user_id' => Yii::$app->user->id])
+                ->andWhere(['viewed_user_id' => $user->id])
+                ->andWhere(['>', 'viewing_time', date('Y-m-d H:i:s', strtotime('-1 hour'))])
+                ->all();
 
-            $view->save();
+            if (count($recentViews) === 0) {
+                $newView = new ProfileView();
+                $newView->current_user_id = Yii::$app->user->id;
+                $newView->viewed_user_id = $user->id;
+                $newView->save();
+            }
         }
 
         $tasksCount = count($user->tasks);
