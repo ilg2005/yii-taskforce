@@ -13,7 +13,7 @@ class User extends ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'town', 'email', 'password', 'registration_date', 'profile_id', 'role', 'latest_activity_time', 'is_favorite', 'rating', 'feedbacks_count', 'tasks_count', 'views_count'], 'safe'],
+            [['name', 'town', 'email', 'password', 'registration_date', 'profile_id', 'role', 'latest_activity_time', 'is_favorite', 'rating', 'views_count'], 'safe'],
             ['email', 'email'],
         ];
     }
@@ -46,6 +46,13 @@ class User extends ActiveRecord
     {
         return $this->hasMany(Feedback::class, ['worker_id' => 'id']);
     }
+
+    public function getProfileViews()
+    {
+        return $this->hasMany(ProfileView::class, ['viewed_user_id' => 'id']);
+
+    }
+
 
     /**
      * Generates password hash from password and sets it to the model

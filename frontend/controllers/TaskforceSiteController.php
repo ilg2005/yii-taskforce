@@ -182,7 +182,7 @@ class TaskforceSiteController extends Controller
             $user->save();
         }
 
-        return $this->render('profile', compact('user', 'feedbacks', 'pages', 'feedbacksCount', 'tasksCount'));
+        return $this->render('profile', compact('user', 'feedbacks', 'pages', 'tasksCount', 'feedbacksCount'));
     }
 
     /**
@@ -195,15 +195,16 @@ class TaskforceSiteController extends Controller
         $users = User::find()
             ->where(['role' => UserRoles::WORKER])
             ->orderBy(['registration_date' => SORT_DESC])
-            ->with(['profile', 'categories'])
-            ->groupBy(['id', 'rating', 'tasks_count', 'views_count']);
+            ->with(['profile', 'categories', 'tasks', 'feedbacks'])
+            ->groupBy(['id', 'rating', 'views_count']);
 
         if (Yii::$app->request->get('rating')) {
             $users->orderBy(['rating' => SORT_DESC]);
         }
 
         if (Yii::$app->request->get('tasks')) {
-            $users->orderBy(['tasks_count' => SORT_DESC]);
+            $users->joinWith('tasks')->
+            orderBy(['count(tasks.id)' => SORT_DESC]);
         }
 
         if (Yii::$app->request->get('views')) {
