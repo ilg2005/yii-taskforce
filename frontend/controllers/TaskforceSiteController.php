@@ -195,8 +195,8 @@ class TaskforceSiteController extends Controller
         $users = User::find()
             ->where(['role' => UserRoles::WORKER])
             ->orderBy(['registration_date' => SORT_DESC])
-            ->with(['profile', 'categories', 'tasks', 'feedbacks', 'views'])
-            ->groupBy(['id', 'rating']);
+            ->with(['profile', 'categories', 'tasks', 'feedbacks'])
+            ->groupBy(['id']);
 
         if (Yii::$app->request->get('rating')) {
             $users->orderBy(['rating' => SORT_DESC]);
