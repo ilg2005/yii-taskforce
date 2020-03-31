@@ -38,7 +38,7 @@ const TRIM_WIDTH = 70;
             <p>Работа там, где ты!</p>
         </div>
         <div class="header__account--index">
-            <a href="/account" class="header__account-enter">
+            <a href="#" class="header__account-enter open-modal" data-for="enter-form">
                 <span>Вход</span></a>
             или
             <a href="/signup" class="header__account-registration">
