@@ -184,7 +184,6 @@ BasicAsset::register($this);
     </section>
 </div>
 <div class="overlay"></div>
-<script src="js/main.js"></script>
 <?php $this->endBody() ?>
 </body>
 </html>
