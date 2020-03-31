@@ -183,6 +183,8 @@ BasicAsset::register($this);
         <button class="form-modal-close" type="button">Закрыть</button>
     </section>
 </div>
+<div class="overlay"></div>
+<script src="js/main.js"></script>
 <?php $this->endBody() ?>
 </body>
 </html>
