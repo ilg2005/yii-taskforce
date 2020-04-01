@@ -168,39 +168,7 @@ BasicAsset::register($this);
             <?= ($this->title !== 'TaskForce-Signup') ? '' : \Yii::$app->view->renderFile('@app/views/taskforce-site/clipart.php') ?>
         </div>
     </footer>
-    <section class="modal enter-form form-modal" id="enter-form">
-        <h2>Вход на сайт</h2>
-        <?php $form = ActiveForm::begin([
-            'id' => 'enter-form']); ?>
-        <?= $form->field($model, 'email', ['enableAjaxValidation' => 'true'])
-            ->label('Электронная почта')
-            ->input('email', [
-                'placeholder' => 'yourmail@gmail.com',
-            ])
-            ->hint('Введите Ваш адрес электронной почты')
-        ?>
-        <?= $form->field($model, 'password')
-            ->label('Пароль')
-            ->passwordInput()
-            ->hint('Введите пароль')
-        ?>
-        <?= Html::submitButton('Войти', ['class' => 'button']) ?>
-        <?php ActiveForm::end(); ?>
-        <form action="#" method="post">
-            <p>
-                <label class="form-modal-description" for="enter-email">Email</label>
-                <input class="enter-form-email input input-middle" type="email" name="enter-email" id="enter-email">
-            </p>
-            <p>
-                <label class="form-modal-description" for="enter-password">Пароль</label>
-                <input class="enter-form-email input input-middle" type="password" name="enter-email" id="enter-password">
-            </p>
-            <button class="button" type="submit">Войти</button>
-        </form>
-        <button class="form-modal-close" type="button">Закрыть</button>
-    </section>
 </div>
-<div class="overlay"></div>
 <?php $this->endBody() ?>
 </body>
 </html>
