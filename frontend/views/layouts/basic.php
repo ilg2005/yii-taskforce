@@ -2,6 +2,7 @@
 
 use frontend\assets\BasicAsset;
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 
 BasicAsset::register($this);
 ?>
@@ -169,6 +170,22 @@ BasicAsset::register($this);
     </footer>
     <section class="modal enter-form form-modal" id="enter-form">
         <h2>Вход на сайт</h2>
+        <?php $form = ActiveForm::begin([
+            'id' => 'enter-form']); ?>
+        <?= $form->field($model, 'email', ['enableAjaxValidation' => 'true'])
+            ->label('Электронная почта')
+            ->input('email', [
+                'placeholder' => 'yourmail@gmail.com',
+            ])
+            ->hint('Введите Ваш адрес электронной почты')
+        ?>
+        <?= $form->field($model, 'password')
+            ->label('Пароль')
+            ->passwordInput()
+            ->hint('Введите пароль')
+        ?>
+        <?= Html::submitButton('Войти', ['class' => 'button']) ?>
+        <?php ActiveForm::end(); ?>
         <form action="#" method="post">
             <p>
                 <label class="form-modal-description" for="enter-email">Email</label>

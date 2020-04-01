@@ -6,6 +6,7 @@ namespace frontend\controllers;
 use frontend\constants\TaskStatuses;
 use frontend\constants\UserRoles;
 use frontend\models\Category;
+use frontend\models\EnterForm;
 use frontend\models\Feedback;
 use frontend\models\ProfileView;
 use frontend\models\SignupForm;
@@ -38,7 +39,8 @@ class TaskforceSiteController extends Controller
             ->limit($tasksNumberToShow)
             ->with('category')
             ->all();
-        return $this->render('index', compact('tasks'));
+        $model = new EnterForm();
+        return $this->render('index', compact('tasks', 'model'));
     }
 
     public function actionSignup()
