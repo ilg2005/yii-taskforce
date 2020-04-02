@@ -2,7 +2,6 @@
 
 use frontend\assets\BasicAsset;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
 
 BasicAsset::register($this);
 ?>

@@ -14,6 +14,7 @@ use frontend\models\Task;
 
 use frontend\models\User;
 use Yii;
+use yii\helpers\Url;
 use yii\web\Response;
 use yii\data\Pagination;
 use yii\web\Controller;
@@ -47,8 +48,9 @@ class TaskforceSiteController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            echo 'Все ОК';
-            die();
+            $user = $model->getUser();
+            Yii::$app->user->login($user);
+            Yii::$app->response->redirect(Url::to('/browse'));
         }
 
         return $this->render('index', compact('tasks', 'model'));
