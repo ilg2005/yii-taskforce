@@ -40,6 +40,17 @@ class TaskforceSiteController extends Controller
             ->with('category')
             ->all();
         $model = new EnterForm();
+
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            echo 'Все ОК';
+            die();
+        }
+
         return $this->render('index', compact('tasks', 'model'));
     }
 
