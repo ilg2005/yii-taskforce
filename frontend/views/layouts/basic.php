@@ -112,7 +112,7 @@ BasicAsset::register($this);
                         <a href="/account">Настройки</a>
                     </li>
                     <li>
-                        <a href="/index">Выход</a>
+                        <a href="/logout">Выход</a>
                     </li>
                 </ul>
             </div>

@@ -40,6 +40,7 @@ class TaskforceSiteController extends Controller
             ->limit($tasksNumberToShow)
             ->with('category')
             ->all();
+
         $model = new EnterForm();
 
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
@@ -54,6 +55,13 @@ class TaskforceSiteController extends Controller
         }
 
         return $this->render('index', compact('tasks', 'model'));
+    }
+
+    public function actionLogout()
+    {
+        Yii::$app->user->logout();
+
+        return $this->goHome();
     }
 
     public function actionSignup()
