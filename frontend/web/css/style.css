@@ -649,6 +649,9 @@ footer {
 .has-error .text-danger {
     color: #FF116E; }
 
+.text-danger {
+  color: #FF116E; }
+
 .input-middle {
   padding-top: 14px;
   padding-bottom: 14px;

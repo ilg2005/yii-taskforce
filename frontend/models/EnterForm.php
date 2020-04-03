@@ -42,6 +42,7 @@ class EnterForm extends Model
             $user = $this->getUser();
             if (!$user || !$user->validatePassword($this->password)) {
                 $this->addError($attribute, 'Неверный пароль');
+                var_dump($this->errors);
             }
         }
     }

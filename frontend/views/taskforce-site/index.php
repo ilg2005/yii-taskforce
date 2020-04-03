@@ -171,6 +171,10 @@ use yii\widgets\ActiveForm; ?>
 </main>
 <section class="modal enter-form form-modal <?= $model->errors ? 'show' : '' ?>" id="enter-form">
     <h2>Вход на сайт</h2>
+    <?php if ($model->errors) : ?>
+        <p class="has-error text-danger">Вы ввели неверный email/пароль!</p>
+        <br>
+    <?php endif; ?>
     <?php $form = ActiveForm::begin([
         'id' => 'login',
         'fieldConfig' => [
