@@ -40,9 +40,8 @@ class EnterForm extends Model
     {
         if (!$this->hasErrors()) {
             $user = $this->getUser();
-            if (!$user || !$user->validatePassword($this->password)) {
+            if (!$user->validatePassword($this->password)) {
                 $this->addError($attribute, 'Неверный пароль');
-                var_dump($this->errors);
             }
         }
     }

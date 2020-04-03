@@ -9,8 +9,8 @@ for (var i = 0; i < openModalLinks.length; i++) {
     var modalId = event.currentTarget.getAttribute("data-for");
 
     var modal = document.getElementById(modalId);
-    modal.setAttribute("style", "display: block");
-    overlay.setAttribute("style", "display: block");
+    modal.classList.add("show");
+    overlay.classList.add("show");
 
   });
 }
@@ -18,8 +18,8 @@ for (var i = 0; i < openModalLinks.length; i++) {
 function closeModal(event) {
   var modal = event.currentTarget.parentElement;
 
-  modal.removeAttribute("style");
-  overlay.removeAttribute("style");
+  modal.classList.remove("show");
+  overlay.classList.remove("show");
 }
 
 for (var j = 0; j < closeModalLinks.length; j++) {
