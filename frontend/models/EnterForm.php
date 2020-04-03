@@ -21,16 +21,27 @@ class EnterForm extends Model
             ['email', 'email'],
 
             [['email', 'password'], 'required', 'message' => 'Это поле должно быть заполнено!'],
+            ['email', 'validateEmail'],
             ['password', 'validatePassword'],
         ];
     }
 
-    public function validatePassword($attribute, $params)
+    public function validateEmail($attribute)
+    {
+        if (!$this->hasErrors()) {
+            $user = $this->getUser();
+            if (!$user) {
+                $this->addError($attribute, 'Несуществующий пользователь');
+            }
+        }
+    }
+
+    public function validatePassword($attribute)
     {
         if (!$this->hasErrors()) {
             $user = $this->getUser();
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Вы ввели неверный email/пароль');
+                $this->addError($attribute, 'Неверный пароль');
             }
         }
     }
