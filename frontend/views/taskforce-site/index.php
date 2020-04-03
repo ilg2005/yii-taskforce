@@ -169,7 +169,7 @@ use yii\widgets\ActiveForm; ?>
         </div>
     </div>
 </main>
-<section class="modal enter-form form-modal" id="enter-form">
+<section class="modal enter-form form-modal <?= $model->errors ? 'show' : '' ?>" id="enter-form">
     <h2>Вход на сайт</h2>
     <?php $form = ActiveForm::begin([
         'id' => 'login',
@@ -203,4 +203,4 @@ use yii\widgets\ActiveForm; ?>
 
     <button class="form-modal-close" type="button">Закрыть</button>
 </section>
-<div class="overlay"></div>
+<div class="overlay <?= $model->errors ? 'show' : '' ?>"></div>

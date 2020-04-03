@@ -2578,5 +2578,8 @@ IMG.displayed {
   background-color: #ffffff;
   border-top: 1px solid #c8c5c5; }
 
+.show {
+  display: block;
+}
 /*# sourceMappingURL=style.css.map */
 
