@@ -14,6 +14,7 @@ use frontend\models\Task;
 
 use frontend\models\User;
 use Yii;
+use yii\filters\AccessControl;
 use yii\helpers\Url;
 use yii\web\Response;
 use yii\data\Pagination;
@@ -32,6 +33,36 @@ class TaskforceSiteController extends Controller
      *
      * @return mixed
      */
+
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index', 'signup'],
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['index', 'logout', 'account', 'browse', 'create', 'mylist', 'profile', 'users', 'view', 'image'],
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'allow' => false,
+                        'actions' => ['signup'],
+                        'roles' => ['@'],
+                    ],
+                ],
+                'denyCallback' => function ($rule, $action) {
+                    Yii::$app->response->redirect(['/index']);
+                },
+            ],
+        ];
+    }
+
     public function actionIndex()
     {
         $tasksNumberToShow = 4;

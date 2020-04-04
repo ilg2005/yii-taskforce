@@ -64,9 +64,6 @@ return [
             //'enableStrictParsing' => true,
             'rules' => [
                 '/' => 'taskforce-site/index',
-                'about' => 'site/about',
-                'contact' => 'site/contact',
-                'login' => 'site/login',
                 'defaultRoute' => 'taskforce-site/index',
 
                 'browse/<page:\d+>' => 'taskforce-site/browse',
