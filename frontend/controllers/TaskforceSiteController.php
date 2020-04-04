@@ -51,9 +51,12 @@ class TaskforceSiteController extends Controller
                         'roles' => ['@'],
                     ],
                     [
-                        'allow' => false,
+                        'allow' => true,
                         'actions' => ['signup'],
                         'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return $this->redirect('/browse');
+                        }
                     ],
                 ],
                 'denyCallback' => function ($rule, $action) {

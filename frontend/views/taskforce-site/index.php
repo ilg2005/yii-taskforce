@@ -38,7 +38,8 @@ use yii\widgets\ActiveForm; ?>
             </a>
             <p>Работа там, где ты!</p>
         </div>
-        <div class="header__account--index">
+        <div class="header__account--index <?= (Yii::$app->user->isGuest) ?: 'hide' ?>
+">
             <a href="#" class="header__account-enter open-modal" data-for="enter-form">
                 <span>Вход</span></a>
             или

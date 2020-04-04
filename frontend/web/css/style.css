@@ -2072,11 +2072,11 @@ footer {
   font-family: "PT Sans", sans-serif;
   font-size: 36px;
   font-style: italic;
-  margin-top: 9px;
+  margin: auto;
   color: #ffffff; }
 
 .logo-image--index {
-  margin-top: 17px;
+  margin: 17px;
   padding-left: 18px;
   height: 114px;
   fill: #ffffff; }
@@ -2584,5 +2584,10 @@ IMG.displayed {
 .show {
   display: block;
 }
+
+.hide {
+  visibility: hidden;
+}
+
 /*# sourceMappingURL=style.css.map */
 
