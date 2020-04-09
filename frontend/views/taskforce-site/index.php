@@ -193,7 +193,7 @@ use yii\widgets\ActiveForm; ?>
         ],
     ]); ?>
 
-    <?= $form->field($model, 'email', ['enableAjaxValidation' => 'true'])
+    <?= $form->field($model, 'email')
         ->label('Email')
         ->input('email')
     ?>
