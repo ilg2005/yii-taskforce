@@ -20,7 +20,7 @@ function closeModal(event) {
 
   modal.classList.remove("show");
   overlay.classList.remove("show");
-  window.location.replace("http://yii-taskforce");
+  window.location.href = "/";
 }
 
 for (var j = 0; j < closeModalLinks.length; j++) {
