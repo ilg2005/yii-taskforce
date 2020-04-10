@@ -1,6 +1,7 @@
-var openModalLinks = document.getElementsByClassName("open-modal");
-var closeModalLinks = document.getElementsByClassName("form-modal-close");
-var overlay = document.getElementsByClassName("overlay")[0];
+var openModalLinks = document.querySelectorAll(".open-modal");
+var closeModalLinks = document.querySelectorAll(".form-modal-close");
+var overlay = document.querySelector(".overlay");
+var enterFormElement = document.querySelector("#login");
 
 for (var i = 0; i < openModalLinks.length; i++) {
   var modalLink = openModalLinks[i];
@@ -20,11 +21,27 @@ function closeModal(event) {
 
   modal.classList.remove("show");
   overlay.classList.remove("show");
-  window.location.href = "/";
+
+ /* var inputElements = enterFormElement.querySelectorAll("input");
+  for(var i = 0; i < inputElements.length; i++) {
+    inputElements[i].value = "";
+  }
+
+  var errorFields = document.querySelectorAll('.has-error');
+  for(var i = 0; i < errorFields.length; i++) {
+    errorFields[i].classList.remove("has-error");
+  }*/
+
+  enterFormElement.reset();
+
+  var errorMessages = modal.querySelectorAll(".text-danger");
+  for(var i = 0; i < errorMessages.length; i++) {
+    errorMessages[i].innerText = "";
+  }
 }
 
-for (var j = 0; j < closeModalLinks.length; j++) {
-  var closeModalLink = closeModalLinks[j];
+for (var i = 0; i < closeModalLinks.length; i++) {
+  var closeModalLink = closeModalLinks[i];
 
   closeModalLink.addEventListener("click", closeModal)
 }
