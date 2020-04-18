@@ -110,7 +110,7 @@ BasicAsset::register($this);
             <div class="account__pop-up">
                 <ul class="account__pop-up-list">
                     <li>
-                        <a href="/view">Мои задания</a>
+                        <a href="/mylist">Мои задания</a>
                     </li>
                     <li>
                         <a href="/account">Настройки</a>
