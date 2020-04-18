@@ -70,10 +70,12 @@ class TaskforceSiteController extends Controller
     {
         $exception = Yii::$app->errorHandler->exception;
         if ($exception !== null) {
-            if ($exception->statusCode == 404)
+            if ($exception->statusCode == 404) {
                 return $this->render('error404', ['exception' => $exception]);
-            else
+            }
+            else {
                 return $this->render('error', ['exception' => $exception]);
+            }
         }
     }
 
