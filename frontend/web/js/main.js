@@ -22,7 +22,9 @@ function closeModal(event) {
   modal.classList.remove("show");
   overlay.classList.remove("show");
 
- /* var inputElements = enterFormElement.querySelectorAll("input");
+  window.location.href = "/";
+
+  /*var inputElements = enterFormElement.querySelectorAll("input");
   for(var i = 0; i < inputElements.length; i++) {
     inputElements[i].value = "";
   }
@@ -32,12 +34,12 @@ function closeModal(event) {
     errorFields[i].classList.remove("has-error");
   }*/
 
-  enterFormElement.reset();
+  /*enterFormElement.reset();*/
 
-  var errorMessages = modal.querySelectorAll(".text-danger");
+  /*var errorMessages = modal.querySelectorAll(".text-danger");
   for(var i = 0; i < errorMessages.length; i++) {
     errorMessages[i].innerText = "";
-  }
+  }*/
 }
 
 for (var i = 0; i < closeModalLinks.length; i++) {
