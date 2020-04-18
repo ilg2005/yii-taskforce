@@ -2,6 +2,7 @@
 
 use frontend\assets\BasicAsset;
 use yii\helpers\Html;
+use yii\web\NotFoundHttpException;
 
 BasicAsset::register($this);
 ?>
@@ -61,7 +62,10 @@ BasicAsset::register($this);
                         <a href="/create">Создать задание</a>
                     </li>
                     <li class="site-list__item">
-                        <a href="/profile">Мой профиль</a>
+                        <a <?php if ($user->role) : ?> href="/profile?user_id=<?= $user->id ?>"
+                        <?php else : ?>
+                                href="/error404"
+                        <?php endif; ?>>Мой профиль</a>
                     </li>
                 </ul>
             </div>

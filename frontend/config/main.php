@@ -55,7 +55,7 @@ return [
             ],
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => 'taskforce-site/error',
         ],
 
         'urlManager' => [
@@ -67,7 +67,7 @@ return [
                 'defaultRoute' => 'taskforce-site/index',
 
                 'browse/<page:\d+>' => 'taskforce-site/browse',
-                '<action:(index|account|browse|create|mylist|profile|signup|users|view|image|logout)>' => 'taskforce-site/<action>',
+                '<action:(index|account|browse|create|mylist|profile|signup|users|view|image|logout|error)>' => 'taskforce-site/<action>',
             ],
         ],
 

@@ -42,12 +42,12 @@ class TaskforceSiteController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'signup'],
+                        'actions' => ['index', 'signup', 'error'],
                         'roles' => ['?'],
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index', 'logout', 'account', 'browse', 'create', 'mylist', 'profile', 'users', 'view', 'image'],
+                        'actions' => ['index', 'logout', 'account', 'browse', 'create', 'mylist', 'profile', 'users', 'view', 'image', 'error'],
                         'roles' => ['@'],
                     ],
                     [
@@ -64,6 +64,17 @@ class TaskforceSiteController extends Controller
                 },
             ],
         ];
+    }
+
+    public function actionError()
+    {
+        $exception = Yii::$app->errorHandler->exception;
+        if ($exception !== null) {
+            if ($exception->statusCode == 404)
+                return $this->render('error404', ['exception' => $exception]);
+            else
+                return $this->render('error', ['exception' => $exception]);
+        }
     }
 
     public function actionIndex()
