@@ -13,9 +13,14 @@ use frontend\models\SignupForm;
 use frontend\models\Task;
 
 use frontend\models\User;
+use http\Exception\BadHeaderException;
 use Yii;
+use yii\base\ErrorException;
+use yii\console\UnknownCommandException;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
+use yii\web\HttpException;
+use yii\web\NotAcceptableHttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\data\Pagination;
