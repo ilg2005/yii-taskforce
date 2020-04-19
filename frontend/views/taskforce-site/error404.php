@@ -1,5 +1,5 @@
 <?php
-$this->title = $exception->getName();
+$this->title = 'Not Found (#404)';
 ?>
 <div class="not-found">
     <h1>Ошибка 404!</h1>
