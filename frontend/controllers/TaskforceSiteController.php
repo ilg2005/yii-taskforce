@@ -224,6 +224,7 @@ class TaskforceSiteController extends Controller
      * Displays user' profile page.
      *
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionProfile()
     {
