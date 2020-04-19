@@ -16,6 +16,7 @@ use frontend\models\User;
 use Yii;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
+use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\data\Pagination;
 use yii\web\Controller;
@@ -229,6 +230,10 @@ class TaskforceSiteController extends Controller
         $user = User::find()
             ->where(['users.id' => Yii::$app->request->get('user_id')])
             ->one();
+
+        if (!$user->role) {
+            throw new NotFoundHttpException();
+        }
 
         if (Yii::$app->user->id !== $user->id) {
             $recentViews = ProfileView::find()

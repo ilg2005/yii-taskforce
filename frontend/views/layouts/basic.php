@@ -62,10 +62,7 @@ BasicAsset::register($this);
                         <a href="/create">Создать задание</a>
                     </li>
                     <li class="site-list__item">
-                        <a <?php if ($user->role) : ?> href="/profile?user_id=<?= $user->id ?>"
-                        <?php else : ?>
-                                href="/error404"
-                        <?php endif; ?>>Мой профиль</a>
+                        <a href="/profile?user_id=<?= $user->id ?>">Мой профиль</a>
                     </li>
                 </ul>
             </div>
