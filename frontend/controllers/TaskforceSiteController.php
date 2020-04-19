@@ -231,7 +231,6 @@ class TaskforceSiteController extends Controller
             ->one();
 
         if (!$user->role) {
-            Yii::$app->request->setBodyParams(['user_id' => $user->id]);
             throw new NotFoundHttpException();
         }
 
