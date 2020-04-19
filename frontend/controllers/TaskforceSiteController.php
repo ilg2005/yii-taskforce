@@ -145,7 +145,8 @@ class TaskforceSiteController extends Controller
      */
     public function actionAccount()
     {
-        return $this->render('account');
+        $user = Yii::$app->user->identity;
+        return $this->render('account', ['user' => $user]);
     }
 
     /**

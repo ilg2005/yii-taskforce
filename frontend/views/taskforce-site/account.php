@@ -21,7 +21,7 @@ $this->title = 'TaskForce-Account';
                         <div class="account__redaction">
                             <div class="account__input account__input--name">
                                 <label for="200">Ваше имя</label>
-                                <input class="input textarea" id="200" name="" placeholder="Титов Денис" disabled>
+                                <input class="input textarea" id="200" name="" placeholder="Введите имя и фамилию" value="<?= $user->name ?>" disabled>
                             </div>
                             <div class="account__input account__input--email">
                                 <label for="201">email</label>
