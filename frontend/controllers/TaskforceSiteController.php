@@ -71,10 +71,6 @@ class TaskforceSiteController extends Controller
     {
         $exception = Yii::$app->errorHandler->exception;
         if ($exception !== null) {
-            if ($exception->statusCode === 404) {
-                return $this->render('error404', ['exception' => $exception]);
-            }
-
             return $this->render('error', ['exception' => $exception]);
         }
     }
@@ -231,7 +227,7 @@ class TaskforceSiteController extends Controller
             ->one();
 
         if (!$user->role) {
-            throw new NotFoundHttpException();
+            throw new NotFoundHttpException('Такая страница не существует');
         }
 
         if (Yii::$app->user->id !== $user->id) {

@@ -2589,7 +2589,7 @@ IMG.displayed {
   visibility: hidden;
 }
 
-.not-found {
+.exception {
   margin-top: 10%;
   text-align: center;
 }
