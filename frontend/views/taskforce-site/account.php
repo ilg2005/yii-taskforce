@@ -14,7 +14,7 @@ $this->title = 'TaskForce-Account';
                     <h3 class="div-line">Настройки аккаунта</h3>
                     <div class="account__redaction-section-wrapper">
                         <div class="account__redaction-avatar">
-                            <img src="./img/man-glasses.jpg" width="156" height="156">
+                            <img src="./img/no-image-available.jpg" width="156" height="156">
                             <input type="file" name="avatar" id="upload-avatar">
                             <label for="upload-avatar" class="link-regular">Сменить аватар</label>
                         </div>
@@ -50,18 +50,10 @@ $this->title = 'TaskForce-Account';
                     <h3 class="div-line">Выберите свои специализации</h3>
                     <div class="account__redaction-section-wrapper">
                         <div class="search-task__categories account_checkbox--bottom">
-                            <input class="visually-hidden checkbox__input" id="205" type="checkbox" name="" value="" checked>
-                            <label for="205">Курьерские услуги</label>
-                            <input class="visually-hidden checkbox__input" id="206" type="checkbox" name="" value="" checked>
-                            <label for="206">Грузоперевозки</label>
-                            <input class="visually-hidden checkbox__input" id="207" type="checkbox" name="" value="">
-                            <label for="207">Перевод текстов</label>
-                            <input class="visually-hidden checkbox__input" id="208" type="checkbox" name="" value="" checked>
-                            <label for="208">Ремонт транспорта</label>
-                            <input class="visually-hidden checkbox__input" id="209" type="checkbox" name="" value="">
-                            <label for="209">Удалённая помощь</label>
-                            <input class="visually-hidden checkbox__input" id="210" type="checkbox" name="" value="">
-                            <label for="210">Выезд на стрелку</label>
+                            <?php foreach ($categories as $category): ?>
+                            <input class="visually-hidden checkbox__input" id="<?= $category['id'] ?>" type="checkbox" name="category[]" value="<?= $category['id'] ?>" <?= (Yii::$app->request->get('category') && in_array($category['id'], Yii::$app->request->get('category'))) ? 'checked' : '' ?>>
+                            <label for="<?= $category['id'] ?>"><?= $category['name'] ?></label>
+                            <?php endforeach; ?>
                         </div>
                     </div>
                     <h3 class="div-line">Безопасность</h3>
