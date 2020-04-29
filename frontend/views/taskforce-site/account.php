@@ -113,6 +113,7 @@ $this->title = 'TaskForce-Account';
         </section>
     </div>
 </main>
+<script src="js/image-upload.js"></script>
 <script src="js/dropzone.js"></script>
 <script>
     Dropzone.autoDiscover = false;
