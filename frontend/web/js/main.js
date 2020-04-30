@@ -1,3 +1,5 @@
+'use strict';
+
 var openModalLinks = document.querySelectorAll(".open-modal");
 var closeModalLinks = document.querySelectorAll(".form-modal-close");
 var overlay = document.querySelector(".overlay");
@@ -47,8 +49,9 @@ for (var i = 0; i < closeModalLinks.length; i++) {
 
   closeModalLink.addEventListener("click", closeModal)
 }
-
-document.getElementById('close-modal').addEventListener("click", closeModal);
+if (document.getElementById('close-modal')) {
+  document.getElementById('close-modal').addEventListener("click", closeModal);
+}
 
 var starRating = document.getElementsByClassName("completion-form-star");
 

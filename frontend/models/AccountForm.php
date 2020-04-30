@@ -26,6 +26,13 @@ class AccountForm extends Model
     public function rules()
     {
         return [
+            [['email', 'name', 'about', 'phone', 'skype', 'telegram'], 'trim'],
+            [['email', 'name'], 'required', 'message' => 'Это поле должно быть заполнено!'],
+
+            ['email', 'email'],
+            ['email', 'string', 'max' => 255],
+
+            ['name', 'string', 'min' => 2, 'max' => 255],
         ];
 /*        return [
 

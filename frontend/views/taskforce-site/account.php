@@ -14,7 +14,7 @@ $this->title = 'TaskForce-Account';
             <?php $form = ActiveForm::begin([
                 'id' => 'account',
                 'fieldConfig' => [
-                    'template' => '<p>{label}</p><div>{input}</div><span>{hint}</span><span>{error}</span><br>',
+                    'template' => '<p>{label}</p><div>{input}</div><span>{error}</span>',
 
                     'errorOptions' => [
                         'class' => 'text-danger'
@@ -27,18 +27,34 @@ $this->title = 'TaskForce-Account';
                     <div class="account__redaction-avatar">
                         <img src="./img/no-image-available.jpg" width="156" height="156">
                         <?= $form->field($modelUploadFile, 'avatar')
-                            ->label('Сменить аватар', ['class' => 'link-regular'])
-                            ->fileInput(['hidden' => ''])
+                            ->label('Сменить аватар', ['class' => 'link-regular', 'for' => 'upload-avatar'])
+                            ->fileInput(['hidden' => '', 'name' => 'avatar', 'id' => 'upload-avatar'])
                         ?>
                     </div>
                     <div class="account__redaction">
                         <div class="account__input account__input--name">
-                            <label for="200">Ваше имя</label>
-                            <input class="input textarea" id="200" name="" placeholder="Введите имя и фамилию" value="<?= $user->name ?>" disabled>
+                            <?= $form->field($model, 'name')
+                                ->label('Ваше имя')
+                                ->textInput([
+                                    'placeholder' => 'Введите имя и фамилию',
+                                    'value' => $user->name,
+                                    'class' => 'input textarea',
+                                    'name' => 'name',
+                                    'style' => ['width' => '415px'],
+                                ])
+                            ?>
                         </div>
                         <div class="account__input account__input--email">
-                            <label for="201">email</label>
-                            <input class="input textarea" id="201" name="" placeholder="DenisT@bk.ru">
+                            <?= $form->field($model, 'email', ['enableAjaxValidation' => 'true'])
+                                ->label('email')
+                                ->input('email', [
+                                    'placeholder' => 'example@gmail.com',
+                                    'value' => $user->email,
+                                    'class' => 'input textarea',
+                                    'name' => 'email',
+                                    'style' => ['width' => '350px'],
+                                ])
+                            ?>
                         </div>
                         <div class="account__input account__input--name">
                             <label for="202">Город</label>

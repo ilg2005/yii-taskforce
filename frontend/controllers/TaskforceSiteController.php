@@ -149,8 +149,9 @@ class TaskforceSiteController extends Controller
     {
         $user = Yii::$app->user->identity;
         $categories = Category::find()->all();
+        $model = new AccountForm();
         $modelUploadFile = new UploadFile();
-        return $this->render('account', compact('user', 'categories', 'modelUploadFile'));
+        return $this->render('account', compact('user', 'categories', 'model', 'modelUploadFile'));
     }
 
     /**
