@@ -14,7 +14,7 @@ $this->title = 'TaskForce-Account';
             <?php $form = ActiveForm::begin([
                 'id' => 'account',
                 'fieldConfig' => [
-                    'template' => '<p>{label}</p><div>{input}</div><span>{error}</span>',
+                    'template' => '<p>{label}</p><div>{input}</div><span>{error}</span><br>',
 
                     'errorOptions' => [
                         'class' => 'text-danger'
@@ -38,20 +38,20 @@ $this->title = 'TaskForce-Account';
                                 ->textInput([
                                     'placeholder' => 'Введите имя и фамилию',
                                     'value' => $user->name,
-                                    'class' => 'input textarea',
                                     'name' => 'name',
+                                    'class' => 'input textarea',
                                     'style' => ['width' => '415px'],
                                 ])
                             ?>
                         </div>
                         <div class="account__input account__input--email">
-                            <?= $form->field($model, 'email', ['enableAjaxValidation' => 'true'])
+                            <?= $form->field($model, 'email')
                                 ->label('email')
                                 ->input('email', [
                                     'placeholder' => 'example@gmail.com',
                                     'value' => $user->email,
-                                    'class' => 'input textarea',
                                     'name' => 'email',
+                                    'class' => 'input textarea',
                                     'style' => ['width' => '350px'],
                                 ])
                             ?>
