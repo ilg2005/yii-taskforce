@@ -2,6 +2,7 @@
 
 /* @var $this yii\web\View */
 
+use frontend\models\Location;
 use yii\widgets\ActiveForm;
 
 $this->title = 'TaskForce-Account';
@@ -14,7 +15,7 @@ $this->title = 'TaskForce-Account';
             <?php $form = ActiveForm::begin([
                 'id' => 'account',
                 'fieldConfig' => [
-                    'template' => '<p>{label}</p><div>{input}</div><span>{error}</span><br>',
+                    'template' => '<p>{label}</p><div>{input}</div><span>{error}</span>',
 
                     'errorOptions' => [
                         'class' => 'text-danger'
@@ -40,7 +41,7 @@ $this->title = 'TaskForce-Account';
                                     'value' => $user->name,
                                     'name' => 'name',
                                     'class' => 'input textarea',
-                                    'style' => ['width' => '415px'],
+                                    'style' => ['width' => '410px'],
                                 ])
                             ?>
                         </div>
@@ -57,22 +58,41 @@ $this->title = 'TaskForce-Account';
                             ?>
                         </div>
                         <div class="account__input account__input--name">
-                            <label for="202">Город</label>
-                            <select class="multiple-select input multiple-select-big" size="1" id="202" name="town[]">
-                                <option value="Moscow">Москва</option>
-                                <option selected="" value="SPB">Санкт-Петербург</option>
-                                <option value="Krasnodar">Краснодар</option>
-                                <option value="Irkutsk">Иркутск</option>
-                                <option value="Vladivostok">Владивосток</option>
-                            </select>
+                            <?= $form->field($model, 'town[]')
+                                ->label('Город')
+                                ->dropDownList(Location::find()->select('town')->indexBy('town')->column(), [
+                                    'prompt' => 'Выберите город...',
+                                    'value' => $user->town,
+                                    'name' => 'town[]',
+                                    'class' => 'multiple-select input town-select registration-town',
+                                    'style' => ['width' => '350px'],
+                                ])
+                            ?>
                         </div>
                         <div class="account__input account__input--date">
-                            <label for="203">День рождения</label>
-                            <input id="203" class="input-middle input input-date" type="date" placeholder="15.08.1987">
+                            <?= $form->field($model, 'birthday')
+                                ->label('День рождения')
+                                ->input('date', [
+                                    'placeholder' => 'дд.мм.гггг',
+                                    'value' => $user->profile->birthday,
+                                    'name' => 'birthday',
+                                    'class' => 'input-middle input input-date',
+                                    'style' => ['width' => '250px'],
+                                ])
+                            ?>
                         </div>
                         <div class="account__input account__input--info">
-                            <label for="204">Информация о себе</label>
-                            <textarea class="input textarea" rows="7" id="204" name="" placeholder="Place your text"></textarea>
+                            <?= $form->field($model, 'about')
+                                ->label('Информация о себе')
+                                ->textarea([
+                                    'placeholder' => 'Place your text',
+                                    'value' => $user->profile->about,
+                                    'name' => 'about',
+                                    'class' => 'input textarea',
+                                    'rows' => 7,
+                                    'style' => ['width' => '820px'],
+                                ])
+                            ?>
                         </div>
                     </div>
                 </div>

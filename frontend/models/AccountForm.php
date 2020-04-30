@@ -33,6 +33,7 @@ class AccountForm extends Model
             ['email', 'string', 'max' => 255],
 
             ['name', 'string', 'min' => 2, 'max' => 255],
+
         ];
 /*        return [
 
