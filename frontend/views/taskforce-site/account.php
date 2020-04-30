@@ -15,10 +15,7 @@ $this->title = 'TaskForce-Account';
                 'id' => 'account',
                 'fieldConfig' => [
                     'template' => '<p>{label}</p><div>{input}</div><span>{hint}</span><span>{error}</span><br>',
-                    'inputOptions' => [
-                        'class' => 'input textarea',
-                        'style' => ['width' => '330px'],
-                    ],
+
                     'errorOptions' => [
                         'class' => 'text-danger'
                     ],
@@ -31,7 +28,7 @@ $this->title = 'TaskForce-Account';
                         <img src="./img/no-image-available.jpg" width="156" height="156">
                         <?= $form->field($modelUploadFile, 'avatar')
                             ->label('Сменить аватар', ['class' => 'link-regular'])
-                            ->fileInput()
+                            ->fileInput(['hidden' => ''])
                         ?>
                     </div>
                     <div class="account__redaction">

@@ -1,6 +1,6 @@
 'use strict';
 
-var uploadAvatarElement = document.querySelector('#upload-avatar');
+var uploadAvatarElement = document.querySelector('#uploadfile-avatar');
 var avatarImageElement = document.querySelector('.account__redaction-avatar img');
 
 var uploadAvatarElementChangeHandler = function () {
