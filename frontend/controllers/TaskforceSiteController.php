@@ -5,6 +5,7 @@ namespace frontend\controllers;
 
 use frontend\constants\TaskStatuses;
 use frontend\constants\UserRoles;
+use frontend\models\AccountForm;
 use frontend\models\Category;
 use frontend\models\EnterForm;
 use frontend\models\Feedback;
@@ -12,6 +13,7 @@ use frontend\models\ProfileView;
 use frontend\models\SignupForm;
 use frontend\models\Task;
 
+use frontend\models\UploadFile;
 use frontend\models\User;
 use http\Exception\BadHeaderException;
 use Yii;
@@ -147,7 +149,8 @@ class TaskforceSiteController extends Controller
     {
         $user = Yii::$app->user->identity;
         $categories = Category::find()->all();
-        return $this->render('account', compact('user', 'categories'));
+        $modelUploadFile = new UploadFile();
+        return $this->render('account', compact('user', 'categories', 'modelUploadFile'));
     }
 
     /**

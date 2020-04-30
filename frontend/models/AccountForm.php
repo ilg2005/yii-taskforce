@@ -26,6 +26,8 @@ class AccountForm extends Model
     public function rules()
     {
         return [
+        ];
+/*        return [
 
             [['email', 'name', 'about', 'phone', 'skype', 'telegram'], 'trim'],
 
@@ -46,6 +48,6 @@ class AccountForm extends Model
             ['skype', 'match', 'pattern' => '/\w{3,}', 'message' => 'Skype должен быть строкой из латинских символов и цифр от 3-х знаков'],
 
             ['telegram', 'match', 'pattern' => '/^.+$', 'message' => 'Telegram должен быть любой непустой строкой'],
-        ];
+        ];*/
     }
 }
