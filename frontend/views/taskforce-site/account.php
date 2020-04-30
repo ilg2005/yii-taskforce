@@ -3,6 +3,7 @@
 /* @var $this yii\web\View */
 
 use frontend\models\Location;
+use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 
 $this->title = 'TaskForce-Account';
@@ -100,8 +101,16 @@ $this->title = 'TaskForce-Account';
                 <div class="account__redaction-section-wrapper">
                     <div class="search-task__categories account_checkbox--bottom">
                         <?php foreach ($categories as $category): ?>
-                            <input class="visually-hidden checkbox__input" id="<?= $category['id'] ?>" type="checkbox" name="category[]" value="<?= $category['id'] ?>" <?= (Yii::$app->request->get('category') && in_array($category['id'], Yii::$app->request->get('category'))) ? 'checked' : '' ?>>
-                            <label for="<?= $category['id'] ?>"><?= $category['name'] ?></label>
+                            <?= $form->field($model, 'categories[]', ['template' => '{input}{label}'])
+                                ->checkbox([
+                                        'id' => $category['id'],
+                                        'checked' => Yii::$app->request->get('category'),
+                                        'name' => 'categories[]',
+                                        'value' => $category['id'],
+                                        'label' => $category['name'],
+                                        'class' => 'checkbox__input'
+                                        ])
+                            ?>
                         <?php endforeach; ?>
                     </div>
                 </div>
