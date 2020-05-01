@@ -717,11 +717,6 @@ footer {
   background-repeat: no-repeat;
   background-position: 0 0; }
 
-.checkbox__input {
-  width: 18px;
-  height: 18px;
-}
-
 .checkbox__input:checked + label::after {
   content: "";
   position: absolute;

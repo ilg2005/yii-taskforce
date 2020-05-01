@@ -3,8 +3,7 @@
 /* @var $this yii\web\View */
 
 use frontend\models\Location;
-use yii\helpers\ArrayHelper;
-use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
 use yii\widgets\MaskedInput;
 
 $this->title = 'TaskForce-Account';
@@ -106,12 +105,13 @@ $this->title = 'TaskForce-Account';
                         <?php foreach ($categories as $category): ?>
                             <?= $form->field($model, 'categories[]')
                                 ->checkbox([
+                                        'template' => "\n{input}\n{beginLabel}\n{labelTitle}\n{endLabel}\n",
                                         'id' => $category['id'],
                                         'checked' => Yii::$app->request->get('category'),
                                         'name' => 'categories[]',
                                         'value' => $category['id'],
                                         'label' => $category['name'],
-                                        'class' => 'checkbox__input'
+                                        'class' => 'visually-hidden checkbox__input'
                                         ])
                             ?>
                         <?php endforeach; ?>
