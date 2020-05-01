@@ -16,10 +16,13 @@ $this->title = 'TaskForce-Account';
             <?php $form = ActiveForm::begin([
                 'id' => 'account',
                 'fieldConfig' => [
-                    'template' => '<p>{label}</p><div>{input}</div><span>{error}</span>',
+                    'template' => '{label}{input}{error}',
 
                     'errorOptions' => [
                         'class' => 'text-danger'
+                    ],
+                    'labelOptions' => [
+                        'style' => ['display' => 'block'],
                     ],
                 ],
             ]); ?>
@@ -101,7 +104,7 @@ $this->title = 'TaskForce-Account';
                 <div class="account__redaction-section-wrapper">
                     <div class="search-task__categories account_checkbox--bottom">
                         <?php foreach ($categories as $category): ?>
-                            <?= $form->field($model, 'categories[]', ['template' => '{input}{label}'])
+                            <?= $form->field($model, 'categories[]')
                                 ->checkbox([
                                         'id' => $category['id'],
                                         'checked' => Yii::$app->request->get('category'),
@@ -141,12 +144,7 @@ $this->title = 'TaskForce-Account';
                 <h3 class="div-line">Контакты</h3>
                 <div class="account__redaction-section-wrapper account__redaction">
                     <div class="account__input">
-                        <?= $form->field($model, 'phone', [
-                                'template' => "{label}{input}",
-                                'labelOptions' => [
-                                    'style' => ['display' => 'block'],
-                                ],
-                        ])
+                        <?= $form->field($model, 'phone')
                             ->widget(MaskedInput::class,
                                 [
                                     'mask' => '9 (999) 999 99 99',
@@ -162,12 +160,28 @@ $this->title = 'TaskForce-Account';
                         ?>
                     </div>
                     <div class="account__input">
-                        <label for="214">Skype</label>
-                        <input class="input textarea" type="password" id="214" name="" placeholder="DenisT">
+                        <?= $form->field($model, 'skype')
+                            ->label('Skype')
+                            ->textInput([
+                                'placeholder' => 'skypename',
+                                'value' => $user->profile->skype,
+                                'name' => 'skype',
+                                'class' => 'input textarea',
+                                'style' => ['width' => '280px'],
+                            ])
+                        ?>
                     </div>
                     <div class="account__input">
-                        <label for="215">Telegram</label>
-                        <input class="input textarea" id="215" name="" placeholder="@DenisT">
+                        <?= $form->field($model, 'telegram')
+                            ->label('Telegram')
+                            ->textInput([
+                                'placeholder' => '@Username',
+                                'value' => $user->profile->telegram,
+                                'name' => 'telegram',
+                                'class' => 'input textarea',
+                                'style' => ['width' => '280px'],
+                            ])
+                        ?>
                     </div>
                 </div>
                 <h3 class="div-line">Настройки сайта</h3>
