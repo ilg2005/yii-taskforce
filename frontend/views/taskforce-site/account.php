@@ -8,7 +8,6 @@ use yii\widgets\ActiveForm;
 
 $this->title = 'TaskForce-Account';
 ?>
-
 <main class="page-main">
     <div class="main-container page-container">
         <section class="account__redaction-wrapper">
@@ -117,12 +116,18 @@ $this->title = 'TaskForce-Account';
                 <h3 class="div-line">Безопасность</h3>
                 <div class="account__redaction-section-wrapper account__redaction">
                     <div class="account__input">
-                        <label for="211">Новый пароль</label>
-                        <input class="input textarea" type="password" id="211" name="" value="moiparol">
+                        <?= $form->field($model, 'password')->passwordInput([
+                            'class' => 'input textarea',
+                            'style' => ['width' => '280px'],
+                        ])
+                            ->label('Новый пароль') ?>
                     </div>
                     <div class="account__input">
-                        <label for="212">Повтор пароля</label>
-                        <input class="input textarea" type="password" id="212" name="" value="moiparol">
+                        <?= $form->field($model, 'password_repeat')->passwordInput([
+                            'class' => 'input textarea',
+                            'style' => ['width' => '280px'],
+                        ])
+                            ->label('Повтор пароля') ?>
                     </div>
                 </div>
 
@@ -151,6 +156,8 @@ $this->title = 'TaskForce-Account';
                 <h4>Уведомления</h4>
                 <div class="account__redaction-section-wrapper account_section--bottom">
                     <div class="search-task__categories account_checkbox--bottom">
+
+
                         <input class="visually-hidden checkbox__input" id="216" type="checkbox" name="" value="" checked>
                         <label for="216">Новое сообщение</label>
                         <input class="visually-hidden checkbox__input" id="217" type="checkbox" name="" value="" checked>

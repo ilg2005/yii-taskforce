@@ -4,6 +4,7 @@
 namespace frontend\models;
 
 
+use Yii;
 use yii\base\Model;
 
 class AccountForm extends Model
@@ -23,6 +24,15 @@ class AccountForm extends Model
     public $telegram;
     public $settings;
 
+    public function attributeLabels()
+    {
+        return [
+            'name' => 'Ваше имя',
+            'password' => 'Новый пароль',
+            'password_repeat' => 'Повтор пароля',
+        ];
+    }
+
     public function rules()
     {
         return [
@@ -33,6 +43,10 @@ class AccountForm extends Model
             ['email', 'string', 'max' => 255],
 
             ['name', 'string', 'min' => 2, 'max' => 255],
+
+            ['password', 'string', 'min' => 8, 'tooShort' => 'Пароль должен быть не менее 8 символов'],
+            ['password_repeat', 'compare', 'compareAttribute' => 'password'],
+
 
         ];
 /*        return [
