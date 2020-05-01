@@ -30,6 +30,7 @@ class AccountForm extends Model
             'name' => 'Ваше имя',
             'password' => 'Новый пароль',
             'password_repeat' => 'Повтор пароля',
+            'phone' => 'Телефон',
         ];
     }
 

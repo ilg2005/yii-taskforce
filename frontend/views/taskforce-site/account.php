@@ -5,6 +5,7 @@
 use frontend\models\Location;
 use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
+use yii\widgets\MaskedInput;
 
 $this->title = 'TaskForce-Account';
 ?>
@@ -140,8 +141,25 @@ $this->title = 'TaskForce-Account';
                 <h3 class="div-line">Контакты</h3>
                 <div class="account__redaction-section-wrapper account__redaction">
                     <div class="account__input">
-                        <label for="213">Телефон</label>
-                        <input class="input textarea" type="tel" id="213" name="" placeholder="8 (555) 187 44 87">
+                        <?= $form->field($model, 'phone', [
+                                'template' => "{label}{input}",
+                                'labelOptions' => [
+                                    'style' => ['display' => 'block'],
+                                ],
+                        ])
+                            ->widget(MaskedInput::class,
+                                [
+                                    'mask' => '9 (999) 999 99 99',
+                                    'options' => [
+                                        'class' => 'input textarea',
+                                        'style' => ['width' => '280px'],
+                                        'placeholder' => '8 (555) 187 44 87',
+                                        'name' => 'phone',
+                                    ],
+                                    'value' => Yii::$app->formatter->asPhone($user->profile->phone),
+
+                                ])
+                        ?>
                     </div>
                     <div class="account__input">
                         <label for="214">Skype</label>
