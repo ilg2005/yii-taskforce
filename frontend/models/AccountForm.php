@@ -48,7 +48,7 @@ class AccountForm extends Model
             ['password', 'string', 'min' => 8, 'tooShort' => 'Пароль должен быть не менее 8 символов'],
             ['password_repeat', 'compare', 'compareAttribute' => 'password'],
 
-
+            ['skype', 'match', 'pattern' => '/^[a-z\d]{3,}$/i', 'message' => 'Skype должен быть строкой из латинских символов и цифр от 3-х знаков']
         ];
 /*        return [
 
