@@ -55,6 +55,12 @@ class User extends ActiveRecord implements IdentityInterface
 
     }
 
+    public function getSettings()
+    {
+        return $this->hasMany(Setting::class, ['user_id' => 'id']);
+    }
+
+
 
     /**
      * Generates password hash from password and sets it to the model

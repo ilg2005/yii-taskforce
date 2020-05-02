@@ -22,7 +22,11 @@ class AccountForm extends Model
     public $phone;
     public $skype;
     public $telegram;
-    public $settings;
+    public $new_message;
+    public $actions_on_task;
+    public $new_feedback;
+    public $show_to_customer;
+    public $hide_user_profile;
 
     public function attributeLabels()
     {
@@ -31,6 +35,11 @@ class AccountForm extends Model
             'password' => 'Новый пароль',
             'password_repeat' => 'Повтор пароля',
             'phone' => 'Телефон',
+            'new_message' => 'Новое сообщение',
+            'actions_on_task' => 'Действия по заданию',
+            'new_feedback' => 'Новый отзыв',
+            'show_to_customer' => 'Показывать мои контакты только заказчику',
+            'hide_user_profile' => 'Не показывать мой профиль'
         ];
     }
 

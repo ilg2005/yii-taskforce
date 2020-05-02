@@ -10,6 +10,7 @@ use frontend\models\Category;
 use frontend\models\EnterForm;
 use frontend\models\Feedback;
 use frontend\models\ProfileView;
+use frontend\models\Setting;
 use frontend\models\SignupForm;
 use frontend\models\Task;
 

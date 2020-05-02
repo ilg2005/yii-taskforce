@@ -16,6 +16,7 @@ $this->title = 'TaskForce-Account';
                 'id' => 'account',
                 'fieldConfig' => [
                     'template' => '{label}{input}{error}',
+                    'checkboxTemplate' => "\n{input}\n{beginLabel}\n{labelTitle}\n{endLabel}\n",
 
                     'errorOptions' => [
                         'class' => 'text-danger'
@@ -105,7 +106,6 @@ $this->title = 'TaskForce-Account';
                         <?php foreach ($categories as $category): ?>
                             <?= $form->field($model, 'categories[]')
                                 ->checkbox([
-                                        'template' => "\n{input}\n{beginLabel}\n{labelTitle}\n{endLabel}\n",
                                         'id' => $category['id'],
                                         'checked' => Yii::$app->request->get('category'),
                                         'name' => 'categories[]',
@@ -188,20 +188,45 @@ $this->title = 'TaskForce-Account';
                 <h4>Уведомления</h4>
                 <div class="account__redaction-section-wrapper account_section--bottom">
                     <div class="search-task__categories account_checkbox--bottom">
+                        <?= $form->field($model, 'new_message')
+                            ->checkbox([
+                                'name' => 'new_message',
+                                'value' => $user->settings->new_message,
+                                'class' => 'visually-hidden checkbox__input'
+                            ])
+                        ?>
 
+                        <?= $form->field($model, 'actions_on_task')
+                            ->checkbox([
+                                'name' => 'actions_on_task',
+                                'value' => $user->settings->actions_on_task,
+                                'class' => 'visually-hidden checkbox__input'
+                            ])
+                        ?>
 
-                        <input class="visually-hidden checkbox__input" id="216" type="checkbox" name="" value="" checked>
-                        <label for="216">Новое сообщение</label>
-                        <input class="visually-hidden checkbox__input" id="217" type="checkbox" name="" value="" checked>
-                        <label for="217">Действия по заданию</label>
-                        <input class="visually-hidden checkbox__input" id="218" type="checkbox" name="" value="" checked>
-                        <label for="218">Новый отзыв</label>
+                        <?= $form->field($model, 'new_feedback')
+                            ->checkbox([
+                                'name' => 'new_feedback',
+                                'value' => $user->settings->new_feedback,
+                                'class' => 'visually-hidden checkbox__input'
+                            ])
+                        ?>
                     </div>
                     <div class="search-task__categories account_checkbox account_checkbox--secrecy">
-                        <input class="visually-hidden checkbox__input" id="219" type="checkbox" name="" value="">
-                        <label for="219">Показывать мои контакты только заказчику</label>
-                        <input class="visually-hidden checkbox__input" id="220" type="checkbox" name="" value="" checked>
-                        <label for="220">Не показывать мой профиль</label>
+                        <?= $form->field($model, 'show_to_customer')
+                            ->checkbox([
+                                'name' => 'show_to_customer',
+                                'value' => $user->settings->show_to_customer,
+                                'class' => 'visually-hidden checkbox__input'
+                            ])
+                        ?>
+                        <?= $form->field($model, 'hide_user_profile')
+                            ->checkbox([
+                                'name' => 'hide_user_profile',
+                                'value' => $user->settings->hide_user_profile,
+                                'class' => 'visually-hidden checkbox__input'
+                            ])
+                        ?>
                     </div>
                 </div>
             </div>
