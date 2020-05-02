@@ -2007,7 +2007,8 @@ footer {
   -ms-flex-item-align: start;
       align-self: flex-start;
   width: 310px;
-  margin-right: 20px; }
+  margin-right: 20px;
+}
 
 .account__input--name {
   width: 445px; }

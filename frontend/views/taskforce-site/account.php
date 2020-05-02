@@ -20,6 +20,7 @@ $this->title = 'TaskForce-Account';
                     'checkboxTemplate' => "\n{input}\n{beginLabel}\n{labelTitle}\n{endLabel}\n",
 
                     'errorOptions' => [
+                        'style' => ['display' => 'inline'],
                         'class' => 'text-danger'
                     ],
                     'labelOptions' => [
