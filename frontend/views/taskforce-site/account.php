@@ -4,6 +4,7 @@
 
 use frontend\models\Location;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\Html;
 use yii\widgets\MaskedInput;
 
 $this->title = 'TaskForce-Account';
@@ -230,7 +231,8 @@ $this->title = 'TaskForce-Account';
                     </div>
                 </div>
             </div>
-                <button class="button" type="submit">Сохранить изменения</button>
+
+            <?= Html::submitButton('Сохранить изменения', ['class'=> 'button']) ?>
             <?php ActiveForm::end(); ?>
 
             <form enctype="multipart/form-data" id="account" method="post">
