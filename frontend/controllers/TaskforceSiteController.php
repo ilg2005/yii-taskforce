@@ -155,8 +155,7 @@ class TaskforceSiteController extends Controller
 
         if(Yii::$app->request->post())
         {
-            $model->avatar = UploadedFile::getInstance($model, 'avatar');
-            var_dump(UploadedFile::getInstance($model, 'avatar'));
+            $model->avatar = UploadedFile::getInstanceByName('avatar');
             $model->uploadFile();
         }
 

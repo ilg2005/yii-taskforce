@@ -75,7 +75,7 @@ class AccountForm extends Model
     public function uploadFile()
     {
         if ($this->validate()) {
-            var_dump($this->avatar);
+            $this->avatar->saveAs("uploads/{$this->avatar->baseName}.{$this->avatar->extension}");
         } else {
             return false;
         }
