@@ -28,6 +28,7 @@ use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\data\Pagination;
 use yii\web\Controller;
+use yii\web\UploadedFile;
 use yii\widgets\ActiveForm;
 
 class TaskforceSiteController extends Controller
@@ -151,8 +152,15 @@ class TaskforceSiteController extends Controller
         $user = Yii::$app->user->identity;
         $categories = Category::find()->all();
         $model = new AccountForm();
-        $modelUploadFile = new UploadFile();
-        return $this->render('account', compact('user', 'categories', 'model', 'modelUploadFile'));
+
+        if(Yii::$app->request->post())
+        {
+            $model->avatar = UploadedFile::getInstance($model, 'avatar');
+            var_dump(UploadedFile::getInstance($model, 'avatar'));
+            $model->uploadFile();
+        }
+
+        return $this->render('account', compact('user', 'categories', 'model'));
     }
 
     /**

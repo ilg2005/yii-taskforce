@@ -9,7 +9,7 @@ use yii\base\Model;
 
 class AccountForm extends Model
 {
-    public $avatar_file;
+    public $avatar;
     public $name;
     public $email;
     public $town;
@@ -46,9 +46,11 @@ class AccountForm extends Model
     public function rules()
     {
         return [
-            ['avatar_file', 'image'],
-            [['email', 'name', 'about', 'phone', 'skype', 'telegram' ], 'trim'],
-            [['email', 'name'], 'required', 'message' => 'Это поле должно быть заполнено!'],
+            [['avatar'], 'file', 'extensions' => 'png, jpg', 'skipOnEmpty' => true],
+/*            [['avatar'], 'default', 'value' => './img/no-image-available.jpg'],*/
+
+            [['email', 'name', 'about', 'phone', 'skype', 'telegram'], 'trim'],
+            /*[['email', 'name'], 'required', 'message' => 'Это поле должно быть заполнено!'],*/
 
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
@@ -58,32 +60,24 @@ class AccountForm extends Model
             ['password', 'string', 'min' => 8, 'tooShort' => 'Пароль должен быть не менее 8 символов'],
             ['password_repeat', 'compare', 'compareAttribute' => 'password'],
 
-            ['skype', 'match', 'pattern' => '/^[a-z\d]{3,}$/i', 'message' => 'Skype должен быть строкой из латинских символов и цифр от 3-х знаков'],
+            [
+                'skype',
+                'match',
+                'pattern' => '/^[a-z\d]{3,}$/i',
+                'message' => 'Skype должен быть строкой из латинских символов и цифр от 3-х знаков'
+            ],
 
             ['telegram', 'string'],
 
         ];
-/*        return [
+    }
 
-            [['email', 'name', 'about', 'phone', 'skype', 'telegram'], 'trim'],
-
-            ['email', 'email'],
-            ['email', 'string', 'max' => 255],
-
-            ['name', 'string', 'min' => 2, 'max' => 255],
-
-            ['birthday', 'format' => 'dd.MM.yyyy'],
-
-            ['password', 'string', 'min' => 8, 'tooShort' => 'Пароль должен быть не менее 8 символов'],
-            ['password', 'compare'],
-
-            [['email', 'name'], 'required', 'message' => 'Это поле должно быть заполнено!'],
-
-            ['phone', 'match', 'pattern' => '/(\d\s*){11}', 'message' => 'Телефон должен быть строкой из 11 цифр'],
-
-            ['skype', 'match', 'pattern' => '/\w{3,}', 'message' => 'Skype должен быть строкой из латинских символов и цифр от 3-х знаков'],
-
-            ['telegram', 'match', 'pattern' => '/^.+$', 'message' => 'Telegram должен быть любой непустой строкой'],
-        ];*/
+    public function uploadFile()
+    {
+        if ($this->validate()) {
+            var_dump($this->avatar);
+        } else {
+            return false;
+        }
     }
 }

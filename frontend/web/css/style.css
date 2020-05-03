@@ -650,6 +650,7 @@ footer {
     color: #FF116E; }
 
 .text-danger {
+  display: inline;
   color: #FF116E; }
 
 .input-middle {
@@ -705,6 +706,10 @@ footer {
 
 .registration-town {
   background-position: 325px 20px; }
+
+.accountform-label {
+  display: block;
+}
 
 .checkbox__input + label::before {
   content: "";

@@ -6,6 +6,7 @@ use frontend\models\Location;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 use yii\widgets\MaskedInput;
+use yii\web\UploadedFile;
 
 $this->title = 'TaskForce-Account';
 ?>
@@ -14,26 +15,25 @@ $this->title = 'TaskForce-Account';
         <section class="account__redaction-wrapper">
             <h1>Редактирование настроек профиля</h1>
             <?php $form = ActiveForm::begin([
-                'id' => 'account',
-                'fieldConfig' => [
-                    'template' => '{label}{input}{error}',
-                    'checkboxTemplate' => "\n{input}\n{beginLabel}\n{labelTitle}\n{endLabel}\n",
+                    'id' => 'account',
+                    'fieldConfig' => [
+                        'template' => '{label}{input}{error}',
+                        'checkboxTemplate' => "\n{input}\n{beginLabel}\n{labelTitle}\n{endLabel}\n",
 
-                    'errorOptions' => [
-                        'style' => ['display' => 'inline'],
-                        'class' => 'text-danger'
+                        'errorOptions' => [
+                            'class' => 'text-danger'
+                         ],
+                         'labelOptions' => [
+                                 'class' => 'accountform-label',
+                         ],
                     ],
-                    'labelOptions' => [
-                        'style' => ['display' => 'block'],
-                    ],
-                ],
             ]); ?>
                 <div class="account__redaction-section">
                 <h3 class="div-line">Настройки аккаунта</h3>
                 <div class="account__redaction-section-wrapper">
                     <div class="account__redaction-avatar">
                         <img src="./img/no-image-available.jpg" width="156" height="156">
-                        <?= $form->field($modelUploadFile, 'avatar')
+                        <?= $form->field($model, 'avatar')
                             ->label('Сменить аватар', ['class' => 'link-regular', 'for' => 'upload-avatar'])
                             ->fileInput(['hidden' => '', 'name' => 'avatar', 'id' => 'upload-avatar'])
                         ?>
