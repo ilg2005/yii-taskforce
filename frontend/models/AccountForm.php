@@ -46,6 +46,7 @@ class AccountForm extends Model
     public function rules()
     {
         return [
+            ['avatar_file', 'image'],
             [['email', 'name', 'about', 'phone', 'skype', 'telegram' ], 'trim'],
             [['email', 'name'], 'required', 'message' => 'Это поле должно быть заполнено!'],
 
