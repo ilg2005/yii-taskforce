@@ -34,7 +34,7 @@ $this->title = 'TaskForce-Account';
                     <div class="account__redaction-avatar">
                         <img src="./uploads/<?= $model->avatar ?>" width="156" height="156">
                         <?= $form->field($model, 'avatar')
-                            ->label('Сменить аватар', ['class' => 'link-regular', 'for' => 'upload-avatar'])
+                            ->label('Сменить аватар', ['class' => 'link-regular', 'for' => 'upload-avatar', 'style' => ['display' => 'block']])
                             ->fileInput(['hidden' => '', 'name' => 'avatar', 'id' => 'upload-avatar'])
                         ?>
                     </div>
