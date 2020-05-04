@@ -49,10 +49,12 @@ class AccountForm extends Model
             [['avatar'], 'file', 'extensions' => 'png, jpg', 'skipOnEmpty' => true],
 
             [['email', 'name', 'about', 'phone', 'skype', 'telegram'], 'trim'],
+            [['name'], 'default', 'value' => Yii::$app->user->identity->name],
             [['name'], 'required'],
+
             /*[['email', 'name'], 'required', 'message' => 'Это поле должно быть заполнено!'],*/
 
-            ['email', 'email'],
+/*            ['email', 'email'],
             ['email', 'string', 'max' => 255],
 
             ['name', 'string', 'min' => 2, 'max' => 255],
@@ -67,7 +69,7 @@ class AccountForm extends Model
                 'message' => 'Skype должен быть строкой из латинских символов и цифр от 3-х знаков'
             ],
 
-            ['telegram', 'string'],
+            ['telegram', 'string'],*/
 
         ];
     }

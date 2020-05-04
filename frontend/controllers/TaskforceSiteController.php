@@ -170,8 +170,7 @@ class TaskforceSiteController extends Controller
                 $user->profile->avatar_file = $avatar_file;
             }
             var_dump($model);
-            var_dump($_POST);
-            die;
+            die();
             $user->name = $model->name;
             $user->profile->save();
             $user->save();
