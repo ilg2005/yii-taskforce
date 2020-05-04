@@ -62,8 +62,10 @@ class AccountForm extends Model
             ['birthday', 'date', 'format' => 'Y-m-d'],
             [['birthday'], 'default', 'value' => Yii::$app->user->identity->profile->birthday],
 
-/*
             [['about'], 'default', 'value' => Yii::$app->user->identity->profile->about],
+
+/*
+
 
             ['password', 'string', 'min' => 8, 'tooShort' => 'Пароль должен быть не менее 8 символов'],
             ['password_repeat', 'compare', 'compareAttribute' => 'password'],
