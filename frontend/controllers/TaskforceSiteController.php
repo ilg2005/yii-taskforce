@@ -159,7 +159,6 @@ class TaskforceSiteController extends Controller
             ->one();
         $categories = Category::find()->all();
         $model = new AccountForm();
-        $model->name = $user->name;
 
         if ($model->validate() && $model->load(Yii::$app->request->post()))
         {
