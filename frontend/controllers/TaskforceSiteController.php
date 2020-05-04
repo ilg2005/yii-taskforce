@@ -159,6 +159,7 @@ class TaskforceSiteController extends Controller
             ->one();
         $categories = Category::find()->all();
         $model = new AccountForm();
+        $model->name = $user->name;
 
         if ($model->validate() && $model->load(Yii::$app->request->post()))
         {
@@ -170,7 +171,9 @@ class TaskforceSiteController extends Controller
                 $user->profile->avatar_file = $avatar_file;
             }
             var_dump($model);
-            die();
+            var_dump($_POST);
+            die;
+            $user->name = $model->name;
             $user->profile->save();
             $user->save();
         }

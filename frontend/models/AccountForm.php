@@ -49,6 +49,7 @@ class AccountForm extends Model
             [['avatar'], 'file', 'extensions' => 'png, jpg', 'skipOnEmpty' => true],
 
             [['email', 'name', 'about', 'phone', 'skype', 'telegram'], 'trim'],
+            [['name'], 'required', 'message' => 'Это поле должно быть заполнено!'],
             /*[['email', 'name'], 'required', 'message' => 'Это поле должно быть заполнено!'],*/
 
             ['email', 'email'],

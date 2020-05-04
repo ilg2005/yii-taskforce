@@ -44,7 +44,6 @@ $this->title = 'TaskForce-Account';
                                 ->label('Ваше имя')
                                 ->textInput([
                                     'placeholder' => 'Введите имя и фамилию',
-                                    'value' => $user->name,
                                     'name' => 'name',
                                     'class' => 'input textarea',
                                     'style' => ['width' => '410px'],
