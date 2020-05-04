@@ -60,6 +60,7 @@ class AccountForm extends Model
 
             [['town'], 'string'],
             ['birthday', 'date', 'format' => 'Y-m-d'],
+            [['birthday'], 'default', 'value' => Yii::$app->user->identity->profile->birthday],
 
 /*
             [['about'], 'default', 'value' => Yii::$app->user->identity->profile->about],
