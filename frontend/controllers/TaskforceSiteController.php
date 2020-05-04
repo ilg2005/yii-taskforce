@@ -9,6 +9,7 @@ use frontend\models\AccountForm;
 use frontend\models\Category;
 use frontend\models\EnterForm;
 use frontend\models\Feedback;
+use frontend\models\Profile;
 use frontend\models\ProfileView;
 use frontend\models\Setting;
 use frontend\models\SignupForm;
@@ -128,6 +129,7 @@ class TaskforceSiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
 
             $user = new User();
+
             $user->email = $model->email;
             $user->name = $model->name;
             $user->town = $model->town[0];
@@ -149,7 +151,9 @@ class TaskforceSiteController extends Controller
      */
     public function actionAccount()
     {
-        $user = Yii::$app->user->identity;
+        $user = User::find()
+            ->where(['users.id' => Yii::$app->user->id])
+            ->one();
         $categories = Category::find()->all();
         $model = new AccountForm();
 
@@ -157,6 +161,17 @@ class TaskforceSiteController extends Controller
         {
             $model->avatar = UploadedFile::getInstanceByName('avatar');
             $model->uploadFile();
+
+            $profile = new Profile();
+            if ($model->avatar) {
+                $avatar_file = './uploads/' . $model->avatar->baseName . '.' . $model->avatar->extension;
+                $profile->avatar_file = $avatar_file;
+
+            }
+            $profile->save();
+            $user->profile_id = $profile->id;
+            $user->save();
+
         }
 
         return $this->render('account', compact('user', 'categories', 'model'));

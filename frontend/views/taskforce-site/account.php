@@ -178,7 +178,7 @@ $this->title = 'TaskForce-Account';
                             ->label('Telegram')
                             ->textInput([
                                 'placeholder' => '@Username',
-                                'value' => $user->profile->telegram,
+                                'value' => $user->profile->messenger,
                                 'name' => 'telegram',
                                 'class' => 'input textarea',
                                 'style' => ['width' => '280px'],

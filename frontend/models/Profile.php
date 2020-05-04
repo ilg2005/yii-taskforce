@@ -14,7 +14,9 @@ class Profile extends ActiveRecord
     public function rules()
     {
         return [
-            [['avatar_file', 'address', 'birthday', 'about', 'phone', 'skype'], 'safe'],
+            [['avatar_file', 'address', 'birthday', 'about', 'phone', 'skype', 'messenger'], 'safe'],
+            [['avatar_file'], 'string'],
+            [['avatar_file'], 'default', 'value' => './img/no-image-available.jpg'],
         ];
     }
 
