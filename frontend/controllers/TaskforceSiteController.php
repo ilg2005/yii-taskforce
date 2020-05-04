@@ -170,6 +170,10 @@ class TaskforceSiteController extends Controller
                 $user->profile->avatar_file = $avatar_file;
             }
             $user->name = $model->name;
+            $user->email = $model->email;
+/*            $user->town = $model->town;
+            $user->profile->birthday = $model->birthday;
+            $user->profile->about = $model->about;*/
             $user->profile->save();
             $user->save();
             $this->refresh();

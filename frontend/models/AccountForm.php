@@ -49,15 +49,22 @@ class AccountForm extends Model
             [['avatar'], 'file', 'extensions' => 'png, jpg', 'skipOnEmpty' => true],
 
             [['email', 'name', 'about', 'phone', 'skype', 'telegram'], 'trim'],
+
             [['name'], 'default', 'value' => Yii::$app->user->identity->name],
-            [['name'], 'required'],
-
-            /*[['email', 'name'], 'required', 'message' => 'Это поле должно быть заполнено!'],*/
-
-/*            ['email', 'email'],
+            ['name', 'string', 'min' => 2, 'max' => 255],
+            [['email'], 'default', 'value' => Yii::$app->user->identity->email],
+            ['email', 'email'],
             ['email', 'string', 'max' => 255],
 
-            ['name', 'string', 'min' => 2, 'max' => 255],
+            [['name', 'email'], 'required', 'message' => 'Это поле должно быть заполнено!'],
+
+/*            [['town'], 'string'],
+            [['town'], 'default', 'value' => Yii::$app->user->identity->town],
+
+            ['birthday', 'date', 'format' => 'd.m.Y'],
+            [['birthday'], 'default', 'value' => Yii::$app->user->identity->profile->birthday],
+
+            [['about'], 'default', 'value' => Yii::$app->user->identity->profile->about],
 
             ['password', 'string', 'min' => 8, 'tooShort' => 'Пароль должен быть не менее 8 символов'],
             ['password_repeat', 'compare', 'compareAttribute' => 'password'],

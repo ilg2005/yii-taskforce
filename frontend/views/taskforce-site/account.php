@@ -35,7 +35,7 @@ $this->title = 'TaskForce-Account';
                         <img src="<?= $user->profile->avatar_file ?>" width="156" height="156">
                         <?= $form->field($model, 'avatar')
                             ->label('Сменить аватар', ['class' => 'link-regular', 'for' => 'upload-avatar', 'style' => ['display' => 'block']])
-                            ->fileInput(['hidden' => '', 'name' => 'avatar', 'id' => 'upload-avatar'])
+                            ->fileInput(['hidden' => '', 'id' => 'upload-avatar'])
                         ?>
                     </div>
                     <div class="account__redaction">
@@ -54,8 +54,6 @@ $this->title = 'TaskForce-Account';
                                 ->label('email')
                                 ->input('email', [
                                     'placeholder' => 'example@gmail.com',
-                                    'value' => $user->email,
-                                    'name' => 'email',
                                     'class' => 'input textarea',
                                     'style' => ['width' => '350px'],
                                 ])
@@ -66,8 +64,6 @@ $this->title = 'TaskForce-Account';
                                 ->label('Город')
                                 ->dropDownList(Location::find()->select('town')->indexBy('town')->column(), [
                                     'prompt' => 'Выберите город...',
-                                    'value' => $user->town,
-                                    'name' => 'town[]',
                                     'class' => 'multiple-select input town-select registration-town',
                                     'style' => ['width' => '350px'],
                                 ])
