@@ -160,19 +160,19 @@ class TaskforceSiteController extends Controller
         $categories = Category::find()->all();
         $model = new AccountForm();
 
-        if(Yii::$app->request->post())
+        if ($model->validate() && $model->load(Yii::$app->request->post()))
         {
             $model->avatar = UploadedFile::getInstanceByName('avatar');
-            $model->uploadFile();
 
             if ($model->avatar) {
+                $model->uploadFile();
                 $avatar_file = './uploads/' . $model->avatar->baseName . '.' . $model->avatar->extension;
                 $user->profile->avatar_file = $avatar_file;
-
             }
+            var_dump($model);
+            die();
             $user->profile->save();
             $user->save();
-
         }
 
         return $this->render('account', compact('user', 'categories', 'model'));
