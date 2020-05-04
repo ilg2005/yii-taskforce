@@ -129,7 +129,10 @@ class TaskforceSiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
 
             $user = new User();
+            $profile = new Profile();
+            $profile->save();
 
+            $user->profile_id = $profile->id;
             $user->email = $model->email;
             $user->name = $model->name;
             $user->town = $model->town[0];
@@ -162,14 +165,12 @@ class TaskforceSiteController extends Controller
             $model->avatar = UploadedFile::getInstanceByName('avatar');
             $model->uploadFile();
 
-            $profile = new Profile();
             if ($model->avatar) {
                 $avatar_file = './uploads/' . $model->avatar->baseName . '.' . $model->avatar->extension;
-                $profile->avatar_file = $avatar_file;
+                $user->profile->avatar_file = $avatar_file;
 
             }
-            $profile->save();
-            $user->profile_id = $profile->id;
+            $user->profile->save();
             $user->save();
 
         }
