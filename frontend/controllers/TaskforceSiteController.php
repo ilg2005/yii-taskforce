@@ -171,9 +171,9 @@ class TaskforceSiteController extends Controller
             }
             $user->name = $model->name;
             $user->email = $model->email;
-/*            $user->town = $model->town;
+            $user->town = $model->town[0];
             $user->profile->birthday = $model->birthday;
-            $user->profile->about = $model->about;*/
+            $user->profile->about = $model->about;
             $user->profile->save();
             $user->save();
             $this->refresh();

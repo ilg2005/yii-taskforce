@@ -58,12 +58,10 @@ class AccountForm extends Model
 
             [['name', 'email'], 'required', 'message' => 'Это поле должно быть заполнено!'],
 
-/*            [['town'], 'string'],
-            [['town'], 'default', 'value' => Yii::$app->user->identity->town],
+            [['town'], 'string'],
+            ['birthday', 'date', 'format' => 'Y-m-d'],
 
-            ['birthday', 'date', 'format' => 'd.m.Y'],
-            [['birthday'], 'default', 'value' => Yii::$app->user->identity->profile->birthday],
-
+/*
             [['about'], 'default', 'value' => Yii::$app->user->identity->profile->about],
 
             ['password', 'string', 'min' => 8, 'tooShort' => 'Пароль должен быть не менее 8 символов'],

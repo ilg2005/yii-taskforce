@@ -65,6 +65,7 @@ $this->title = 'TaskForce-Account';
                                 ->dropDownList(Location::find()->select('town')->indexBy('town')->column(), [
                                     'prompt' => 'Выберите город...',
                                     'class' => 'multiple-select input town-select registration-town',
+                                    'value' => $user->town,
                                     'style' => ['width' => '350px'],
                                 ])
                             ?>
@@ -74,8 +75,6 @@ $this->title = 'TaskForce-Account';
                                 ->label('День рождения')
                                 ->input('date', [
                                     'placeholder' => 'дд.мм.гггг',
-                                    'value' => $user->profile->birthday,
-                                    'name' => 'birthday',
                                     'class' => 'input-middle input input-date',
                                     'style' => ['width' => '250px'],
                                 ])
@@ -86,8 +85,6 @@ $this->title = 'TaskForce-Account';
                                 ->label('Информация о себе')
                                 ->textarea([
                                     'placeholder' => 'Place your text',
-                                    'value' => $user->profile->about,
-                                    'name' => 'about',
                                     'class' => 'input textarea',
                                     'rows' => 7,
                                     'style' => ['width' => '820px'],
