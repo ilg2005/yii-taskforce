@@ -169,11 +169,10 @@ class TaskforceSiteController extends Controller
                 $avatar_file = './uploads/' . $model->avatar->baseName . '.' . $model->avatar->extension;
                 $user->profile->avatar_file = $avatar_file;
             }
-            var_dump($model);
-            die();
             $user->name = $model->name;
             $user->profile->save();
             $user->save();
+            $this->refresh();
         }
 
         return $this->render('account', compact('user', 'categories', 'model'));
