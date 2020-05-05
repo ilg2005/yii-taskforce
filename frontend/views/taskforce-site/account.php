@@ -100,9 +100,6 @@ $this->title = 'TaskForce-Account';
                             <?= $form->field($model, 'categories[]')
                                 ->checkbox([
                                         'id' => $category['id'],
-                                        'checked' => Yii::$app->request->get('category'),
-                                        'name' => 'categories[]',
-                                        'value' => $category['id'],
                                         'label' => $category['name'],
                                         'class' => 'visually-hidden checkbox__input'
                                         ])
