@@ -46,36 +46,43 @@ class AccountForm extends Model
     public function rules()
     {
         return [
-            [['avatar'], 'file', 'extensions' => 'png, jpg', 'skipOnEmpty' => true],
+            ['avatar', 'file', 'extensions' => 'png, jpg', 'skipOnEmpty' => true],
 
             [['email', 'name', 'about', 'phone', 'skype', 'telegram'], 'trim'],
 
-            [['name'], 'default', 'value' => Yii::$app->user->identity->name],
+            ['name', 'default', 'value' => Yii::$app->user->identity->name],
             ['name', 'string', 'min' => 2, 'max' => 255],
-            [['email'], 'default', 'value' => Yii::$app->user->identity->email],
+            ['email', 'default', 'value' => Yii::$app->user->identity->email],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
 
             [['name', 'email'], 'required', 'message' => 'Это поле должно быть заполнено!'],
 
-            [['town'], 'string'],
+            ['town', 'string'],
             ['birthday', 'date', 'format' => 'Y-m-d'],
-            [['birthday'], 'default', 'value' => Yii::$app->user->identity->profile->birthday],
+            ['birthday', 'default', 'value' => Yii::$app->user->identity->profile->birthday],
 
-            [['about'], 'default', 'value' => Yii::$app->user->identity->profile->about],
+            ['about', 'default', 'value' => Yii::$app->user->identity->profile->about],
+
+            ['password', 'string', 'min' => 8, 'tooShort' => 'Пароль должен быть не менее 8 символов'],
+            ['password_repeat', 'compare', 'compareAttribute' => 'password'],
+
+            ['phone', 'default', 'value' => Yii::$app->user->identity->profile->phone],
+
+            [
+                'skype',
+                'match',
+                'pattern' => '/^[a-z\d]{3,}$/i',
+                'message' => 'Skype должен быть строкой из латинских символов и цифр от 3-х знаков'
+            ],
+            ['skype', 'default', 'value' => Yii::$app->user->identity->profile->skype],
 
             /*
 
 
-                        ['password', 'string', 'min' => 8, 'tooShort' => 'Пароль должен быть не менее 8 символов'],
-                        ['password_repeat', 'compare', 'compareAttribute' => 'password'],
 
-                        [
-                            'skype',
-                            'match',
-                            'pattern' => '/^[a-z\d]{3,}$/i',
-                            'message' => 'Skype должен быть строкой из латинских символов и цифр от 3-х знаков'
-                        ],
+
+
 
                         ['telegram', 'string'],*/
 

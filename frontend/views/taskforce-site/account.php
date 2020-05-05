@@ -116,6 +116,7 @@ $this->title = 'TaskForce-Account';
                         <?= $form->field($model, 'password')->passwordInput([
                             'class' => 'input textarea',
                             'style' => ['width' => '280px'],
+                            'placeholder' => '********',
                         ])
                             ->label('Новый пароль') ?>
                     </div>
@@ -123,6 +124,7 @@ $this->title = 'TaskForce-Account';
                         <?= $form->field($model, 'password_repeat')->passwordInput([
                             'class' => 'input textarea',
                             'style' => ['width' => '280px'],
+                            'placeholder' => '********',
                         ])
                             ->label('Повтор пароля') ?>
                     </div>
@@ -144,8 +146,7 @@ $this->title = 'TaskForce-Account';
                                     'options' => [
                                         'class' => 'input textarea',
                                         'style' => ['width' => '280px'],
-                                        'placeholder' => '8 (555) 187 44 87',
-                                        'name' => 'phone',
+                                        'placeholder' => '8 (999) 999 99 99',
                                     ],
                                     'value' => Yii::$app->formatter->asPhone($user->profile->phone),
 
@@ -157,8 +158,6 @@ $this->title = 'TaskForce-Account';
                             ->label('Skype')
                             ->textInput([
                                 'placeholder' => 'skypename',
-                                'value' => $user->profile->skype,
-                                'name' => 'skype',
                                 'class' => 'input textarea',
                                 'style' => ['width' => '280px'],
                             ])
