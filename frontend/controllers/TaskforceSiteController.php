@@ -176,6 +176,7 @@ class TaskforceSiteController extends Controller
             $user->profile->about = strip_tags($model->about);
             $user->profile->phone = preg_replace('/\D/', '', $model->phone);
             $user->profile->skype = $model->skype;
+            $user->profile->messenger = htmlspecialchars($model->telegram);
 
             $user->profile->save();
             $user->save();

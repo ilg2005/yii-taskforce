@@ -77,15 +77,8 @@ class AccountForm extends Model
             ],
             ['skype', 'default', 'value' => Yii::$app->user->identity->profile->skype],
 
-            /*
-
-
-
-
-
-
-                        ['telegram', 'string'],*/
-
+            ['telegram', 'string'],
+            ['telegram', 'default', 'value' => htmlspecialchars_decode(Yii::$app->user->identity->profile->messenger)],
         ];
     }
 
