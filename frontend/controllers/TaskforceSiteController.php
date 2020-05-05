@@ -174,6 +174,11 @@ class TaskforceSiteController extends Controller
             $user->town = $model->town[0];
             $user->profile->birthday = $model->birthday;
             $user->profile->about = strip_tags($model->about);
+
+            if ($model->password && $model->password_repeat) {
+                $user->password = Yii::$app->security->generatePasswordHash($model->password);
+            }
+
             $user->profile->phone = preg_replace('/\D/', '', $model->phone);
             $user->profile->skype = $model->skype;
             $user->profile->messenger = htmlspecialchars($model->telegram);
