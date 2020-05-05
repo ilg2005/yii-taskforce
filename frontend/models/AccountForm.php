@@ -79,7 +79,17 @@ class AccountForm extends Model
 
             ['telegram', 'string'],
             ['telegram', 'default', 'value' => htmlspecialchars_decode(Yii::$app->user->identity->profile->messenger)],
+
+/*            [['new_message', 'actions_on_task', 'new_feedback', 'show_to_customer', 'hide_user_profile'], 'number'],*/
+            ['new_message', 'default', 'value' => Yii::$app->user->identity->settings->new_message],
+            ['actions_on_task', 'default', 'value' => Yii::$app->user->identity->settings->actions_on_task],
+            ['new_feedback', 'default', 'value' => Yii::$app->user->identity->settings->new_feedback],
+            ['show_to_customer', 'default', 'value' => Yii::$app->user->identity->settings->show_to_customer],
+            ['hide_user_profile', 'default', 'value' => Yii::$app->user->identity->settings->hide_user_profile],
+
+
         ];
+
     }
 
     public function uploadFile()

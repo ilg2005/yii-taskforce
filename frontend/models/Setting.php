@@ -7,6 +7,12 @@ use yii\db\ActiveRecord;
 
 class Setting extends ActiveRecord
 {
+public function rules()
+{
+    return [
+        [['new_message', 'actions_on_task', 'new_feedback', 'show_to_customer', 'hide_user_profile'], 'safe'],
+    ];
+}
 
     public function getUsers()
     {

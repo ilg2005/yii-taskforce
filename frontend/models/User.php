@@ -57,7 +57,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function getSettings()
     {
-        return $this->hasMany(Setting::class, ['user_id' => 'id']);
+        return $this->hasOne(Setting::class, ['user_id' => 'id']);
     }
 
 

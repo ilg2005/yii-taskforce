@@ -180,24 +180,18 @@ $this->title = 'TaskForce-Account';
                     <div class="search-task__categories account_checkbox--bottom">
                         <?= $form->field($model, 'new_message')
                             ->checkbox([
-                                'name' => 'new_message',
-                                'value' => $user->settings->new_message,
                                 'class' => 'visually-hidden checkbox__input'
                             ])
                         ?>
 
                         <?= $form->field($model, 'actions_on_task')
                             ->checkbox([
-                                'name' => 'actions_on_task',
-                                'value' => $user->settings->actions_on_task,
                                 'class' => 'visually-hidden checkbox__input'
                             ])
                         ?>
 
                         <?= $form->field($model, 'new_feedback')
                             ->checkbox([
-                                'name' => 'new_feedback',
-                                'value' => $user->settings->new_feedback,
                                 'class' => 'visually-hidden checkbox__input'
                             ])
                         ?>
@@ -205,15 +199,11 @@ $this->title = 'TaskForce-Account';
                     <div class="search-task__categories account_checkbox account_checkbox--secrecy">
                         <?= $form->field($model, 'show_to_customer')
                             ->checkbox([
-                                'name' => 'show_to_customer',
-                                'value' => $user->settings->show_to_customer,
                                 'class' => 'visually-hidden checkbox__input'
                             ])
                         ?>
                         <?= $form->field($model, 'hide_user_profile')
                             ->checkbox([
-                                'name' => 'hide_user_profile',
-                                'value' => $user->settings->hide_user_profile,
                                 'class' => 'visually-hidden checkbox__input'
                             ])
                         ?>

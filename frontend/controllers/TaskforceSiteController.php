@@ -131,6 +131,9 @@ class TaskforceSiteController extends Controller
             $user = new User();
             $profile = new Profile();
             $profile->save();
+            $settings = new Setting();
+            $settings->user_id = $user->id;
+            $settings->save();
 
             $user->profile_id = $profile->id;
             $user->email = $model->email;
@@ -172,7 +175,11 @@ class TaskforceSiteController extends Controller
             $user->name = $model->name;
             $user->email = $model->email;
             $user->town = $model->town[0];
-            $user->profile->birthday = $model->birthday;
+
+            if ($model->birthday) {
+                $user->profile->birthday = $model->birthday;
+            }
+
             $user->profile->about = strip_tags($model->about);
 
             if ($model->password && $model->password_repeat) {
@@ -183,6 +190,14 @@ class TaskforceSiteController extends Controller
             $user->profile->skype = $model->skype;
             $user->profile->messenger = htmlspecialchars($model->telegram);
 
+            $user->settings->new_message = $model->new_message;
+            $user->settings->actions_on_task = $model->actions_on_task;
+            $user->settings->new_feedback = $model->new_feedback;
+            $user->settings->show_to_customer = $model->show_to_customer;
+            $user->settings->hide_user_profile = $model->hide_user_profile;
+
+
+            $user->settings->save();
             $user->profile->save();
             $user->save();
             $this->refresh();
