@@ -14,7 +14,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['name', 'town', 'email', 'password', 'registration_date', 'profile_id', 'role', 'latest_activity_time', 'is_favorite', 'rating'], 'safe'],
+            [['name', 'town', 'email', 'password', 'registration_date', 'profile_id', 'role', 'latest_activity_time', 'is_favorite', 'rating', 'settings_id'], 'safe'],
             ['email', 'email'],
             ['email', 'unique'],
         ];
@@ -57,7 +57,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function getSettings()
     {
-        return $this->hasOne(Setting::class, ['user_id' => 'id']);
+        return $this->hasOne(Setting::class, ['id' => 'settings_id']);
     }
 
 

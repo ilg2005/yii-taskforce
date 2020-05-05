@@ -16,7 +16,7 @@ public function rules()
 
     public function getUsers()
     {
-        return $this->hasMany(User::class, ['id' => 'user_id']);
+        return $this->hasMany(User::class, ['settings_id' => 'id']);
     }
 
     public static function tableName()
