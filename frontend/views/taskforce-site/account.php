@@ -96,15 +96,19 @@ $this->title = 'TaskForce-Account';
                 <h3 class="div-line">Выберите свои специализации</h3>
                 <div class="account__redaction-section-wrapper">
                     <div class="search-task__categories account_checkbox--bottom">
-                        <?php foreach ($categories as $category): ?>
-                            <?= $form->field($model, 'categories[]')
+                        <?= Html::activeCheckboxList($model, 'categories', $categories, $options = ['class' => 'search-task__categories account_checkbox--bottom'])
+/*                        Html::checkboxList('categories', [1, 2, 3], $categories) */
+                        ?>
+
+                        <?php /*foreach ($categories as $category): */?><!--
+                            <?/*= $form->field($model, 'categories[]')
                                 ->checkbox([
                                         'id' => $category['id'],
                                         'label' => $category['name'],
                                         'class' => 'visually-hidden checkbox__input'
                                         ])
-                            ?>
-                        <?php endforeach; ?>
+                            */?>
+                        --><?php /*endforeach; */?>
                     </div>
                 </div>
                 <h3 class="div-line">Безопасность</h3>

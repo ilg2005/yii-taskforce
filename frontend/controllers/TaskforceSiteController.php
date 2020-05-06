@@ -160,7 +160,12 @@ class TaskforceSiteController extends Controller
         $user = User::find()
             ->where(['users.id' => Yii::$app->user->id])
             ->one();
-        $categories = Category::find()->all();
+/*        $categories = Category::find()->all();*/
+        $categories = [];
+        foreach (Category::find()->all() as $category) {
+            $categories[$category['id']] = $category['name'];
+        }
+
         $model = new AccountForm();
 
         if ($model->validate() && $model->load(Yii::$app->request->post()))
