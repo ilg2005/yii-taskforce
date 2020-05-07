@@ -160,11 +160,11 @@ class TaskforceSiteController extends Controller
         $user = User::find()
             ->where(['users.id' => Yii::$app->user->id])
             ->one();
-/*        $categories = Category::find()->all();*/
-        $categories = [];
+        $categories = Category::find()->all();
+        /*$categories = [];
         foreach (Category::find()->all() as $category) {
             $categories[$category['id']] = $category['name'];
-        }
+        }*/
 
         $model = new AccountForm();
 
@@ -205,6 +205,8 @@ class TaskforceSiteController extends Controller
             $user->settings->save();
             $user->profile->save();
             $user->save();
+            var_dump($model);
+            die();
             $this->refresh();
         }
 

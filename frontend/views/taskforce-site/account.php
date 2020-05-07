@@ -96,9 +96,31 @@ $this->title = 'TaskForce-Account';
                 <h3 class="div-line">Выберите свои специализации</h3>
                 <div class="account__redaction-section-wrapper">
                     <div class="search-task__categories account_checkbox--bottom">
-                        <?= Html::activeCheckboxList($model, 'categories', $categories, $options = ['class' => 'search-task__categories account_checkbox--bottom'])
-/*                        Html::checkboxList('categories', [1, 2, 3], $categories) */
-                        ?>
+                        <?= $form->field($model,
+                        'categories[]',
+                        ['options' => ['class' => 'search-task__categories account_checkbox--bottom']]
+                        )->checkboxList(
+                        $categories,
+                        ['item' =>  function ($index, $category, $name) use ($user) {
+                        return Html::checkbox(
+                        $name,
+                        in_array($category->id, $user->getCategories()->select('id')->column()), [
+                        'value' => $category->id,
+                        'id' => 'accountForm-categories_' . $index,
+                        'class' => 'visually-hidden checkbox__input',
+                        ]) .
+                        Html::label($category->name, 'accountForm-categories_' . $index);
+                        }]
+                        )->label(false) ?>
+<!--                        --><?/*= $form->field($model, 'categories')
+                                ->checkboxList($categories, [
+                                    'class' => 'search-task__categories account_checkbox--bottom'])->label(false)
+                                */?>
+
+<?/*= Html::activeCheckboxList($model, 'categories', $categories, $options = ['class' => 'search-task__categories account_checkbox--bottom'])
+                        */?>
+<!--                  <?/*= Html::checkboxList('categories', [1, 2, 3], $categories) */?>
+-->
 
                         <?php /*foreach ($categories as $category): */?><!--
                             <?/*= $form->field($model, 'categories[]')
