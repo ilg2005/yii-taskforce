@@ -201,14 +201,15 @@ class TaskforceSiteController extends Controller
 
 
             $selectedCategories = Category::find()->where(['in', 'id',  $model->categories])->all();
-            foreach ($allCategories as $category) {
-                $user->unlink('categories', $category, $delete = true );
-            }
-
-            if ($selectedCategories) {
-                foreach ($selectedCategories as $category) {
-                    $user->link('categories', $category);
+            if ($user->categories) {
+                foreach ($allCategories as $category) {
+                    $user->unlink('categories', $category, $delete = true);
                 }
+            }
+            if ($selectedCategories) {
+                    foreach ($selectedCategories as $category) {
+                        $user->link('categories', $category);
+                    }
             }
 
             $user->role = $selectedCategories ? UserRoles::WORKER : UserRoles::CUSTOMER;
