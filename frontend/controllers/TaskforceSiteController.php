@@ -21,6 +21,7 @@ use http\Exception\BadHeaderException;
 use Yii;
 use yii\base\ErrorException;
 use yii\console\UnknownCommandException;
+use yii\db\Query;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
 use yii\web\HttpException;
@@ -199,13 +200,23 @@ class TaskforceSiteController extends Controller
             $user->settings->hide_user_profile = $model->hide_user_profile;
             $user->settings->save();
 
-
-            $selectedCategories = Category::find()->where(['in', 'id',  $model->categories])->all();
             if ($user->categories) {
-                foreach ($allCategories as $category) {
+                (new Query())
+                    ->createCommand()
+                    ->delete(
+                        'users_categories',
+                        ['and', ['user_id' => $user->id], ['not in', 'category_id', $model->categories]]
+                    )
+                    ->execute();
+            }
+
+            /*if ($user->categories) {
+                foreach ($user->categories as $category) {
                     $user->unlink('categories', $category, $delete = true);
                 }
-            }
+            }*/
+
+            $selectedCategories = Category::find()->where(['in', 'id',  $model->categories])->all();
             if ($selectedCategories) {
                     foreach ($selectedCategories as $category) {
                         $user->link('categories', $category);
