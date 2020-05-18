@@ -86,7 +86,7 @@ class AccountForm extends Model
             ['new_feedback', 'default', 'value' => Yii::$app->user->identity->settings->new_feedback],
             ['show_to_customer', 'default', 'value' => Yii::$app->user->identity->settings->show_to_customer],
             ['hide_user_profile', 'default', 'value' => Yii::$app->user->identity->settings->hide_user_profile],
-
+            ['categories', 'each', 'rule' => ['integer']],
 
         ];
 

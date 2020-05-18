@@ -160,11 +160,7 @@ class TaskforceSiteController extends Controller
         $user = User::find()
             ->where(['users.id' => Yii::$app->user->id])
             ->one();
-        $categories = Category::find()->all();
-        /*$categories = [];
-        foreach (Category::find()->all() as $category) {
-            $categories[$category['id']] = $category['name'];
-        }*/
+        $allCategories = Category::find()->all();
 
         $model = new AccountForm();
 
@@ -194,23 +190,37 @@ class TaskforceSiteController extends Controller
             $user->profile->phone = preg_replace('/\D/', '', $model->phone);
             $user->profile->skype = $model->skype;
             $user->profile->messenger = htmlspecialchars($model->telegram);
+            $user->profile->save();
 
             $user->settings->new_message = $model->new_message;
             $user->settings->actions_on_task = $model->actions_on_task;
             $user->settings->new_feedback = $model->new_feedback;
             $user->settings->show_to_customer = $model->show_to_customer;
             $user->settings->hide_user_profile = $model->hide_user_profile;
-
-
             $user->settings->save();
-            $user->profile->save();
+
+
+            $selectedCategories = Category::find()->where(['in', 'id',  $model->categories])->all();
+            foreach ($allCategories as $category) {
+                $user->unlink('categories', $category, $delete = true );
+            }
+
+            if ($selectedCategories) {
+                foreach ($selectedCategories as $category) {
+                    $user->link('categories', $category);
+                }
+            }
+
+            $user->role = $selectedCategories ? UserRoles::WORKER : UserRoles::CUSTOMER;
+
             $user->save();
-            var_dump($model);
-            die();
+
+            /*var_dump($model);
+            die();*/
             $this->refresh();
         }
 
-        return $this->render('account', compact('user', 'categories', 'model'));
+        return $this->render('account', compact('user', 'allCategories', 'model'));
     }
 
     /**
