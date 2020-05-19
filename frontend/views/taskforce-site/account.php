@@ -229,6 +229,9 @@ $this->title = 'TaskForce-Account';
         uploadMultiple: true,
         parallelUploads: 6,
         maxFiles: 6,
+        maxfilesexceeded: function(file) {
+            dropzone.removeFile(file);
+        },
         autoProcessQueue: false,
         acceptedFiles: 'image/*',
         previewTemplate: '<div class="dz-preview dz-file-preview file-close">' +
