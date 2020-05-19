@@ -136,7 +136,7 @@ $this->title = 'TaskForce-Account';
                 <h3 class="div-line">Фото работ</h3>
 
                 <div class="account__redaction-section-wrapper account__redaction">
-                    <span class="dropzone link-regular">Выбрать фотографии</span>
+                    <span class="dropzone link-regular"></span>
                 </div>
 
                 <h3 class="div-line">Контакты</h3>
@@ -226,15 +226,19 @@ $this->title = 'TaskForce-Account';
 
     var dropzone = new Dropzone(".dropzone", {
         url: window.location.href,
+        dictDefaultMessage: 'Выбрать фотографии',
         uploadMultiple: true,
         parallelUploads: 6,
         maxFiles: 6,
+        maxfilesreached: function() {
+            document.querySelector('.dz-default').classList.add('visually-hidden');
+        },
         maxfilesexceeded: function(file) {
             dropzone.removeFile(file);
         },
         autoProcessQueue: false,
         acceptedFiles: 'image/*',
-        previewTemplate: '<div class="dz-preview dz-file-preview file-close">' +
+        previewTemplate: '<div class="dz-preview dz-file-preview file-delete">' +
             '<div><img data-dz-thumbnail alt="Фото работы"></div>' +
             '<div class="dz-remove" data-dz-remove><button  type="button">Удалить</button></div>' +
             '</div>',
