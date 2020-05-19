@@ -2600,6 +2600,10 @@ IMG.displayed {
   text-align: center;
 }
 
+.file-close {
+  display: inline-block;
+  margin: 20px;
+}
 
 
 /*# sourceMappingURL=style.css.map */

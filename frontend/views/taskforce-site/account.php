@@ -224,6 +224,16 @@ $this->title = 'TaskForce-Account';
 <script>
     Dropzone.autoDiscover = false;
 
-    var dropzone = new Dropzone(".dropzone", {url: window.location.href, maxFiles: 6, uploadMultiple: true, autoProcessQueue: false,
-        acceptedFiles: 'image/*', previewTemplate: '<a href="#"><img data-dz-thumbnail alt="Фото работы"></a>'});
+    var dropzone = new Dropzone(".dropzone", {
+        url: window.location.href,
+        uploadMultiple: true,
+        parallelUploads: 6,
+        maxFiles: 6,
+        autoProcessQueue: false,
+        acceptedFiles: 'image/*',
+        previewTemplate: '<div class="dz-preview dz-file-preview file-close">' +
+            '<div><img data-dz-thumbnail alt="Фото работы"></div>' +
+            '<div class="dz-remove" data-dz-remove><button  type="button">Удалить</button></div>' +
+            '</div>',
+    });
 </script>
