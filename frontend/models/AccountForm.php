@@ -47,7 +47,7 @@ class AccountForm extends Model
     {
         return [
             ['avatar', 'file', 'extensions' => 'png, jpg', 'skipOnEmpty' => true],
-            ['portfolio', 'safe'],
+            ['portfolio', 'file', 'extensions' => 'png, jpg', 'skipOnEmpty' => true],
 
             [['email', 'name', 'about', 'phone', 'skype', 'telegram'], 'trim'],
 
