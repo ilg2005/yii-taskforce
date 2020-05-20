@@ -188,7 +188,7 @@ class TaskforceSiteController extends Controller
                 $user->password = Yii::$app->security->generatePasswordHash($model->password);
             }
 
-            $portfolio = UploadedFile::getInstancesByName('portfolio');
+            $portfolio = UploadedFile::getInstances($model, 'portfolio');
             var_dump($portfolio);
             die();
 

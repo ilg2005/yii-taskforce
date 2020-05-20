@@ -138,7 +138,7 @@ $this->title = 'TaskForce-Account';
                 <div class="account__redaction-section-wrapper account__redaction">
                     <span class="dropzone link-regular"></span>
 
-                   <?= $form->field($model, 'portfolio')
+                   <?= $form->field($model, 'portfolio[]')
                         ->label('', ['class' => 'link-regular dropzone', 'for' => 'upload-portfolio'])
                         ->fileInput(['hidden' => '', 'id' => 'upload-portfolio', 'name' => 'portfolio', 'multiple' => true])
                    ?>
