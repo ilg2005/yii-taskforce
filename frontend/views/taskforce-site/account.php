@@ -137,7 +137,10 @@ $this->title = 'TaskForce-Account';
 
                 <div class="account__redaction-section-wrapper account__redaction">
                     <span class="dropzone link-regular"></span>
-                </div>
+                       <?= $form->field($model, 'portfolio')
+                         ->label(false)
+                        ->fileInput(['hidden' => '', 'multiple' => true, 'class' => 'link-regular dropzone', 'name' => 'portfolio'])?>
+                 </div>
 
                 <h3 class="div-line">Контакты</h3>
                 <div class="account__redaction-section-wrapper account__redaction">
@@ -222,10 +225,10 @@ $this->title = 'TaskForce-Account';
 <script src="js/image-upload.js"></script>
 <script src="js/dropzone.js"></script>
 <script>
-    Dropzone.autoDiscover = false;
-
     var dropzone = new Dropzone(".dropzone", {
         url: window.location.href,
+        autoDiscover: false,
+        paramName: 'portfolio',
         dictDefaultMessage: 'Выбрать фотографии',
         uploadMultiple: true,
         parallelUploads: 6,
@@ -244,7 +247,7 @@ $this->title = 'TaskForce-Account';
         maxfilesexceeded: function(file) {
             dropzone.removeFile(file);
         },
-        autoProcessQueue: false,
+        autoProcessQueue: true,
         acceptedFiles: 'image/*',
         previewTemplate: '<div class="dz-preview dz-file-preview file-preview">' +
             '<div><img data-dz-thumbnail alt="Фото работы"></div>' +
