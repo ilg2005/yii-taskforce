@@ -188,6 +188,10 @@ class TaskforceSiteController extends Controller
                 $user->password = Yii::$app->security->generatePasswordHash($model->password);
             }
 
+            $portfolio = UploadedFile::getInstancesByName('portfolio');
+            var_dump($portfolio);
+            die();
+
             $user->profile->phone = preg_replace('/\D/', '', $model->phone);
             $user->profile->skype = $model->skype;
             $user->profile->messenger = htmlspecialchars($model->telegram);

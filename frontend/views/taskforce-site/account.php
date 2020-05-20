@@ -138,8 +138,8 @@ $this->title = 'TaskForce-Account';
                 <div class="account__redaction-section-wrapper account__redaction">
                     <span class="dropzone link-regular"></span>
 
-                      <!-- --><?/*= $form->field($model, 'portfolio[]')
-                         ->label('', ['class' => 'link-regular dropzone'])
+                   <!-- --><?/*= $form->field($model, 'portfolio', ['options' => ['class' => 'dropzone link-regular']])
+                        ->label(false)
                         ->fileInput(['hidden' => '', 'multiple' => true, 'name' => 'portfolio']) */?>
 
                  </div>
