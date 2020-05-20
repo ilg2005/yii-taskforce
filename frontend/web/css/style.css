@@ -2600,7 +2600,7 @@ IMG.displayed {
   text-align: center;
 }
 
-.file-delete {
+.file-preview {
   display: inline-block;
   margin: 20px;
 }

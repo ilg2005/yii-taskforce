@@ -230,6 +230,14 @@ $this->title = 'TaskForce-Account';
         uploadMultiple: true,
         parallelUploads: 6,
         maxFiles: 6,
+        addRemoveLinks: true,
+        dictRemoveFile: 'Удалить файл',
+        removedfile: function (file) {
+            file.previewElement.remove();
+            if (this.files.length < 6) {
+                document.querySelector('.dz-default').classList.remove('visually-hidden');
+            }
+        },
         maxfilesreached: function() {
             document.querySelector('.dz-default').classList.add('visually-hidden');
         },
@@ -238,9 +246,8 @@ $this->title = 'TaskForce-Account';
         },
         autoProcessQueue: false,
         acceptedFiles: 'image/*',
-        previewTemplate: '<div class="dz-preview dz-file-preview file-delete">' +
+        previewTemplate: '<div class="dz-preview dz-file-preview file-preview">' +
             '<div><img data-dz-thumbnail alt="Фото работы"></div>' +
-            '<div class="dz-remove" data-dz-remove><button  type="button">Удалить</button></div>' +
             '</div>',
     });
 </script>
