@@ -18,7 +18,7 @@ class AccountForm extends Model
     public $categories;
     public $password;
     public $password_repeat;
-    public $portfolio;
+    public $imageFiles;
     public $phone;
     public $skype;
     public $telegram;
@@ -47,7 +47,7 @@ class AccountForm extends Model
     {
         return [
             ['avatar', 'file', 'extensions' => 'png, jpg', 'skipOnEmpty' => true],
-            ['portfolio', 'file', 'extensions' => 'png, jpg', 'skipOnEmpty' => true, 'maxFiles' => 6],
+            [['imageFiles'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg', 'maxFiles' => 6],
 
             [['email', 'name', 'about', 'phone', 'skype', 'telegram'], 'trim'],
 
@@ -97,6 +97,17 @@ class AccountForm extends Model
     {
         if ($this->validate()) {
             $this->avatar->saveAs("uploads/{$this->avatar->baseName}.{$this->avatar->extension}");
+        } else {
+            return false;
+        }
+    }
+
+    public function uploadImages() {
+        if ($this->validate()) {
+            foreach ($this->imageFiles as $file) {
+                $file->saveAs('uploads/' . $file->baseName . '.' . $file->extension);
+            }
+            return true;
         } else {
             return false;
         }

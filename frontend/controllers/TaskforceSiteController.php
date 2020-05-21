@@ -15,7 +15,6 @@ use frontend\models\Setting;
 use frontend\models\SignupForm;
 use frontend\models\Task;
 
-use frontend\models\UploadFile;
 use frontend\models\User;
 use http\Exception\BadHeaderException;
 use Yii;
@@ -188,9 +187,13 @@ class TaskforceSiteController extends Controller
                 $user->password = Yii::$app->security->generatePasswordHash($model->password);
             }
 
-            $portfolio = UploadedFile::getInstances($model, 'portfolio');
-            var_dump($portfolio);
-            die();
+            $model->imageFiles = UploadedFile::getInstances($model, 'imageFiles');
+
+
+            if ($model->imageFiles) {
+                $model->uploadImages();
+            }
+
 
             $user->profile->phone = preg_replace('/\D/', '', $model->phone);
             $user->profile->skype = $model->skype;

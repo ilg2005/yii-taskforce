@@ -15,6 +15,7 @@ $this->title = 'TaskForce-Account';
         <section class="account__redaction-wrapper">
             <h1>Редактирование настроек профиля</h1>
             <?php $form = ActiveForm::begin([
+                    'options' => ['enctype' => 'multipart/form-data'],
                     'id' => 'account',
                     'fieldConfig' => [
                         'template' => '{label}{input}{error}',
@@ -138,10 +139,7 @@ $this->title = 'TaskForce-Account';
                 <div class="account__redaction-section-wrapper account__redaction">
 <!--                    <span class="dropzone link-regular"></span>
 -->
-                   <?= $form->field($model, 'portfolio[]')
-                        ->label('', ['class' => 'link-regular dropzone', 'for' => 'upload-portfolio'])
-                        ->fileInput(['hidden' => '', 'id' => 'upload-portfolio', 'name' => 'portfolio', 'multiple' => true])
-                   ?>
+                    <?= $form->field($model, 'imageFiles[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
 
                  </div>
 
@@ -255,5 +253,8 @@ $this->title = 'TaskForce-Account';
         previewTemplate: '<div class="dz-preview dz-file-preview file-preview">' +
             '<div><img data-dz-thumbnail alt="Фото работы"></div>' +
             '</div>',
+/*        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }*/
     });
 </script>
