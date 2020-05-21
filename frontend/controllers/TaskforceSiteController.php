@@ -22,6 +22,7 @@ use yii\base\ErrorException;
 use yii\console\UnknownCommandException;
 use yii\db\Query;
 use yii\filters\AccessControl;
+use yii\helpers\FileHelper;
 use yii\helpers\Url;
 use yii\web\HttpException;
 use yii\web\NotAcceptableHttpException;

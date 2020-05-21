@@ -6,6 +6,7 @@ namespace frontend\models;
 
 use Yii;
 use yii\base\Model;
+use yii\helpers\FileHelper;
 
 class AccountForm extends Model
 {
@@ -95,21 +96,24 @@ class AccountForm extends Model
 
     public function uploadFile()
     {
-        if ($this->validate()) {
-            $this->avatar->saveAs("uploads/{$this->avatar->baseName}.{$this->avatar->extension}");
-        } else {
-            return false;
+        $dir = './uploads';
+        if (!is_dir($dir)) {
+            FileHelper::createDirectory($dir, 0755, true);
         }
+
+        if ($this->avatar) {
+            $this->avatar->saveAs("{$dir}/{$this->avatar->baseName}.{$this->avatar->extension}");
+        }
+
     }
 
-    public function uploadImages() {
-        if ($this->validate()) {
+    public function uploadImages()
+    {
+        if ($this->imageFiles) {
             foreach ($this->imageFiles as $file) {
-                $file->saveAs('uploads/' . $file->baseName . '.' . $file->extension);
+                $file->saveAs('./uploads/' . $file->baseName . '.' . $file->extension);
             }
-            return true;
-        } else {
-            return false;
         }
     }
 }
+
