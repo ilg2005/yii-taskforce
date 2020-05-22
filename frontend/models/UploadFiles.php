@@ -17,10 +17,10 @@ class UploadFiles extends Model
         }
 
         if (!is_array($uploadedFileData)) {
-            $uploadedFileData->saveAs("{$dir}/{$uploadedFileData->baseName}.{$uploadedFileData->extension}");
+            $uploadedFileData->saveAs("{$dir}/{$uploadedFileData->baseName}_" . date('Y-m-d') . ".{$uploadedFileData->extension}");
         } else {
             foreach ($uploadedFileData as $file) {
-                $file->saveAs("{$dir}/" . $file->baseName . '.' . $file->extension);
+                $file->saveAs("{$dir}/{$file->baseName}_" . date('Y-m-d') . '.' . $file->extension);
             }
         }
 

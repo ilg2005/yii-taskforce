@@ -172,8 +172,8 @@ class TaskforceSiteController extends Controller
 
             if ($model->avatar) {
                 UploadFiles::upload($model->avatar);
-                $avatar_file = './uploads/' . $model->avatar->baseName . '.' . $model->avatar->extension;
-                $user->profile->avatar_file = $avatar_file;
+                $avatar_filename = "./uploads/{$model->avatar->baseName}_" . date('Y-m-d') . ".{$model->avatar->extension}";
+                $user->profile->avatar_file = $avatar_filename;
             }
             $user->name = $model->name;
             $user->email = $model->email;
