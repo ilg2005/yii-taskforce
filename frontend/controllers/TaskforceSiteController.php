@@ -189,8 +189,7 @@ class TaskforceSiteController extends Controller
                 $user->password = Yii::$app->security->generatePasswordHash($model->password);
             }
 
-            $model->imageFiles = UploadedFile::getInstances($model, 'imageFiles');
-
+            $model->imageFiles = UploadedFile::getInstancesByName('imageFiles');
 
             if ($model->imageFiles) {
                 UploadFiles::upload($model->imageFiles);

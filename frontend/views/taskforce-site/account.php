@@ -137,9 +137,12 @@ $this->title = 'TaskForce-Account';
                 <h3 class="div-line">Фото работ</h3>
 
                 <div class="account__redaction-section-wrapper account__redaction">
-<!--                    <span class="dropzone link-regular"></span>
--->
-                    <?= $form->field($model, 'imageFiles[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
+                   <span class="dropzone link-regular"></span>
+
+                    <!--    --><?/*= $form->field($model, 'imageFiles[]', ['options' => ['class' => 'dropzone link-regular']])
+                   ->label(false)
+                   ->textInput(['hidden' => '', 'disabled'=> true])
+                        */?>
 
                  </div>
 
@@ -226,10 +229,10 @@ $this->title = 'TaskForce-Account';
 <script src="js/image-upload.js"></script>
 <script src="js/dropzone.js"></script>
 <script>
+    Dropzone.autoDiscover = false;
     var dropzone = new Dropzone(".dropzone", {
         url: window.location.href,
-        autoDiscover: false,
-        paramName: 'portfolio',
+        paramName: 'imageFiles',
         dictDefaultMessage: 'Выбрать фотографии',
         uploadMultiple: true,
         parallelUploads: 6,
@@ -253,8 +256,8 @@ $this->title = 'TaskForce-Account';
         previewTemplate: '<div class="dz-preview dz-file-preview file-preview">' +
             '<div><img data-dz-thumbnail alt="Фото работы"></div>' +
             '</div>',
-/*        headers: {
+        headers: {
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-        }*/
+        }
     });
 </script>
