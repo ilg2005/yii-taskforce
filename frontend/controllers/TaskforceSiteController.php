@@ -15,6 +15,7 @@ use frontend\models\Setting;
 use frontend\models\SignupForm;
 use frontend\models\Task;
 
+use frontend\models\UploadFiles;
 use frontend\models\User;
 use http\Exception\BadHeaderException;
 use Yii;
@@ -170,7 +171,7 @@ class TaskforceSiteController extends Controller
             $model->avatar = UploadedFile::getInstanceByName('avatar');
 
             if ($model->avatar) {
-                $model->uploadFile();
+                UploadFiles::upload($model->avatar);
                 $avatar_file = './uploads/' . $model->avatar->baseName . '.' . $model->avatar->extension;
                 $user->profile->avatar_file = $avatar_file;
             }
@@ -192,7 +193,7 @@ class TaskforceSiteController extends Controller
 
 
             if ($model->imageFiles) {
-                $model->uploadImages();
+                UploadFiles::upload($model->imageFiles);
             }
 
 

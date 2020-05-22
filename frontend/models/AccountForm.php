@@ -93,27 +93,5 @@ class AccountForm extends Model
         ];
 
     }
-
-    public function uploadFile()
-    {
-        $dir = './uploads';
-        if (!is_dir($dir)) {
-            FileHelper::createDirectory($dir, 0755, true);
-        }
-
-        if ($this->avatar) {
-            $this->avatar->saveAs("{$dir}/{$this->avatar->baseName}.{$this->avatar->extension}");
-        }
-
-    }
-
-    public function uploadImages()
-    {
-        if ($this->imageFiles) {
-            foreach ($this->imageFiles as $file) {
-                $file->saveAs('./uploads/' . $file->baseName . '.' . $file->extension);
-            }
-        }
-    }
 }
 
