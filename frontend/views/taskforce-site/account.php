@@ -139,10 +139,10 @@ $this->title = 'TaskForce-Account';
                 <div class="account__redaction-section-wrapper account__redaction">
                    <span class="dropzone link-regular"></span>
 
-                    <!--    --><?/*= $form->field($model, 'imageFiles[]', ['options' => ['class' => 'dropzone link-regular']])
+                    <?/*= $form->field($model, 'imageFiles[]', ['options' => ['class' => 'dropzone link-regular']])
                    ->label(false)
                    ->textInput(['hidden' => '', 'disabled'=> true])
-                        */?>
+                    */?>
 
                  </div>
 
