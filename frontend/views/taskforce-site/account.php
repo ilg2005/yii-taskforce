@@ -260,4 +260,21 @@ $this->title = 'TaskForce-Account';
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         }
     });
+
+    var formElement = document.querySelector('#account');
+    var submitBtnElement = formElement.querySelector('button[type="submit"]');
+    submitBtnElement.addEventListener('click', function (evt) {
+        evt.preventDefault();
+        var formData = new FormData(formElement);
+        var imageFiles = dropzone.files;
+        imageFiles.forEach((file) => {
+           formData.append('imageFiles[]', file);
+        })
+        var request = new XMLHttpRequest();
+        request.open("POST", window.location.href);
+        request.send(formData);
+        window.location.reload();
+    });
+
+
 </script>
