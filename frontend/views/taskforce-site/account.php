@@ -137,12 +137,12 @@ $this->title = 'TaskForce-Account';
                 <h3 class="div-line">Фото работ</h3>
 
                 <div class="account__redaction-section-wrapper account__redaction">
-<!--                   <span class="dropzone link-regular"></span>
--->
-                    <?= $form->field($model, 'imageFiles[]')
+                   <span class="dropzone link-regular"></span>
+
+                    <?/*= $form->field($model, 'imageFiles[]')
                    ->label('', ['class' => 'dropzone link-regular'])
                    ->fileInput(['hidden' => '', 'disabled' => true, 'name' => 'imageFiles'])
-                    ?>
+                    */?>
 
                  </div>
 
