@@ -9,6 +9,7 @@ use frontend\models\AccountForm;
 use frontend\models\Category;
 use frontend\models\EnterForm;
 use frontend\models\Feedback;
+use frontend\models\Portfolio;
 use frontend\models\Profile;
 use frontend\models\ProfileView;
 use frontend\models\Setting;
@@ -193,6 +194,13 @@ class TaskforceSiteController extends Controller
 
             if ($model->imageFiles) {
                 UploadFiles::upload($model->imageFiles);
+                $user->unlinkAll('portfolio', true);
+                foreach ($model->imageFiles as $file) {
+                    $portfolio = new Portfolio();
+                    $portfolio->user_id = $user->id;
+                    $portfolio->filename = "./uploads/{$file->baseName}_" . date('Y-m-d') . '.' . $file->extension;
+                    $user->link('portfolio', $portfolio);
+                }
             }
 
 

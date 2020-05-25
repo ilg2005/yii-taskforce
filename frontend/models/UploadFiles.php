@@ -15,7 +15,6 @@ class UploadFiles extends Model
         if (!is_dir($dir)) {
             FileHelper::createDirectory($dir, 0755, true);
         }
-
         if (!is_array($uploadedFileData)) {
             $uploadedFileData->saveAs("{$dir}/{$uploadedFileData->baseName}_" . date('Y-m-d') . ".{$uploadedFileData->extension}");
         } else {

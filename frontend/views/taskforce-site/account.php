@@ -136,6 +136,14 @@ $this->title = 'TaskForce-Account';
 
                 <h3 class="div-line">Фото работ</h3>
 
+                    <?php if ($user->portfolio) : ?>
+                    <p class="user__card-photo">
+                        <?php foreach($user->portfolio as $portfolio) : ?>
+                        <img src="<?= $portfolio->filename ?>" width="120" height="120" alt="Фото работы">
+                        <?php endforeach; ?>
+                    </p>
+                    <?php endif; ?>
+
                 <div class="account__redaction-section-wrapper account__redaction">
                    <span class="dropzone link-regular"></span>
 
