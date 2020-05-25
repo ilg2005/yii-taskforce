@@ -16,7 +16,7 @@ class Profile extends ActiveRecord
         return [
             [['avatar_file', 'address', 'birthday', 'about', 'phone', 'skype', 'messenger'], 'safe'],
             [['avatar_file'], 'string'],
-            [['avatar_file'], 'default', 'value' => './img/no-image-available.jpg'],
+            [['avatar_file'], 'default', 'value' => 'no-image-available.jpg'],
         ];
     }
 

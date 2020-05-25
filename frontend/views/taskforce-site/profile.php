@@ -14,7 +14,7 @@ use frontend\components\Rating;
         <section class="content-view">
             <div class="user__card-wrapper">
                 <div class="user__card">
-                    <img src="../img/<?= $user->profile->avatar_file ?>" width="120" height="120" alt="Аватар пользователя">
+                    <img src="./uploads/<?= $user->profile->avatar_file ?>" width="120" height="120" alt="Аватар пользователя">
                     <div class="content-view__headline">
                         <h1><?= $user->name ?></h1>
                         <p>Россия, Санкт-Петербург, <?= Yii::t('app', '{n, plural, one{# год} few{# года} other{# лет}}', ['n' => Yii::$app->formatter->asAge($user->profile->birthday)]) ?></p>
@@ -49,7 +49,7 @@ use frontend\components\Rating;
                     <div class="user__card-photo">
                         <h3 class="content-view__h3">Фото работ</h3>
                         <?php foreach ($user->portfolio as $array): ?>
-                        <a href="/image?filename=<?= $array->filename ?>"><img src="../img/<?= $array->filename ?>" width="85" height="86" alt="Фото работы"></a>
+                        <a href="/image?filename=<?= $array->filename ?>"><img src="./uploads/<?= $array->filename ?>" width="85" height="86" alt="Фото работы"></a>
                         <?php endforeach; ?>
                     </div>
                 </div>

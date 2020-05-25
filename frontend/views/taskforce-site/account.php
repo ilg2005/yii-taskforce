@@ -33,7 +33,7 @@ $this->title = 'TaskForce-Account';
                 <h3 class="div-line">Настройки аккаунта</h3>
                 <div class="account__redaction-section-wrapper">
                     <div class="account__redaction-avatar">
-                        <img src="<?= $user->profile->avatar_file ?>" width="156" height="156">
+                        <img src="./uploads/<?= $user->profile->avatar_file ?>" width="156" height="156">
                         <?= $form->field($model, 'avatar')
                             ->label('Сменить аватар', ['class' => 'link-regular', 'for' => 'upload-avatar', 'style' => ['display' => 'block']])
                             ->fileInput(['hidden' => '', 'id' => 'upload-avatar', 'name' => 'avatar'])
@@ -139,7 +139,7 @@ $this->title = 'TaskForce-Account';
                     <?php if ($user->portfolio) : ?>
                     <p class="user__card-photo">
                         <?php foreach($user->portfolio as $portfolio) : ?>
-                        <img src="<?= $portfolio->filename ?>" width="120" height="120" alt="Фото работы">
+                        <img src="./uploads/<?= $portfolio->filename ?>" width="120" height="120" alt="Фото работы">
                         <?php endforeach; ?>
                     </p>
                     <?php endif; ?>

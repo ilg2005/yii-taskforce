@@ -173,7 +173,7 @@ class TaskforceSiteController extends Controller
 
             if ($model->avatar) {
                 UploadFiles::upload($model->avatar);
-                $avatar_filename = "./uploads/{$model->avatar->baseName}_" . date('Y-m-d') . ".{$model->avatar->extension}";
+                $avatar_filename = "{$model->avatar->baseName}_" . date('Y-m-d') . ".{$model->avatar->extension}";
                 $user->profile->avatar_file = $avatar_filename;
             }
             $user->name = $model->name;
@@ -198,7 +198,7 @@ class TaskforceSiteController extends Controller
                 foreach ($model->imageFiles as $file) {
                     $portfolio = new Portfolio();
                     $portfolio->user_id = $user->id;
-                    $portfolio->filename = "./uploads/{$file->baseName}_" . date('Y-m-d') . '.' . $file->extension;
+                    $portfolio->filename = "{$file->baseName}_" . date('Y-m-d') . '.' . $file->extension;
                     $user->link('portfolio', $portfolio);
                 }
             }
