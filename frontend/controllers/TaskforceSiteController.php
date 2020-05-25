@@ -333,6 +333,7 @@ class TaskforceSiteController extends Controller
     {
         $user = User::find()
             ->where(['users.id' => Yii::$app->request->get('user_id')])
+            ->orWhere(['users.id' => Yii::$app->user->id])
             ->one();
 
         if (!$user->role) {
