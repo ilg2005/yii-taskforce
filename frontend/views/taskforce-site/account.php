@@ -286,5 +286,4 @@ $this->title = 'TaskForce-Account';
         }, 100);
     });
 
-
 </script>
