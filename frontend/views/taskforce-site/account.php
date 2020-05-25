@@ -281,7 +281,9 @@ $this->title = 'TaskForce-Account';
         var request = new XMLHttpRequest();
         request.open("POST", window.location.href);
         request.send(formData);
-        window.location.reload();
+        setTimeout(() => {
+            window.location.reload();
+        }, 100);
     });
 
 
