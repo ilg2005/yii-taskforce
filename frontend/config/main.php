@@ -1,6 +1,7 @@
 <?php
 
 use frontend\components\MyFormatter;
+use frontend\models\User;
 use yii\i18n\PhpMessageSource;
 
 $params = array_merge(
@@ -16,6 +17,13 @@ return [
     'language' => 'ru-RU',
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
+    'on beforeAction' => static function() {
+        if (!Yii::$app->user->isGuest) {
+            $user = Yii::$app->user->identity;
+            $user->latest_activity_time = date('Y-m-d H:i:s');
+            $user->update();
+        }
+    },
     'components' => [
         'formatter' => [
             'defaultTimeZone' => 'Europe/Moscow',
