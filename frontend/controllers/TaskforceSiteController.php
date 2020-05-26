@@ -160,9 +160,7 @@ class TaskforceSiteController extends Controller
      */
     public function actionAccount()
     {
-        $user = User::find()
-            ->where(['users.id' => Yii::$app->user->id])
-            ->one();
+        $user = Yii::$app->user->identity;
         $allCategories = Category::find()->all();
 
         $model = new AccountForm();
@@ -214,6 +212,7 @@ class TaskforceSiteController extends Controller
             $user->settings->new_feedback = $model->new_feedback;
             $user->settings->show_to_customer = $model->show_to_customer;
             $user->settings->hide_user_profile = $model->hide_user_profile;
+
             $user->settings->save();
 
             if ($user->categories) {
@@ -238,13 +237,15 @@ class TaskforceSiteController extends Controller
                         $user->link('categories', $category);
                     }
             }
-
             $user->role = $selectedCategories ? UserRoles::WORKER : UserRoles::CUSTOMER;
 
-            $user->save();
+            $user->settings->new_message = $model->new_message;
+            $user->settings->actions_on_task = $model->actions_on_task;
+            $user->settings->new_feedback = $model->new_feedback;
+            $user->settings->show_to_customer = $model->show_to_customer;
+            $user->settings->hide_user_profile = $model->hide_user_profile;
 
-            /*var_dump($model);
-            die();*/
+            $user->save();
             $this->refresh();
         }
 
@@ -390,9 +391,13 @@ class TaskforceSiteController extends Controller
     {
         $users = User::find()
             ->where(['role' => UserRoles::WORKER])
+/*            ->andWhere(['not in', 'settings_id', (new Query())->select('id')->from('users_settings')->where(['hide_user_profile' => 0])])*/
             ->orderBy(['registration_date' => SORT_DESC])
             ->with(['profile', 'categories', 'tasks', 'feedbacks'])
             ->groupBy(['id']);
+
+            $users->joinWith('settings')
+                ->where(['hide_user_profile' => 0]);
 
         if (Yii::$app->request->get('rating')) {
             $users->orderBy(['rating' => SORT_DESC]);
