@@ -38,7 +38,11 @@ use frontend\components\Rating; ?>
                             <?= $user->profile->about ?>
                         </p>
                     </div>
+                    <?php if (strtotime($user->latest_activity_time) >= strtotime('-1 minute')) : ?>
+                        <span  class="new-task__time">Сейчас на сайте</span>
+                    <?php else : ?>
                     <span class="new-task__time">Был на сайте <?= Yii::$app->formatter->asRelativeTime($user->latest_activity_time) ?></span>
+                    <?php endif; ?>
                 </div>
                 <div class="link-specialization user__search-link--bottom">
                     <?php foreach ($user->categories as $category): ?>
