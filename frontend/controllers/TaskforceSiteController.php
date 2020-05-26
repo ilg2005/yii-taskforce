@@ -391,13 +391,10 @@ class TaskforceSiteController extends Controller
     {
         $users = User::find()
             ->where(['role' => UserRoles::WORKER])
-/*            ->andWhere(['not in', 'settings_id', (new Query())->select('id')->from('users_settings')->where(['hide_user_profile' => 0])])*/
             ->orderBy(['registration_date' => SORT_DESC])
             ->with(['profile', 'categories', 'tasks', 'feedbacks'])
             ->groupBy(['id']);
 
-            $users->joinWith('settings')
-                ->where(['hide_user_profile' => 0]);
 
         if (Yii::$app->request->get('rating')) {
             $users->orderBy(['rating' => SORT_DESC]);

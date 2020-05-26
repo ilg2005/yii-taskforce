@@ -18,11 +18,13 @@ class ImportController extends Controller
         'feedbacks' => 'Feedback',
         'reactions' => 'Reaction',
         'users-portfolio' => 'Portfolio',
-        'profile-views' => 'ProfileView'
+        'profile-views' => 'ProfileView',
+        'users-settings' => 'Setting'
     ];
 
     const DATA_TABLE_MAP = [
         'users-categories' => 'users_categories',
+
     ];
 
     public function directImport2Table($filename, $tableName)
