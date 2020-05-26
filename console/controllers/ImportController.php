@@ -13,13 +13,13 @@ class ImportController extends Controller
         'categories' => 'Category',
         'towns' => 'Location',
         'profiles' => 'Profile',
+        'settings' => 'Setting',
         'users-combined' => 'User',
         'tasks' => 'Task',
         'feedbacks' => 'Feedback',
         'reactions' => 'Reaction',
         'users-portfolio' => 'Portfolio',
         'profile-views' => 'ProfileView',
-        'settings' => 'Setting'
     ];
 
     const DATA_TABLE_MAP = [
