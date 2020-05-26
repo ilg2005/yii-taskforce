@@ -393,6 +393,8 @@ class TaskforceSiteController extends Controller
             ->where(['role' => UserRoles::WORKER])
             ->orderBy(['registration_date' => SORT_DESC])
             ->with(['profile', 'categories', 'tasks', 'feedbacks'])
+            ->joinWith('settings')
+            ->where(['users_settings.hide_user_profile' => 0])
             ->groupBy(['id']);
 
 
