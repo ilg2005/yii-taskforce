@@ -19,20 +19,6 @@ CREATE TABLE categories
     icon VARCHAR(64)
 );
 
-CREATE TABLE users_profiles
-(
-    id          int AUTO_INCREMENT PRIMARY KEY,
-    avatar_file VARCHAR(128),
-    address     VARCHAR(1000),
-    location_id int,
-    birthday    date,
-    about       TEXT,
-    phone       VARCHAR(20),
-    skype       VARCHAR(128),
-    messenger   VARCHAR(128),
-    FOREIGN KEY (location_id) REFERENCES locations (id) ON DELETE CASCADE
-);
-
 CREATE TABLE users
 (
     id                   int AUTO_INCREMENT PRIMARY KEY,
@@ -41,13 +27,26 @@ CREATE TABLE users
     town                 VARCHAR(128) NOT NULL,
     email                VARCHAR(128) NOT NULL,
     password             VARCHAR(128) NOT NULL,
-    profile_id           int,
     role                 TINYINT(1) DEFAULT 0,
     latest_activity_time TIMESTAMP,
     is_favorite          boolean    DEFAULT false,
-    rating               FLOAT      DEFAULT 0,
+    rating               FLOAT      DEFAULT 0
+);
 
-    FOREIGN KEY (profile_id) REFERENCES users_profiles (id) ON DELETE CASCADE
+CREATE TABLE users_profiles
+(
+    id          int AUTO_INCREMENT PRIMARY KEY,
+    user_id     int,
+    avatar_file VARCHAR(128),
+    address     VARCHAR(1000),
+    location_id int,
+    birthday    date,
+    about       TEXT,
+    phone       VARCHAR(20),
+    skype       VARCHAR(128),
+    messenger   VARCHAR(128),
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
+    FOREIGN KEY (location_id) REFERENCES locations (id) ON DELETE CASCADE
 );
 
 CREATE TABLE users_settings

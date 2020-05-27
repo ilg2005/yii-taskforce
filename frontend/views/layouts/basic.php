@@ -95,7 +95,7 @@ BasicAsset::register($this);
             </div>
             <div class="header__account">
                 <a class="header__account-photo">
-                    <img src="./uploads/<?= Yii::$app->user->identity->profile->avatar_file ?>"
+                    <img src="./uploads/<?= Yii::$app->user->identity->avatar ?>"
                          width="43" height="44"
                          alt="Аватар пользователя">
                 </a>

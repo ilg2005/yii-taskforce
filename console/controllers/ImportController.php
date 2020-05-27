@@ -12,8 +12,8 @@ class ImportController extends Controller
     const DATA_MODEL_MAP = [
         'categories' => 'Category',
         'towns' => 'Location',
-        'profiles' => 'Profile',
         'users-combined' => 'User',
+        'profiles' => 'Profile',
         'settings' => 'Setting',
         'tasks' => 'Task',
         'feedbacks' => 'Feedback',

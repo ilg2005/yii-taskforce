@@ -14,15 +14,14 @@ class Profile extends ActiveRecord
     public function rules()
     {
         return [
-            [['avatar_file', 'address', 'birthday', 'about', 'phone', 'skype', 'messenger'], 'safe'],
+            [['user_id', 'avatar_file', 'address', 'birthday', 'about', 'phone', 'skype', 'messenger'], 'safe'],
             [['avatar_file'], 'string'],
-            [['avatar_file'], 'default', 'value' => 'no-image-available.jpg'],
         ];
     }
 
     public function getUsers()
     {
-        return $this->hasMany(USER::class, ['profile_id' => 'id']);
+        return $this->hasMany(USER::class, ['id' => 'user_id']);
     }
 
     public function behaviors()
@@ -34,6 +33,7 @@ class Profile extends ActiveRecord
                     'birthday' => static function ($value) {
                         return ($value instanceof DateTime) ? $value->format('Y-m-d') : DateTime::createFromFormat('Y-m-d', $value);
                     },
+                    'avatar_file' => AttributeTypecastBehavior::TYPE_STRING,
                     'phone' => AttributeTypecastBehavior::TYPE_STRING,
                     'skype' => AttributeTypecastBehavior::TYPE_STRING,
                 ],

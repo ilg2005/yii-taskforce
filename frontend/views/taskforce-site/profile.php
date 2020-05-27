@@ -14,7 +14,7 @@ use frontend\components\Rating;
         <section class="content-view">
             <div class="user__card-wrapper">
                 <div class="user__card">
-                    <img src="./uploads/<?= $user->profile->avatar_file ?>" width="120" height="120" alt="Аватар пользователя">
+                    <img src="./uploads/<?= $user->avatar ?>" width="120" height="120" alt="Аватар пользователя">
                     <div class="content-view__headline">
                         <h1><?= $user->name ?></h1>
                         <p>Россия, Санкт-Петербург, <?= Yii::t('app', '{n, plural, one{# год} few{# года} other{# лет}}', ['n' => Yii::$app->formatter->asAge($user->profile->birthday)]) ?></p>

@@ -14,7 +14,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['name', 'town', 'email', 'password', 'registration_date', 'profile_id', 'role', 'latest_activity_time', 'is_favorite', 'rating'], 'safe'],
+            [['name', 'town', 'email', 'password', 'registration_date', 'role', 'latest_activity_time', 'is_favorite', 'rating'], 'safe'],
             ['email', 'email'],
             ['email', 'unique'],
         ];
@@ -35,7 +35,12 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function getProfile()
     {
-        return $this->hasOne(Profile::class, ['id' => 'profile_id']);
+        return $this->hasOne(Profile::class, ['user_id' => 'id']);
+    }
+
+    public function getAvatar()
+    {
+        return $this->profile->avatar_file ?? 'no-image-available.jpg';
     }
 
 
@@ -59,8 +64,6 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return $this->hasOne(Setting::class, ['user_id' => 'id']);
     }
-
-
 
     /**
      * Generates password hash from password and sets it to the model

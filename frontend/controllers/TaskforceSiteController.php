@@ -133,15 +133,14 @@ class TaskforceSiteController extends Controller
 
             $user = new User();
             $profile = new Profile();
-            $profile->save();
             $settings = new Setting();
 
-            $user->profile_id = $profile->id;
             $user->email = $model->email;
             $user->name = $model->name;
             $user->town = $model->town[0];
             $user->setPassword($model->password);
             $user->save();
+            $user->link('profile', $profile);
             $user->link('settings', $settings);
 
 
