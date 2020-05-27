@@ -135,15 +135,15 @@ class TaskforceSiteController extends Controller
             $profile = new Profile();
             $profile->save();
             $settings = new Setting();
-            $settings->save();
 
             $user->profile_id = $profile->id;
-            $user->settings_id = $settings->id;
             $user->email = $model->email;
             $user->name = $model->name;
             $user->town = $model->town[0];
             $user->setPassword($model->password);
             $user->save();
+            $user->link('settings', $settings);
+
 
             Yii::$app->session->setFlash('success', 'Регистрация успешна!');
             return $this->goHome();

@@ -33,16 +33,6 @@ CREATE TABLE users_profiles
     FOREIGN KEY (location_id) REFERENCES locations (id) ON DELETE CASCADE
 );
 
-CREATE TABLE users_settings
-(
-    id                int AUTO_INCREMENT PRIMARY KEY,
-    new_message       TINYINT DEFAULT 1,
-    actions_on_task   TINYINT DEFAULT 0,
-    new_feedback      TINYINT DEFAULT 0,
-    show_to_customer  TINYINT DEFAULT 1,
-    hide_user_profile TINYINT DEFAULT 0
-);
-
 CREATE TABLE users
 (
     id                   int AUTO_INCREMENT PRIMARY KEY,
@@ -52,14 +42,24 @@ CREATE TABLE users
     email                VARCHAR(128) NOT NULL,
     password             VARCHAR(128) NOT NULL,
     profile_id           int,
-    settings_id          int,
     role                 TINYINT(1) DEFAULT 0,
     latest_activity_time TIMESTAMP,
     is_favorite          boolean    DEFAULT false,
     rating               FLOAT      DEFAULT 0,
 
-    FOREIGN KEY (profile_id) REFERENCES users_profiles (id) ON DELETE CASCADE,
-    FOREIGN KEY (settings_id) REFERENCES users_settings (id) ON DELETE CASCADE
+    FOREIGN KEY (profile_id) REFERENCES users_profiles (id) ON DELETE CASCADE
+);
+
+CREATE TABLE users_settings
+(
+    id                int AUTO_INCREMENT PRIMARY KEY,
+    user_id           int,
+    new_message       TINYINT DEFAULT 1,
+    actions_on_task   TINYINT DEFAULT 0,
+    new_feedback      TINYINT DEFAULT 0,
+    show_to_customer  TINYINT DEFAULT 1,
+    hide_user_profile TINYINT DEFAULT 0,
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
 
 CREATE TABLE users_categories
