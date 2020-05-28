@@ -65,7 +65,7 @@ BasicAsset::register($this);
                     'itemOptions' => [
                         'class' => 'site-list__item',
 ],
-                    'activeCssClass'=>'active__item',
+                    'activeCssClass'=>'site-list__item site-list__item--active',
 
 ]) ?>
                 <ul class="header-nav__list site-list">
