@@ -10,7 +10,7 @@ use frontend\models\Task;
 use Yii;
 use yii\data\Pagination;
 
-class TaskController extends TaskforceSiteController
+class TaskController extends SecureController
 {
 
     public function actionBrowse()

@@ -24,7 +24,7 @@ use yii\web\Response;
 use yii\web\UploadedFile;
 use yii\widgets\ActiveForm;
 
-class UserController extends TaskforceSiteController
+class UserController extends SecureController
 {
 
     public function actionSignup()
