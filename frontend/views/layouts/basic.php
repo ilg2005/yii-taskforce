@@ -61,7 +61,7 @@ BasicAsset::register($this);
                         <a href="/create">Создать задание</a>
                     </li>
                     <li class="site-list__item">
-                        <a href="/profile">Мой профиль</a>
+                        <a href="/profile?user_id=<?= $user->id ?>">Мой профиль</a>
                     </li>
                 </ul>
             </div>
@@ -95,24 +95,24 @@ BasicAsset::register($this);
             </div>
             <div class="header__account">
                 <a class="header__account-photo">
-                    <img src="../img/user-photo.png"
+                    <img src="./uploads/<?= Yii::$app->user->identity->avatar ?>"
                          width="43" height="44"
                          alt="Аватар пользователя">
                 </a>
                 <span class="header__account-name">
-                 Василий
+                 <?= Yii::$app->user->identity->name ?>
              </span>
             </div>
             <div class="account__pop-up">
                 <ul class="account__pop-up-list">
                     <li>
-                        <a href="/view">Мои задания</a>
+                        <a href="/mylist">Мои задания</a>
                     </li>
                     <li>
                         <a href="/account">Настройки</a>
                     </li>
                     <li>
-                        <a href="/index">Выход</a>
+                        <a href="/logout">Выход</a>
                     </li>
                 </ul>
             </div>

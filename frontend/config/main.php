@@ -1,6 +1,7 @@
 <?php
 
 use frontend\components\MyFormatter;
+use frontend\models\User;
 use yii\i18n\PhpMessageSource;
 
 $params = array_merge(
@@ -16,6 +17,13 @@ return [
     'language' => 'ru-RU',
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
+    'on beforeAction' => static function() {
+        if (!Yii::$app->user->isGuest) {
+            $user = Yii::$app->user->identity;
+            $user->latest_activity_time = date('Y-m-d H:i:s');
+            $user->update();
+        }
+    },
     'components' => [
         'formatter' => [
             'defaultTimeZone' => 'Europe/Moscow',
@@ -37,7 +45,7 @@ return [
             'csrfParam' => '_csrf-frontend',
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => 'frontend\models\User',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
         ],
@@ -55,7 +63,7 @@ return [
             ],
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => 'taskforce-site/error',
         ],
 
         'urlManager' => [
@@ -64,13 +72,10 @@ return [
             //'enableStrictParsing' => true,
             'rules' => [
                 '/' => 'taskforce-site/index',
-                'about' => 'site/about',
-                'contact' => 'site/contact',
-                'login' => 'site/login',
                 'defaultRoute' => 'taskforce-site/index',
 
                 'browse/<page:\d+>' => 'taskforce-site/browse',
-                '<action:(index|account|browse|create|mylist|profile|signup|users|view|image)>' => 'taskforce-site/<action>',
+                '<action:(index|account|browse|create|mylist|profile|signup|users|view|image|logout|error)>' => 'taskforce-site/<action>',
             ],
         ],
 

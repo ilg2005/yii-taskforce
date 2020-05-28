@@ -14,17 +14,21 @@ use frontend\components\Rating;
         <section class="content-view">
             <div class="user__card-wrapper">
                 <div class="user__card">
-                    <img src="../img/<?= $user->profile->avatar_file ?>" width="120" height="120" alt="Аватар пользователя">
+                    <img src="./uploads/<?= $user->avatar ?>" width="120" height="120" alt="Аватар пользователя">
                     <div class="content-view__headline">
                         <h1><?= $user->name ?></h1>
                         <p>Россия, Санкт-Петербург, <?= Yii::t('app', '{n, plural, one{# год} few{# года} other{# лет}}', ['n' => Yii::$app->formatter->asAge($user->profile->birthday)]) ?></p>
                         <div class="profile-mini__name five-stars__rate">
                             <?= Rating::widget(['rating' => $user->rating]) ?>
                         </div>
-                        <b class="done-task"><?= Yii::t('app', 'Выполнил {n, plural, one{# заказ} few{# заказа} other{# заказов}}', ['n' => $user->tasks_count]) ?></b><b class="done-review"><?= Yii::t('app', 'Получил {n, plural, one{# отзыв} few{# отзыва} other{# отзывов}}', ['n' => $user->feedbacks_count]) ?></b>
+                        <b class="done-task"><?= Yii::t('app', 'Выполнил {n, plural, one{# заказ} few{# заказа} other{# заказов}}', ['n' => $tasksCount]) ?></b><b class="done-review"><?= Yii::t('app', 'Получил {n, plural, one{# отзыв} few{# отзыва} other{# отзывов}}', ['n' => $feedbacksCount]) ?></b>
                     </div>
                     <div class="content-view__headline user__card-bookmark <?= (Yii::$app->request->get('is_favorite') || $user->is_favorite) ? 'user__card-bookmark--current' : '' ?>">
+                        <?php if (strtotime($user->latest_activity_time) >= strtotime('-1 minute')) : ?>
+                        <span>Сейчас на сайте</span>
+                        <?php else : ?>
                         <span>Был на сайте <?= Yii::$app->formatter->asRelativeTime($user->latest_activity_time) ?></span>
+                        <?php endif; ?>
                         <a href="/profile?user_id=<?= $user->id ?>&is_favorite=<?= Yii::$app->request->get('is_favorite') ? '0' : '1' ?>"><b></b></a>
                     </div>
                 </div>
@@ -49,14 +53,14 @@ use frontend\components\Rating;
                     <div class="user__card-photo">
                         <h3 class="content-view__h3">Фото работ</h3>
                         <?php foreach ($user->portfolio as $array): ?>
-                        <a href="/image?filename=<?= $array->filename ?>"><img src="../img/<?= $array->filename ?>" width="85" height="86" alt="Фото работы"></a>
+                        <a href="/image?filename=<?= $array->filename ?>"><img src="./uploads/<?= $array->filename ?>" width="85" height="86" alt="Фото работы"></a>
                         <?php endforeach; ?>
                     </div>
                 </div>
             </div>
-            <?php if ($user->feedbacks_count): ?>
+            <?php if ($feedbacksCount): ?>
             <div class="content-view__feedback">
-                <h2>Отзывы<span> (<?= $user->feedbacks_count ?>)</span></h2>
+                <h2>Отзывы<span> (<?= $feedbacksCount ?>)</span></h2>
                 <div class="content-view__feedback-wrapper reviews-wrapper">
                     <?php foreach ($feedbacks as $feedback): ?>
                     <div class="feedback-card__reviews">

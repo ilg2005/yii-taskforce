@@ -12,8 +12,9 @@ class UserController extends Controller
     public $layout = 'basic';
     public function actionShow()
     {
-        $users = User::find()->asArray()
-            ->with('categories')
+        $users = User::find()
+            ->joinWith('views')
+            ->orderBy(['profile_views.id' => SORT_DESC])
             ->all();
         return $this->render('show', compact('users'));
     }

@@ -27,9 +27,9 @@ use frontend\components\Rating; ?>
             <div class="content-view__feedback-card user__search-wrapper">
                 <div class="feedback-card__top">
                     <div class="user__search-icon">
-                        <a href="/profile?user_id=<?= $user->id ?>&is_favorite=<?= $user->is_favorite ?>"><img src="../img/<?= $user->profile->avatar_file ?>" width="65" height="65"></a>
-                        <span><?= Yii::t('app', '{n, plural, one{# задание} few{# задания} other{# заданий}}', ['n' => $user->tasks_count]) ?></span>
-                        <span><?= Yii::t('app', '{n, plural, one{# отзыв} few{# отзыва} other{# отзывов}}', ['n' => $user->feedbacks_count]) ?></span>
+                        <a href="/profile?user_id=<?= $user->id ?>&is_favorite=<?= $user->is_favorite ?>"><img src="./uploads/<?= $user->avatar ?>" width="65" height="65"></a>
+                        <span><?= Yii::t('app', '{n, plural, one{# задание} few{# задания} other{# заданий}}', ['n' => count($user->tasks)]) ?></span>
+                        <span><?= Yii::t('app', '{n, plural, one{# отзыв} few{# отзыва} other{# отзывов}}', ['n' => count($user->feedbacks)]) ?></span>
                     </div>
                     <div class="feedback-card__top--name user__search-card">
                         <p class="link-name"><a href="/profile?user_id=<?= $user->id ?>&is_favorite=<?= $user->is_favorite ?>" class="link-regular"><?= $user->name ?></a></p>
@@ -38,7 +38,11 @@ use frontend\components\Rating; ?>
                             <?= $user->profile->about ?>
                         </p>
                     </div>
+                    <?php if (strtotime($user->latest_activity_time) >= strtotime('-1 minute')) : ?>
+                        <span  class="new-task__time">Сейчас на сайте</span>
+                    <?php else : ?>
                     <span class="new-task__time">Был на сайте <?= Yii::$app->formatter->asRelativeTime($user->latest_activity_time) ?></span>
+                    <?php endif; ?>
                 </div>
                 <div class="link-specialization user__search-link--bottom">
                     <?php foreach ($user->categories as $category): ?>

@@ -8,20 +8,13 @@ use DateTime;
 use yii\behaviors\AttributeTypecastBehavior;
 use yii\db\ActiveRecord;
 
-class Profile extends ActiveRecord
+class ProfileView extends ActiveRecord
 {
-
     public function rules()
     {
         return [
-            [['user_id', 'avatar_file', 'address', 'birthday', 'about', 'phone', 'skype', 'messenger'], 'safe'],
-            [['avatar_file'], 'string'],
+            [['current_user_id', 'viewed_user_id', 'viewing_time'], 'safe'],
         ];
-    }
-
-    public function getUsers()
-    {
-        return $this->hasMany(USER::class, ['id' => 'user_id']);
     }
 
     public function behaviors()
@@ -30,12 +23,11 @@ class Profile extends ActiveRecord
             'typecast' => [
                 'class' => AttributeTypecastBehavior::class,
                 'attributeTypes' => [
-                    'birthday' => static function ($value) {
+                    'viewing_time' => static function ($value) {
                         return ($value instanceof DateTime) ? $value->format('Y-m-d') : DateTime::createFromFormat('Y-m-d', $value);
                     },
-                    'avatar_file' => AttributeTypecastBehavior::TYPE_STRING,
-                    'phone' => AttributeTypecastBehavior::TYPE_STRING,
-                    'skype' => AttributeTypecastBehavior::TYPE_STRING,
+                    'current_user_id' => AttributeTypecastBehavior::TYPE_INTEGER,
+                    'viewed_user_id' => AttributeTypecastBehavior::TYPE_INTEGER,
                 ],
                 'typecastAfterValidate' => true,
                 'typecastBeforeSave' => true,
@@ -44,8 +36,9 @@ class Profile extends ActiveRecord
         ];
     }
 
+
     public static function tableName()
     {
-        return 'users_profiles';
+        return 'profile_views';
     }
 }

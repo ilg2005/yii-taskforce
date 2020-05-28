@@ -649,6 +649,10 @@ footer {
 .has-error .text-danger {
     color: #FF116E; }
 
+.text-danger {
+  display: inline;
+  color: #FF116E; }
+
 .input-middle {
   padding-top: 14px;
   padding-bottom: 14px;
@@ -702,6 +706,10 @@ footer {
 
 .registration-town {
   background-position: 325px 20px; }
+
+.accountform-label {
+  display: block;
+}
 
 .checkbox__input + label::before {
   content: "";
@@ -2004,7 +2012,8 @@ footer {
   -ms-flex-item-align: start;
       align-self: flex-start;
   width: 310px;
-  margin-right: 20px; }
+  margin-right: 20px;
+}
 
 .account__input--name {
   width: 445px; }
@@ -2069,11 +2078,11 @@ footer {
   font-family: "PT Sans", sans-serif;
   font-size: 36px;
   font-style: italic;
-  margin-top: 9px;
+  margin: auto;
   color: #ffffff; }
 
 .logo-image--index {
-  margin-top: 17px;
+  margin: 17px;
   padding-left: 18px;
   height: 114px;
   fill: #ffffff; }
@@ -2577,6 +2586,25 @@ IMG.displayed {
   padding-top: 15px;
   background-color: #ffffff;
   border-top: 1px solid #c8c5c5; }
+
+.show {
+  display: block;
+}
+
+.hide {
+  visibility: hidden;
+}
+
+.exception {
+  margin-top: 10%;
+  text-align: center;
+}
+
+.file-preview {
+  display: inline-block;
+  margin: 20px;
+}
+
 
 /*# sourceMappingURL=style.css.map */
 

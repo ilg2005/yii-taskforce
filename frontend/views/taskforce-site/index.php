@@ -5,7 +5,8 @@
 $this->title = 'TaskForce-Index';
 
 const TRIM_WIDTH = 70;
-?>
+use yii\helpers\Html;
+use yii\widgets\ActiveForm; ?>
 <header class=" page-header--index">
     <div class="main-container page-header__container page-header__container--index">
         <div class="page-header__logo--index">
@@ -37,8 +38,9 @@ const TRIM_WIDTH = 70;
             </a>
             <p>Работа там, где ты!</p>
         </div>
-        <div class="header__account--index">
-            <a href="/account" class="header__account-enter">
+        <div class="header__account--index <?= (Yii::$app->user->isGuest) ?: 'hide' ?>
+">
+            <a href="#" class="header__account-enter open-modal" data-for="enter-form">
                 <span>Вход</span></a>
             или
             <a href="/signup" class="header__account-registration">
@@ -168,3 +170,42 @@ const TRIM_WIDTH = 70;
         </div>
     </div>
 </main>
+<section class="modal enter-form form-modal <?= $model->errors ? 'show' : '' ?>" id="enter-form">
+    <h2>Вход на сайт</h2>
+    <?php if ($model->errors) : ?>
+        <p class="has-error text-danger">Вы ввели неверный email/пароль!</p>
+        <br>
+    <?php endif; ?>
+    <?php $form = ActiveForm::begin([
+        'id' => 'login',
+        'fieldConfig' => [
+            'template' => '<p>{label}{input}{error}</p><br><br>',
+            'labelOptions' => [
+                'class' => 'form-modal-description',
+            ],
+            'inputOptions' => [
+                'class' => 'enter-form-email input input-middle',
+                'style' => ['margin-bottom' => '0px'],
+            ],
+            'errorOptions' => [
+                'class' => 'text-danger',
+            ],
+        ],
+    ]); ?>
+
+    <?= $form->field($model, 'email')
+        ->label('Email')
+        ->input('email')
+    ?>
+
+    <?= $form->field($model, 'password')
+        ->label('Пароль')
+        ->passwordInput()
+    ?>
+
+    <?= Html::submitButton('Войти', ['class' => 'button']) ?>
+    <?php ActiveForm::end(); ?>
+
+    <button class="form-modal-close" type="button">Закрыть</button>
+</section>
+<div class="overlay <?= $model->errors ? 'show' : '' ?>"></div>

@@ -12,16 +12,19 @@ class ImportController extends Controller
     const DATA_MODEL_MAP = [
         'categories' => 'Category',
         'towns' => 'Location',
-        'profiles' => 'Profile',
         'users-combined' => 'User',
+        'profiles' => 'Profile',
+        'settings' => 'Setting',
         'tasks' => 'Task',
         'feedbacks' => 'Feedback',
         'reactions' => 'Reaction',
         'users-portfolio' => 'Portfolio',
+        'profile-views' => 'ProfileView',
     ];
 
     const DATA_TABLE_MAP = [
         'users-categories' => 'users_categories',
+
     ];
 
     public function directImport2Table($filename, $tableName)

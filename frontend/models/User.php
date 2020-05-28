@@ -6,15 +6,17 @@ namespace frontend\models;
 
 use Yii;
 use yii\db\ActiveRecord;
+use yii\web\IdentityInterface;
 
-class User extends ActiveRecord
+class User extends ActiveRecord implements IdentityInterface
 {
 
     public function rules()
     {
         return [
-            [['name', 'town', 'email', 'password', 'registration_date', 'profile_id', 'role', 'latest_activity_time', 'is_favorite', 'rating', 'feedbacks_count', 'tasks_count', 'views_count'], 'safe'],
+            [['name', 'town', 'email', 'password', 'registration_date', 'role', 'latest_activity_time', 'is_favorite', 'rating'], 'safe'],
             ['email', 'email'],
+            ['email', 'unique'],
         ];
     }
 
@@ -33,7 +35,12 @@ class User extends ActiveRecord
 
     public function getProfile()
     {
-        return $this->hasOne(Profile::class, ['id' => 'profile_id']);
+        return $this->hasOne(Profile::class, ['user_id' => 'id']);
+    }
+
+    public function getAvatar()
+    {
+        return $this->profile->avatar_file ?? 'no-image-available.jpg';
     }
 
 
@@ -47,6 +54,17 @@ class User extends ActiveRecord
         return $this->hasMany(Feedback::class, ['worker_id' => 'id']);
     }
 
+    public function getViews()
+    {
+        return $this->hasMany(ProfileView::class, ['viewed_user_id' => 'id']);
+
+    }
+
+    public function getSettings()
+    {
+        return $this->hasOne(Setting::class, ['user_id' => 'id']);
+    }
+
     /**
      * Generates password hash from password and sets it to the model
      *
@@ -57,9 +75,54 @@ class User extends ActiveRecord
         $this->password = Yii::$app->security->generatePasswordHash($password);
     }
 
+    public function validatePassword($password)
+    {
+        return Yii::$app->security->validatePassword($password, $this->password);
+    }
+
 
     public static function tableName()
     {
         return 'users';
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public static function findIdentity($id)
+    {
+        return self::findOne($id);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
+        // TODO: Implement findIdentityByAccessToken() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getId()
+    {
+        return $this->getPrimaryKey();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getAuthKey()
+    {
+        // TODO: Implement getAuthKey() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function validateAuthKey($authKey)
+    {
+        // TODO: Implement validateAuthKey() method.
     }
 }

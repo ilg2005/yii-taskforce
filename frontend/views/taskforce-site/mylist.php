@@ -66,7 +66,7 @@ $this->title = 'TaskForce-MyList';
                         </svg>
                     </div>
                     <a href="#">
-                        Скрытые
+                        Просроченные
                     </a>
                 </li>
             </ul>
@@ -86,7 +86,7 @@ $this->title = 'TaskForce-MyList';
                         требуют определения и уточнения позиций…
                     </p>
                     <div class="feedback-card__top ">
-                        <a href="#"><img src="../img/man-glasses.jpg" width="36" height="36"></a>
+                        <a href="#"><img src="./img/man-glasses.jpg" width="36" height="36"></a>
                         <div class="feedback-card__top--name my-list__bottom">
                             <p class="link-name"><a href="#" class="link-regular">Астахов Павел</a></p>
                             <a href="#" class="my-list__bottom-chat  my-list__bottom-chat--new"><b>3</b></a>
@@ -107,7 +107,7 @@ $this->title = 'TaskForce-MyList';
                         требуют определения и уточнения позиций…
                     </p>
                     <div class="feedback-card__top ">
-                        <a href="#"><img src="../img/woman-glasses.jpg" width="36" height="36"></a>
+                        <a href="#"><img src="./img/woman-glasses.jpg" width="36" height="36"></a>
                         <div class="feedback-card__top--name my-list__bottom">
                             <p class="link-name"><a href="#" class="link-regular">Морозова Евгения</a></p>
                             <a href="#" class="my-list__bottom-chat"></a>
