@@ -2,6 +2,8 @@
 
 use frontend\assets\BasicAsset;
 use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\widgets\Menu;
 
 BasicAsset::register($this);
 ?>
@@ -50,6 +52,22 @@ BasicAsset::register($this);
             </div>
 
             <div class="header__nav">
+                <?= Menu::widget([
+                    'items' => [
+                        ['label' => 'Задания', 'url' => ['/browse']],
+                        ['label' => 'Исполнители', 'url' => ['/users']],
+                        ['label' => 'Создать задание', 'url' => ['/create']],
+                        ['label' => 'Мой профиль', 'url' => ['/profile?user_id=']],
+                    ],
+                    'options' => [
+                        'class' => 'header-nav__list site-list',
+                    ],
+                    'itemOptions' => [
+                        'class' => 'site-list__item',
+],
+                    'activeCssClass'=>'active__item',
+
+]) ?>
                 <ul class="header-nav__list site-list">
                     <li class="site-list__item">
                         <a href="/browse">Задания</a>
