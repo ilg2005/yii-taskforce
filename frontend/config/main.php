@@ -74,8 +74,10 @@ return [
                 '/' => 'taskforce-site/index',
                 'defaultRoute' => 'taskforce-site/index',
 
-                'browse/<page:\d+>' => 'taskforce-site/browse',
-                '<action:(index|account|browse|create|mylist|profile|signup|users|view|image|logout|error)>' => 'taskforce-site/<action>',
+                'browse/<page:\d+>' => 'task/browse',
+                '<action:(index|image|error)>' => 'taskforce-site/<action>',
+                '<action:(account|profile|signup|users|logout)>' => 'user/<action>',
+                '<action:(browse|create|mylist|view)>' => 'task/<action>',
             ],
         ],
 
