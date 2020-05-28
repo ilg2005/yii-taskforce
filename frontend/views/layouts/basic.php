@@ -69,7 +69,7 @@ BasicAsset::register($this);
 
 ]) ?>
                 <ul class="header-nav__list site-list">
-                    <li class="site-list__item">
+                    <li class="<?= (Yii::$app->request->getUrl() === '/browse') ? ' site-list__item site-list__item--active' : 'site-list__item '?>">
                         <a href="/browse">Задания</a>
                     </li>
                     <li class="site-list__item">
