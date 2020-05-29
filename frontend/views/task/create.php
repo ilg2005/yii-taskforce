@@ -1,6 +1,8 @@
 <?php
 
 
+use frontend\models\Category;
+use yii\helpers\ArrayHelper;
 use yii\bootstrap\ActiveForm;
 
 $this->title = 'TaskForce-Create';
@@ -18,12 +20,12 @@ $this->title = 'TaskForce-Create';
                         'template' => "<p>{label}</p>{input}{hint}{error}",
                         'inputOptions' => [
                             'style' => ['width' => '520px'],
+                            'class' => 'input textarea',
                         ],
                         'errorOptions' => [
                             'class' => 'has-error'
                         ],
                         'labelOptions' => [
-                            'class' => 'form-create'
                         ],
                         'hintOptions' => [
                             'tag' => 'span',
@@ -35,12 +37,27 @@ $this->title = 'TaskForce-Create';
                 <?= $form->field($model, 'title')
                     ->textArea([
                         'placeholder' => 'Повесить полку',
-                        'class' => 'input textarea',
                         'rows' => 1,
                     ])
                     ->hint('Кратко опишите суть работы')
                 ?>
 
+                <?= $form->field($model, 'description')
+                    ->textArea([
+                        'placeholder' => 'Подробное описание',
+                        'rows' => 7,
+                    ])
+                    ->hint('Укажите все пожелания и детали, чтобы исполнителям было проще соориентироваться')
+                ?>
+
+                <?= $form->field($model, 'category')
+                    ->dropDownList($categories, [
+                        'class' => 'multiple-select input multiple-select-big',
+                        'prompt' => 'Выберите из списка...',
+                        'size' => 1,
+                    ])
+                    ->hint('Выберите категорию')
+                ?>
                 <?php ActiveForm::end(); ?>
                 <form class="create__task-form form-create" id="task-form">
                     <label for="10">Мне нужно</label>

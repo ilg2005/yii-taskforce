@@ -10,6 +10,7 @@ use frontend\models\CreateForm;
 use frontend\models\Task;
 use Yii;
 use yii\data\Pagination;
+use yii\helpers\ArrayHelper;
 
 class TaskController extends SecureController
 {
@@ -64,7 +65,8 @@ class TaskController extends SecureController
     public function actionCreate()
     {
         $model = new CreateForm();
-        return $this->render('create', compact('model'));
+        $categories = ArrayHelper::map(Category::find()->all(), 'id', 'name');
+        return $this->render('create', compact('model', 'categories'));
     }
 
     public function actionView()
