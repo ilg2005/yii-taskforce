@@ -1,6 +1,7 @@
 <?php
 
-/* @var $this yii\web\View */
+
+use yii\bootstrap\ActiveForm;
 
 $this->title = 'TaskForce-Create';
 
@@ -10,6 +11,37 @@ $this->title = 'TaskForce-Create';
         <section class="create__task">
             <h1>Публикация нового задания</h1>
             <div class="create__task-main">
+                <?php $form = ActiveForm::begin([
+                    'options' => ['enctype' => 'multipart/form-data', 'class' => 'create__task-form form-create'],
+                    'id' => 'task-form',
+                    'fieldConfig' => [
+                        'template' => "<p>{label}</p>{input}{hint}{error}",
+                        'inputOptions' => [
+                            'style' => ['width' => '520px'],
+                        ],
+                        'errorOptions' => [
+                            'class' => 'has-error'
+                        ],
+                        'labelOptions' => [
+                            'class' => 'form-create'
+                        ],
+                        'hintOptions' => [
+                            'tag' => 'span',
+                            'class' => 'form-create'
+                        ],
+
+                    ],
+                ]); ?>
+                <?= $form->field($model, 'title')
+                    ->textArea([
+                        'placeholder' => 'Повесить полку',
+                        'class' => 'input textarea',
+                        'rows' => 1,
+                    ])
+                    ->hint('Кратко опишите суть работы')
+                ?>
+
+                <?php ActiveForm::end(); ?>
                 <form class="create__task-form form-create" id="task-form">
                     <label for="10">Мне нужно</label>
                     <textarea class="input textarea" rows="1" id="10" name="" placeholder="Повесить полку"></textarea>

@@ -646,7 +646,7 @@ footer {
 .has-error input, .has-error select {
   border-color: #FF116E; }
 
-.has-error .text-danger {
+.has-error  {
     color: #FF116E; }
 
 .text-danger {

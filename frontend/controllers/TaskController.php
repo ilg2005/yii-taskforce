@@ -6,6 +6,7 @@ namespace frontend\controllers;
 
 use frontend\constants\TaskStatuses;
 use frontend\models\Category;
+use frontend\models\CreateForm;
 use frontend\models\Task;
 use Yii;
 use yii\data\Pagination;
@@ -62,7 +63,8 @@ class TaskController extends SecureController
 
     public function actionCreate()
     {
-        return $this->render('create');
+        $model = new CreateForm();
+        return $this->render('create', compact('model'));
     }
 
     public function actionView()

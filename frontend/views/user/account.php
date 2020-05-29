@@ -6,7 +6,6 @@ use frontend\models\Location;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 use yii\widgets\MaskedInput;
-use yii\web\UploadedFile;
 
 $this->title = 'TaskForce-Account';
 ?>
