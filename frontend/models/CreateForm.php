@@ -11,6 +11,7 @@ class CreateForm extends Model
     public $title;
     public $description;
     public $category;
+    public $files;
 
     public function attributeLabels()
     {
@@ -18,6 +19,7 @@ class CreateForm extends Model
             'title' => 'Мне нужно',
             'description' => 'Подробности задания',
             'category' => 'Категория',
+            'files' => 'Файлы',
         ];
     }
 
@@ -44,6 +46,7 @@ class CreateForm extends Model
 
             ['category', 'each', 'rule' => ['integer']],
 
+            ['files', 'file', 'skipOnEmpty' => true],
         ];
     }
 }

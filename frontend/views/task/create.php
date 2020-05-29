@@ -58,6 +58,12 @@ $this->title = 'TaskForce-Create';
                     ])
                     ->hint('Выберите категорию')
                 ?>
+
+                <?= $form->field($model, 'files[]', ['template' => '<p>{label}</p>{hint}<div class="create__file"><span>Добавить новый файл{input}</span></div>{error}'])
+                    ->fileInput([])
+                    ->hint('Загрузите файлы, которые помогут исполнителю лучше выполнить или оценить работу')
+                ?>
+
                 <?php ActiveForm::end(); ?>
                 <form class="create__task-form form-create" id="task-form">
                     <label for="10">Мне нужно</label>
