@@ -54,10 +54,10 @@ BasicAsset::register($this);
             <div class="header__nav">
                 <?= Menu::widget([
                     'items' => [
-                        ['label' => 'Задания', 'url' => ['/browse']],
-                        ['label' => 'Исполнители', 'url' => ['/users']],
-                        ['label' => 'Создать задание', 'url' => ['/create']],
-                        ['label' => 'Мой профиль', 'url' => ['/profile?user_id=']],
+                        ['label' => 'Задания', 'url' => ['/browse'], 'active' => (Yii::$app->request->getUrl() === '/browse')],
+                        ['label' => 'Исполнители', 'url' => ['/users'], 'active' => (Yii::$app->request->getUrl() === '/users')],
+                        ['label' => 'Создать задание', 'url' => ['/create'], 'active' => (Yii::$app->request->getUrl() === '/create')],
+                        ['label' => 'Мой профиль', 'url' => ['/profile?user_id='], 'active' => (Yii::$app->request->getUrl() === '/profile?user_id=')],
                     ],
                     'options' => [
                         'class' => 'header-nav__list site-list',
@@ -65,23 +65,9 @@ BasicAsset::register($this);
                     'itemOptions' => [
                         'class' => 'site-list__item',
 ],
-                    'activeCssClass'=>'site-list__item site-list__item--active',
+                    'activeCssClass'=>'site-list__item--active',
 
 ]) ?>
-                <ul class="header-nav__list site-list">
-                    <li class="<?= (Yii::$app->request->getUrl() === '/browse') ? ' site-list__item site-list__item--active' : 'site-list__item '?>">
-                        <a href="/browse">Задания</a>
-                    </li>
-                    <li class="site-list__item">
-                        <a href="/users">Исполнители</a>
-                    </li>
-                    <li class="site-list__item">
-                        <a href="/create">Создать задание</a>
-                    </li>
-                    <li class="site-list__item">
-                        <a href="/profile?user_id=<?= $user->id ?>">Мой профиль</a>
-                    </li>
-                </ul>
             </div>
 
             <?php if($this->title !== 'TaskForce-Signup') : ?>
