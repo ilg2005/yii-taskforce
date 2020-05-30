@@ -59,13 +59,16 @@ $this->title = 'TaskForce-Create';
                     ->hint('Выберите категорию')
                 ?>
 
-                <?= $form->field($model, 'files[]', ['template' => '<p>{label}</p>{hint}<div class="create__file"><span>Добавить новый файл{input}</span></div>{error}'])
-                    ->fileInput([])
-                    ->hint('Загрузите файлы, которые помогут исполнителю лучше выполнить или оценить работу')
-                ?>
+                <label>Файлы</label>
+                <span>Загрузите файлы, которые помогут исполнителю лучше выполнить или оценить работу</span>
+                <div id="previews"></div>
+                <div class="create__file dropzone">
+                    <span>Добавить новый файл</span>
+                </div>
+
 
                 <?php ActiveForm::end(); ?>
-                <form class="create__task-form form-create" id="task-form">
+                <form class="create__task-form form-create" action="/" enctype="multipart/form-data" id="task-form">
                     <label for="10">Мне нужно</label>
                     <textarea class="input textarea" rows="1" id="10" name="" placeholder="Повесить полку"></textarea>
                     <span>Кратко опишите суть работы</span>
@@ -83,6 +86,7 @@ $this->title = 'TaskForce-Create';
                     <span>Загрузите файлы, которые помогут исполнителю лучше выполнить или оценить работу</span>
                     <div class="create__file">
                         <span>Добавить новый файл</span>
+                        <!--                          <input type="file" name="files[]" class="dropzone">-->
                     </div>
                     <label for="13">Локация</label>
                     <input class="input-navigation input-middle input" id="13" type="search" name="q" placeholder="Санкт-Петербург, Калининский район">
@@ -94,8 +98,8 @@ $this->title = 'TaskForce-Create';
                             <span>Не заполняйте для оценки исполнителем</span>
                         </div>
                         <div class="create__price-time--wrapper">
-                            <label for="15">Сроки исполнения</label>
-                            <input id="15"  class="input-middle input input-date" type="text" placeholder="10.11, 15:00">
+                            <label for="15">Срок исполнения</label>
+                            <input id="15"  class="input-middle input input-date" type="date" placeholder="10.11, 15:00">
                             <span>Укажите крайний срок исполнения</span>
                         </div>
                     </div>
@@ -125,3 +129,60 @@ $this->title = 'TaskForce-Create';
         </section>
     </div>
 </main>
+<script src="js/dropzone.js"></script>
+<script>
+    Dropzone.autoDiscover = false;
+    var fileUploadElement = document.querySelector('.create__file')
+    var dropzone = new Dropzone(fileUploadElement, {
+        url: window.location.href,
+        paramName: 'files',
+        uploadMultiple: true,
+        parallelUploads: 6,
+        maxFiles: 6,
+        addRemoveLinks: true,
+        dictRemoveFile: 'Удалить',
+        removedfile: function (file) {
+            file.previewElement.remove();
+            if (this.files.length < 6) {
+                document.querySelector('.dz-default').classList.remove('visually-hidden');
+            }
+        },
+        maxfilesreached: function() {
+            document.querySelector('.dz-default').classList.add('visually-hidden');
+        },
+        maxfilesexceeded: function(file) {
+            dropzone.removeFile(file);
+        },
+        autoProcessQueue: true,
+        previewsContainer: "#previews",
+
+
+/*
+        previewTemplate: '<div class="dz-preview dz-file-preview file-preview">' +
+            '<div><img data-dz-thumbnail alt="Файл по заданию"></div>' +
+            '</div>',
+*/
+
+
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }
+    });
+
+    var formElement = document.querySelector('#task-form');
+    var submitBtnElement = formElement.querySelector('button[type="submit"]');
+    submitBtnElement.addEventListener('click', function (evt) {
+        evt.preventDefault();
+        var formData = new FormData(formElement);
+        var imageFiles = dropzone.files;
+        imageFiles.forEach((file) => {
+            formData.append('files[]', file);
+        })
+        var request = new XMLHttpRequest();
+        request.open("POST", window.location.href);
+        request.send(formData);
+        setTimeout(() => {
+            window.location.reload();
+        }, 100);
+    });
+</script>
