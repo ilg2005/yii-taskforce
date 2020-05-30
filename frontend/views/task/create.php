@@ -58,7 +58,6 @@ $this->title = 'TaskForce-Create';
                     ])
                     ->hint('Выберите категорию')
                 ?>
-
                 <label>Файлы</label>
                 <span>Загрузите файлы, которые помогут исполнителю лучше выполнить или оценить работу</span>
                 <div id="previews"></div>
