@@ -1,7 +1,7 @@
 <?php
 
 
-namespace frontend\constants;
+namespace TaskForce\constants;
 
 
 class WorkerCategories

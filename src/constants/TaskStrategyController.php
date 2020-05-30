@@ -1,5 +1,5 @@
 <?php
-namespace frontend\controllers;
+namespace TaskForce\constants;
 
 use frontend\constants\TaskStatuses;
 use frontend\constants\UserActions;

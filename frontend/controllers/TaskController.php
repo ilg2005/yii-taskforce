@@ -4,13 +4,15 @@
 namespace frontend\controllers;
 
 
-use frontend\constants\TaskStatuses;
 use frontend\models\Category;
 use frontend\models\CreateForm;
 use frontend\models\Task;
+use TaskForce\constants\TaskStatuses;
+use TaskForce\constants\UserRoles;
 use Yii;
 use yii\data\Pagination;
 use yii\helpers\ArrayHelper;
+use yii\web\NotFoundHttpException;
 
 class TaskController extends SecureController
 {
@@ -64,6 +66,10 @@ class TaskController extends SecureController
 
     public function actionCreate()
     {
+        if (Yii::$app->user->identity->role === UserRoles::WORKER) {
+            throw new NotFoundHttpException('Задание может создать только заказчик');
+        }
+
         $model = new CreateForm();
         $categories = ArrayHelper::map(Category::find()->all(), 'id', 'name');
         return $this->render('create', compact('model', 'categories'));

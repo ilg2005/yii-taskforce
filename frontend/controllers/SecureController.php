@@ -4,9 +4,11 @@
 namespace frontend\controllers;
 
 
+use frontend\constants\UserRoles;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 
 class SecureController extends Controller
 {
@@ -32,12 +34,24 @@ class SecureController extends Controller
                         'allow' => true,
                         'actions' => ['signup'],
                         'roles' => ['@'],
-                        'matchCallback' => function ($rule, $action) {
+                        'matchCallback' => function () {
                             return $this->redirect('/browse');
                         }
                     ],
+/*                    [
+                        'allow' => false,
+                        'actions' => ['create'],
+                        'roles' => ['@'],
+                        'matchCallback' => function () {
+                               return (Yii::$app->user->identity->role === UserRoles::WORKER);
+                        },
+                        'denyCallback' => function () {
+                            throw new NotFoundHttpException('Задание может создать только заказчик');
+                        },
+                    ],*/
+
                 ],
-                'denyCallback' => function ($rule, $action) {
+                'denyCallback' => function () {
                     Yii::$app->response->redirect(['/index']);
                 },
             ],

@@ -4,8 +4,8 @@
 namespace frontend\controllers;
 
 
-use frontend\constants\TaskStatuses;
-use frontend\constants\UserRoles;
+use TaskForce\constants\TaskStatuses;
+use TaskForce\constants\UserRoles;
 use frontend\models\AccountForm;
 use frontend\models\Category;
 use frontend\models\Feedback;
