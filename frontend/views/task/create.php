@@ -155,15 +155,6 @@ $this->title = 'TaskForce-Create';
         },
         autoProcessQueue: true,
         previewsContainer: "#previews",
-
-
-/*
-        previewTemplate: '<div class="dz-preview dz-file-preview file-preview">' +
-            '<div><img data-dz-thumbnail alt="Файл по заданию"></div>' +
-            '</div>',
-*/
-
-
         headers: {
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         }
