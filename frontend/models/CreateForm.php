@@ -34,17 +34,21 @@ class CreateForm extends Model
 
             [['title', 'description', 'category' ], 'required', 'message' => 'Это поле должно быть заполнено!'],
 
+            [['title', 'description'], 'filter', 'filter' => function ($value) {
+                return preg_replace('/\s{2,}/', ' ', $value);
+            }],
+
             [
                 'title',
                 'match',
-                'pattern' => '/^[\S]{10,}$/i',
+                'pattern' => '/^[а-я\w\s]{10,}$/i',
                 'message' => 'Длина текста должна быть не менее 10 непробельных символов.'
             ],
 
             [
                 'description',
                 'match',
-                'pattern' => '/^[\S]{30,}$/i',
+                'pattern' => '/^[а-я\w\s]{30,}$/i',
                 'message' => 'Длина текста должна быть не менее 30 непробельных символов.'
             ],
 

@@ -4,6 +4,7 @@
 use frontend\models\Category;
 use yii\helpers\ArrayHelper;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\Html;
 
 $this->title = 'TaskForce-Create';
 
@@ -117,7 +118,7 @@ $this->title = 'TaskForce-Create';
                     </div>
                 </div>
             </div>
-            <button form="task-form" class="button" type="submit">Опубликовать</button>
+            <?= Html::submitButton('Опубликовать', ['form' => 'task-form', 'class'=> 'button']) ?>
         </section>
     </div>
 </main>
