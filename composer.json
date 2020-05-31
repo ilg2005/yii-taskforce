@@ -1,7 +1,7 @@
 {
     "autoload": {
         "psr-4": {
-            "TaskForce\\": "src/"
+            "TaskForce\\": "./src/"
         }
     },
     "name": "yiisoft/yii2-app-advanced",

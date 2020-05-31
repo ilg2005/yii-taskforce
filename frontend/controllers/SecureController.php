@@ -38,18 +38,6 @@ class SecureController extends Controller
                             return $this->redirect('/browse');
                         }
                     ],
-/*                    [
-                        'allow' => false,
-                        'actions' => ['create'],
-                        'roles' => ['@'],
-                        'matchCallback' => function () {
-                               return (Yii::$app->user->identity->role === UserRoles::WORKER);
-                        },
-                        'denyCallback' => function () {
-                            throw new NotFoundHttpException('Задание может создать только заказчик');
-                        },
-                    ],*/
-
                 ],
                 'denyCallback' => function () {
                     Yii::$app->response->redirect(['/index']);

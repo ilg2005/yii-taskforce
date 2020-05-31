@@ -8,7 +8,8 @@ use frontend\models\Category;
 use frontend\models\CreateForm;
 use frontend\models\Task;
 use TaskForce\constants\TaskStatuses;
-use TaskForce\constants\UserRoles;
+use TaskForce\constants\TaskStrategy;
+use TaskForce\constants\UserActions;
 use Yii;
 use yii\data\Pagination;
 use yii\helpers\ArrayHelper;
@@ -66,7 +67,7 @@ class TaskController extends SecureController
 
     public function actionCreate()
     {
-        if (Yii::$app->user->identity->role === UserRoles::WORKER) {
+        if (!TaskStrategy::checkAccess(Yii::$app->user->identity, UserActions::CREATE)) {
             throw new NotFoundHttpException('Задание может создать только заказчик');
         }
 

@@ -1,12 +1,9 @@
 <?php
 namespace TaskForce\constants;
 
-use frontend\constants\TaskStatuses;
-use frontend\constants\UserActions;
-use frontend\constants\UserRoles;
-use frontend\constants\WorkerCategories;
 
-class TaskStrategyController
+
+class TaskStrategy
 {
     private $workerId;
     private $customerId;
@@ -79,6 +76,18 @@ class TaskStrategyController
                 break;
         }
         return $status;
+    }
+
+    public static function checkAccess($user, $action) {
+        switch ($action) {
+            case UserActions::CREATE:
+                $access = ($user->role === UserRoles::CUSTOMER);
+                break;
+            default:
+                $access = false;
+                break;
+        }
+        return $access;
     }
 
 
