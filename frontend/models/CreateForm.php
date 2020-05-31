@@ -12,6 +12,8 @@ class CreateForm extends Model
     public $description;
     public $category;
     public $files;
+    public $budget;
+    public $deadline;
 
     public function attributeLabels()
     {
@@ -20,13 +22,15 @@ class CreateForm extends Model
             'description' => 'Подробности задания',
             'category' => 'Категория',
             'files' => 'Файлы',
+            'budget' => 'Бюджет',
+            'deadline' => 'Срок исполнения',
         ];
     }
 
     public function rules()
     {
         return [
-            [['title', 'description'], 'trim'],
+            [['title', 'description', 'budget', 'deadline'], 'trim'],
 
             [['title', 'description', 'category' ], 'required', 'message' => 'Это поле должно быть заполнено!'],
 
@@ -47,6 +51,10 @@ class CreateForm extends Model
             ['category', 'each', 'rule' => ['integer']],
 
             ['files', 'file', 'skipOnEmpty' => true],
+
+            ['budget', 'integer', 'min' => 1, 'message' => 'Должно быть целое положительное число'],
+            ['deadline', 'date', 'format' => 'Y-m-d'],
+
         ];
     }
 }
