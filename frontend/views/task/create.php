@@ -154,7 +154,7 @@ $this->title = 'TaskForce-Create';
     });
 
     var formElement = document.querySelector('#task-form');
-    var submitBtnElement = formElement.querySelector('button[type="submit"]');
+    var submitBtnElement = document.querySelector('.button');
     submitBtnElement.addEventListener('click', function (evt) {
         evt.preventDefault();
         var formData = new FormData(formElement);
