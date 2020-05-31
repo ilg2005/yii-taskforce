@@ -34,23 +34,10 @@ class CreateForm extends Model
 
             [['title', 'description', 'category' ], 'required', 'message' => 'Это поле должно быть заполнено!'],
 
-            [['title', 'description'], 'filter', 'filter' => function ($value) {
-                return preg_replace('/\s{2,}/', ' ', $value);
-            }],
+/*            ['title', 'string', 'length' => [10], 'message' => 'Длина текста должна быть не менее 10 непробельных символов.'],
+            ['description', 'string', 'length' => [30], 'message' => 'Длина текста должна быть не менее 30 непробельных символов.'],*/
 
-            [
-                'title',
-                'match',
-                'pattern' => '/^[а-я\w\s]{10,}$/i',
-                'message' => 'Длина текста должна быть не менее 10 непробельных символов.'
-            ],
-
-            [
-                'description',
-                'match',
-                'pattern' => '/^[а-я\w\s]{30,}$/i',
-                'message' => 'Длина текста должна быть не менее 30 непробельных символов.'
-            ],
+            [['title', 'description'], 'validateTitleDescription'],
 
             ['category', 'each', 'rule' => ['integer']],
 
@@ -60,5 +47,15 @@ class CreateForm extends Model
             ['deadline', 'date', 'format' => 'Y-m-d'],
 
         ];
+    }
+
+    public function validateTitleDescription()
+    {
+
+        if (strlen($this->title) < 10)
+        {
+            $errorMsg = 'Длина текста должна быть не менее 10 непробельных символов.';
+            $this->addError('title',$errorMsg);
+        }
     }
 }

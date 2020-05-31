@@ -95,7 +95,6 @@ $this->title = 'TaskForce-Create';
                         ?>
                     </div>
                 </div>
-
                 <?php ActiveForm::end(); ?>
                 <div class="create__warnings">
                     <div class="warning-item warning-item--advice">
@@ -165,8 +164,10 @@ $this->title = 'TaskForce-Create';
         var request = new XMLHttpRequest();
         request.open("POST", window.location.href);
         request.send(formData);
+/*
         setTimeout(() => {
             window.location.reload();
         }, 100);
+*/
     });
 </script>

@@ -70,9 +70,10 @@ class TaskController extends SecureController
         if (!TaskStrategy::checkAccess(Yii::$app->user->identity, UserActions::CREATE)) {
             throw new NotFoundHttpException('Задание может создать только заказчик');
         }
+        $categories = ArrayHelper::map(Category::find()->all(), 'id', 'name');
 
         $model = new CreateForm();
-        $categories = ArrayHelper::map(Category::find()->all(), 'id', 'name');
+
         return $this->render('create', compact('model', 'categories'));
     }
 
