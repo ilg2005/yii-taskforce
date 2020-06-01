@@ -26,7 +26,7 @@ class NonblankCharsValidator extends Validator
     }
 
 
-    /*public function clientValidateAttribute($model, $attribute, $view)
+    public function clientValidateAttribute($model, $attribute, $view)
     {
         $this->setValidationSettings($model, $attribute);
         $message = json_encode($this->message, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
@@ -36,6 +36,6 @@ class NonblankCharsValidator extends Validator
                 }
 JS;
 
-    }*/
+    }
 
 }

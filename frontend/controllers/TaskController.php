@@ -73,7 +73,7 @@ class TaskController extends SecureController
         $categories = ArrayHelper::map(Category::find()->all(), 'id', 'name');
 
         $model = new CreateForm();
-        if ($model->validate() && $model->load(Yii::$app->request->post())) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
 
             var_dump($model);
             die();
