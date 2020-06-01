@@ -30,6 +30,7 @@ class NonblankCharsValidator extends Validator
     {
         $this->setValidationSettings($model, $attribute);
         $message = json_encode($this->message, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+
         return <<<JS
                 if (value.length - (value.split(' ').length - 1) < $this->limit) {
                 messages.push($message);
