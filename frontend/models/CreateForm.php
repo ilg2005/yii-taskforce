@@ -4,6 +4,7 @@
 namespace frontend\models;
 
 
+use frontend\components\validators\NonblankCharsValidator;
 use yii\base\Model;
 
 class CreateForm extends Model
@@ -32,12 +33,12 @@ class CreateForm extends Model
         return [
             [['title', 'description', 'budget', 'deadline'], 'trim'],
 
-            [['title', 'description', 'category' ], 'required', 'message' => 'Это поле должно быть заполнено!'],
+            [['title', 'description', 'category'], 'required', 'message' => 'Это поле должно быть заполнено!'],
 
-/*            ['title', 'string', 'length' => [10], 'message' => 'Длина текста должна быть не менее 10 непробельных символов.'],
-            ['description', 'string', 'length' => [30], 'message' => 'Длина текста должна быть не менее 30 непробельных символов.'],*/
+/*                        ['title', 'string', 'length' => [10], 'message' => 'Длина текста должна быть не менее 10 непробельных символов.'],
+                        ['description', 'string', 'length' => [30], 'message' => 'Длина текста должна быть не менее 30 непробельных символов.'],*/
 
-            [['title', 'description'], 'validateTitleDescription'],
+            [['title', 'description'], NonblankCharsValidator::class],
 
             ['category', 'each', 'rule' => ['integer']],
 
@@ -49,13 +50,17 @@ class CreateForm extends Model
         ];
     }
 
-    public function validateTitleDescription()
+/*    public function validateNonblankChars()
     {
-
-        if (strlen($this->title) < 10)
-        {
+        $nonblankChars = strlen($this->title) - substr_count($this->title, ' ');
+        if ($nonblankChars < 10) {
             $errorMsg = 'Длина текста должна быть не менее 10 непробельных символов.';
-            $this->addError('title',$errorMsg);
+            $this->addError('title', $errorMsg);
         }
-    }
+        if ($nonblankChars < 30) {
+            $errorMsg = 'Длина текста должна быть не менее 30 непробельных символов.';
+            $this->addError('description', $errorMsg);
+        }
+
+    }*/
 }
