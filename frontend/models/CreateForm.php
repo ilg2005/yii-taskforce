@@ -35,10 +35,8 @@ class CreateForm extends Model
 
             [['title', 'description', 'category'], 'required', 'message' => 'Это поле должно быть заполнено!'],
 
-/*                        ['title', 'string', 'length' => [10], 'message' => 'Длина текста должна быть не менее 10 непробельных символов.'],
-                        ['description', 'string', 'length' => [30], 'message' => 'Длина текста должна быть не менее 30 непробельных символов.'],*/
-
-            [['title', 'description'], NonblankCharsValidator::class],
+            [['title', 'description'], 'string'],
+            [['title', 'description'], NonblankCharsValidator::class, 'skipOnEmpty' => true],
 
             ['category', 'each', 'rule' => ['integer']],
 
@@ -50,17 +48,4 @@ class CreateForm extends Model
         ];
     }
 
-/*    public function validateNonblankChars()
-    {
-        $nonblankChars = strlen($this->title) - substr_count($this->title, ' ');
-        if ($nonblankChars < 10) {
-            $errorMsg = 'Длина текста должна быть не менее 10 непробельных символов.';
-            $this->addError('title', $errorMsg);
-        }
-        if ($nonblankChars < 30) {
-            $errorMsg = 'Длина текста должна быть не менее 30 непробельных символов.';
-            $this->addError('description', $errorMsg);
-        }
-
-    }*/
 }

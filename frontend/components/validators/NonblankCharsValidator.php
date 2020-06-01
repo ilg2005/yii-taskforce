@@ -19,14 +19,14 @@ class NonblankCharsValidator extends Validator
     public function validateAttribute($model, $attribute)
     {
         $this->setValidationSettings($model, $attribute);
-        $nonblankCharsCountCondition = (strlen($model->$attribute) - substr_count($model->$attribute, ' ') < $this->limit);
-        if ($nonblankCharsCountCondition) {
+        $condition = (strlen($model->$attribute) - substr_count($model->$attribute, ' ') < $this->limit);
+        if ($condition) {
             $model->addError($attribute, $this->message);
         }
     }
 
 
-    public function clientValidateAttribute($model, $attribute, $view)
+    /*public function clientValidateAttribute($model, $attribute, $view)
     {
         $this->setValidationSettings($model, $attribute);
         $message = json_encode($this->message, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
@@ -36,6 +36,6 @@ class NonblankCharsValidator extends Validator
                 }
 JS;
 
-    }
+    }*/
 
 }
