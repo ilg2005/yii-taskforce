@@ -96,7 +96,7 @@ $this->title = 'TaskForce-Create';
                         ?>
                     </div>
                 </div>
-                <?php ActiveForm::end(); ?>
+<!--                --><?php /*ActiveForm::end(); */?>
                 <div class="create__warnings">
                     <div class="warning-item warning-item--advice">
                         <h2>Правила хорошего описания</h2>
@@ -110,6 +110,7 @@ $this->title = 'TaskForce-Create';
                             что всё в фокусе, а фото показывает объект со всех
                             ракурсов.</p>
                     </div>
+                    <?= $form->errorSummary($model, ['class' => 'warning-item warning-item--error', 'header' => '<h2>Ошибки заполнения формы</h2>']) ?>
                     <?php if (!empty($model->errors)) : ?>
                     <div class="warning-item warning-item--error">
                         <h2>Ошибки заполнения формы</h2>
@@ -122,6 +123,8 @@ $this->title = 'TaskForce-Create';
                 </div>
             </div>
             <?= Html::submitButton('Опубликовать', ['form' => 'task-form', 'class'=> 'button']) ?>
+            <?php ActiveForm::end(); ?>
+
         </section>
     </div>
 </main>
