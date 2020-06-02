@@ -52,6 +52,7 @@ $this->title = 'TaskForce-Create';
                     ->hint('Укажите все пожелания и детали, чтобы исполнителям было проще соориентироваться')
                 ?>
 
+
                 <?= $form->field($model, 'category')
                     ->dropDownList($categories, [
                         'class' => 'multiple-select input multiple-select-big',
@@ -60,6 +61,8 @@ $this->title = 'TaskForce-Create';
                     ])
                     ->hint('Выберите категорию')
                 ?>
+
+
                 <label>Файлы</label>
                 <span>Загрузите файлы, которые помогут исполнителю лучше выполнить или оценить работу</span>
                 <div id="previews"></div>
@@ -68,35 +71,41 @@ $this->title = 'TaskForce-Create';
                 </div>
 
 
-                <label for="13">Локация</label>
-                <input class="input-navigation input-middle input" id="13" type="search" name="q" placeholder="Санкт-Петербург, Калининский район">
-                <span>Укажите адрес исполнения, если задание требует присутствия</span>
+                    <label for="13">Локация</label>
+                    <input class="input-navigation input-middle input" id="13" type="search" name="q" placeholder="Санкт-Петербург, Калининский район">
+                    <span>Укажите адрес исполнения, если задание требует присутствия</span>
 
 
-                <div class="create__price-time">
-                    <div class="create__price-time--wrapper">
-                        <?= $form->field($model, 'budget')
-                            ->textArea([
-                                'placeholder' => '1000',
-                                'rows' => 1,
-                                'class' => 'input textarea input-money',
-                                'style' => ['width' => '200px']
-                            ])
-                            ->hint('Не заполняйте для оценки исполнителем')
-                        ?>
+
+                    <div class="create__price-time">
+                        <div class="create__price-time--wrapper">
+
+                            <?= $form->field($model, 'budget')
+                                ->textArea([
+                                    'placeholder' => '1000',
+                                    'rows' => 1,
+                                    'class' => 'input textarea input-money',
+                                    'style' => ['width' => '200px']
+                                ])
+                                ->hint('Не заполняйте для оценки исполнителем')
+                            ?>
+
+                        </div>
+                        <div class="create__price-time--wrapper">
+
+                            <?= $form->field($model, 'deadline')
+                                ->input('date', [
+                                    'placeholder' => 'дд.мм.гггг',
+                                    'class' => 'input-middle input input-date',
+                                    'style' => ['width' => '200px']
+                                ])
+                                ->hint('Укажите крайний срок исполнения')
+                            ?>
+
+                        </div>
                     </div>
-                    <div class="create__price-time--wrapper">
-                        <?= $form->field($model, 'deadline')
-                            ->input('date', [
-                                'placeholder' => 'дд.мм.гггг',
-                                'class' => 'input-middle input input-date',
-                                'style' => ['width' => '200px']
-                            ])
-                            ->hint('Укажите крайний срок исполнения')
-                        ?>
-                    </div>
-                </div>
-<!--                --><?php /*ActiveForm::end(); */?>
+                <?php ActiveForm::end(); ?>
+
                 <div class="create__warnings">
                     <div class="warning-item warning-item--advice">
                         <h2>Правила хорошего описания</h2>
@@ -110,20 +119,16 @@ $this->title = 'TaskForce-Create';
                             что всё в фокусе, а фото показывает объект со всех
                             ракурсов.</p>
                     </div>
-                    <?= $form->errorSummary($model, ['class' => 'warning-item warning-item--error', 'header' => '<h2>Ошибки заполнения формы</h2>']) ?>
-                    <?php if (!empty($model->errors)) : ?>
                     <div class="warning-item warning-item--error">
                         <h2>Ошибки заполнения формы</h2>
-                        <?php foreach ($model->errors as $attribute => $error) : ?>
-                        <h3>Поле "<?= $model->getAttributeLabel($attribute) ?>"</h3>
-                        <p><?= $error[0] ?></p>
-                        <?php endforeach; ?>
+                        <h3>Категория</h3>
+                        <p>Это поле должно быть выбрано.<br>
+                            Задание должно принадлежать одной из категорий</p>
                     </div>
-                    <?php endif; ?>
                 </div>
             </div>
+
             <?= Html::submitButton('Опубликовать', ['form' => 'task-form', 'class'=> 'button']) ?>
-            <?php ActiveForm::end(); ?>
 
         </section>
     </div>
