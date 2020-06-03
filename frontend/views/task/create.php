@@ -119,15 +119,17 @@ $this->title = 'TaskForce-Create';
                             что всё в фокусе, а фото показывает объект со всех
                             ракурсов.</p>
                     </div>
-                    <div class="warning-item warning-item--error">
-                        <h2>Ошибки заполнения формы</h2>
-                        <h3>Категория</h3>
-                        <p>Это поле должно быть выбрано.<br>
-                            Задание должно принадлежать одной из категорий</p>
-                    </div>
+                    <?php if (!empty($model->errors)) : ?>
+                        <div class="warning-item warning-item--error">
+                            <h2>Ошибки заполнения формы</h2>
+                            <?php foreach ($model->errors as $attribute => $error) : ?>
+                                <h3>Поле "<?= $model->getAttributeLabel($attribute) ?>"</h3>
+                                <p><?= $error[0] ?></p>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
-
             <?= Html::submitButton('Опубликовать', ['form' => 'task-form', 'class'=> 'button']) ?>
 
         </section>
