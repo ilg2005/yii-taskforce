@@ -165,9 +165,8 @@ $this->title = 'TaskForce-Create';
         }
     });
 
-    /*var formElement = document.querySelector('form');
+    var formElement = document.querySelector('form');
     var submitBtnElement = document.querySelector('.button');
-    var hiddenFileInputElement = document.querySelector('#createform-files');
     submitBtnElement.addEventListener('click', function (evt) {
         evt.preventDefault();
         var formData = new FormData(formElement);
@@ -178,7 +177,9 @@ $this->title = 'TaskForce-Create';
 
             var request = new XMLHttpRequest();
             request.open("POST", window.location.href);
-            request.send(formData);*/
+            request.send(formData);
+
+            formElement.submit();
 
 /*
         setTimeout(() => {
@@ -186,5 +187,5 @@ $this->title = 'TaskForce-Create';
         }, 100);
 */
 
-    });
+    })
 </script>

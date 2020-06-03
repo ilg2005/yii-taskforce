@@ -74,7 +74,8 @@ class TaskController extends SecureController
 
         $model = new CreateForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-
+            var_dump($_FILES);
+            die();
 
         }
         return $this->render('create', compact('model', 'categories'));
