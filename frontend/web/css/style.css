@@ -2606,6 +2606,14 @@ IMG.displayed {
   margin: 20px;
 }
 
+.task-files-preview {
+  display: inline-flex;
+  justify-content: space-between;
+  width: 95%;
+  margin: 20px;
+
+}
+
 
 /*# sourceMappingURL=style.css.map */
 

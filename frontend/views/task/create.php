@@ -65,11 +65,10 @@ $this->title = 'TaskForce-Create';
 
                 <label>Файлы</label>
                 <span>Загрузите файлы, которые помогут исполнителю лучше выполнить или оценить работу</span>
-                <div id="previews"></div>
+                <div class="task-files-preview"></div>
                 <div class="create__file dropzone">
                     <span>Добавить новый файл</span>
                 </div>
-
 
                     <label for="13">Локация</label>
                     <input class="input-navigation input-middle input" id="13" type="search" name="q" placeholder="Санкт-Петербург, Калининский район">
@@ -136,7 +135,7 @@ $this->title = 'TaskForce-Create';
     </div>
 </main>
 <script src="js/dropzone.js"></script>
-<!--<script>
+<script>
     Dropzone.autoDiscover = false;
     var fileUploadElement = document.querySelector('.create__file')
     var dropzone = new Dropzone(fileUploadElement, {
@@ -160,14 +159,15 @@ $this->title = 'TaskForce-Create';
             dropzone.removeFile(file);
         },
         autoProcessQueue: true,
-        previewsContainer: "#previews",
+        previewsContainer: ".task-files-preview",
         headers: {
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         }
     });
 
-    var formElement = document.querySelector('#task-form');
+    var formElement = document.querySelector('form');
     var submitBtnElement = document.querySelector('.button');
+    var hiddenFileInputElement = document.querySelector('#createform-files');
     submitBtnElement.addEventListener('click', function (evt) {
         evt.preventDefault();
         var formData = new FormData(formElement);
@@ -175,13 +175,17 @@ $this->title = 'TaskForce-Create';
         imageFiles.forEach((file) => {
             formData.append('files[]', file);
         })
-        var request = new XMLHttpRequest();
-        request.open("POST", window.location.href);
-        request.send(formData);
+
+            var request = new XMLHttpRequest();
+            request.open("POST", window.location.href);
+            request.send(formData);
+            formElement.submit();
+
 /*
         setTimeout(() => {
             window.location.reload();
         }, 100);
 */
+
     });
-</script>-->
+</script>
