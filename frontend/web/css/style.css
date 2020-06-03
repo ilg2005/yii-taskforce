@@ -643,7 +643,7 @@ footer {
     .input:disabled::-webkit-input-placeholder {
       color: #D4D9E2; }
 
-.has-error input, .has-error select {
+.has-error input, .has-error select, .has-error textarea {
   border-color: #FF116E; }
 
 .has-error  {

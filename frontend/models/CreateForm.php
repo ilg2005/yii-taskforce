@@ -5,6 +5,7 @@ namespace frontend\models;
 
 
 use frontend\components\validators\NonblankCharsValidator;
+use frontend\components\validators\CategoryExistValidator;
 use yii\base\Model;
 
 class CreateForm extends Model
@@ -39,6 +40,8 @@ class CreateForm extends Model
             [['title', 'description'], NonblankCharsValidator::class, 'skipOnEmpty' => true],
 
             ['category', 'integer'],
+            ['category', CategoryExistValidator::class, 'skipOnEmpty' => true],
+
 
             ['files', 'file', 'skipOnEmpty' => true],
 

@@ -19,8 +19,7 @@ class NonblankCharsValidator extends Validator
     public function validateAttribute($model, $attribute)
     {
         $this->setValidationSettings($model, $attribute);
-        $condition = (strlen($model->$attribute) - substr_count($model->$attribute, ' ') < $this->limit);
-        if ($condition) {
+        if (strlen($model->$attribute) - substr_count($model->$attribute, ' ') < $this->limit) {
             $model->addError($attribute, $this->message);
         }
     }
