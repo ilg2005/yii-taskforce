@@ -7,6 +7,7 @@ namespace frontend\controllers;
 use frontend\models\Category;
 use frontend\models\CreateForm;
 use frontend\models\Task;
+use frontend\models\UploadFiles;
 use taskforce\constants\TaskStatuses;
 use taskforce\constants\TaskStrategy;
 use taskforce\constants\UserActions;
@@ -14,6 +15,7 @@ use Yii;
 use yii\data\Pagination;
 use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
+use yii\web\UploadedFile;
 
 class TaskController extends SecureController
 {
@@ -74,7 +76,10 @@ class TaskController extends SecureController
 
         $model = new CreateForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            var_dump($_FILES);
+
+            $model->files = UploadedFile::getInstances($model, 'files');
+            UploadFiles::upload($model->files);
+            var_dump($model->files);
             die();
 
         }

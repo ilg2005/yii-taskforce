@@ -165,6 +165,8 @@ $this->title = 'TaskForce-Create';
         }
     });
 
+
+/*
     var formElement = document.querySelector('form');
     var submitBtnElement = document.querySelector('.button');
     submitBtnElement.addEventListener('click', function (evt) {
@@ -179,13 +181,14 @@ $this->title = 'TaskForce-Create';
             request.open("POST", window.location.href);
             request.send(formData);
 
-            formElement.submit();
 
-/*
+
         setTimeout(() => {
             window.location.reload();
         }, 100);
-*/
+
 
     })
+*/
+
 </script>
