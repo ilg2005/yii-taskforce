@@ -6,6 +6,7 @@ namespace frontend\controllers;
 
 use frontend\models\Category;
 use frontend\models\CreateForm;
+use frontend\models\Files;
 use frontend\models\Task;
 use frontend\models\UploadFiles;
 use taskforce\constants\TaskStatuses;
@@ -75,12 +76,14 @@ class TaskController extends SecureController
         $categories = ArrayHelper::map(Category::find()->all(), 'id', 'name');
 
         $model = new CreateForm();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
 
-            $model->files = UploadedFile::getInstances($model, 'files');
-            UploadFiles::upload($model->files);
-            var_dump($model->files);
-            die();
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            if (isset($_FILES['files'])) {
+                for ($i = 0, $iMax = count($_FILES['files']); $i < $iMax; $i++) {
+                    $image = UploadedFile::getInstancesByName("files[$i]");
+                    $files[] = UploadFiles::upload($image);
+                }
+            }
 
         }
         return $this->render('create', compact('model', 'categories'));

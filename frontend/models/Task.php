@@ -24,6 +24,10 @@ class Task extends ActiveRecord
         return $this->hasMany(Reaction::class, ['task_id' => 'id']);
     }
 
+    public function getFiles() {
+        return $this->hasMany(Files::class, ['task_id' => 'id']);
+    }
+
     public function getCustomer()
     {
         return $this->hasOne(User::class, ['id' => 'customer_id']);
