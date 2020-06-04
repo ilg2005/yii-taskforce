@@ -79,13 +79,13 @@ class TaskController extends SecureController
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if (isset($_FILES['files'])) {
-                for ($i = 0, $iMax = count($_FILES['files']); $i < $iMax; $i++) {
-                    $image = UploadedFile::getInstancesByName("files[$i]");
-                    $files[] = UploadFiles::upload($image);
+                    $image = UploadedFile::getInstancesByName('files');
+                    $files = UploadFiles::upload($image);
                 }
-            }
-
+            var_dump($files);
+            die();
         }
+
         return $this->render('create', compact('model', 'categories'));
     }
 
