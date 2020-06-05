@@ -41,10 +41,10 @@ class CreateForm extends Model
 
             ['category', CategoryExistValidator::class, 'skipOnEmpty' => true],
 
-
             ['files', 'file', 'maxFiles' => 6, 'skipOnEmpty' => true ],
 
             ['budget', 'integer', 'min' => 1, 'message' => 'Должно быть целое положительное число'],
+
             ['deadline', 'date', 'format' => 'Y-m-d',   'message' => 'Неверный формат даты', 'min' => date('Y-m-d', strtotime('today')), 'tooSmall' => 'Срок исполнения должен быть не раньше сегодняшней даты'],
 
         ];
