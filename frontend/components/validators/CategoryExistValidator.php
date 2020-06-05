@@ -14,9 +14,9 @@ class CategoryExistValidator extends Validator
     public function validateAttribute($model, $attribute)
     {
         $this->message = 'Выбранная категория должна существовать на сайте.';
-        $categoriesID = (new Query())->select('id')->from('categories')->column();
+        $categoriesIDs = (new Query())->select('id')->from('categories')->column();
 
-        if (!in_array($model->$attribute, $categoriesID, false)) {
+        if (!in_array($model->$attribute, $categoriesIDs, false)) {
             $model->addError($attribute, $this->message);
         }
     }
