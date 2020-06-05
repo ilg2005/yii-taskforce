@@ -6,7 +6,6 @@ namespace frontend\components\validators;
 
 use frontend\models\Category;
 use yii\data\ActiveDataProvider;
-use yii\db\Query;
 use yii\validators\Validator;
 
 class CategoryExistValidator extends Validator
