@@ -39,7 +39,6 @@ class CreateForm extends Model
             [['title', 'description'], 'string'],
             [['title', 'description'], NonblankCharsValidator::class, 'skipOnEmpty' => true],
 
-            ['category', 'integer'],
             ['category', CategoryExistValidator::class, 'skipOnEmpty' => true],
 
 
