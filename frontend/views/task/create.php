@@ -145,7 +145,7 @@ $this->title = 'TaskForce-Create';
     </div>
 </main>
 <script src="js/dropzone.js"></script>
-<!--<script>
+<script>
     Dropzone.autoDiscover = false;
     var fileUploadElement = document.querySelector('.create__file')
     var dropzone = new Dropzone(fileUploadElement, {
@@ -168,7 +168,7 @@ $this->title = 'TaskForce-Create';
         maxfilesexceeded: function(file) {
             dropzone.removeFile(file);
         },
-        autoProcessQueue: true,
+        autoProcessQueue: false,
         previewsContainer: ".task-files-preview",
         headers: {
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
