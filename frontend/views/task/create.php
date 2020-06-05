@@ -144,7 +144,7 @@ $this->title = 'TaskForce-Create';
         </section>
     </div>
 </main>
-<script src="js/dropzone.js"></script>
+<!--<script src="js/dropzone.js"></script>
 <script>
     Dropzone.autoDiscover = false;
     var fileUploadElement = document.querySelector('.create__file')
