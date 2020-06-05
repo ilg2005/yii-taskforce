@@ -43,7 +43,7 @@ class CreateForm extends Model
             ['category', CategoryExistValidator::class, 'skipOnEmpty' => true],
 
 
-            ['files', 'file', 'skipOnEmpty' => true],
+            ['files', 'file', 'maxFiles' => 6, 'skipOnEmpty' => true ],
 
             ['budget', 'integer', 'min' => 1, 'message' => 'Должно быть целое положительное число'],
             ['deadline', 'date', 'format' => 'Y-m-d'],

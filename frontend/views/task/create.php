@@ -62,13 +62,23 @@ $this->title = 'TaskForce-Create';
                     ->hint('Выберите категорию')
                 ?>
 
+               <?= $form->field($model, 'files[]')
+                    ->fileInput([
+                            'multiple' => true,
+                            'class' => 'create__file',
+                            'name' => 'files[]',
 
-                <label>Файлы</label>
+                    ])
+                    ->hint('Загрузите файлы, которые помогут исполнителю лучше выполнить или оценить работу')
+                ?>
+
+
+               <!--<label>Файлы</label>
                 <span>Загрузите файлы, которые помогут исполнителю лучше выполнить или оценить работу</span>
                 <div class="task-files-preview"></div>
                 <div class="create__file dropzone">
                     <span>Добавить новый файл</span>
-                </div>
+                </div>-->
 
                     <label for="13">Локация</label>
                     <input class="input-navigation input-middle input" id="13" type="search" name="q" placeholder="Санкт-Петербург, Калининский район">
@@ -135,7 +145,7 @@ $this->title = 'TaskForce-Create';
     </div>
 </main>
 <script src="js/dropzone.js"></script>
-<script>
+<!--<script>
     Dropzone.autoDiscover = false;
     var fileUploadElement = document.querySelector('.create__file')
     var dropzone = new Dropzone(fileUploadElement, {
@@ -166,29 +176,25 @@ $this->title = 'TaskForce-Create';
     });
 
 
-/*
-    var formElement = document.querySelector('form');
-    var submitBtnElement = document.querySelector('.button');
-    submitBtnElement.addEventListener('click', function (evt) {
-        evt.preventDefault();
-        var formData = new FormData(formElement);
-        var imageFiles = dropzone.files;
-        imageFiles.forEach((file) => {
-            formData.append('files[]', file);
+    /*
+        var formElement = document.querySelector('form');
+        var submitBtnElement = document.querySelector('.button');
+        submitBtnElement.addEventListener('click', function (evt) {
+            evt.preventDefault();
+            var formData = new FormData(formElement);
+            var imageFiles = dropzone.files;
+            imageFiles.forEach((file) => {
+                formData.append('files[]', file);
+            })
+                var request = new XMLHttpRequest();
+                request.open("POST", window.location.href);
+                request.send(formData);
+            setTimeout(() => {
+                window.location.reload();
+            }, 100);
         })
+    */
 
-            var request = new XMLHttpRequest();
-            request.open("POST", window.location.href);
-            request.send(formData);
-
-
-
-        setTimeout(() => {
-            window.location.reload();
-        }, 100);
-
-
-    })
-*/
 
 </script>
+-->
