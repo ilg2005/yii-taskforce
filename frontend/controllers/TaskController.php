@@ -101,7 +101,7 @@ class TaskController extends SecureController
                 UploadFiles::upload($taskFiles);
                 foreach ($taskFiles as $taskFile) {
                     $file = new Files();
-                    $file->task_id = $task->id;
+                    $file->task_id = $task->id; // Не записывается в БД, т.к. задача еще в базе не сохранена. Нужно исправить логику
                     $file->filename = "{$taskFile->baseName}_" . date('Y-m-d') . '.' . $taskFile->extension;
                     $file->save();
                 }
