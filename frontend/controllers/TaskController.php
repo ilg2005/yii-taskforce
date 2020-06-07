@@ -9,6 +9,7 @@ use frontend\models\CreateForm;
 use frontend\models\Files;
 use frontend\models\Task;
 use frontend\models\UploadFiles;
+use frontend\models\User;
 use taskforce\constants\TaskStatuses;
 use taskforce\constants\TaskStrategy;
 use taskforce\constants\UserActions;
@@ -70,7 +71,9 @@ class TaskController extends SecureController
 
     public function actionCreate()
     {
-        if (!TaskStrategy::checkAccess(Yii::$app->user->identity, UserActions::CREATE)) {
+        $user = Yii::$app->user->identity;
+
+        if (!TaskStrategy::checkAccess($user, UserActions::CREATE)) {
             throw new NotFoundHttpException('Задание может создать только заказчик');
         }
         $categories = ArrayHelper::map(Category::find()->all(), 'id', 'name');
@@ -78,10 +81,34 @@ class TaskController extends SecureController
         $model = new CreateForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $task = new Task();
+
+            $task->customer_id = $user->id;
+            $task->title = $model->title;
+            $task->description = $model->description;
+            $task->category_id = $model->category;
+
+            if (isset($model->budget)) {
+                $task->budget = $model->budget;
+            }
+
+            if (isset($model->deadline)) {
+                $task->deadline = $model->deadline;
+            }
+
             if (isset($_FILES)) {
                 $taskFiles = UploadedFile::getInstancesByName('files');
-                $files = UploadFiles::upload($taskFiles);
+                UploadFiles::upload($taskFiles);
+                foreach ($taskFiles as $taskFile) {
+                    $file = new Files();
+                    $file->task_id = $task->id;
+                    $file->filename = "{$taskFile->baseName}_" . date('Y-m-d') . '.' . $taskFile->extension;
+                    $file->save();
+                }
             }
+
+            $task->save();
+
         }
 
         return $this->render('create', compact('model', 'categories'));
