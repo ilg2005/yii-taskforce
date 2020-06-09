@@ -70,14 +70,6 @@ CREATE TABLE users_categories
     FOREIGN KEY (category_id) REFERENCES categories (id) ON DELETE CASCADE
 );
 
-CREATE TABLE users_portfolio
-(
-    id       int AUTO_INCREMENT PRIMARY KEY,
-    user_id  int,
-    filename VARCHAR(128),
-    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
-);
-
 CREATE TABLE tasks
 (
     id            int AUTO_INCREMENT PRIMARY KEY,
@@ -100,12 +92,30 @@ CREATE TABLE tasks
     FOREIGN KEY (worker_id) REFERENCES users (id) ON UPDATE CASCADE
 );
 
+CREATE TABLE files
+(
+    id       int AUTO_INCREMENT PRIMARY KEY,
+    user_id  int,
+    filename VARCHAR(128),
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+);
+
 CREATE TABLE tasks_files
 (
     id       int AUTO_INCREMENT PRIMARY KEY,
     task_id  int,
-    filename VARCHAR(128),
-    FOREIGN KEY (task_id) REFERENCES tasks (id) ON DELETE CASCADE
+    file_id  int,
+    FOREIGN KEY (task_id) REFERENCES tasks (id) ON DELETE CASCADE,
+    FOREIGN KEY (file_id) REFERENCES files (id) ON DELETE CASCADE
+);
+
+CREATE TABLE users_portfolio
+(
+    id       int AUTO_INCREMENT PRIMARY KEY,
+    user_id  int,
+    file_id  int,
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
+    FOREIGN KEY (file_id) REFERENCES files (id) ON DELETE CASCADE
 );
 
 CREATE TABLE feedbacks

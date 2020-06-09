@@ -25,7 +25,8 @@ class Task extends ActiveRecord
     }
 
     public function getFiles() {
-        return $this->hasMany(Files::class, ['task_id' => 'id']);
+        return $this->hasMany(File::class, ['id' => 'file_id'])
+            ->viaTable('tasks_files', ['task_id' => 'id']);
     }
 
     public function getCustomer()

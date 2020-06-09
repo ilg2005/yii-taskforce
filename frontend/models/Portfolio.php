@@ -11,7 +11,7 @@ class Portfolio extends ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'filename'], 'safe'],
+            [['user_id', 'file_id'], 'safe'],
         ];
     }
 

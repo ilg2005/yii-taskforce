@@ -6,7 +6,7 @@ namespace frontend\controllers;
 
 use frontend\models\Category;
 use frontend\models\CreateForm;
-use frontend\models\Files;
+use frontend\models\File;
 use frontend\models\Task;
 use frontend\models\UploadFiles;
 use frontend\models\User;
@@ -88,6 +88,7 @@ class TaskController extends SecureController
             $task->description = $model->description;
             $task->category_id = $model->category;
 
+
             if (isset($model->budget)) {
                 $task->budget = $model->budget;
             }
@@ -96,18 +97,18 @@ class TaskController extends SecureController
                 $task->deadline = $model->deadline;
             }
 
-            if (isset($_FILES)) {
+            if ($task->save() && isset($_FILES)) {
                 $taskFiles = UploadedFile::getInstancesByName('files');
                 UploadFiles::upload($taskFiles);
                 foreach ($taskFiles as $taskFile) {
-                    $file = new Files();
-                    $file->task_id = $task->id; // Не записывается в БД, т.к. задача еще в базе не сохранена. Нужно исправить логику
+                    $file = new File();
+                    $file->user_id = $user->id;
                     $file->filename = "{$taskFile->baseName}_" . date('Y-m-d') . '.' . $taskFile->extension;
                     $file->save();
+                    $task->link('files', $file);
                 }
             }
 
-            $task->save();
 
         }
 
