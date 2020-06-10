@@ -103,13 +103,13 @@ class UserController extends SecureController
 
             if ($model->imageFiles) {
                 UploadFiles::upload($model->imageFiles);
-                $user->unlinkAll('files', true);
+                $user->unlinkAll('portfolio', true);
                 foreach ($model->imageFiles as $imageFile) {
                     $file = new File();
                     $file->user_id = $user->id;
                     $file->filename = "{$imageFile->baseName}_" . date('Y-m-d') . '.' . $imageFile->extension;
                     $file->save();
-                    $user->link('files', $file);
+                    $user->link('portfolio', $file);
                 }
             }
 
