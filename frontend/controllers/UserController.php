@@ -4,12 +4,12 @@
 namespace frontend\controllers;
 
 
+use frontend\models\File;
 use taskforce\constants\TaskStatuses;
 use taskforce\constants\UserRoles;
 use frontend\models\AccountForm;
 use frontend\models\Category;
 use frontend\models\Feedback;
-use frontend\models\Portfolio;
 use frontend\models\Profile;
 use frontend\models\ProfileView;
 use frontend\models\Setting;
@@ -19,6 +19,7 @@ use frontend\models\User;
 use Yii;
 use yii\data\Pagination;
 use yii\db\Query;
+use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\web\UploadedFile;
@@ -71,6 +72,8 @@ class UserController extends SecureController
         $user = Yii::$app->user->identity;
         $allCategories = Category::find()->all();
 
+        $portfolio = ArrayHelper::getColumn($user->portfolio, 'filename');
+
         $model = new AccountForm();
 
         if ($model->validate() && $model->load(Yii::$app->request->post()))
@@ -100,12 +103,13 @@ class UserController extends SecureController
 
             if ($model->imageFiles) {
                 UploadFiles::upload($model->imageFiles);
-                $user->unlinkAll('portfolio', true);
-                foreach ($model->imageFiles as $file) {
-                    $portfolio = new Portfolio();
-                    $portfolio->user_id = $user->id;
-                    $portfolio->filename = "{$file->baseName}_" . date('Y-m-d') . '.' . $file->extension;
-                    $user->link('portfolio', $portfolio);
+                $user->unlinkAll('files', true);
+                foreach ($model->imageFiles as $imageFile) {
+                    $file = new File();
+                    $file->user_id = $user->id;
+                    $file->filename = "{$imageFile->baseName}_" . date('Y-m-d') . '.' . $imageFile->extension;
+                    $file->save();
+                    $user->link('files', $file);
                 }
             }
 
@@ -157,7 +161,7 @@ class UserController extends SecureController
             $this->refresh();
         }
 
-        return $this->render('account', compact('user', 'allCategories', 'model'));
+        return $this->render('account', compact('user', 'allCategories', 'model', 'portfolio'));
     }
 
     public function actionProfile()
@@ -166,6 +170,8 @@ class UserController extends SecureController
             ->where(['users.id' => Yii::$app->request->get('user_id')])
             ->orWhere(['users.id' => Yii::$app->user->id])
             ->one();
+
+        $portfolio = ArrayHelper::getColumn($user->portfolio, 'filename');
 
         if (!$user->role) {
             throw new NotFoundHttpException('Такая страница не существует');
@@ -209,7 +215,7 @@ class UserController extends SecureController
             $user->save();
         }
 
-        return $this->render('profile', compact('user', 'feedbacks', 'pages', 'tasksCount', 'feedbacksCount'));
+        return $this->render('profile', compact('user', 'feedbacks', 'pages', 'tasksCount', 'feedbacksCount', 'portfolio'));
     }
 
     public function actionUsers()

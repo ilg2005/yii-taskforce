@@ -44,15 +44,11 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
 
-    public function getFiles()
-    {
-        return $this->hasMany(File::class, ['user_id' => 'id']);
+    public function getPortfolio() {
+        return $this->hasMany(File::class, ['id' => 'file_id'])
+            ->viaTable('users_portfolio', ['user_id' => 'id']);
     }
 
-    public function getPortfolio()
-    {
-        return $this->hasMany(Portfolio::class, ['user_id' => 'id']);
-    }
 
     public function getFeedbacks()
     {
