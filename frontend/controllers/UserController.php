@@ -171,11 +171,11 @@ class UserController extends SecureController
             ->orWhere(['users.id' => Yii::$app->user->id])
             ->one();
 
-        $portfolio = ArrayHelper::getColumn($user->portfolio, 'filename');
-
         if (!$user->role) {
             throw new NotFoundHttpException('Такая страница не существует');
         }
+
+        $portfolio = ArrayHelper::getColumn($user->portfolio, 'filename');
 
         if (Yii::$app->user->id !== $user->id) {
             $recentViews = ProfileView::find()
