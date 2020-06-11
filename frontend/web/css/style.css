@@ -523,6 +523,9 @@ footer {
 .new-task__price--beauty {
   color: #ff4dd1; }
 
+.new-task__price--delivery {
+  color: #5f5f5f; }
+
 .new-task__price--photo {
   color: #ff9245; }
 

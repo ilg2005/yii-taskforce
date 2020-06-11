@@ -117,7 +117,11 @@ class TaskController extends SecureController
 
     public function actionView()
     {
-        return $this->render('view');
+        $task = Task::find()
+            ->where(['tasks.id' => Yii::$app->request->get('task_id')])
+            ->one();
+
+        return $this->render('view', compact('task'));
     }
 
     public function actionMylist()

@@ -12,34 +12,29 @@ $this->title = 'TaskForce-View';
                 <div class="content-view__card-wrapper">
                     <div class="content-view__header">
                         <div class="content-view__headline">
-                            <h1>Убрать квартиру после вписки</h1>
+                            <h1><?= $task->title ?></h1>
                             <span>Размещено в категории
-                                    <a href="#" class="link-regular">Уборка</a>
-                                    25 минут назад</span>
+                                    <a href="/browse?category[]=<?= $task->category_id ?>" class="link-regular"><?= $task->category->name ?></a>
+                                    <?= Yii::$app->formatter->asRelativeTime($task->creation_date) ?></span>
                         </div>
-                        <b class="new-task__price new-task__price--clean content-view-price">1500<b> ₽</b></b>
-                        <div class="new-task__icon new-task__icon--clean content-view-icon"></div>
+                        <b class="new-task__price new-task__price--<?= $task->category->icon ?> content-view-price"><?= $task->budget ?><b> ₽</b></b>
+                        <div class="new-task__icon new-task__icon--<?= $task->category->icon ?> content-view-icon"></div>
                     </div>
                     <div class="content-view__description">
                         <h3 class="content-view__h3">Общее описание</h3>
-                        <p>
-                            Внезапно, ключевые особенности структуры проекта неоднозначны и будут подвергнуты целой серии
-                            независимых исследований. Следует отметить, что высококачественный прототип будущего проекта, в
-                            своём классическом представлении, допускает внедрение своевременного выполнения сверхзадачи.
-                            Кстати, некоторые особенности внутренней политики будут функционально разнесены на независимые
-                            элементы.
-                        </p>
+                        <p><?= $task->description ?></p>
                     </div>
                     <div class="content-view__attach">
                         <h3 class="content-view__h3">Вложения</h3>
-                        <a href="#">my_picture.jpeg</a>
-                        <a href="#">agreement.docx</a>
+                        <?php foreach ($task->files as $taskFile) : ?>
+                        <a href="/download?filename=<?= $taskFile->filename ?>"><?= $taskFile->filename ?></a>
+                        <?php endforeach; ?>
                     </div>
                     <div class="content-view__location">
                         <h3 class="content-view__h3">Расположение</h3>
                         <div class="content-view__location-wrapper">
                             <div class="content-view__map">
-                                <a href="#"><img src="../img/map.jpg" width="361" height="292"
+                                <a href="#"><img src="./img/map.jpg" width="361" height="292"
                                                  alt="Москва, Новый арбат, 23 к. 1"></a>
                             </div>
                             <div class="content-view__address">
@@ -51,12 +46,12 @@ $this->title = 'TaskForce-View';
                     </div>
                 </div>
                 <div class="content-view__action-buttons">
-                    <button class=" button button__big-color response-button"
-                            type="button">Откликнуться</button>
-                    <button class="button button__big-color refusal-button"
-                            type="button">Отказаться</button>
-                    <button class="button button__big-color connection-button"
-                            type="button">Написать сообщение</button>
+                    <button class=" button button__big-color response-button open-modal"
+                            type="button" data-for="response-form">Откликнуться</button>
+                    <button class="button button__big-color refusal-button open-modal"
+                            type="button" data-for="refuse-form">Отказаться</button>
+                    <button class="button button__big-color request-button open-modal"
+                            type="button" data-for="complete-form">Завершить</button>
                 </div>
             </div>
             <div class="content-view__feedback">
@@ -64,7 +59,7 @@ $this->title = 'TaskForce-View';
                 <div class="content-view__feedback-wrapper">
                     <div class="content-view__feedback-card">
                         <div class="feedback-card__top">
-                            <a href="#"><img src="../img/man-glasses.jpg" width="55" height="55"></a>
+                            <a href="#"><img src="./img/man-glasses.jpg" width="55" height="55"></a>
                             <div class="feedback-card__top--name">
                                 <p><a href="#" class="link-regular">Астахов Павел</a></p>
                                 <span></span><span></span><span></span><span></span><span class="star-disabled"></span>
@@ -79,17 +74,15 @@ $this->title = 'TaskForce-View';
                             <span>1500 ₽</span>
                         </div>
                         <div class="feedback-card__actions">
-                            <button class="button__small-color response-button button"
-                                    type="button">Откликнуться</button>
-                            <button class="button__small-color refusal-button button"
-                                    type="button">Отказаться</button>
-                            <button class="button__chat button"
-                                    type="button"></button>
+                            <a class="button__small-color request-button button"
+                               type="button">Подтвердить</a>
+                            <a class="button__small-color refusal-button button"
+                               type="button">Отказать</a>
                         </div>
                     </div>
                     <div class="content-view__feedback-card">
                         <div class="feedback-card__top">
-                            <a href="#"><img src="../img/man-blond.jpg" width="55" height="55"></a>
+                            <a href="#"><img src="./img/man-blond.jpg" width="55" height="55"></a>
                             <div class="feedback-card__top--name">
                                 <p class="link-name"><a href="#" class="link-regular">Богатырев Дмитрий</a></p>
                                 <span></span><span></span><span></span><span></span><span class="star-disabled"></span>
@@ -104,12 +97,10 @@ $this->title = 'TaskForce-View';
                             <span>1500 ₽</span>
                         </div>
                         <div class="feedback-card__actions">
-                            <button class="button__small-color response-button button"
-                                    type="button">Откликнуться</button>
-                            <button class="button__small-color refusal-button button"
-                                    type="button">Отказаться</button>
-                            <button class="button__chat button"
-                                    type="button"></button>
+                            <a class="button__small-color request-button button"
+                               type="button">Подтвердить</a>
+                            <a class="button__small-color refusal-button button"
+                               type="button">Отказать</a>
                         </div>
                     </div>
                 </div>
@@ -120,14 +111,12 @@ $this->title = 'TaskForce-View';
                 <div class="profile-mini__wrapper">
                     <h3>Заказчик</h3>
                     <div class="profile-mini__top">
-                        <img src="../img/man-brune.jpg" width="62" height="62" alt="Аватар заказчика">
+                        <img src="./img/man-brune.jpg" width="62" height="62" alt="Аватар заказчика">
                         <div class="profile-mini__name five-stars__rate">
                             <p>Николай Демченко</p>
-                            <span></span><span></span><span></span><span></span><span class="star-disabled"></span>
-                            <b>4.25</b>
                         </div>
                     </div>
-                    <p class="info-customer"><span>15 отзывов</span><span class="last-">28 заказов</span></p>
+                    <p class="info-customer"><span>12 заданий</span><span class="last-">2 года на сайте</span></p>
                     <a href="#" class="link-regular">Смотреть профиль</a>
                 </div>
             </div>
