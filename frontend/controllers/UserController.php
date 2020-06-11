@@ -72,8 +72,6 @@ class UserController extends SecureController
         $user = Yii::$app->user->identity;
         $allCategories = Category::find()->all();
 
-        $portfolio = ArrayHelper::getColumn($user->portfolio, 'filename');
-
         $model = new AccountForm();
 
         if ($model->validate() && $model->load(Yii::$app->request->post()))
@@ -161,7 +159,7 @@ class UserController extends SecureController
             $this->refresh();
         }
 
-        return $this->render('account', compact('user', 'allCategories', 'model', 'portfolio'));
+        return $this->render('account', compact('user', 'allCategories', 'model'));
     }
 
     public function actionProfile()
@@ -174,8 +172,6 @@ class UserController extends SecureController
         if (!$user->role) {
             throw new NotFoundHttpException('Такая страница не существует');
         }
-
-        $portfolio = ArrayHelper::getColumn($user->portfolio, 'filename');
 
         if (Yii::$app->user->id !== $user->id) {
             $recentViews = ProfileView::find()
@@ -215,7 +211,7 @@ class UserController extends SecureController
             $user->save();
         }
 
-        return $this->render('profile', compact('user', 'feedbacks', 'pages', 'tasksCount', 'feedbacksCount', 'portfolio'));
+        return $this->render('profile', compact('user', 'feedbacks', 'pages', 'tasksCount', 'feedbacksCount'));
     }
 
     public function actionUsers()

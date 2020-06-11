@@ -135,10 +135,10 @@ $this->title = 'TaskForce-Account';
 
                 <h3 class="div-line">Фото работ</h3>
 
-                    <?php if ($portfolio) : ?>
+                    <?php if ($user->portfolio) : ?>
                     <p class="user__card-photo">
-                        <?php foreach($portfolio as $filename) : ?>
-                        <img src="./uploads/<?= $filename ?>" width="120" height="120" alt="Фото работы">
+                        <?php foreach($user->portfolio as $file) : ?>
+                        <img src="./uploads/<?= $file->filename ?>" width="120" height="120" alt="Фото работы">
                         <?php endforeach; ?>
                     </p>
                     <?php endif; ?>

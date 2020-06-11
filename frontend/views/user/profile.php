@@ -52,8 +52,8 @@ use frontend\components\Rating;
                     </div>
                     <div class="user__card-photo">
                         <h3 class="content-view__h3">Фото работ</h3>
-                        <?php foreach ($portfolio as $filename): ?>
-                        <a href="/image?filename=<?= $filename ?>"><img src="./uploads/<?= $filename ?>" width="85" height="86" alt="Фото работы"></a>
+                        <?php foreach ($user->portfolio as $file): ?>
+                        <a href="/image?filename=<?= $file->filename ?>"><img src="./uploads/<?= $file->filename ?>" width="85" height="86" alt="Фото работы"></a>
                         <?php endforeach; ?>
                     </div>
                 </div>
