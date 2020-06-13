@@ -19,7 +19,6 @@ use frontend\models\User;
 use Yii;
 use yii\data\Pagination;
 use yii\db\Query;
-use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\web\UploadedFile;

@@ -7,6 +7,7 @@ namespace frontend\controllers;
 use frontend\models\Category;
 use frontend\models\CreateForm;
 use frontend\models\File;
+use frontend\models\Profile;
 use frontend\models\Task;
 use frontend\models\UploadFiles;
 use frontend\models\User;
@@ -121,7 +122,15 @@ class TaskController extends SecureController
             ->where(['tasks.id' => Yii::$app->request->get('task_id')])
             ->one();
 
-        return $this->render('view', compact('task'));
+        $isAuthor = Yii::$app->user->id === $task->customer_id;
+
+         if ($task->worker_id && $isAuthor) {
+            $user = User::find()->where(['id' => $task->worker_id])->one();
+        } else {
+            $user = User::find()->where(['id' => $task->customer_id])->one();
+        }
+
+        return $this->render('view', compact('task', 'isAuthor', 'user'));
     }
 
     public function actionMylist()

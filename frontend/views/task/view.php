@@ -2,6 +2,8 @@
 
 /* @var $this yii\web\View */
 
+use frontend\components\Rating;
+
 $this->title = 'TaskForce-View';
 
 ?>
@@ -106,18 +108,22 @@ $this->title = 'TaskForce-View';
                 </div>
             </div>
         </section>
+        <?php if ($task->worker_id) : ?>
         <section class="connect-desk">
             <div class="connect-desk__profile-mini">
                 <div class="profile-mini__wrapper">
-                    <h3>Заказчик</h3>
+                    <h3><?= $isAuthor ? 'Исполнитель' : 'Заказчик' ?></h3>
                     <div class="profile-mini__top">
-                        <img src="./img/man-brune.jpg" width="62" height="62" alt="Аватар заказчика">
+                        <img src="./uploads/<?= $user->avatar ?>" width="62" height="62" alt="Аватар <?= $isAuthor ? 'исполнителя' : 'заказчика' ?>">
                         <div class="profile-mini__name five-stars__rate">
-                            <p>Николай Демченко</p>
+                            <p><?= $user->name ?></p>
+                            <?= $isAuthor ? Rating::widget(['rating' => $user->rating]) : '' ?>
                         </div>
                     </div>
-                    <p class="info-customer"><span>12 заданий</span><span class="last-">2 года на сайте</span></p>
-                    <a href="#" class="link-regular">Смотреть профиль</a>
+                    <p class="info-customer"><span><?= Yii::t('app', '{n, plural, one{# задание} few{# задания} other{# заданий}}', ['n' => count($user->tasks)]) ?></span><span class="last-"><?= Yii::$app->formatter->asTimeSinceRegistration($user->registration_date) ?> на сайте</span></p>
+                    <?php if ($isAuthor) : ?>
+                    <a href="/profile?user_id=<?= $user->id ?>" class="link-regular">Смотреть профиль</a>
+                    <?php endif; ?>
                 </div>
             </div>
             <div class="connect-desk__chat">
@@ -145,5 +151,6 @@ $this->title = 'TaskForce-View';
                 </form>
             </div>
         </section>
+        <?php endif; ?>
     </div>
 </main>
