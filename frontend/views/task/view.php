@@ -56,57 +56,41 @@ $this->title = 'TaskForce-View';
                             type="button" data-for="complete-form">Завершить</button>
                 </div>
             </div>
+            <?php if ($task->responses && ($isAuthor || $isWorker)) : ?>
             <div class="content-view__feedback">
-                <h2>Отклики <span>(2)</span></h2>
+                <h2>Отклики
+                    <?php if ($isAuthor) : ?>
+                        <span><?= '(' . count($task->responses) . ')' ?></span>
+                    <?php endif; ?>
+                </h2>
                 <div class="content-view__feedback-wrapper">
-                    <div class="content-view__feedback-card">
+                    <?php foreach ($task->responses as $response) : ?>
+                    <div class="content-view__feedback-card <?= ((Yii::$app->user->id !== $response->applicant_id) && !$isAuthor)  ? 'visually-hidden' : '' ?>">
                         <div class="feedback-card__top">
-                            <a href="#"><img src="./img/man-glasses.jpg" width="55" height="55"></a>
+                            <a href="/profile?user_id=<?= $response->applicant_id ?>"><img src="./uploads/<?= $response->applicant->avatar ?>" width="55" height="55"></a>
                             <div class="feedback-card__top--name">
-                                <p><a href="#" class="link-regular">Астахов Павел</a></p>
-                                <span></span><span></span><span></span><span></span><span class="star-disabled"></span>
-                                <b>4.25</b>
+                                <p><a href="/profile?user_id=<?= $response->applicant_id ?>" class="link-regular"><?= $response->applicant->name ?></a></p>
+                                <?= Rating::widget(['rating' => $response->applicant->rating]) ?>
                             </div>
-                            <span class="new-task__time">25 минут назад</span>
+                            <span class="new-task__time"><?= Yii::$app->formatter->asRelativeTime($response->response_time) ?></span>
                         </div>
                         <div class="feedback-card__content">
-                            <p>
-                                Могу сделать всё в лучшем виде. У меня есть необходимый опыт и инструменты.
-                            </p>
-                            <span>1500 ₽</span>
+                            <p><?= $response->applicant_comment ?></p>
+                            <span><?= $response->applicant_price ?> ₽</span>
                         </div>
+                        <?php if ($isAuthor) : ?>
                         <div class="feedback-card__actions">
                             <a class="button__small-color request-button button"
                                type="button">Подтвердить</a>
                             <a class="button__small-color refusal-button button"
                                type="button">Отказать</a>
                         </div>
+                        <?php endif; ?>
                     </div>
-                    <div class="content-view__feedback-card">
-                        <div class="feedback-card__top">
-                            <a href="#"><img src="./img/man-blond.jpg" width="55" height="55"></a>
-                            <div class="feedback-card__top--name">
-                                <p class="link-name"><a href="#" class="link-regular">Богатырев Дмитрий</a></p>
-                                <span></span><span></span><span></span><span></span><span class="star-disabled"></span>
-                                <b>4.25</b>
-                            </div>
-                            <span class="new-task__time">25 минут назад</span>
-                        </div>
-                        <div class="feedback-card__content">
-                            <p>
-                                Примусь за выполнение задания в течение часа, сделаю быстро и качественно.
-                            </p>
-                            <span>1500 ₽</span>
-                        </div>
-                        <div class="feedback-card__actions">
-                            <a class="button__small-color request-button button"
-                               type="button">Подтвердить</a>
-                            <a class="button__small-color refusal-button button"
-                               type="button">Отказать</a>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
+            <?php endif; ?>
         </section>
         <?php if ($task->worker_id) : ?>
         <section class="connect-desk">
@@ -126,6 +110,7 @@ $this->title = 'TaskForce-View';
                     <?php endif; ?>
                 </div>
             </div>
+            <?php if ($isAuthor || $isWorker) : ?>
             <div class="connect-desk__chat">
                 <h3>Переписка</h3>
                 <div class="chat__overflow">
@@ -150,6 +135,7 @@ $this->title = 'TaskForce-View';
                     <button class="button chat__button" type="submit">Отправить</button>
                 </form>
             </div>
+            <?php endif; ?>
         </section>
         <?php endif; ?>
     </div>

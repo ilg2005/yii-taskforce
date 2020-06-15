@@ -88,7 +88,7 @@ footer {
   overflow: hidden; }
 
 .main-container {
-  width: 1280px;
+  width: 1300px;
   margin: 0 auto; }
 
 .page-main {
@@ -2067,7 +2067,7 @@ footer {
 
 .page-header__container--index {
   min-height: 268px;
-  width: 1280px;
+  width: 1300px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

@@ -17,6 +17,7 @@ use taskforce\constants\UserActions;
 use Yii;
 use yii\data\Pagination;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
 
@@ -110,7 +111,7 @@ class TaskController extends SecureController
                 }
             }
 
-
+            Yii::$app->response->redirect(Url::to("/view?task_id={$task->id}"));
         }
 
         return $this->render('create', compact('model', 'categories'));
@@ -123,6 +124,7 @@ class TaskController extends SecureController
             ->one();
 
         $isAuthor = Yii::$app->user->id === $task->customer_id;
+        $isWorker = Yii::$app->user->id === $task->worker_id;
 
          if ($task->worker_id && $isAuthor) {
             $user = User::find()->where(['id' => $task->worker_id])->one();
@@ -130,7 +132,7 @@ class TaskController extends SecureController
             $user = User::find()->where(['id' => $task->customer_id])->one();
         }
 
-        return $this->render('view', compact('task', 'isAuthor', 'user'));
+        return $this->render('view', compact('task', 'isAuthor', 'isWorker', 'user'));
     }
 
     public function actionMylist()
