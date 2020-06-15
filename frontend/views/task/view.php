@@ -195,3 +195,4 @@ $this->title = 'TaskForce-View';
             type="button">Отказаться</button>
     <button class="form-modal-close" type="button">Закрыть</button>
 </section>
+<div class="overlay"></div>

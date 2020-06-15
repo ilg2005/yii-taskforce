@@ -8,8 +8,8 @@ var enterFormElement = document.querySelector("#login");
 for (var i = 0; i < openModalLinks.length; i++) {
   var modalLink = openModalLinks[i];
 
-  modalLink.addEventListener("click", function (event) {
-    var modalId = event.currentTarget.getAttribute("data-for");
+  modalLink.addEventListener("click", function (evt) {
+    var modalId = evt.currentTarget.getAttribute("data-for");
 
     var modal = document.getElementById(modalId);
     modal.classList.add("show");
@@ -18,8 +18,8 @@ for (var i = 0; i < openModalLinks.length; i++) {
   });
 }
 
-function closeModal(event) {
-  var modal = event.currentTarget.parentElement;
+function closeModal(evt) {
+  var modal = evt.currentTarget.parentElement;
 
   modal.classList.remove("show");
   overlay.classList.remove("show");
@@ -58,8 +58,8 @@ var starRating = document.getElementsByClassName("completion-form-star");
 if (starRating.length) {
   starRating = starRating[0];
 
-  starRating.addEventListener("click", function(event) {
-    var stars = event.currentTarget.childNodes;
+  starRating.addEventListener("click", function(evt) {
+    var stars = evt.currentTarget.childNodes;
     var rating = 0;
 
     for (var i = 0; i < stars.length; i++) {
@@ -70,7 +70,7 @@ if (starRating.length) {
         rating++;
       }
 
-      if (element === event.target) {
+      if (element === evt.target) {
         break;
       }
     }
