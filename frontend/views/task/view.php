@@ -3,6 +3,8 @@
 /* @var $this yii\web\View */
 
 use frontend\components\Rating;
+use taskforce\constants\TaskStatuses;
+use taskforce\constants\UserRoles;
 
 $this->title = 'TaskForce-View';
 
@@ -48,12 +50,22 @@ $this->title = 'TaskForce-View';
                     </div>
                 </div>
                 <div class="content-view__action-buttons">
+
+                    <?php if (Yii::$app->user->identity->role === UserRoles::WORKER && $task->status === TaskStatuses::NEW) : ?>
                     <button class=" button button__big-color response-button open-modal"
                             type="button" data-for="response-form">Откликнуться</button>
+                    <?php endif; ?>
+
+                    <?php if ($isWorker && $task->status === TaskStatuses::ACTIVE) : ?>
                     <button class="button button__big-color refusal-button open-modal"
                             type="button" data-for="refuse-form">Отказаться</button>
+                    <?php endif; ?>
+
+                    <?php if ($isAuthor && $task->status === TaskStatuses::ACTIVE) : ?>
                     <button class="button button__big-color request-button open-modal"
                             type="button" data-for="complete-form">Завершить</button>
+                    <?php endif; ?>
+
                 </div>
             </div>
             <?php if ($task->responses && ($isAuthor || $isWorker)) : ?>

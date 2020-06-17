@@ -6,7 +6,7 @@ namespace frontend\controllers;
 
 use Yii;
 
-class ErrorController extends SecureController
+class ErrorController extends BehaviorsController
 {
     public function actionError()
     {

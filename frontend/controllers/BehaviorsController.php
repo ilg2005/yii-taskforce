@@ -10,7 +10,7 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
-class SecureController extends Controller
+class BehaviorsController extends Controller
 {
     public $layout = 'basic';
 

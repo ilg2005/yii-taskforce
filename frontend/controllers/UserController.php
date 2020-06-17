@@ -24,7 +24,7 @@ use yii\web\Response;
 use yii\web\UploadedFile;
 use yii\widgets\ActiveForm;
 
-class UserController extends SecureController
+class UserController extends BehaviorsController
 {
 
     public function actionSignup()

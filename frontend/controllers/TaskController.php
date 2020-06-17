@@ -21,7 +21,7 @@ use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
 
-class TaskController extends SecureController
+class TaskController extends BehaviorsController
 {
 
     public function actionBrowse()

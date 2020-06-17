@@ -11,7 +11,7 @@ use yii\helpers\Url;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
 
-class IndexController extends SecureController
+class IndexController extends BehaviorsController
 {
 
 

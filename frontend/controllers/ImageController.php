@@ -6,7 +6,7 @@ namespace frontend\controllers;
 
 use Yii;
 
-class ImageController extends SecureController
+class ImageController extends BehaviorsController
 {
     public function actionImage()
     {
