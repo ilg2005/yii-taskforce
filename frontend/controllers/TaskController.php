@@ -26,7 +26,6 @@ use yii\web\UploadedFile;
 class TaskController extends BehaviorsController
 {
 
-    public $respondModel;
     public $currentTaskID;
 
     public function actionBrowse()
@@ -137,17 +136,15 @@ class TaskController extends BehaviorsController
         } else {
             $user = User::find()->where(['id' => $task->customer_id])->one();
         }
-        $model = new ResponseForm();
-        $this->respondModel = $model;
 
-        $this->actionResponse();
+        $model = $this->actionResponse();
 
         return $this->render('view', compact('task', 'isAuthor', 'isWorker', 'user', 'model'));
     }
 
     public function actionResponse()
     {
-        $model = $this->respondModel;
+        $model = new ResponseForm();
         $response = new Response();
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
@@ -158,6 +155,7 @@ class TaskController extends BehaviorsController
             $response->save();
             Yii::$app->response->redirect(Url::to("/view?task_id={$response->task_id}"));
         }
+        return $model;
     }
 
     public function actionMylist()

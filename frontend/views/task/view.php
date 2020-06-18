@@ -58,7 +58,7 @@ $this->title = 'TaskForce-View';
                 </div>
                 <div class="content-view__action-buttons">
 
-                    <?php if (Yii::$app->user->identity->role === UserRoles::WORKER && $task->status === TaskStatuses::NEW) : ?>
+                    <?php if (Yii::$app->user->identity->role === UserRoles::WORKER && $task->status === TaskStatuses::NEW && !in_array(Yii::$app->user->id, ArrayHelper::getColumn($task->responses, 'applicant_id'))) : ?>
                     <button class=" button button__big-color response-button open-modal"
                             type="button" data-for="response-form">Откликнуться</button>
                     <?php endif; ?>
