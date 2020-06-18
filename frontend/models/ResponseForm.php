@@ -8,6 +8,7 @@ use yii\base\Model;
 
 class ResponseForm extends Model
 {
+    public $action;
     public $price;
     public $comment;
 
@@ -22,6 +23,7 @@ class ResponseForm extends Model
     public function rules()
     {
         return [
+            ['action', 'default', 'value' => 'response'],
             [['comment', 'price'], 'trim'],
             ['comment', 'string'],
             ['price', 'integer', 'min' => 1, 'message' => 'Должно быть целое положительное число'],

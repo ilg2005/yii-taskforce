@@ -174,6 +174,13 @@ $this->title = 'TaskForce-View';
 
         ],
     ]); ?>
+    <?= $form->field($model, 'action')
+        ->textInput([
+            'class' => 'visually-hidden',
+            'value' => 'response'
+        ])->label(false)
+
+    ?>
     <?= $form->field($model, 'price')
         ->textInput([
             'class' => 'response-form-payment input input-middle input-money',

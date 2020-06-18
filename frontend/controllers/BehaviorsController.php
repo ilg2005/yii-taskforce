@@ -27,8 +27,16 @@ class BehaviorsController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index', 'logout', 'account', 'browse', 'create', 'mylist', 'profile', 'users', 'view', 'image', 'error', 'response'],
+                        'actions' => ['index', 'logout', 'account', 'browse', 'create', 'mylist', 'profile', 'users', 'image', 'error', 'view'],
                         'roles' => ['@'],
+                    ],
+                    [
+                        'allow' => false,
+                        'actions' => ['view'],
+                        'roles' => ['@'],
+                        'matchCallback' => function () {
+                            return (Yii::$app->request->post('action') === 'response');
+                        }
                     ],
                     [
                         'allow' => true,
