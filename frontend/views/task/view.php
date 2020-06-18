@@ -3,6 +3,7 @@
 /* @var $this yii\web\View */
 
 use frontend\components\Rating;
+use frontend\components\TaskBtn;
 use taskforce\constants\TaskStatuses;
 use taskforce\constants\UserRoles;
 use yii\bootstrap\ActiveForm;
@@ -57,21 +58,22 @@ $this->title = 'TaskForce-View';
                     </div>
                 </div>
                 <div class="content-view__action-buttons">
+                    <?= TaskBtn::widget(['currentUserId' => Yii::$app->user->id, 'task' => $task]) ?>
 
-                    <?php if (Yii::$app->user->identity->role === UserRoles::WORKER && $task->status === TaskStatuses::NEW && !in_array(Yii::$app->user->id, ArrayHelper::getColumn($task->responses, 'applicant_id'))) : ?>
+                    <?php /*if (Yii::$app->user->identity->role === UserRoles::WORKER && $task->status === TaskStatuses::NEW && !in_array(Yii::$app->user->id, ArrayHelper::getColumn($task->responses, 'applicant_id'))) : */?><!--
                     <button class=" button button__big-color response-button open-modal"
                             type="button" data-for="response-form">Откликнуться</button>
-                    <?php endif; ?>
+                    <?php /*endif; */?>
 
-                    <?php if ($isWorker && $task->status === TaskStatuses::ACTIVE) : ?>
+                    <?php /*if ($isWorker && $task->status === TaskStatuses::ACTIVE) : */?>
                     <button class="button button__big-color refusal-button open-modal"
                             type="button" data-for="refuse-form">Отказаться</button>
-                    <?php endif; ?>
+                    <?php /*endif; */?>
 
-                    <?php if ($isAuthor && $task->status === TaskStatuses::ACTIVE) : ?>
+                    <?php /*if ($isAuthor && $task->status === TaskStatuses::ACTIVE) : */?>
                     <button class="button button__big-color request-button open-modal"
                             type="button" data-for="complete-form">Завершить</button>
-                    <?php endif; ?>
+                    --><?php /*endif; */?>
 
                 </div>
             </div>

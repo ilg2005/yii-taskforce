@@ -3,7 +3,6 @@
 var openModalLinks = document.querySelectorAll(".open-modal");
 var closeModalLinks = document.querySelectorAll(".form-modal-close");
 var overlay = document.querySelector(".overlay");
-var enterFormElement = document.querySelector("#login");
 
 for (var i = 0; i < openModalLinks.length; i++) {
   var modalLink = openModalLinks[i];
