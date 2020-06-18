@@ -80,7 +80,7 @@ return [
                 'error' => 'error/error',
                 'download' => 'download/download',
                 '<action:(account|profile|signup|users|logout)>' => 'user/<action>',
-                '<action:(browse|create|mylist|view)>' => 'task/<action>',
+                '<action:(browse|create|mylist|view|response)>' => 'task/<action>',
             ],
         ],
 

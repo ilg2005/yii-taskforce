@@ -5,6 +5,10 @@
 use frontend\components\Rating;
 use taskforce\constants\TaskStatuses;
 use taskforce\constants\UserRoles;
+use yii\bootstrap\ActiveForm;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
+use yii\helpers\Url;
 
 $this->title = 'TaskForce-View';
 
@@ -28,12 +32,15 @@ $this->title = 'TaskForce-View';
                         <h3 class="content-view__h3">Общее описание</h3>
                         <p><?= $task->description ?></p>
                     </div>
+
+                    <?php if (count($task->files)) : ?>
                     <div class="content-view__attach">
                         <h3 class="content-view__h3">Вложения</h3>
                         <?php foreach ($task->files as $taskFile) : ?>
                         <a href="/download?filename=<?= $taskFile->filename ?>"><?= $taskFile->filename ?></a>
                         <?php endforeach; ?>
                     </div>
+                    <?php endif; ?>
                     <div class="content-view__location">
                         <h3 class="content-view__h3">Расположение</h3>
                         <div class="content-view__location-wrapper">
@@ -68,7 +75,8 @@ $this->title = 'TaskForce-View';
 
                 </div>
             </div>
-            <?php if ($task->responses && ($isAuthor || $isWorker)) : ?>
+            <?php if ($task->responses && ($isAuthor || (in_array(Yii::$app->user->id,
+                        ArrayHelper::getColumn($task->responses, 'applicant_id'), true)))) : ?>
             <div class="content-view__feedback">
                 <h2>Отклики
                     <?php if ($isAuthor) : ?>
@@ -154,7 +162,36 @@ $this->title = 'TaskForce-View';
 </main>
 <section class="modal response-form form-modal" id="response-form">
     <h2>Отклик на задание</h2>
-    <form action="#" method="post">
+    <?php $form = ActiveForm::begin([
+        'fieldConfig' => [
+            'template' => "<p>{label}</p>{input}{error}",
+            'errorOptions' => [
+                'class' => 'has-error'
+            ],
+            'labelOptions' => [
+                  'class' =>  'form-modal-description'
+            ],
+
+        ],
+    ]); ?>
+    <?= $form->field($model, 'price')
+        ->textInput([
+            'class' => 'response-form-payment input input-middle input-money',
+        ])
+    ?>
+    <?= $form->field($model, 'comment')
+        ->textArea([
+            'class' => 'input textarea',
+            'placeholder' => 'Ваш комментарий к отклику',
+            'rows' => 4,
+            'style' => ['width' => '450px']
+        ])
+    ?>
+    <?= Html::submitButton('Отправить', ['class'=> 'button modal-button']) ?>
+    <?= Html::button('Закрыть', ['class'=> 'form-modal-close']) ?>
+    <?php ActiveForm::end(); ?>
+
+<!--    <form action="#" method="post">
         <p>
             <label class="form-modal-description" for="response-payment">Ваша цена</label>
             <input class="response-form-payment input input-middle input-money" type="text" name="response-payment" id="response-payment">
@@ -166,7 +203,12 @@ $this->title = 'TaskForce-View';
         <button class="button modal-button" type="submit">Отправить</button>
     </form>
     <button class="form-modal-close" type="button">Закрыть</button>
+-->
+
 </section>
+-->
+
+
 <section class="modal completion-form form-modal" id="complete-form">
     <h2>Завершение задания</h2>
     <p class="form-modal-description">Задание выполнено?</p>

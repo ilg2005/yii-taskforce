@@ -8,6 +8,8 @@ use frontend\models\Category;
 use frontend\models\CreateForm;
 use frontend\models\File;
 use frontend\models\Profile;
+use frontend\models\ResponseForm;
+use frontend\models\Response;
 use frontend\models\Task;
 use frontend\models\UploadFiles;
 use frontend\models\User;
@@ -23,6 +25,9 @@ use yii\web\UploadedFile;
 
 class TaskController extends BehaviorsController
 {
+
+    public $respondModel;
+    public $currentTaskID;
 
     public function actionBrowse()
     {
@@ -122,17 +127,37 @@ class TaskController extends BehaviorsController
         $task = Task::find()
             ->where(['tasks.id' => Yii::$app->request->get('task_id')])
             ->one();
+        $this->currentTaskID = $task->id;
 
         $isAuthor = Yii::$app->user->id === $task->customer_id;
         $isWorker = Yii::$app->user->id === $task->worker_id;
 
-         if ($task->worker_id && $isAuthor) {
+        if ($task->worker_id && $isAuthor) {
             $user = User::find()->where(['id' => $task->worker_id])->one();
         } else {
             $user = User::find()->where(['id' => $task->customer_id])->one();
         }
+        $model = new ResponseForm();
+        $this->respondModel = $model;
 
-        return $this->render('view', compact('task', 'isAuthor', 'isWorker', 'user'));
+        $this->actionResponse();
+
+        return $this->render('view', compact('task', 'isAuthor', 'isWorker', 'user', 'model'));
+    }
+
+    public function actionResponse()
+    {
+        $model = $this->respondModel;
+        $response = new Response();
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $response->task_id = $this->currentTaskID;
+            $response->applicant_id = Yii::$app->user->id;
+            $response->applicant_price = $model->price;
+            $response->applicant_comment = $model->comment;
+            $response->save();
+            Yii::$app->response->redirect(Url::to("/view?task_id={$response->task_id}"));
+        }
     }
 
     public function actionMylist()

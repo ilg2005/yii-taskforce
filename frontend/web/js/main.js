@@ -24,7 +24,9 @@ function closeModal(evt) {
   modal.classList.remove("show");
   overlay.classList.remove("show");
 
+/*
   window.location.href = "/";
+*/
 
   /*var inputElements = enterFormElement.querySelectorAll("input");
   for(var i = 0; i < inputElements.length; i++) {

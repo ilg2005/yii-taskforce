@@ -27,7 +27,7 @@ class BehaviorsController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index', 'logout', 'account', 'browse', 'create', 'mylist', 'profile', 'users', 'view', 'image', 'error'],
+                        'actions' => ['index', 'logout', 'account', 'browse', 'create', 'mylist', 'profile', 'users', 'view', 'image', 'error', 'response'],
                         'roles' => ['@'],
                     ],
                     [
