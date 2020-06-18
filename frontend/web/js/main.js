@@ -18,9 +18,8 @@ for (var i = 0; i < openModalLinks.length; i++) {
   });
 }
 
-function closeModal(evt) {
-  var modal = evt.currentTarget.parentElement;
-
+function closeModal() {
+  var modal = document.querySelector('.show');
   modal.classList.remove("show");
   overlay.classList.remove("show");
 
