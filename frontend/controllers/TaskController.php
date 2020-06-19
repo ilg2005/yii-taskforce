@@ -169,7 +169,7 @@ class TaskController extends BehaviorsController
 
             /* 3) Инициировать процесс «отправка уведомления».
                4) Переадресовать на главную страницу*/
-            Yii::$app->response->redirect(['/']);
+            Yii::$app->response->redirect(["/view?task_id={$taskId}"]);
         }
     }
 
