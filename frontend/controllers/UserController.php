@@ -168,7 +168,8 @@ class UserController extends BehaviorsController
             ->orWhere(['users.id' => Yii::$app->user->id])
             ->one();
 
-        if (!$user->role) {
+        /* Нужно исправить, чтобы страница профиля была доступна по прямой ссылке*/
+        if (!Yii::$app->user->identity->role) {
             throw new NotFoundHttpException('Такая страница не существует');
         }
 
