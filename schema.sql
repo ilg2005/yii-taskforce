@@ -77,7 +77,7 @@ CREATE TABLE tasks
     title         VARCHAR(256) NOT NULL,
     description   TEXT         NOT NULL,
     category_id   int          NOT NULL,
-    status        int       DEFAULT 0,
+    status        TINYINT   DEFAULT 0,
     address       VARCHAR(256),
     location_id   int,
     budget        int UNSIGNED,
@@ -102,18 +102,18 @@ CREATE TABLE files
 
 CREATE TABLE tasks_files
 (
-    id       int AUTO_INCREMENT PRIMARY KEY,
-    task_id  int,
-    file_id  int,
+    id      int AUTO_INCREMENT PRIMARY KEY,
+    task_id int,
+    file_id int,
     FOREIGN KEY (task_id) REFERENCES tasks (id) ON DELETE CASCADE,
     FOREIGN KEY (file_id) REFERENCES files (id) ON DELETE CASCADE
 );
 
 CREATE TABLE users_portfolio
 (
-    id       int AUTO_INCREMENT PRIMARY KEY,
-    user_id  int,
-    file_id  int,
+    id      int AUTO_INCREMENT PRIMARY KEY,
+    user_id int,
+    file_id int,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
     FOREIGN KEY (file_id) REFERENCES files (id) ON DELETE CASCADE
 );
@@ -134,12 +134,13 @@ CREATE TABLE feedbacks
 
 CREATE TABLE tasks_replies
 (
-    id             int AUTO_INCREMENT PRIMARY KEY,
-    task_id        int,
+    id                int AUTO_INCREMENT PRIMARY KEY,
+    task_id           int,
     applicant_id      int,
     applicant_price   int UNSIGNED,
     applicant_comment TEXT,
-    reply_time  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    reply_time        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    is_refused        TINYINT   DEFAULT 0,
     FOREIGN KEY (applicant_id) REFERENCES users (id) ON DELETE CASCADE,
     FOREIGN KEY (task_id) REFERENCES tasks (id) ON DELETE CASCADE
 );

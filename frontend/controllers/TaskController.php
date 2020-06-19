@@ -178,6 +178,20 @@ class TaskController extends BehaviorsController
         }
     }
 
+    public function actionRefuse($taskId, $currentUserId, $applicantId)
+    {
+        $task = Task::findOne($taskId);
+        if ($task->customer_id == $currentUserId && $task->status === TaskStatuses::NEW) {
+
+            /* 1) Cкрывать кнопки-действия с этого отклика*/
+            $reply = Reply::find()->where(['task_id' => $task->id])->one();
+            $reply->is_refused = true;
+            $reply->save();
+
+            Yii::$app->response->redirect(["/view?task_id={$taskId}"]);
+        }
+    }
+
     public function actionMylist()
     {
         return $this->render('mylist');

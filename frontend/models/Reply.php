@@ -11,7 +11,7 @@ class Reply extends ActiveRecord
     public function rules()
     {
         return [
-            [['task_id', 'applicant_id', 'applicant_price', 'applicant_comment', 'reply_time'], 'safe'],
+            [['task_id', 'applicant_id', 'applicant_price', 'applicant_comment', 'reply_time', 'is_refused'], 'safe'],
         ];
     }
 

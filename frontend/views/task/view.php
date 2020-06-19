@@ -101,12 +101,9 @@ $this->title = 'TaskForce-View';
                             <span><?= $reply->applicant_price ?> ₽</span>
                         </div>
                         <?php if ($isAuthor && $task->status !== TaskStatuses::ACTIVE) : ?>
-                        <div class="feedback-card__actions">
+                        <div class="feedback-card__actions <?= $reply->is_refused ? 'visually-hidden' : '' ?>">
                             <?= Html::a('Подтвердить', ['/confirm', 'taskId' => $task->id, 'currentUserId' => Yii::$app->user->id, 'applicantId' => $reply->applicant_id], ['class' => 'button__small-color request-button button', 'type' => 'button']) ?>
-                            <!--<a class="button__small-color request-button button"
-                               type="button">Подтвердить</a>-->
-                            <a class="button__small-color refusal-button button"
-                               type="button">Отказать</a>
+                            <?= Html::a('Отказать', ['/refuse', 'taskId' => $task->id, 'currentUserId' => Yii::$app->user->id, 'applicantId' => $reply->applicant_id], ['class' => 'button__small-color refusal-button button', 'type' => 'button']) ?>
                         </div>
                         <?php endif; ?>
                     </div>

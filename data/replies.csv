@@ -1,4 +1,4 @@
-task_id,applicant_id,applicant_price,applicant_comment,reply_time
-1,1,100,готов взять задание,2020-02-01
-2,2,200,сделаю быстро и качественно,2020-05-10
-2,3,300,звоните,2020-06-14
+task_id,applicant_id,applicant_price,applicant_comment,reply_time,is_refused
+1,1,100,готов взять задание,2020-02-01,0
+2,2,200,сделаю быстро и качественно,2020-05-10,0
+2,3,300,звоните,2020-06-14,0
