@@ -163,8 +163,13 @@ class TaskController extends BehaviorsController
     {
         $task = Task::findOne($taskId);
         if ($task->customer_id == $currentUserId && $task->status === TaskStatuses::NEW) {
-            $task->worker_id = $applicantId;
+
+            /* 1) Сменить статус задания: «На исполнении».*/
             $task->status = TaskStatuses::ACTIVE;
+
+            /* 2) Назначить автора отклика исполнителем этого задания.*/
+            $task->worker_id = $applicantId;
+
             $task->save();
 
             /* 3) Инициировать процесс «отправка уведомления».
