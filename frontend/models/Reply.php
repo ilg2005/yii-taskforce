@@ -6,12 +6,12 @@ namespace frontend\models;
 
 use yii\db\ActiveRecord;
 
-class Response extends ActiveRecord
+class Reply extends ActiveRecord
 {
     public function rules()
     {
         return [
-            [['task_id', 'applicant_id', 'applicant_price', 'applicant_comment', 'response_time'], 'safe'],
+            [['task_id', 'applicant_id', 'applicant_price', 'applicant_comment', 'reply_time'], 'safe'],
         ];
     }
 
@@ -25,6 +25,6 @@ class Response extends ActiveRecord
 
     public static function tableName()
     {
-        return 'tasks_responses';
+        return 'tasks_replies';
     }
 }

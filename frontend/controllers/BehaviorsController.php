@@ -4,7 +4,7 @@
 namespace frontend\controllers;
 
 
-use frontend\constants\UserRoles;
+use taskforce\constants\UserRoles;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -35,7 +35,16 @@ class BehaviorsController extends Controller
                         'actions' => ['view'],
                         'roles' => ['@'],
                         'matchCallback' => function () {
-                            return (Yii::$app->request->post('action') === 'response');
+                            return (Yii::$app->request->post('action') === 'reply');
+                        }
+                    ],
+                    [
+                        'allow' => true,
+                        'controllers' => ['task'],
+                        'actions' => ['confirm'],
+                        'roles' => ['@'],
+                        'matchCallback' => function () {
+                            return $this->redirect('/browse');
                         }
                     ],
                     [

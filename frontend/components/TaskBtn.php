@@ -20,7 +20,7 @@ class TaskBtn extends Widget
         $user = User::findOne($this->currentUserId);
 
         if ($user->role === UserRoles::WORKER && $this->task->status === TaskStatuses::NEW && !in_array($this->currentUserId,
-                ArrayHelper::getColumn($this->task->responses, 'applicant_id'), true)) {
+                ArrayHelper::getColumn($this->task->replies, 'applicant_id'), true)) {
             $dataAttr = 'response';
             $btnClass = 'response';
             $btnName = 'Откликнуться';

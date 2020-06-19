@@ -8,8 +8,8 @@ use frontend\models\Category;
 use frontend\models\CreateForm;
 use frontend\models\File;
 use frontend\models\Profile;
-use frontend\models\ResponseForm;
-use frontend\models\Response;
+use frontend\models\ReplyForm;
+use frontend\models\Reply;
 use frontend\models\Task;
 use frontend\models\UploadFiles;
 use frontend\models\User;
@@ -40,6 +40,7 @@ class TaskController extends BehaviorsController
             $tasks->andWhere(['category_id' => Yii::$app->request->get('category')]);
         }
 
+        /*Потенциальная ошибка tasks_reactions -> tasks_replies */
         if (Yii::$app->request->get('no-responses')) {
             $tasks->joinWith('reactions');
             $tasks->andWhere('tasks_reactions.id IS NULL');
@@ -137,25 +138,39 @@ class TaskController extends BehaviorsController
             $user = User::find()->where(['id' => $task->customer_id])->one();
         }
 
-        $model = $this->actionResponse();
+        $model = $this->actionReply();
 
         return $this->render('view', compact('task', 'isAuthor', 'isWorker', 'user', 'model'));
     }
 
-    public function actionResponse()
+    public function actionReply()
     {
-        $model = new ResponseForm();
-        $response = new Response();
+        $model = new ReplyForm();
+        $reply = new Reply();
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $response->task_id = $this->currentTaskID;
-            $response->applicant_id = Yii::$app->user->id;
-            $response->applicant_price = $model->price;
-            $response->applicant_comment = $model->comment;
-            $response->save();
-            Yii::$app->response->redirect(Url::to("/view?task_id={$response->task_id}"));
+            $reply->task_id = $this->currentTaskID;
+            $reply->applicant_id = Yii::$app->user->id;
+            $reply->applicant_price = $model->price;
+            $reply->applicant_comment = $model->comment;
+            $reply->save();
+            Yii::$app->response->redirect(Url::to("/view?task_id={$reply->task_id}"));
         }
         return $model;
+    }
+
+    public function actionConfirm($taskId, $currentUserId, $applicantId)
+    {
+        $task = Task::findOne($taskId);
+        if ($task->customer_id == $currentUserId && $task->status === TaskStatuses::NEW) {
+            $task->worker_id = $applicantId;
+            $task->status = TaskStatuses::ACTIVE;
+            $task->save();
+
+            /* 3) Инициировать процесс «отправка уведомления».
+               4) Переадресовать на главную страницу*/
+            Yii::$app->response->redirect(['/']);
+        }
     }
 
     public function actionMylist()

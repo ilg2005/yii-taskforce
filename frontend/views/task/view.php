@@ -60,7 +60,7 @@ $this->title = 'TaskForce-View';
                 <div class="content-view__action-buttons">
                     <?= TaskBtn::widget(['currentUserId' => Yii::$app->user->id, 'task' => $task]) ?>
 
-                    <?php /*if (Yii::$app->user->identity->role === UserRoles::WORKER && $task->status === TaskStatuses::NEW && !in_array(Yii::$app->user->id, ArrayHelper::getColumn($task->responses, 'applicant_id'))) : */?><!--
+                    <?php /*if (Yii::$app->user->identity->role === UserRoles::WORKER && $task->status === TaskStatuses::NEW && !in_array(Yii::$app->user->id, ArrayHelper::getColumn($task->replies, 'applicant_id'))) : */?><!--
                     <button class=" button button__big-color response-button open-modal"
                             type="button" data-for="response-form">Откликнуться</button>
                     <?php /*endif; */?>
@@ -77,33 +77,34 @@ $this->title = 'TaskForce-View';
 
                 </div>
             </div>
-            <?php if ($task->responses && ($isAuthor || (in_array(Yii::$app->user->id,
-                        ArrayHelper::getColumn($task->responses, 'applicant_id'), true)))) : ?>
+            <?php if ($task->replies && ($isAuthor || (in_array(Yii::$app->user->id,
+                        ArrayHelper::getColumn($task->replies, 'applicant_id'), true)))) : ?>
             <div class="content-view__feedback">
                 <h2>Отклики
                     <?php if ($isAuthor) : ?>
-                        <span><?= '(' . count($task->responses) . ')' ?></span>
+                        <span><?= '(' . count($task->replies) . ')' ?></span>
                     <?php endif; ?>
                 </h2>
                 <div class="content-view__feedback-wrapper">
-                    <?php foreach ($task->responses as $response) : ?>
-                    <div class="content-view__feedback-card <?= ((Yii::$app->user->id !== $response->applicant_id) && !$isAuthor)  ? 'visually-hidden' : '' ?>">
+                    <?php foreach ($task->replies as $reply) : ?>
+                    <div class="content-view__feedback-card <?= ((Yii::$app->user->id !== $reply->applicant_id) && !$isAuthor)  ? 'visually-hidden' : '' ?>">
                         <div class="feedback-card__top">
-                            <a href="/profile?user_id=<?= $response->applicant_id ?>"><img src="./uploads/<?= $response->applicant->avatar ?>" width="55" height="55"></a>
+                            <a href="/profile?user_id=<?= $reply->applicant_id ?>"><img src="./uploads/<?= $reply->applicant->avatar ?>" width="55" height="55"></a>
                             <div class="feedback-card__top--name">
-                                <p><a href="/profile?user_id=<?= $response->applicant_id ?>" class="link-regular"><?= $response->applicant->name ?></a></p>
-                                <?= Rating::widget(['rating' => $response->applicant->rating]) ?>
+                                <p><a href="/profile?user_id=<?= $reply->applicant_id ?>" class="link-regular"><?= $reply->applicant->name ?></a></p>
+                                <?= Rating::widget(['rating' => $reply->applicant->rating]) ?>
                             </div>
-                            <span class="new-task__time"><?= Yii::$app->formatter->asRelativeTime($response->response_time) ?></span>
+                            <span class="new-task__time"><?= Yii::$app->formatter->asRelativeTime($reply->reply_time) ?></span>
                         </div>
                         <div class="feedback-card__content">
-                            <p><?= $response->applicant_comment ?></p>
-                            <span><?= $response->applicant_price ?> ₽</span>
+                            <p><?= $reply->applicant_comment ?></p>
+                            <span><?= $reply->applicant_price ?> ₽</span>
                         </div>
-                        <?php if ($isAuthor) : ?>
+                        <?php if ($isAuthor && $task->status !== TaskStatuses::ACTIVE) : ?>
                         <div class="feedback-card__actions">
-                            <a class="button__small-color request-button button"
-                               type="button">Подтвердить</a>
+                            <?= Html::a('Подтвердить', ['/confirm', 'taskId' => $task->id, 'currentUserId' => Yii::$app->user->id, 'applicantId' => $reply->applicant_id], ['class' => 'button__small-color request-button button', 'type' => 'button']) ?>
+                            <!--<a class="button__small-color request-button button"
+                               type="button">Подтвердить</a>-->
                             <a class="button__small-color refusal-button button"
                                type="button">Отказать</a>
                         </div>
@@ -179,7 +180,7 @@ $this->title = 'TaskForce-View';
     <?= $form->field($model, 'action')
         ->textInput([
             'class' => 'visually-hidden',
-            'value' => 'response'
+            'value' => 'reply'
         ])->label(false)
 
     ?>

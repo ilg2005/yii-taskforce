@@ -6,7 +6,7 @@ namespace frontend\models;
 
 use yii\base\Model;
 
-class ResponseForm extends Model
+class ReplyForm extends Model
 {
     public $action;
     public $price;

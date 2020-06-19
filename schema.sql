@@ -132,14 +132,14 @@ CREATE TABLE feedbacks
     FOREIGN KEY (customer_id) REFERENCES tasks (customer_id) ON DELETE CASCADE
 );
 
-CREATE TABLE tasks_responses
+CREATE TABLE tasks_replies
 (
     id             int AUTO_INCREMENT PRIMARY KEY,
     task_id        int,
     applicant_id      int,
     applicant_price   int UNSIGNED,
     applicant_comment TEXT,
-    response_time  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    reply_time  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (applicant_id) REFERENCES users (id) ON DELETE CASCADE,
     FOREIGN KEY (task_id) REFERENCES tasks (id) ON DELETE CASCADE
 );
