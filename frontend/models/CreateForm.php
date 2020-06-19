@@ -46,6 +46,7 @@ class CreateForm extends Model
             ['budget', 'integer', 'min' => 1, 'message' => 'Должно быть целое положительное число'],
 
             ['deadline', 'date', 'format' => 'Y-m-d',   'message' => 'Неверный формат даты', 'min' => date('Y-m-d', strtotime('today')), 'tooSmall' => 'Срок исполнения должен быть не раньше сегодняшней даты'],
+            /* Нестабильно валидирует минимальную дату*/
 
         ];
     }
