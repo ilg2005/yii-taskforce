@@ -26,11 +26,12 @@ class TaskBtn extends Widget
             $btnName = 'Откликнуться';
         }
 
-        if ($this->currentUserId === $this->task->worker_id && $this->task->status === TaskStatuses::ACTIVE) {
+        if (($this->currentUserId === $this->task->worker_id && $this->task->status === TaskStatuses::ACTIVE) || ($this->currentUserId === $this->task->customer_id && $this->task->status === TaskStatuses::NEW)) {
             $dataAttr = 'refuse';
             $btnClass = 'refusal';
             $btnName = 'Отказаться';
         }
+
 
         if ($this->currentUserId === $this->task->customer_id && $this->task->status === TaskStatuses::ACTIVE) {
             $dataAttr = 'complete';

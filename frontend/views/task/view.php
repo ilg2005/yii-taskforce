@@ -100,7 +100,7 @@ $this->title = 'TaskForce-View';
                             <p><?= $reply->applicant_comment ?></p>
                             <span><?= $reply->applicant_price ?> ₽</span>
                         </div>
-                        <?php if ($isAuthor && $task->status !== TaskStatuses::ACTIVE) : ?>
+                        <?php if ($isAuthor && $task->status === TaskStatuses::NEW) : ?>
                         <div class="feedback-card__actions <?= $reply->is_refused ? 'visually-hidden' : '' ?>">
                             <?= Html::a('Подтвердить', ['/confirm', 'taskId' => $task->id, 'currentUserId' => Yii::$app->user->id, 'applicantId' => $reply->applicant_id], ['class' => 'button__small-color request-button button', 'type' => 'button']) ?>
                             <?= Html::a('Отказать', ['/refuse', 'taskId' => $task->id, 'currentUserId' => Yii::$app->user->id, 'applicantId' => $reply->applicant_id], ['class' => 'button__small-color refusal-button button', 'type' => 'button']) ?>
@@ -252,8 +252,7 @@ $this->title = 'TaskForce-View';
     </p>
     <button class="button__form-modal button" id="close-modal"
             type="button">Отмена</button>
-    <button class="button__form-modal refusal-button button"
-            type="button">Отказаться</button>
+   <?= Html::a('Отказаться', ['/fail', 'taskId' => $task->id, 'currentUserId' => Yii::$app->user->id], ['class' => 'button__form-modal refusal-button button', 'style' => ['float' => 'right'], 'type' => 'button']) ?>
     <button class="form-modal-close" type="button">Закрыть</button>
 </section>
 <div class="overlay"></div>
