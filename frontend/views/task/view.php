@@ -252,7 +252,7 @@ $this->title = 'TaskForce-View';
     </p>
     <button class="button__form-modal button" id="close-modal"
             type="button">Отмена</button>
-   <?= Html::a('Отказаться', ['/fail', 'taskId' => $task->id, 'currentUserId' => Yii::$app->user->id], ['class' => 'button__form-modal refusal-button button', 'style' => ['float' => 'right'], 'type' => 'button']) ?>
+   <?= Html::a('Отказаться', [($isAuthor ? '/cancel' : '/fail'), 'taskId' => $task->id, 'currentUserId' => Yii::$app->user->id], ['class' => 'button__form-modal refusal-button button', 'style' => ['float' => 'right'], 'type' => 'button']) ?>
     <button class="form-modal-close" type="button">Закрыть</button>
 </section>
 <div class="overlay"></div>

@@ -192,10 +192,26 @@ class TaskController extends BehaviorsController
         }
     }
 
+    public function actionCancel($taskId, $currentUserId)
+    {
+        $task = Task::findOne($taskId);
+        if ($task->customer_id == $currentUserId && $task->status === TaskStatuses::NEW) {
+
+            /* Отказ меняет статус задания на «Провалено»*/
+            $task->status = TaskStatuses::CANCELED;
+            $task->save();
+
+            /* и увеличивает у исполнителя счётчик проваленных заданий.*/
+
+            /*Затем следует переадресация на страницу просмотра.*/
+            Yii::$app->response->redirect(["/view?task_id={$taskId}"]);
+        }
+    }
+
     public function actionFail($taskId, $currentUserId)
     {
         $task = Task::findOne($taskId);
-        if (($task->worker_id == $currentUserId && $task->status === TaskStatuses::ACTIVE) || ($task->customer_id == $currentUserId && $task->status === TaskStatuses::NEW)) {
+        if ($task->worker_id == $currentUserId && $task->status === TaskStatuses::ACTIVE) {
 
             /* Отказ меняет статус задания на «Провалено»*/
             $task->status = TaskStatuses::FAILED;
