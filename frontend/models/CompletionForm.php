@@ -10,7 +10,7 @@ class CompletionForm extends Model
 {
     public $completionStatus;
     public $comment;
-    public $rating;
+    public $rate;
     public $task_id;
 
     public function attributeLabels()
@@ -18,7 +18,7 @@ class CompletionForm extends Model
         return [
             'completionStatus' => 'Задание выполнено?',
             'comment' => 'Комментарий',
-            'rating' => 'Оценка'
+            'rate' => 'Оценка'
         ];
     }
 
@@ -27,8 +27,8 @@ class CompletionForm extends Model
         return [
             [['completionStatus', 'task_id'], 'required'],
             [['comment', 'completionStatus'], 'string'],
-            [['rating', 'task_id'], 'integer'],
-            [['completionStatus', 'comment', 'rating', 'task_id'], 'safe'],
+            [['rate', 'task_id'], 'integer'],
+            [['completionStatus', 'comment', 'rate', 'task_id'], 'safe'],
         ];
     }
 

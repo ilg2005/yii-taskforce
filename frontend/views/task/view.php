@@ -239,7 +239,7 @@ $this->title = 'TaskForce-View';
         ])
         ->label(null, ['class' => 'form-modal-description'])
     ?>
-    <?= $form->field($completionForm, 'rating')
+    <?= $form->field($completionForm, 'rate')
         ->hiddenInput(['id' => 'rating'])
         ->label(null, ['class' => 'form-modal-description'])
     ?>
