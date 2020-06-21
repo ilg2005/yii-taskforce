@@ -5,6 +5,7 @@ namespace frontend\controllers;
 
 
 use frontend\models\Category;
+use frontend\models\CompletionForm;
 use frontend\models\CreateForm;
 use frontend\models\File;
 use frontend\models\Profile;
@@ -139,8 +140,9 @@ class TaskController extends BehaviorsController
         }
 
         $model = $this->actionReply();
+        $completionForm = new CompletionForm();
 
-        return $this->render('view', compact('task', 'isAuthor', 'isWorker', 'user', 'model'));
+        return $this->render('view', compact('task', 'isAuthor', 'isWorker', 'user', 'model', 'completionForm'));
     }
 
     public function actionReply()
