@@ -126,7 +126,7 @@ CREATE TABLE feedbacks
     customer_id   int NOT NULL,
     rate          TINYINT UNSIGNED,
     comment       TEXT,
-    feedback_date date,
+    feedback_date TIMESTAMP  DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (task_id) REFERENCES tasks (id) ON DELETE CASCADE,
     FOREIGN KEY (worker_id) REFERENCES tasks (worker_id) ON DELETE CASCADE,
     FOREIGN KEY (customer_id) REFERENCES tasks (customer_id) ON DELETE CASCADE

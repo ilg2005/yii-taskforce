@@ -66,6 +66,12 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->hasOne(Setting::class, ['user_id' => 'id']);
     }
 
+    public function calculateRating($rate)
+    {
+        $taskCount = Task::find()->where(['worker_id' => $this->id])->count();
+         return ($this->rating + $rate) / (int)$taskCount;
+    }
+
     /**
      * Generates password hash from password and sets it to the model
      *

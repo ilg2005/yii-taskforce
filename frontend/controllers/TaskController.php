@@ -7,6 +7,7 @@ namespace frontend\controllers;
 use frontend\models\Category;
 use frontend\models\CompletionForm;
 use frontend\models\CreateForm;
+use frontend\models\Feedback;
 use frontend\models\File;
 use frontend\models\Profile;
 use frontend\models\ReplyForm;
@@ -224,6 +225,35 @@ class TaskController extends BehaviorsController
         }
     }
 
+    public function actionComplete()
+    {
+
+        if (Yii::$app->request->getIsPost()) {
+            $completionForm = new CompletionForm();
+            $completionForm->load(Yii::$app->request->post());
+            $task = Task::findOne($completionForm->task_id);
+
+            if ($task && $completionForm->validate()) {
+                $feedback = new Feedback();
+                $feedback->task_id = $completionForm->task_id;
+                $feedback->worker_id = $task->worker_id;
+                $feedback->customer_id = $task->customer_id;
+                $feedback->rate = $completionForm->rate;
+                $feedback->comment = $completionForm->comment;
+                $feedback->save();
+
+                $task->status = ($completionForm->completionStatus === 'yes') ? TaskStatuses::COMPLETED : TaskStatuses::FAILED;
+                $task->save();
+
+                $worker = User::findOne($task->worker_id);
+                $worker->rating = $worker->calculateRating($feedback->rate);
+                $worker->save();
+            }
+        }
+
+        return $this->redirect(["/view?task_id={$completionForm->task_id}"]);
+
+    }
 
     public function actionMylist()
     {
