@@ -66,7 +66,7 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->hasOne(Setting::class, ['user_id' => 'id']);
     }
 
-    public function calculateRating($rate)
+    public function getRating($rate)
     {
         $taskCount = Task::find()->where(['worker_id' => $this->id])->count();
          return ($this->rating + $rate) / (int)$taskCount;

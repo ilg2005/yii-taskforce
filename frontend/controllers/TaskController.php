@@ -246,7 +246,7 @@ class TaskController extends BehaviorsController
                 $task->save();
 
                 $worker = User::findOne($task->worker_id);
-                $worker->rating = $worker->calculateRating($feedback->rate);
+                $worker->rating = $worker->getRating($feedback->rate);
                 $worker->save();
             }
         }
