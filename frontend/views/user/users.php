@@ -5,7 +5,10 @@
 $this->title = 'TaskForce-Users';
 
 use frontend\components\Pager;
-use frontend\components\Rating; ?>
+use frontend\components\Rating;
+use frontend\models\Feedback;
+use frontend\models\Task;
+use frontend\models\User; ?>
 <main class="page-main">
     <div class="main-container page-container">
         <section class="user__search">

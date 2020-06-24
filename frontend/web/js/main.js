@@ -57,20 +57,25 @@ var starRating = document.getElementsByClassName("completion-form-star");
 
 if (starRating.length) {
   starRating = starRating[0];
+  var starElements = starRating.querySelectorAll('span');
 
   starRating.addEventListener("click", function(evt) {
-    var stars = evt.currentTarget.childNodes;
+
+    starElements.forEach(function(starElement) {
+      starElement.classList.add('star-disabled');
+    });
+
     var rating = 0;
 
-    for (var i = 0; i < stars.length; i++) {
-      var element = stars[i];
+    for (var i = 0; i < starElements.length; i++) {
+      var starElement = starElements[i];
 
-      if (element.nodeName === "SPAN") {
-        element.className = "";
+      if (starElement.nodeName === "SPAN") {
+        starElement.className = "";
         rating++;
       }
 
-      if (element === evt.target) {
+      if (starElement === evt.target) {
         break;
       }
     }

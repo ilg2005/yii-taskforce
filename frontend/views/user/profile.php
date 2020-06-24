@@ -66,7 +66,7 @@ use frontend\components\Rating;
                     <div class="feedback-card__reviews">
                         <p class="link-task link">Задание <a href="#" class="link-regular">«<?= $feedback->task->title ?>»</a></p>
                         <div class="card__review">
-                            <a href="/profile?user_id=<?= $feedback->customer_id ?>"><img src="../img/<?= $feedback->avatar->avatar_file ?>" width="55" height="54"></a>
+                            <a href="/profile?user_id=<?= $feedback->customer_id ?>"><img src="../uploads/<?= $feedback->avatar->avatar_file ?>" width="55" height="54"></a>
                             <div class="feedback-card__reviews-content">
                                 <p class="link-name link"><a href="/profile?user_id=<?= $feedback->customer_id ?>" class="link-regular"><?= $feedback->customer->name ?></a></p>
                                 <p class="review-text"><?= $feedback->comment ?></p>

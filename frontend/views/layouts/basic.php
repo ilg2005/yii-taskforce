@@ -57,7 +57,7 @@ BasicAsset::register($this);
                         ['label' => 'Задания', 'url' => ['/browse'], 'active' => (Yii::$app->request->getUrl() === '/browse')],
                         ['label' => 'Исполнители', 'url' => ['/users'], 'active' => (Yii::$app->request->getUrl() === '/users')],
                         ['label' => 'Создать задание', 'url' => ['/create'], 'active' => (Yii::$app->request->getUrl() === '/create')],
-                        ['label' => 'Мой профиль', 'url' => ['/profile?user_id='], 'active' => (Yii::$app->request->getUrl() === '/profile?user_id=')],
+                        ['label' => 'Мой профиль', 'url' => ["/profile?user_id=" . (Yii::$app->user->id)], 'active' => (Yii::$app->request->getUrl() === '/profile?user_id=' . (Yii::$app->user->id))],
                     ],
                     'options' => [
                         'class' => 'header-nav__list site-list',

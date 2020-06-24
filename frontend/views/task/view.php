@@ -4,6 +4,7 @@
 
 use frontend\components\Rating;
 use frontend\components\TaskBtn;
+use frontend\models\User;
 use taskforce\constants\TaskStatuses;
 use taskforce\constants\UserRoles;
 use yii\bootstrap\ActiveForm;

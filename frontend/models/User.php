@@ -14,7 +14,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['name', 'town', 'email', 'password', 'registration_date', 'role', 'latest_activity_time', 'is_favorite', 'rating'], 'safe'],
+            [['name', 'town', 'email', 'password', 'registration_date', 'role', 'latest_activity_time', 'is_favorite'], 'safe'],
             ['email', 'email'],
             ['email', 'unique'],
         ];
@@ -66,10 +66,14 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->hasOne(Setting::class, ['user_id' => 'id']);
     }
 
-    public function getRating($rate)
+    public function getRating()
     {
-        $taskCount = Task::find()->where(['worker_id' => $this->id])->count();
-         return ($this->rating + $rate) / (int)$taskCount;
+        $defaultRating = 0;
+
+        $totalRate =  Feedback::find()->where(['worker_id' => $this->id])->sum('rate');
+        $taskCount =  Feedback::find()->where(['worker_id' => $this->id])->count('task_id');
+
+        return $taskCount ? round(($totalRate / $taskCount), 1) : $defaultRating;
     }
 
     /**

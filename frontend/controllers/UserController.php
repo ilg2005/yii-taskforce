@@ -163,13 +163,9 @@ class UserController extends BehaviorsController
 
     public function actionProfile()
     {
-        $user = User::find()
-            ->where(['users.id' => Yii::$app->request->get('user_id')])
-            ->orWhere(['users.id' => Yii::$app->user->id])
-            ->one();
+        $user = User::findOne(Yii::$app->request->get('user_id'));
 
-        /* Нужно исправить, чтобы страница профиля была доступна по прямой ссылке*/
-        if (!Yii::$app->user->identity->role) {
+        if (!$user->role) {
             throw new NotFoundHttpException('Такая страница не существует');
         }
 
@@ -219,14 +215,14 @@ class UserController extends BehaviorsController
         $users = User::find()
             ->where(['role' => UserRoles::WORKER])
             ->orderBy(['registration_date' => SORT_DESC])
-            ->with(['profile', 'categories', 'tasks', 'feedbacks'])
-            ->joinWith('settings')
+            ->with(['profile', 'categories'])
+            ->joinWith(['settings', 'tasks', 'feedbacks'])
             ->andWhere(['users_settings.hide_user_profile' => 0])
-            ->groupBy(['id']);
+            ->groupBy(['users.id']);
 
 
         if (Yii::$app->request->get('rating')) {
-            $users->orderBy(['rating' => SORT_DESC]);
+            $users->orderBy(['sum(feedbacks.rate) / count(tasks.id)' => SORT_DESC]);
         }
 
         if (Yii::$app->request->get('tasks')) {

@@ -126,18 +126,16 @@ class TaskController extends BehaviorsController
 
     public function actionView()
     {
-        $task = Task::find()
-            ->where(['tasks.id' => Yii::$app->request->get('task_id')])
-            ->one();
+        $task = Task::findOne(Yii::$app->request->get('task_id'));
         $this->currentTaskID = $task->id;
 
         $isAuthor = Yii::$app->user->id === $task->customer_id;
         $isWorker = Yii::$app->user->id === $task->worker_id;
 
         if ($task->worker_id && $isAuthor) {
-            $user = User::find()->where(['id' => $task->worker_id])->one();
+            $user = User::findOne($task->worker_id);
         } else {
-            $user = User::find()->where(['id' => $task->customer_id])->one();
+            $user = User::findOne($task->customer_id);
         }
 
         $model = $this->actionReply();
@@ -245,9 +243,6 @@ class TaskController extends BehaviorsController
                 $task->status = ($completionForm->completionStatus === 'yes') ? TaskStatuses::COMPLETED : TaskStatuses::FAILED;
                 $task->save();
 
-                $worker = User::findOne($task->worker_id);
-                $worker->rating = $worker->getRating($feedback->rate);
-                $worker->save();
             }
         }
 
