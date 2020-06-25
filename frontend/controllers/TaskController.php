@@ -129,6 +129,10 @@ class TaskController extends BehaviorsController
         $task = Task::findOne(Yii::$app->request->get('task_id'));
         $this->currentTaskID = $task->id;
 
+        if(!$task) {
+            throw new NotFoundHttpException("Страница не найдена!");
+        }
+
         $isAuthor = Yii::$app->user->id === $task->customer_id;
         $isWorker = Yii::$app->user->id === $task->worker_id;
 
