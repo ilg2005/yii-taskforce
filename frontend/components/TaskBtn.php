@@ -32,6 +32,13 @@ class TaskBtn extends Widget
             $btnName = 'Отказаться';
         }
 
+        if ($this->currentUserId === $this->task->customer_id && $this->task->status === TaskStatuses::NEW) {
+            $dataAttr = 'cancel';
+            $btnClass = 'refusal';
+            $btnName = 'Отменить';
+        }
+
+
 
         if ($this->currentUserId === $this->task->customer_id && $this->task->status === TaskStatuses::ACTIVE) {
             $dataAttr = 'complete';

@@ -249,8 +249,9 @@ class TaskController extends BehaviorsController
 
             }
         }
-
-        return $this->redirect(["/view?task_id={$completionForm->task_id}"]);
+        // Инициировать процесс "Отправка уведомления"
+        // Переадресовать на главную страницу
+        return $this->redirect(["/browse"]);
 
     }
 

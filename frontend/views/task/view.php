@@ -299,9 +299,23 @@ $this->title = 'TaskForce-View';
         Это действие приведёт к снижению вашего рейтинга.
         Вы уверены?
     </p>
-    <button class="button__form-modal button" id="close-modal"
+    <button class="button__form-modal button cancel-modal"
             type="button">Отмена</button>
    <?= Html::a('Отказаться', [($isAuthor ? '/cancel' : '/fail'), 'taskId' => $task->id, 'currentUserId' => Yii::$app->user->id], ['class' => 'button__form-modal refusal-button button', 'style' => ['float' => 'right'], 'type' => 'button']) ?>
     <button class="form-modal-close" type="button">Закрыть</button>
 </section>
+
+<section class="modal form-modal refusal-form" id="cancel-form">
+    <h2>Отмена задания</h2>
+    <p>
+        Вы собираетесь отменить новое задание.
+        Это действие приведёт к его удалению из списка новых заданий.
+        Вы уверены?
+    </p>
+    <button class="button__form-modal button cancel-modal"
+            type="button">Отмена</button>
+    <?= Html::a('Удалить', ['/cancel', 'taskId' => $task->id, 'currentUserId' => Yii::$app->user->id], ['class' => 'button__form-modal refusal-button button', 'style' => ['float' => 'right'], 'type' => 'button']) ?>
+    <button class="form-modal-close" type="button">Закрыть</button>
+</section>
+
 <div class="overlay"></div>
