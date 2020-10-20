@@ -1221,7 +1221,7 @@ var Dropzone = function (_Emitter) {
             return this.getFilesWithStatus(Dropzone.ADDED);
         }
 
-        // Files that are either queued or uploading
+        // File that are either queued or uploading
 
     }, {
         key: "getActiveFiles",

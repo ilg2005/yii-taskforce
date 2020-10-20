@@ -29,8 +29,7 @@ CREATE TABLE users
     password             VARCHAR(128) NOT NULL,
     role                 TINYINT(1) DEFAULT 0,
     latest_activity_time TIMESTAMP,
-    is_favorite          boolean    DEFAULT false,
-    rating               FLOAT      DEFAULT 0
+    is_favorite          boolean    DEFAULT false
 );
 
 CREATE TABLE users_profiles
@@ -70,14 +69,6 @@ CREATE TABLE users_categories
     FOREIGN KEY (category_id) REFERENCES categories (id) ON DELETE CASCADE
 );
 
-CREATE TABLE users_portfolio
-(
-    id       int AUTO_INCREMENT PRIMARY KEY,
-    user_id  int,
-    filename VARCHAR(128),
-    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
-);
-
 CREATE TABLE tasks
 (
     id            int AUTO_INCREMENT PRIMARY KEY,
@@ -85,7 +76,7 @@ CREATE TABLE tasks
     title         VARCHAR(256) NOT NULL,
     description   TEXT         NOT NULL,
     category_id   int          NOT NULL,
-    status        int       DEFAULT 0,
+    status        TINYINT   DEFAULT 0,
     address       VARCHAR(256),
     location_id   int,
     budget        int UNSIGNED,
@@ -100,12 +91,30 @@ CREATE TABLE tasks
     FOREIGN KEY (worker_id) REFERENCES users (id) ON UPDATE CASCADE
 );
 
-CREATE TABLE tasks_files
+CREATE TABLE files
 (
     id       int AUTO_INCREMENT PRIMARY KEY,
-    task_id  int,
+    user_id  int,
     filename VARCHAR(128),
-    FOREIGN KEY (task_id) REFERENCES tasks (id) ON DELETE CASCADE
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+);
+
+CREATE TABLE tasks_files
+(
+    id      int AUTO_INCREMENT PRIMARY KEY,
+    task_id int,
+    file_id int,
+    FOREIGN KEY (task_id) REFERENCES tasks (id) ON DELETE CASCADE,
+    FOREIGN KEY (file_id) REFERENCES files (id) ON DELETE CASCADE
+);
+
+CREATE TABLE users_portfolio
+(
+    id      int AUTO_INCREMENT PRIMARY KEY,
+    user_id int,
+    file_id int,
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
+    FOREIGN KEY (file_id) REFERENCES files (id) ON DELETE CASCADE
 );
 
 CREATE TABLE feedbacks
@@ -114,22 +123,24 @@ CREATE TABLE feedbacks
     task_id       int NOT NULL,
     worker_id     int NOT NULL,
     customer_id   int NOT NULL,
-    rate          TINYINT UNSIGNED,
+    rate          TINYINT DEFAULT 0,
     comment       TEXT,
-    feedback_date date,
+    feedback_date TIMESTAMP  DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (task_id) REFERENCES tasks (id) ON DELETE CASCADE,
     FOREIGN KEY (worker_id) REFERENCES tasks (worker_id) ON DELETE CASCADE,
     FOREIGN KEY (customer_id) REFERENCES tasks (customer_id) ON DELETE CASCADE
 );
 
-CREATE TABLE tasks_reactions
+CREATE TABLE tasks_replies
 (
-    id             int AUTO_INCREMENT PRIMARY KEY,
-    task_id        int,
-    worker_id      int,
-    worker_price   int UNSIGNED,
-    worker_comment TEXT,
-    FOREIGN KEY (worker_id) REFERENCES users (id) ON DELETE CASCADE,
+    id                int AUTO_INCREMENT PRIMARY KEY,
+    task_id           int,
+    applicant_id      int,
+    applicant_price   int UNSIGNED,
+    applicant_comment TEXT,
+    reply_time        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    is_refused        TINYINT   DEFAULT 0,
+    FOREIGN KEY (applicant_id) REFERENCES users (id) ON DELETE CASCADE,
     FOREIGN KEY (task_id) REFERENCES tasks (id) ON DELETE CASCADE
 );
 
@@ -170,8 +181,6 @@ create index users_role_index
     on users (role);
 create index users_is_favorite_index
     on users (is_favorite);
-create index user_rating_index
-    on users (rating);
 create index user_id_index
     on users_categories (user_id);
 create index category_id_index

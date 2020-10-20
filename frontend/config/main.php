@@ -63,7 +63,7 @@ return [
             ],
         ],
         'errorHandler' => [
-            'errorAction' => 'taskforce-site/error',
+            'errorAction' => 'error/error',
         ],
 
         'urlManager' => [
@@ -71,11 +71,16 @@ return [
             'showScriptName' => false,
             //'enableStrictParsing' => true,
             'rules' => [
-                '/' => 'taskforce-site/index',
-                'defaultRoute' => 'taskforce-site/index',
+                '/' => 'index/index',
+                'defaultRoute' => 'index/index',
 
-                'browse/<page:\d+>' => 'taskforce-site/browse',
-                '<action:(index|account|browse|create|mylist|profile|signup|users|view|image|logout|error)>' => 'taskforce-site/<action>',
+                'browse/<page:\d+>' => 'task/browse',
+                'index' => 'index/index',
+                'image' => 'image/image',
+                'error' => 'error/error',
+                'download' => 'download/download',
+                '<action:(account|profile|signup|users|logout)>' => 'user/<action>',
+                '<action:(browse|create|mylist|view|reply|confirm|refuse|fail|cancel|complete)>' => 'task/<action>',
             ],
         ],
 

@@ -17,8 +17,8 @@ class ImportController extends Controller
         'settings' => 'Setting',
         'tasks' => 'Task',
         'feedbacks' => 'Feedback',
-        'reactions' => 'Reaction',
-        'users-portfolio' => 'Portfolio',
+        'replies' => 'Reply',
+/*        'users-portfolio' => 'Portfolio',*/
         'profile-views' => 'ProfileView',
     ];
 

@@ -2,6 +2,8 @@
 
 use frontend\assets\BasicAsset;
 use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\widgets\Menu;
 
 BasicAsset::register($this);
 ?>
@@ -50,20 +52,22 @@ BasicAsset::register($this);
             </div>
 
             <div class="header__nav">
-                <ul class="header-nav__list site-list">
-                    <li class="site-list__item">
-                        <a href="/browse">Задания</a>
-                    </li>
-                    <li class="site-list__item">
-                        <a href="/users">Исполнители</a>
-                    </li>
-                    <li class="site-list__item">
-                        <a href="/create">Создать задание</a>
-                    </li>
-                    <li class="site-list__item">
-                        <a href="/profile?user_id=<?= $user->id ?>">Мой профиль</a>
-                    </li>
-                </ul>
+                <?= Menu::widget([
+                    'items' => [
+                        ['label' => 'Задания', 'url' => ['/browse'], 'active' => (Yii::$app->request->getUrl() === '/browse')],
+                        ['label' => 'Исполнители', 'url' => ['/users'], 'active' => (Yii::$app->request->getUrl() === '/users')],
+                        ['label' => 'Создать задание', 'url' => ['/create'], 'active' => (Yii::$app->request->getUrl() === '/create')],
+                        ['label' => 'Мой профиль', 'url' => ["/profile?user_id=" . (Yii::$app->user->id)], 'active' => (Yii::$app->request->getUrl() === '/profile?user_id=' . (Yii::$app->user->id))],
+                    ],
+                    'options' => [
+                        'class' => 'header-nav__list site-list',
+                    ],
+                    'itemOptions' => [
+                        'class' => 'site-list__item',
+],
+                    'activeCssClass'=>'site-list__item--active',
+
+]) ?>
             </div>
 
             <?php if($this->title !== 'TaskForce-Signup') : ?>
@@ -164,7 +168,7 @@ BasicAsset::register($this);
                          alt="Логотип HTML Academy">
                 </a>
             </div>
-            <?= ($this->title !== 'TaskForce-Signup') ? '' : \Yii::$app->view->renderFile('@app/views/taskforce-site/clipart.php') ?>
+            <?= ($this->title !== 'TaskForce-Signup') ? '' : \Yii::$app->view->renderFile('@app/views/layouts/clipart.php') ?>
         </div>
     </footer>
 </div>

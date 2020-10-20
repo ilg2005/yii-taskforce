@@ -4,6 +4,7 @@
 namespace frontend\components;
 
 
+use Yii;
 use yii\i18n\Formatter;
 
 class MyFormatter extends Formatter
@@ -24,4 +25,11 @@ class MyFormatter extends Formatter
         }
         return $age;
     }
+
+    public function asTimeSinceRegistration($registrationDate)
+    {
+        $relativeTime = Yii::$app->formatter->asRelativeTime($registrationDate);
+        return str_replace('назад', '', $relativeTime);
+    }
+
 }

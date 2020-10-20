@@ -14,7 +14,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['name', 'town', 'email', 'password', 'registration_date', 'role', 'latest_activity_time', 'is_favorite', 'rating'], 'safe'],
+            [['name', 'town', 'email', 'password', 'registration_date', 'role', 'latest_activity_time', 'is_favorite'], 'safe'],
             ['email', 'email'],
             ['email', 'unique'],
         ];
@@ -44,10 +44,11 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
 
-    public function getPortfolio()
-    {
-        return $this->hasMany(Portfolio::class, ['user_id' => 'id']);
+    public function getPortfolio() {
+        return $this->hasMany(File::class, ['id' => 'file_id'])
+            ->viaTable('users_portfolio', ['user_id' => 'id']);
     }
+
 
     public function getFeedbacks()
     {
@@ -63,6 +64,16 @@ class User extends ActiveRecord implements IdentityInterface
     public function getSettings()
     {
         return $this->hasOne(Setting::class, ['user_id' => 'id']);
+    }
+
+    public function getRating()
+    {
+        $defaultRating = 0;
+
+        $totalRate =  Feedback::find()->where(['worker_id' => $this->id])->sum('rate');
+        $taskCount =  Feedback::find()->where(['worker_id' => $this->id])->count('task_id');
+
+        return $taskCount ? round(($totalRate / $taskCount), 1) : $defaultRating;
     }
 
     /**

@@ -2,29 +2,17 @@
 
 var openModalLinks = document.querySelectorAll(".open-modal");
 var closeModalLinks = document.querySelectorAll(".form-modal-close");
+var cancelModalButtons = document.querySelectorAll(".cancel-modal");
 var overlay = document.querySelector(".overlay");
-var enterFormElement = document.querySelector("#login");
 
-for (var i = 0; i < openModalLinks.length; i++) {
-  var modalLink = openModalLinks[i];
-
-  modalLink.addEventListener("click", function (event) {
-    var modalId = event.currentTarget.getAttribute("data-for");
-
-    var modal = document.getElementById(modalId);
-    modal.classList.add("show");
-    overlay.classList.add("show");
-
-  });
-}
-
-function closeModal(event) {
-  var modal = event.currentTarget.parentElement;
-
+function closeModal() {
+  var modal = document.querySelector('.show');
   modal.classList.remove("show");
   overlay.classList.remove("show");
 
-  window.location.href = "/";
+  /*
+    window.location.href = "/";
+  */
 
   /*var inputElements = enterFormElement.querySelectorAll("input");
   for(var i = 0; i < inputElements.length; i++) {
@@ -44,33 +32,58 @@ function closeModal(event) {
   }*/
 }
 
-for (var i = 0; i < closeModalLinks.length; i++) {
-  var closeModalLink = closeModalLinks[i];
+
+for (var i = 0; i < openModalLinks.length; i++) {
+  var modalLink = openModalLinks[i];
+
+  modalLink.addEventListener("click", function (evt) {
+    var modalId = evt.currentTarget.getAttribute("data-for");
+
+    var modal = document.getElementById(modalId);
+    modal.classList.add("show");
+    overlay.classList.add("show");
+
+  });
+}
+
+for (var j = 0; j < cancelModalButtons.length; j++) {
+  var cancelModalButton = cancelModalButtons[j];
+
+  cancelModalButton.addEventListener("click", closeModal);
+}
+
+
+for (var k = 0; k < closeModalLinks.length; k++) {
+  var closeModalLink = closeModalLinks[k];
 
   closeModalLink.addEventListener("click", closeModal)
 }
-if (document.getElementById('close-modal')) {
-  document.getElementById('close-modal').addEventListener("click", closeModal);
-}
+
+
 
 var starRating = document.getElementsByClassName("completion-form-star");
 
 if (starRating.length) {
   starRating = starRating[0];
+  var starElements = starRating.querySelectorAll('span');
 
-  starRating.addEventListener("click", function(event) {
-    var stars = event.currentTarget.childNodes;
+  starRating.addEventListener("click", function(evt) {
+
+    starElements.forEach(function(starElement) {
+      starElement.classList.add('star-disabled');
+    });
+
     var rating = 0;
 
-    for (var i = 0; i < stars.length; i++) {
-      var element = stars[i];
+    for (var i = 0; i < starElements.length; i++) {
+      var starElement = starElements[i];
 
-      if (element.nodeName === "SPAN") {
-        element.className = "";
+      if (starElement.nodeName === "SPAN") {
+        starElement.className = "";
         rating++;
       }
 
-      if (element === event.target) {
+      if (starElement === evt.target) {
         break;
       }
     }
