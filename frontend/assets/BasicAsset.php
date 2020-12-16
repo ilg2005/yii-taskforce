@@ -17,7 +17,8 @@ class BasicAsset extends AssetBundle
         'css/style.css'
     ];
     public $js = [
-        'js/main.js'
+        'js/main.js',
+        'js/index.js'
     ];
     public $depends = [
         YiiAsset::class,

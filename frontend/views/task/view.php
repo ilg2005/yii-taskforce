@@ -4,17 +4,16 @@
 
 use frontend\components\Rating;
 use frontend\components\TaskBtn;
-use frontend\models\User;
 use taskforce\constants\TaskStatuses;
-use taskforce\constants\UserRoles;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-use yii\helpers\Url;
+
+$this->registerJsFile("https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=e666f398-c983-4bde-8f14-e3fec900592a");
 
 $this->title = 'TaskForce-View';
-
 ?>
+
 <main class="page-main">
     <div class="main-container page-container">
         <section class="content-view">
@@ -46,10 +45,10 @@ $this->title = 'TaskForce-View';
                     <div class="content-view__location">
                         <h3 class="content-view__h3">Расположение</h3>
                         <div class="content-view__location-wrapper">
-                            <div class="content-view__map">
-                                <a href="#"><img src="./img/map.jpg" width="361" height="292"
-                                                 alt="Москва, Новый арбат, 23 к. 1"></a>
-                            </div>
+                            <div id="map"
+                                 style="width: 361px;
+                                 height: 292px"
+                                 ></div>
                             <div class="content-view__address">
                                 <span class="address__town">Москва</span><br>
                                 <span>Новый арбат, 23 к. 1</span>

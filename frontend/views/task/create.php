@@ -6,6 +6,7 @@ use frontend\models\CreateForm;
 use yii\helpers\ArrayHelper;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
+$this->registerJSFile('https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@8.1.0/dist/js/autoComplete.min.js');
 
 $this->title = 'TaskForce-Create';
 
@@ -80,10 +81,49 @@ $this->title = 'TaskForce-Create';
                     <span>Добавить новый файл</span>
                 </div>-->
 
-                    <label for="13">Локация</label>
-                    <input class="input-navigation input-middle input" id="13" type="search" name="q" placeholder="Санкт-Петербург, Калининский район">
-                    <span>Укажите адрес исполнения, если задание требует присутствия</span>
+                    <!--<label for="13">Локация</label>
+                    <input class="input-navigation input-middle input" id="autoComplete" type="search" name="q" placeholder="Санкт-Петербург, Калининский район">
+                    <span>Укажите адрес исполнения, если задание требует присутствия</span>-->
 
+                <?= $form->field($model, 'address')
+                    ->input('search', [
+                        'class' => 'input-navigation input-middle input',
+                        'id' => 'autoComplete',
+                        'tabindex' => 1,
+                        'placeholder' => 'Санкт-Петербург, Калининский район',
+                    ])
+                    ->hint('Укажите адрес исполнения, если задание требует присутствия')?>
+
+                <?= $form->field(
+                    $model,
+                    'latitude',
+                    [
+                        'template' => '{input}',
+                    ]
+                )
+                    ->hiddenInput([
+                        'id' => 'latitude',
+                    ]) ?>
+                <?= $form->field(
+                    $model,
+                    'longitude',
+                    [
+                        'template' => '{input}',
+                    ]
+                )
+                    ->hiddenInput([
+                        'id' => 'longitude',
+                    ]); ?>
+                <?= $form->field(
+                    $model,
+                    'locality',
+                    [
+                        'template' => '{input}',
+                    ]
+                )
+                    ->hiddenInput([
+                        'id' => 'locality',
+                    ]); ?>
 
 
                     <div class="create__price-time">

@@ -14,6 +14,10 @@ class CreateForm extends Model
     public $description;
     public $category;
     public $files;
+    public $address;
+    public $latitude;
+    public $longitude;
+    public $locality;
     public $budget;
     public $deadline;
 
@@ -24,6 +28,7 @@ class CreateForm extends Model
             'description' => 'Подробности задания',
             'category' => 'Категория',
             'files' => 'Файлы',
+            'address' => 'Локация',
             'budget' => 'Бюджет',
             'deadline' => 'Срок исполнения',
         ];
@@ -32,20 +37,22 @@ class CreateForm extends Model
     public function rules()
     {
         return [
-            [['title', 'description', 'budget', 'deadline'], 'trim'],
+            [['title', 'description', 'address', 'budget', 'deadline'], 'trim'],
 
             [['title', 'description', 'category'], 'required', 'message' => 'Это поле должно быть заполнено!'],
 
-            [['title', 'description'], 'string'],
+            [['title', 'description', 'address', 'locality'], 'string'],
             [['title', 'description'], NonblankCharsValidator::class, 'skipOnEmpty' => true],
 
             ['category', CategoryExistValidator::class, 'skipOnEmpty' => true],
 
             ['files', 'file', 'maxFiles' => 6, 'skipOnEmpty' => true ],
 
+            [['latitude', 'longitude'], 'double'],
+
             ['budget', 'integer', 'min' => 1, 'message' => 'Должно быть целое положительное число'],
 
-            ['deadline', 'date', 'format' => 'Y-m-d',   'message' => 'Неверный формат даты', 'min' => date('Y-m-d', strtotime('today')), 'tooSmall' => 'Срок исполнения должен быть не раньше сегодняшней даты'],
+            ['deadline', 'date', 'format' => 'Y-m-d',   'message' => 'Неверный формат даты'] /*, 'min' => date('Y-m-d', strtotime('today')), 'tooSmall' => 'Срок исполнения должен быть не раньше сегодняшней даты'],*/
             /* Нестабильно валидирует минимальную дату*/
 
         ];
